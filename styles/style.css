@@ -1,0 +1,10 @@
+main {
+    display: flex;
+}
+
+article {
+    background-color: aqua;
+    padding: 10px;
+    margin: 10px;
+}
+
