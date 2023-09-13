@@ -1,9 +1,9 @@
-.nav_bar {
+.flex_container {
     display: flex;
-    justify-content: flex-end;
 }
 
-.menu_button {
+
+.open_menu_button {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -11,11 +11,42 @@
     border: none;
     background: none;
     margin-right: 1.5vw;
+    margin-left: auto;
+    margin-top: 1.5vh;
+    transition: 0.5s;
+
+}
+
+.close_menu_button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    border: none;
+    background: none;
+    margin-right: 1.5vw;
+    margin-left: auto;
     margin-top: 1.5vh;
 }
 
-
-.menu_button img {
+.ctrl_menu_img {
     width: 2.7vw;
     height: auto;
+}
+
+
+#menu_sidebar {
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0.2vh;
+    right: 0;
+    overflow-x: hidden;
+    transition: 0.5s;
+}
+
+.open_menu_area {
+
+    transition: 0.5s;
+
 }
