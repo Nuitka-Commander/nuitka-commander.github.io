@@ -39,10 +39,18 @@
     width: 0;
     position: fixed;
     z-index: 1;
-    top: 0.2vh;
-    right: 0;
+    top: 0;
+    right: 0.2vw;
     overflow-x: hidden;
+    overflow-y: auto;
     transition: 0.5s;
+    height: 100vh;
+    border-top-left-radius: 28px;
+    border-bottom-left-radius: 28px;
+    /*毛玻璃 todo 确定是否使用？如果使用的话要考虑兼容性吗？*/
+    backdrop-filter: blur(30px);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    background-color: rgba(255, 255, 255, 0.1);
 }
 
 .open_menu_area {
@@ -50,3 +58,4 @@
     transition: 0.5s;
 
 }
+
