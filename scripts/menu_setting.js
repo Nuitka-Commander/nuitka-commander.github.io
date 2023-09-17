@@ -13,3 +13,5 @@ function closeMenu() {
     open_menu_button.style.visibility = "visible";
     open_menu_button.style.opacity = "1";
 }
+
+// css darkmode适配：     document.body.classList.remove('dark_mode')    document.body.classList.add('dark_mode')
