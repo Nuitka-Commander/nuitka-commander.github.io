@@ -1,3 +1,6 @@
+// *********************
+// 处理在菜单操作处理的逻辑
+// *********************
 function openMenu() {
     let open_menu_button = document.querySelector(".open_menu_button");
     open_menu_button.style.visibility = "hidden";
