@@ -1,5 +1,8 @@
 {
   "supported": {
-    "en": "english"
+    "en": {
+      "language_self_identification": "",
+      "path": ""
+    }
   }
 }

@@ -1,19 +1,16 @@
 // *********************
 // 一些常用的函数
 // *********************
-const current_language = {
-    "Genshin": "原神",
-    "start": "启动"
-};
+let current_language; //存储翻译的json
 
 // todo 刷新body来更新语言
+
 //加载语言到字典中
 function load_language() {
     fetch('./src/translation/supported_languages.json')
         .then(response => response.json())
         .then(data => {
-            let a = data;
-            console.log(a);
+            current_language = data;
         })
         .catch(error => {
             console.error('An error occurred in loading the language:', error);
