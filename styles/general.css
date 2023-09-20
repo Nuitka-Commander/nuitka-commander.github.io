@@ -1,8 +1,0 @@
-
-.flex_container {
-    display: flex;
-}
-
-:root * {
-    transition: background-color 500ms linear;
-}

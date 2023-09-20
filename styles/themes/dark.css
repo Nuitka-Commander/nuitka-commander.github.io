@@ -1,3 +1,5 @@
 :root .dark_mode {
-    --bgcolor: black;
+
+    --sub-theme-color-1: lightgreen;
+    --sub-theme-color-2: lightblue;
 }

@@ -45,7 +45,7 @@
     /*毛玻璃 todo 确定是否使用？如果使用的话要考虑兼容性吗？*/
     backdrop-filter: blur(30px);
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-    background-color: rgba(255, 255, 255, 0.1);
+    background-color: rgba(var(--bg-color_rgb), 0.1);
 }
 
 .open_menu_area {
