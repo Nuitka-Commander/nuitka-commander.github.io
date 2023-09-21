@@ -19,8 +19,7 @@ function stop_loading() {
     document.querySelector('.loading_page').style.display = "none";
 }
 
-
-// todo 刷新body来更新语言
+// ===========================================
 
 //加载语言到字典中
 function load_language() {
@@ -35,10 +34,18 @@ function load_language() {
         });
 }
 
-//翻译函数 输入key 从当前语言字典中获取key对应的当前语言字符串
-function t(key) {
-
+//根据键从翻译字典中获得翻译
+function get_translation(key) {
+    //todo 错误判断
     return current_language[key];
+}
+
+//根据tKey对整个页面的元素进行重载翻译文本
+function reload_all_translation() {
+    let elements = document.querySelectorAll('[tKey]');
+    elements.forEach(element => {   //遍历所有有有tKey属性的标签
+        element.textContent = get_translation(element.getAttribute('tKey'));
+    });
 }
 
 
