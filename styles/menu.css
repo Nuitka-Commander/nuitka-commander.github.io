@@ -53,3 +53,20 @@
 
 }
 
+/*下拉按钮*/
+.theme_change_button {
+    background-color: var(--bg-color);
+    color: var(--font-color);
+    padding: 0.5vw;
+    font-size: 1.2vw;
+    border: none;
+    cursor: pointer;
+}
+
+.theme_change_button:hover,.theme_change_button:focus {
+background-color: var(--hover-background);
+}
+
+
+
+

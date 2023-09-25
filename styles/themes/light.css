@@ -3,5 +3,6 @@
     --bg-color_rgb: 255,255,255;/*这里需要填三位数(给rgba用的)*/
     --sub-theme-color-1: lightgreen;
     --sub-theme-color-2: lightblue;
-
+    --font-color: black;
+    --hover-background:#cdcdcd;
 }

@@ -18,3 +18,7 @@ function closeMenu() {
 }
 
 // css darkmode适配：     document.body.classList.remove('dark_mode')    document.body.classList.add('dark_mode')
+//打开theme下拉框
+function show_theme_dropdown() {
+    document.getElementById("theme_change").classList.toggle("show");
+}
