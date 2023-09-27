@@ -56,8 +56,8 @@
 /* 下拉按钮 */
 
 .change_theme_btn {
-    background-color: #3498DB;
-    color: white;
+    background-color: var(--bg-color);
+    color: var(--font-color);
     padding: 16px;
     font-size: 16px;
     border: none;
@@ -66,7 +66,7 @@
 
 /* 悬停 &获取焦点时的下拉按钮 */
 .change_theme_btn:hover, .change_theme_btn:focus {
-    background-color: #2980B9;
+    background-color: var(--hover-background);
 }
 
 /* 容器 <div> - 需要定位下拉内容 */
@@ -79,7 +79,7 @@
 .theme_change-dropdown_content {
     display: none;
     position: absolute;
-    background-color: #f1f1f1;
+    background-color: var(--bg-color2);
     min-width: 160px;
     box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
     z-index: 1;
@@ -87,8 +87,8 @@
 
 /* 下拉列表中的链接 */
 .theme_change-dropdown_content button {
-    color: black;
-    background-color: red;
+    color: var(--font-color);
+    background-color: var(--bg-color2);
     padding: 12px 16px;
     text-decoration: none;
     display: block;
@@ -100,6 +100,7 @@
 }
 
 /* 显示下拉菜单（当用户点击下拉按钮时，使用 JS 将此类添加到 .theme_change-dropdown_content 容器中）*/
-.show {
+.theme_change-dropdown_content.show {
     display: block;
+
 }

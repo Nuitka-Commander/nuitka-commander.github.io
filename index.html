@@ -10,6 +10,7 @@
     <link href="styles/themes/dark.css" rel="stylesheet">
     <link href="styles/menu.css" rel="stylesheet">
     <link href="styles/style.css" rel="stylesheet">
+    <script src="scripts/main.js"></script>
     <script src="scripts/load_and_i18n.js"></script>
     <script src="scripts/menu_setting.js"></script>
 
@@ -53,13 +54,13 @@
     </div>
 
     <!--    todo 语言切换-->
-<!--    todo 明天把颜色改了-->
+
     <div class="theme_change_dropdown">
-        <button class="change_theme_btn" onclick="myFunction()">Dropdown</button>
+        <button class="change_theme_btn" onclick="invert_theme_dropdown_status()">Dropdown</button>
         <div class="theme_change-dropdown_content" id="theme_change-dropdown_content">
-            <button class="change_theme_btn" onclick="myFunction()">Dropdofwn</button>
-            <button class="change_theme_btn" onclick="myFunction()">Dropdofwn</button>
-            <button class="change_theme_btn" onclick="myFunction()">Dropdofwn</button>
+            <button class="change_theme_btn" onclick="change_theme('auto')">OS Default</button>
+            <button class="change_theme_btn" onclick="change_theme('light')">light mode</button>
+            <button class="change_theme_btn" onclick="change_theme('dark')">dark mode </button>
         </div>
     </div>
 

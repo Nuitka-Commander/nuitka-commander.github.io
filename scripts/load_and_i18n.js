@@ -2,7 +2,7 @@
 // 处理翻译及加载逻辑
 // *********************
 
-let current_language; //存储翻译的json
+
 
 function start_loading() {
     document.querySelectorAll('.loading_page span').forEach(span => {
