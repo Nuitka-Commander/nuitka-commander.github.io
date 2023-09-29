@@ -47,7 +47,7 @@ window.onclick = function (event) {
 };
 
 function change_theme(theme) {
-    //todo 更改
+    //todo 更改 theme
     
     
     
