@@ -2,6 +2,8 @@
 // 处理翻译相关的脚本
 // *********************
 
+let current_language; //存储翻译的json
+let supported_languages; //存储支持的语言对象
 
 //加载"可用语言"对象
 fetch("./src/translation/supported_languages.json")

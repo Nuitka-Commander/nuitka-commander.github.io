@@ -1,5 +1,5 @@
 // *********************
-// 处理在菜单操作处理的逻辑
+// 处理在菜单操作的逻辑
 // *********************
 
 function openMenu() {
@@ -21,9 +21,8 @@ function closeMenu() {
 
 }
 
-// css dark mode适配：     document.body.classList.remove('dark_mode')    document.body.classList.add('dark_mode')
 
-//打开下拉栏 
+//打开下拉栏
 let theme_change_dropdown_status = false;
 
 function change_theme_change_dropdown(hope_status) {
@@ -46,22 +45,3 @@ window.onclick = function (event) {
     }
 };
 
-function change_theme(theme) {
-    //todo 更改 theme
-    
-    
-    
-    
-    switch (theme) {
-        case "light":
-            console.log("change_theme: light");
-            break;
-        case "dark":
-            console.log("change_theme: dark");
-            break;
-        case "auto":
-            document.body.classList.remove("dark_mode");
-            break;
-    }
-    change_theme_change_dropdown(false);
-}
