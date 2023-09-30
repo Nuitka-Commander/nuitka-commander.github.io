@@ -1,9 +1,6 @@
 let current_language; //存储翻译的json
 let supported_languages; //存储支持的语言对象
-let localStorage_available;//localStorage是否可用
-let options = {
-    "theme": "auto", "language": "en_us",
-};//todo update监听
+let localStorage_available; //localStorage是否可用
 
 // ===========================================
 
@@ -24,13 +21,18 @@ function check_localStorage() {
 }
 
 localStorage_available = check_localStorage();
-//尝试加载localStorage中的数据到本地字典中
+
+// ===========================================
+
+//创建options对象
+//todo 创建handler对象 并创建proxy绑定
+//尝试加载localStorage中的数据到options中
 if (localStorage_available) {
     try {
         let options_in_localStorage = JSON.parse(localStorage.getItem("options"));
-        for (let key in options) {
+        for (let key in __options) {
             if (options_in_localStorage.hasOwnProperty(key)) {
-                options[key] = options_in_localStorage[key];
+                __options[key] = options_in_localStorage[key];
             }
         }
     } catch (e) {
