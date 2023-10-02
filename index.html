@@ -10,7 +10,7 @@
     <link href="styles/themes/dark.css" rel="stylesheet">
     <link href="styles/menu.css" rel="stylesheet">
     <link href="styles/style.css" rel="stylesheet">
-<!--scripts-->
+    <!--scripts-->
     <script src="scripts/main.js"></script>
     <script src="scripts/localStorage.js"></script>
     <script src="scripts/i18n.js"></script>
@@ -64,7 +64,7 @@
         <div class="theme_change-dropdown_content" id="theme_change-dropdown_content">
             <button class="change_theme_btn" onclick="change_theme('auto')">OS Default</button>
             <button class="change_theme_btn" onclick="change_theme('light')">light mode</button>
-            <button class="change_theme_btn" onclick="change_theme('dark')">dark mode </button>
+            <button class="change_theme_btn" onclick="change_theme('dark')">dark mode</button>
         </div>
     </div>
 
@@ -77,4 +77,8 @@
 
 </main>
 <footer></footer>
+<!--加载完成后再重新加载一次翻译-->
+<script>reload_all_translation();</script>
 </body>
+</html>
+
