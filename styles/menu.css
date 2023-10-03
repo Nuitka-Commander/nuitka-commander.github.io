@@ -42,7 +42,7 @@
     border-top-left-radius: 28px;
     border-bottom-left-radius: 28px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-    background-color: rgba(var(--bg-color_rgb), 0.9);
+    background-color: rgba(var(--bg-color_rgb), 0.8);
 }
 
 .open_menu_area {
@@ -73,24 +73,54 @@
     display: inline-block;
 }
 
+#change_theme_btn {
+    border-radius: 12px;
+    width: 6vw;
+    height: 4vh;
+/*    让其中的内容居中*/
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 1.5vh;
+    margin-left: 0.5vw;
+    background-color: rgba(var(--bg-color_rgb), 0.8);
+    color: var(--font-color);
+    border: none;
+    cursor: pointer;
+    transition: 0.5s;
+}
+#change_theme_btn:hover {
+    background-color: var(--hover-background);
+}
+
 /* 下拉内容（默认隐藏）*/
 .theme_change-dropdown_content {
     display: none;
     position: absolute;
     background-color: var(--bg-color2);
-    min-width: 160px;
-    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+    min-width: 150px;
+box-shadow: 0 12px 20px 3px rgba(var(--shadow-color_rgb), 0.3);
     z-index: 1;
+    border-radius: 12px;
+    outline: none;
+    color: var(--font-color);
+    text-align: center;
+    transition: 0.5s;
+    margin: 0.5vh 0.5vw;
+    padding: 2vh 1vw;
 }
 
-/* 下拉列表中的链接 */
+/* 下拉列表中的button */
 .theme_change-dropdown_content button {
     color: var(--font-color);
     background-color: var(--bg-color2);
-    padding: 12px 16px;
+    padding-top: 1vh;
+    border-radius: 6px;
+    min-width: 150px;
     text-decoration: none;
     display: block;
 }
+
 
 /* 更改悬停时下拉链接的颜色 */
 .theme_change-dropdown_content button:hover {
@@ -100,5 +130,5 @@
 /* 显示下拉菜单（当用户点击下拉按钮时，使用 JS 将此类添加到 .theme_change-dropdown_content 容器中）*/
 .theme_change-dropdown_content.show {
     display: block;
-
 }
+/*todo css动画*/

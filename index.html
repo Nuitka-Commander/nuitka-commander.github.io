@@ -61,20 +61,24 @@
 
     <div class="theme_change_dropdown">
         <!--不得不使用一下event来阻止事件冒泡 否则会出现打不开的情况-->
-        <button class="change_theme_btn" onclick="invert_theme_dropdown_status();event.stopPropagation();">
+        <button class="change_theme_btn" id="change_theme_btn"
+                onclick="invert_theme_dropdown_status();event.stopPropagation();">
             <span tKey="theme"></span>
         </button>
         <div class="theme_change-dropdown_content" id="theme_change-dropdown_content">
-            <button class="change_theme_btn" onclick="change_theme('auto')">OS Default</button>
-            <button class="change_theme_btn" onclick="change_theme('light')">light mode</button>
-            <button class="change_theme_btn" onclick="change_theme('dark')">dark mode</button>
+            <button class="change_theme_btn" id="auto_mode_btn" onclick="change_theme('auto')">OS Default</button>
+            <button class="change_theme_btn" id="light_mode_btn" onclick="change_theme('light')">light mode</button>
+            <button class="change_theme_btn" id="dark_mode_btn" onclick="change_theme('dark')">dark mode</button>
         </div>
     </div>
+    <p>111</p>
 
 </div>
 
 <main>
-    
+<div>
+    1111====================1111=====================1111===========================================================================================================================================================================================================================================================
+</div>
 </main>
 <footer></footer>
 <!--加载完成后再重新加载一次翻译-->
