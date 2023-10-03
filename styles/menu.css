@@ -41,10 +41,8 @@
     height: 100vh;
     border-top-left-radius: 28px;
     border-bottom-left-radius: 28px;
-    /*毛玻璃*/
-    backdrop-filter: blur(30px);
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-    background-color: rgba(var(--bg-color_rgb), 0.1);
+    background-color: rgba(var(--bg-color_rgb), 0.9);
 }
 
 .open_menu_area {
@@ -56,7 +54,7 @@
 /* 下拉按钮 */
 
 .change_theme_btn {
-    background-color: var(--bg-color);
+    background-color: unset;
     color: var(--font-color);
     padding: 16px;
     font-size: 16px;

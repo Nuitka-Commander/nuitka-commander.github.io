@@ -26,13 +26,15 @@ function closeMenu() {
 let theme_change_dropdown_status = false;
 
 function change_theme_change_dropdown(hope_status) {
-    /*反转*/
-    if (theme_change_dropdown_status !== hope_status) {
-        document.getElementById("theme_change-dropdown_content").classList.toggle("show");
-        theme_change_dropdown_status = hope_status;
-        console.log("change_theme_change_dropdown: " + hope_status);
+    if (hope_status === false) {
+        document.getElementById("theme_change-dropdown_content").classList.remove("show");
+        theme_change_dropdown_status = false;
+    } else {
+        document.getElementById("theme_change-dropdown_content").classList.add("show");
+        theme_change_dropdown_status = true;
     }
 }
+
 
 function invert_theme_dropdown_status() {
     change_theme_change_dropdown(!theme_change_dropdown_status);

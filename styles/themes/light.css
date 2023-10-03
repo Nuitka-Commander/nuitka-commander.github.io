@@ -4,6 +4,6 @@
     --bg-color2: #f9f9fb; /*背景色2*/
     --sub-theme-color-1: lightgreen; /*副主题色*/
     --sub-theme-color-2: lightblue; /*副主题色2*/
-    --font-color: black;
-    --hover-background: #cdcdcd;
+    --font-color: #1b1b1b; /*字体颜色*/
+    --hover-background: #cdcdcd; /*鼠标悬停背景色*/
 }

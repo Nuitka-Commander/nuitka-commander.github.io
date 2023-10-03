@@ -35,13 +35,15 @@ fetch("./src/translation/supported_languages.json")
 function get_translation(key) {
     //尝试直接return
     try {
-        return current_language[key];
+        if (current_language[key] !== undefined) {
+            return current_language[key];
+        } else {
+            console.error(`Error in getting translation: \ntKey:${key}\nError:No such key`);
+        }
     } catch (e) {
-        console.warn(`Error in getting translation: \ntKey:${key}\nError:${e}`);
-        return "Panic!";
+        console.error(`Error in getting translation: \ntKey:${key}\nError:${e}`);
     }
-
-
+    return "Panic!";
 }
 
 //根据tKey对整个页面的元素进行重载翻译文本
@@ -59,6 +61,7 @@ function load_language() {
         .then(data => {
             current_language = data;
             reload_all_translation();//加载完毕后重载翻译
+
         })
         .catch(error => {
             console.error("An error occurred in loading the language:\n---\n", error);

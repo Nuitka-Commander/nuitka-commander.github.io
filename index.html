@@ -60,7 +60,10 @@
     <!--    todo 语言切换-->
 
     <div class="theme_change_dropdown">
-        <button class="change_theme_btn" onclick="invert_theme_dropdown_status()">Dropdown</button>
+        <!--不得不使用一下event来阻止事件冒泡 否则会出现打不开的情况-->
+        <button class="change_theme_btn" onclick="invert_theme_dropdown_status();event.stopPropagation();">
+            <span tKey="theme"></span>
+        </button>
         <div class="theme_change-dropdown_content" id="theme_change-dropdown_content">
             <button class="change_theme_btn" onclick="change_theme('auto')">OS Default</button>
             <button class="change_theme_btn" onclick="change_theme('light')">light mode</button>
@@ -71,14 +74,17 @@
 </div>
 
 <main>
-    <div>
-        <p>1</p>
-    </div>
-
+    
 </main>
 <footer></footer>
 <!--加载完成后再重新加载一次翻译-->
-<script>reload_all_translation();</script>
+<script>
+    //当翻译字典不为undefined(也就确保已经翻译过一次了,那么代表可能有些东西没翻译上 所以重新翻译一次)
+    if (current_language !== undefined) {
+        reload_all_translation();
+    }
+    change_theme(options["theme"]);//加载主题
+</script>
 </body>
 </html>
 
