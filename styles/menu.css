@@ -21,6 +21,7 @@
     margin-right: 1.5vw;
     margin-left: auto;
     margin-top: 1.5vh;
+    transition: 0.5s;
 }
 
 .ctrl_menu_img {
