@@ -90,6 +90,7 @@
     border: none;
     cursor: pointer;
     transition: 0.5s;
+
 }
 
 #change_theme_btn:hover {
@@ -135,3 +136,10 @@
     display: block;
 }
 
+.theme_change_icon {
+    width: 2vw;
+    height: 2vh;
+    margin-right: 3px;
+    filter: drop-shadow(1000vw 0 var(--icon-color));
+    transform: translateX(-1000vw);
+}
