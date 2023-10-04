@@ -1,4 +1,6 @@
 {
-  "theme": "主题"
-
+  "theme": "主题",
+  "os_default": "跟随系统",
+  "light_theme": "浅色模式",
+  "dark_theme": "深色模式"
 }
