@@ -83,7 +83,7 @@
     justify-content: center;
     margin-top: 1.5vh;
     margin-left: 0.5vw;
-    background-color: rgba(var(--bg-color_rgb), 0.8);
+    background-color: unset;
     color: var(--font-color);
     border: none;
     cursor: pointer;
