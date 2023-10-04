@@ -30,7 +30,7 @@
 
 
 #menu_sidebar {
-    width: 15vw;
+    width: 0;
     position: fixed;
     z-index: 1;
     top: 0;
@@ -43,10 +43,8 @@
     border-bottom-left-radius: 28px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
     background-color: rgba(var(--bg-color_rgb), 0.8);
-    visibility: visible;
-    opacity: 1;
 }
-/*添加动画 默认为*/
+
 
 .open_menu_area {
     transition: 0.5s;
@@ -78,9 +76,8 @@
 
 #change_theme_btn {
     border-radius: 12px;
-    width: 6vw;
+    min-width: 130px;
     height: 4vh;
-/*    让其中的内容居中*/
     display: flex;
     align-items: center;
     justify-content: center;
@@ -92,6 +89,7 @@
     cursor: pointer;
     transition: 0.5s;
 }
+
 #change_theme_btn:hover {
     background-color: var(--hover-background);
 }
@@ -101,8 +99,8 @@
     display: none;
     position: absolute;
     background-color: var(--bg-color2);
-    min-width: 150px;
-box-shadow: 0 12px 20px 3px rgba(var(--shadow-color_rgb), 0.3);
+    min-width: 130px;
+    box-shadow: 0 12px 20px 3px rgba(var(--shadow-color_rgb), 0.3);
     z-index: 1;
     border-radius: 12px;
     outline: none;
@@ -134,4 +132,5 @@ box-shadow: 0 12px 20px 3px rgba(var(--shadow-color_rgb), 0.3);
 .theme_change-dropdown_content.show {
     display: block;
 }
+
 /*todo css动画*/

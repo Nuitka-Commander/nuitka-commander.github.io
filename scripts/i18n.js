@@ -38,7 +38,8 @@ function get_translation(key) {
         if (current_language[key] !== undefined) {
             return current_language[key];
         } else {
-            console.error(`Error in getting translation: \ntKey:${key}\nError:No such key`);
+            console.error(`Error in getting translation: \ntKey:${key}\nError:No such key\n` + `language:${options["language"]}\ntranslation:`);
+            console.error(current_language);
         }
     } catch (e) {
         console.error(`Error in getting translation: \ntKey:${key}\nError:${e}`);
