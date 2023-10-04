@@ -30,7 +30,7 @@
 
 
 #menu_sidebar {
-    width: 0;
+    width: 15vw;
     position: fixed;
     z-index: 1;
     top: 0;
@@ -43,7 +43,10 @@
     border-bottom-left-radius: 28px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
     background-color: rgba(var(--bg-color_rgb), 0.8);
+    visibility: visible;
+    opacity: 1;
 }
+/*添加动画 默认为*/
 
 .open_menu_area {
     transition: 0.5s;

@@ -7,6 +7,7 @@ function openMenu() {
     open_menu_button.style.visibility = "hidden";
     open_menu_button.style.opacity = "0";
     let menu_sidebar = document.getElementById("menu_sidebar");
+    //设置为15%或150px，取最大值 在css中取最大值而不是js
     menu_sidebar.style.width = Math.max(window.innerWidth * 0.15, 150) + "px";
 
 }
