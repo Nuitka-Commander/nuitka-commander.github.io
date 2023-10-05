@@ -42,7 +42,7 @@
 <header>
     <nav class="nav_bar">
         <div class="flex_container">
-            <button class="open_menu_button" onclick="openMenu()">
+            <button class="ctrl_menu_button open_menu_button" onclick="openMenu()">
                 <img alt="menu" class="ctrl_menu_img" src="src/images/menu_icon.svg">
             </button>
         </div>
@@ -52,35 +52,39 @@
 <!--菜单侧栏-->
 <div id="menu_sidebar">
     <div class="flex_container">
-        <button class="close_menu_button" onclick="closeMenu()">
+        <button class="ctrl_menu_button" onclick="closeMenu()">
             <img alt="close menu" class="ctrl_menu_img" src="src/images/close.svg">
         </button>
     </div>
     <div class="theme_change_dropdown">
         <!--不得不使用一下event来阻止事件冒泡 否则会出现打不开的情况-->
-        <button class="change_theme_btn" id="change_theme_btn"
+        <button class="change_theme_btn menu_dropdown_open_buttons"
                 onclick="invert_theme_dropdown_status();event.stopPropagation();">
-            <img alt="dark mode" class="theme_change_icon" id="now_theme_img" src="">
+            <img alt="dark mode" class="menu_icons" id="now_theme_img" src="">
             <span tKey="theme"></span>
         </button>
         <div class="theme_change-dropdown_content" id="theme_change-dropdown_content">
             <button class="change_theme_btn" id="auto_mode_btn" onclick="change_theme('auto')">
-                <img alt="os default" class="theme_change_icon" src="src/images/auto_theme.svg">
+                <img alt="os default" class="menu_icons" src="src/images/auto_theme.svg">
                 <span tKey="os_default"></span>
             </button>
             <button class="change_theme_btn" id="light_mode_btn" onclick="change_theme('light')">
-                <img alt="light mode" class="theme_change_icon" src="src/images/sun.svg">
+                <img alt="light mode" class="menu_icons" src="src/images/light_theme.svg">
                 <span tKey="light_theme"></span>
             </button>
             <button class="change_theme_btn" id="dark_mode_btn" onclick="change_theme('dark')">
-                <img alt="dark mode" class="theme_change_icon" src="src/images/moon.svg">
+                <img alt="dark mode" class="menu_icons" src="src/images/dark_theme.svg">
                 <span tKey="dark_theme"></span>
             </button>
         </div>
     </div>
 
     <div id="language_set_dropdown">
-        set your language!
+        <button class="menu_dropdown_open_buttons">
+            <img alt="language" class="menu_icons" src="src/images/language.svg">
+            <span tKey="language"></span>
+        </button>
+
     </div>
 
 </div>

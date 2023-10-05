@@ -1,4 +1,4 @@
-.open_menu_button {
+.ctrl_menu_button {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -11,18 +11,6 @@
     transition: 0.5s;
 }
 
-.close_menu_button {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0;
-    border: none;
-    background: none;
-    margin-right: 1.5vw;
-    margin-left: auto;
-    margin-top: 1.5vh;
-    transition: 0.5s;
-}
 
 .ctrl_menu_img {
     width: 2.7vw;
@@ -54,8 +42,38 @@
 
 }
 
-/*******************/
-/* 下拉按钮 */
+/*====================*/
+/*各种通用设置*/
+.menu_icons {
+    width: 2vw;
+    height: 2vh;
+    margin-right: 3px;
+    filter: drop-shadow(1000vw 0 var(--icon-color));
+    transform: translateX(-1000vw);
+}
+
+.menu_dropdown_open_buttons {
+    border-radius: 12px;
+    min-width: 130px;
+    height: 4vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 1.5vh;
+    margin-left: 0.5vw;
+    background-color: unset;
+    color: var(--font-color);
+    border: none;
+    cursor: pointer;
+    transition: 0.5s;
+
+}
+
+.menu_dropdown_open_buttons:hover {
+    background-color: var(--hover-background);
+}
+
+/*====================*/
 
 .change_theme_btn {
     background-color: unset;
@@ -77,26 +95,6 @@
     display: inline-block;
 }
 
-#change_theme_btn {
-    border-radius: 12px;
-    min-width: 130px;
-    height: 4vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-top: 1.5vh;
-    margin-left: 0.5vw;
-    background-color: unset;
-    color: var(--font-color);
-    border: none;
-    cursor: pointer;
-    transition: 0.5s;
-
-}
-
-#change_theme_btn:hover {
-    background-color: var(--hover-background);
-}
 
 /* 下拉内容（默认隐藏）*/
 .theme_change-dropdown_content {
@@ -137,10 +135,6 @@
     display: block;
 }
 
-.theme_change_icon {
-    width: 2vw;
-    height: 2vh;
-    margin-right: 3px;
-    filter: drop-shadow(1000vw 0 var(--icon-color));
-    transform: translateX(-1000vw);
-}
+
+/*language*/
+

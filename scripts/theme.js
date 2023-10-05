@@ -22,11 +22,11 @@ function change_theme(theme) {
     switch (theme) {
         case "light":
             document.body.classList.remove("dark_mode");
-            now_theme_img.src = "src/images/sun.svg";
+            now_theme_img.src = "src/images/light_theme.svg";
             break;
         case "dark":
             document.body.classList.add("dark_mode")
-            now_theme_img.src = "src/images/moon.svg";
+            now_theme_img.src = "src/images/dark_theme.svg";
             break;
         case "auto":
             auto_set_theme();
