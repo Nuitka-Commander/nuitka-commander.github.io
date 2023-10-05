@@ -26,6 +26,8 @@ fetch("./src/i18n/supported_languages.json")
             }
         }
         load_language(); //开始加载语言进json对象
+
+
     })
     .catch(error => {
         console.error("An error occurred in loading the language:", error);
@@ -67,5 +69,15 @@ function load_language() {
         .catch(error => {
             console.error("An error occurred in loading the language:\n---\n", error);
         });
+}
+
+//添加语言切换dropdown里面那一堆按钮
+function add_language_change_button() {
+    //遍历所有支持的语言 分别保存到key和value
+    for (let [key, value] of Object.entries(supported_languages)) {
+        let button = document.createElement("button");
+        button.textContent = value["language_self_identification"];
+        //todo 设置button的点击事件 class
+    }
 }
 
