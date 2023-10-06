@@ -25,6 +25,7 @@ function closeMenu() {
 
 //打开下拉栏
 let theme_change_dropdown_status = false;
+let language_change_dropdown_status = false;
 
 function change_theme_change_dropdown(hope_status) {
     if (hope_status === false) {
@@ -43,8 +44,9 @@ function invert_theme_dropdown_status() {
 
 // 如果用户在下拉菜单之外点击，则关闭下拉菜单
 window.onclick = function (event) {
-    if (!event.target.matches(".change_theme_btn")) {
+    if (!event.target.matches(".theme_change-dropdown_content")) { //如果点到了下拉菜单之外
         change_theme_change_dropdown(false);
     }
+
 };
 

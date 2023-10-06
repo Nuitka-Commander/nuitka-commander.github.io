@@ -1,3 +1,7 @@
 {
-  "b": "this is a test"
+  "theme": "theme",
+  "os_default": "osdefault",
+  "light_theme": "lightmode",
+  "dark_theme": "darkmode",
+  "language": "language"
 }

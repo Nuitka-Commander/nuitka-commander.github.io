@@ -5,33 +5,6 @@
 let current_language; //存储翻译的json
 let supported_languages; //存储支持的语言对象
 
-//加载"可用语言"对象
-fetch("./src/i18n/supported_languages.json")
-    .then(response => response.json())
-    .then(data => {
-        supported_languages = data;
-        //用户未定义语言或语言不支持时检测一下语言
-        if (options["language"] === undefined || !(options["language"] in supported_languages)) {
-            let user_language = navigator.languages;
-            for (let i = 0; i < user_language.length; i++) {
-                if (user_language[i] in supported_languages) {
-                    options["language"] = user_language[i];
-                    console.log(options["language"]);
-                    break;
-                }
-            }
-            //实在没有语言了，就用英语
-            if (options["language"] === undefined) {
-                options["language"] = "en-US";
-            }
-        }
-        load_language(); //开始加载语言进json对象
-
-
-    })
-    .catch(error => {
-        console.error("An error occurred in loading the language:", error);
-    });
 
 //根据键从翻译字典中获得翻译
 function get_translation(key) {
@@ -73,11 +46,52 @@ function load_language() {
 
 //添加语言切换dropdown里面那一堆按钮
 function add_language_change_button() {
+    const dropdown = document.getElementById("language_change_dropdown");
     //遍历所有支持的语言 分别保存到key和value
     for (let [key, value] of Object.entries(supported_languages)) {
         let button = document.createElement("button");
         button.textContent = value["language_self_identification"];
-        //todo 设置button的点击事件 class
+        button.onclick = function () {//button被点击后切换语言
+            options["language"] = key;
+            load_language();
+        };
+        dropdown.appendChild(button);
     }
 }
 
+
+//加载"可用语言"对象
+fetch("./src/i18n/supported_languages.json")
+    .then(response => response.json())
+    .then(data => {
+        supported_languages = data;
+        //用户未定义语言或语言不支持时检测一下语言
+        if (options["language"] === undefined || !(options["language"] in supported_languages)) {
+            let user_language = navigator.languages;
+            for (let i = 0; i < user_language.length; i++) {
+                if (user_language[i] in supported_languages) {
+                    options["language"] = user_language[i];
+                    console.log(options["language"]);
+                    break;
+                }
+            }
+            //实在没有语言了，就用英语
+            if (options["language"] === undefined) {
+                options["language"] = "en-US";
+            }
+        }
+        load_language(); //开始加载语言进json对象
+        //加载html文档完毕后便开始添加翻译切换按钮
+        if (document.readyState === "loading") { //html还在加载
+            document.addEventListener("DOMContentLoaded", function () {
+                add_language_change_button();
+            });
+        } else {  // 加载完毕
+            add_language_change_button();
+        }
+
+    })
+    .catch(error => {
+        console.error("An error occurred in loading the language:", error);
+        alert("Oh no, there was an error loading supported languages. \nError:\n" + error);
+    });
