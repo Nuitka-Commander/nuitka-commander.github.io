@@ -42,11 +42,28 @@ function invert_theme_dropdown_status() {
     change_theme_change_dropdown(!theme_change_dropdown_status);
 }
 
+
+function change_language_change_dropdown(hope_status) {
+    if (hope_status === false) {
+        document.getElementById("language_change_dropdown").classList.remove("show");
+        language_change_dropdown_status = false;
+    } else {
+        document.getElementById("language_change_dropdown").classList.add("show");
+        language_change_dropdown_status = true;
+    }
+}
+
+function invert_language_dropdown_status() {
+    console.log("invert_language_dropdown_status");
+    change_language_change_dropdown(!language_change_dropdown_status);
+}
+
 // 如果用户在下拉菜单之外点击，则关闭下拉菜单
 window.onclick = function (event) {
-    if (!event.target.matches(".theme_change-dropdown_content")) { //如果点到了下拉菜单之外
+    if (!document.getElementById("theme_change_dropdown").contains(event.target)) { //如果点到了下拉菜单之外
         change_theme_change_dropdown(false);
     }
-
+    if (!(document.getElementById("language_set_dropdown").contains(event.target))) {
+        change_language_change_dropdown(false);
+    }
 };
-

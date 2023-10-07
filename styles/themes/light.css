@@ -8,4 +8,5 @@
     --font-color: #1b1b1b; /*字体颜色*/
     --icon-color: #1b1b1b; /*图标颜色*/
     --hover-background: #cdcdcd; /*鼠标悬停背景色*/
+    --focus-border: #067ddf; /*当在焦点上时的边框颜色*/
 }

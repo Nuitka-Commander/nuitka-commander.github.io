@@ -56,14 +56,14 @@
             <img alt="close menu" class="ctrl_menu_img" src="src/images/close.svg">
         </button>
     </div>
-    <div class="theme_change_dropdown">
+    <div class="theme_change_dropdown" id="theme_change_dropdown">
         <!--不得不使用一下event来阻止事件冒泡 否则会出现打不开的情况-->
-        <button class="change_theme_btn menu_dropdown_open_buttons"
-                onclick="invert_theme_dropdown_status();event.stopPropagation();">
+        <button class=" menu_dropdown_open_buttons theme_change_dropdown_button"
+                onclick="invert_theme_dropdown_status();">
             <img alt="dark mode" class="menu_icons" id="now_theme_img" src="">
             <span tKey="theme"></span>
         </button>
-        <div class="theme_change-dropdown_content" id="theme_change-dropdown_content">
+        <div class="theme_change-dropdown_content menu_dropdown_contents" id="theme_change-dropdown_content">
             <button class="change_theme_btn" id="auto_mode_btn" onclick="change_theme('auto')">
                 <img alt="os default" class="menu_icons" src="src/images/auto_theme.svg">
                 <span tKey="os_default"></span>
@@ -78,15 +78,15 @@
             </button>
         </div>
     </div>
-
+    <br>
     <div id="language_set_dropdown">
-        <button class="menu_dropdown_open_buttons">
+        <button class="menu_dropdown_open_buttons language_dropdown_button" onclick="invert_language_dropdown_status();">
             <img alt="language" class="menu_icons" src="src/images/language.svg">
             <span tKey="language"></span>
         </button>
-        <!--     我现在要实现一个里面有多个元素 每个元素被点击就发送一个指令 并且越简单越好 -->
-        <div id="language_change_dropdown">
-
+        <div id="language_change_dropdown" class="menu_dropdown_contents">
+            <!--     内部为js自动添加 -->
+            <span></span>
         </div>
 
     </div>

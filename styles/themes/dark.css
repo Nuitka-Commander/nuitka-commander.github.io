@@ -1,4 +1,4 @@
-:root .dark_mode{
+:root .dark_mode {
     --bg-color: #1b1b1b;
     --bg-color_rgb: 27, 27, 27; /*这里需要填三位数(给rgba用的)*/
     --shadow-color_rgb: 255, 255, 255; /*这里需要填三位数(给rgba用的)*/
@@ -6,6 +6,6 @@
     --sub-theme-color-1: #2b2b2b; /*副主题色*/
     --sub-theme-color-2: #2b2b2b; /*副主题色2*/
     --font-color: white; /*字体颜色*/
-    --icon-color: #cdcdcd; /*图标颜色*/
-    --hover-background: #2b2b2b; /*鼠标悬停背景色*/
+    --icon-color: #ffffff; /*图标颜色*/
+    --hover-background: #cdcdcd; /*鼠标悬停背景色*/
 }
