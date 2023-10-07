@@ -45,6 +45,8 @@
 /*====================*/
 /*各种通用设置*/
 .menu_icons {
+    min-width: 20px;
+    min-height: 20px;
     width: 2vw;
     height: 2vh;
     margin-right: 3px;
@@ -54,8 +56,9 @@
 
 .menu_dropdown_open_buttons {
     border-radius: 12px;
-    min-width: 130px;
-    height: 4vh;
+    min-width: 135px;
+    width: 5vw;
+    height: 5vh;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -167,6 +170,8 @@
     min-width: 130px;
     box-shadow: 0 12px 20px 3px rgba(var(--shadow-color_rgb), 0.3);
     z-index: 1;
+    max-height: 50vh;
+    overflow-y: auto;
     border-radius: 12px;
     outline: none;
     color: var(--font-color);
@@ -174,6 +179,7 @@
     transition: 0.5s;
     margin: 0.5vh 0.5vw;
     padding: 2vh 1vw;
+
 }
 
 #language_change_dropdown.show {
