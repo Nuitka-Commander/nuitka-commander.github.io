@@ -7,7 +7,7 @@ function openMenu() {
     open_menu_button.style.visibility = "hidden";
     open_menu_button.style.opacity = "0";
     let menu_sidebar = document.getElementById("menu_sidebar");
-    menu_sidebar.style.width = Math.max(window.innerWidth * 0.15, 145) + "px";
+    menu_sidebar.style.width = Math.max(window.innerWidth * 0.15, 150) + "px";
 
 }
 

@@ -127,7 +127,8 @@
     background-color: var(--bg-color2);
     padding-top: 1vh;
     border-radius: 6px;
-    min-width: 150px;
+    width: 10vw;
+    min-width: 135px;
     text-decoration: none;
     display: block;
 }
@@ -154,11 +155,12 @@
     color: var(--font-color);
     font-size: 16px;
     border: none;
+    width: 10vw;
     cursor: pointer;
     background-color: var(--bg-color2);
     padding: 1vh 16px 16px;
     border-radius: 6px;
-    min-width: 150px;
+    min-width: 140px;
     text-decoration: none;
     display: block;
 }
