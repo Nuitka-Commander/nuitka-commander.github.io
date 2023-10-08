@@ -1,7 +1,7 @@
 {
-  "theme": "theme",
-  "os_default": "osdefault",
-  "light_theme": "lightmode",
-  "dark_theme": "darkmode",
-  "language": "language"
+  "theme": "Theme",
+  "os_default": "OS Default",
+  "light_theme": "Light",
+  "dark_theme": "Dark",
+  "language": "Language"
 }

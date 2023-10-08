@@ -7,6 +7,13 @@
 
 }
 
+body {
+    background-color: var(--bg-color);
+    color: var(--font-color);
+    transition: background-color 0.5s, color 0.5s;
+
+}
+
 /*加载页面*/
 
 .loading_page {
@@ -26,10 +33,10 @@
 .loading_page span {
     display: inline-block;
     width: 2vw;
-    height: 4vh;
+    height: 0;
     border-radius: 4px;
     background: var(--sub-theme-color-1);
-    -webkit-animation: loadsaven 1.04s ease infinite;
+    -webkit-animation: loadsaven 1.17s ease infinite;
 }
 
 @-webkit-keyframes loadsaven {
@@ -44,31 +51,39 @@
     }
 }
 
+
+/*把上面的时间全部向后偏移0.2s*/
+
+.loading_page span:nth-child(1) {
+    -webkit-animation-delay: 0.2s;
+}
 .loading_page span:nth-child(2) {
-    -webkit-animation-delay: 0.13s;
+    -webkit-animation-delay: 0.33s;
 }
 
 .loading_page span:nth-child(3) {
-    -webkit-animation-delay: 0.26s;
+    -webkit-animation-delay: 0.46s;
 }
 
 .loading_page span:nth-child(4) {
-    -webkit-animation-delay: 0.39s;
+    -webkit-animation-delay: 0.59s;
 }
 
 .loading_page span:nth-child(5) {
-    -webkit-animation-delay: 0.52s;
+    -webkit-animation-delay: 0.72s;
 }
 
 .loading_page span:nth-child(6) {
-    -webkit-animation-delay: 0.65s;
+    -webkit-animation-delay: 0.85s;
 }
 
 .loading_page span:nth-child(7) {
-    -webkit-animation-delay: 0.78s;
+    -webkit-animation-delay: 0.98s;
 }
 
 .loading_page span:nth-child(8) {
-    -webkit-animation-delay: 0.91s;
+    -webkit-animation-delay: 1.11s;
 }
-/*弹出动画*/
+.loading_page span:nth-child(9) {
+    -webkit-animation-delay: 1.24s;
+}

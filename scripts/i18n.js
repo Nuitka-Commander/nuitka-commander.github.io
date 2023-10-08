@@ -36,7 +36,16 @@ function load_language() {
         .then(response => response.json())
         .then(data => {
             current_language = data;
-            reload_all_translation();//加载完毕后重载翻译
+            //等待html加载完毕后加载翻译
+            if (document.readyState === "loading") { //html还在加载
+                document.addEventListener("DOMContentLoaded", function () {
+                    reload_all_translation();
+                    stop_loading();
+                });
+            } else {  // 加载完
+                reload_all_translation();
+                stop_loading();
+            }
 
         })
         .catch(error => {

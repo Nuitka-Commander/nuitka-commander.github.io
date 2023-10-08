@@ -37,7 +37,7 @@
     <span></span>
     <span></span>
 </div>
-<script>stop_loading();//todo 临时先关闭 后面加载的时候肯定会需要一定加载的</script>
+
 
 <header>
     <nav class="nav_bar">
@@ -94,19 +94,14 @@
 </div>
 
 <main>
-    <p>
-        coding <br />coming s∞n
-    </p>
+    <p>language: <span tKey="language"></span></p>
+    <p>light theme: <span tKey="light_theme"></span></p>
+    <p>dark_theme : <span tKey="dark_theme"></span></p>
 </main>
 <footer></footer>
-<!--加载完成后再重新加载一次翻译-->
-<script>
-    //当翻译字典不为undefined(也就确保已经翻译过一次了,那么代表可能有些东西没翻译上 所以重新翻译一次)
-    if (current_language !== undefined) {
-        reload_all_translation();
-    }
-    change_theme(options["theme"]);//加载主题
 
+<script>
+    change_theme(options["theme"]);//加载主题
 </script>
 </body>
 </html>
