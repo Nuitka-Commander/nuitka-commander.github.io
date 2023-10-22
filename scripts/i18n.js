@@ -4,7 +4,7 @@
 
 let current_language; //存储翻译的json
 let supported_languages; //存储支持的语言对象
-let raw_state_object; // 存储原始状态机json
+
 
 //根据键从翻译字典中获得翻译
 function get_translation(key) {
@@ -36,27 +36,15 @@ function load_language() {
         .then(response => response.json())
         .then(data => {
             current_language = data;
-            //加载状态对象
-            fetch("./src/state_machine.json")
-                .then(response => response.json())
-                .then(data2 => {
-                    raw_state_object = data2;
-                    //等待html加载完毕后加载翻译
-                    // todo 告诉程序现在可以开始生成页面了
-                    if (document.readyState === "loading") { //html还在加载
-                        document.addEventListener("DOMContentLoaded", function () {
-                            reload_all_translation();
-                            stop_loading();
-                        });
-                    } else {  // 加载完
-                        reload_all_translation();
-                        stop_loading();
-                    }
-                })
-                .catch(error => {
-                    console.error("An error occurred in loading the stateMachine:\n---\n", error);
+            if (document.readyState === "loading") { //html还在加载
+                document.addEventListener("DOMContentLoaded", function () {
+                    reload_all_translation();
+                    stop_loading();
                 });
-
+            } else {  // 加载完
+                reload_all_translation();
+                stop_loading();
+            }
         })
         .catch(error => {
             console.error("An error occurred in loading the language:\n---\n", error);
