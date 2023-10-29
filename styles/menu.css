@@ -62,15 +62,15 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-top: 1.5vh;
+    margin-top: 0.2vh;
     margin-left: 0.5vw;
-    background-color: unset;
     color: var(--font-color);
-    padding: 16px;
+    padding: 3px;
     font-size: 16px;
     cursor: pointer;
-    transition: background-color 0.5s;
+    background: unset;
     border: none;
+    min-height: 53px;
 }
 
 .menu_dropdown_open_buttons:hover {
@@ -83,10 +83,9 @@
 }
 
 .menu_dropdown_contents {
-    display: none;
     position: absolute;
     background-color: var(--bg-color2);
-    min-width: 130px;
+    min-width: 145px;
     box-shadow: 0 12px 20px 3px rgba(var(--shadow-color_rgb), 0.3);
     z-index: 1;
     border-radius: 12px;
@@ -96,83 +95,43 @@
     transition: 0.5s;
     margin: 0.5vh 0.5vw;
     padding: 2vh 1vw;
+    display: none;
+    min-height: 80px;
+    animation: pop_down_and_expand 0.5s;
+    max-height: 300px;
+    overflow-y: auto;
 }
 
 
-/*====================*/
-
-.change_theme_btn {
-    background-color: unset;
-    color: var(--font-color);
-    padding: 16px;
-    font-size: 16px;
-    cursor: pointer;
+.menu_dropdowns .show {
+    display: block;
 }
 
-/* 悬停 &获取焦点时的下拉按钮 */
-.change_theme_btn:hover {
-    background-color: var(--hover-background);
-}
-
-/* 容器 <div> - 需要定位下拉内容 */
-.theme_change_dropdown {
-    position: relative;
-    display: inline-block;
-}
-
-
-/* 下拉列表中的button */
-.theme_change-dropdown_content button {
+.menu_in_dropdown_buttons {
     color: var(--font-color);
     background-color: var(--bg-color2);
-    padding-top: 1vh;
+    padding: 1vh 16px 16px;
     border-radius: 6px;
     width: 10vw;
     min-width: 135px;
     text-decoration: none;
     display: block;
+    border: none;
+    cursor: pointer;
+    min-height: 53px;
+    font-size: 16px;
 }
 
 
-/* 显示下拉菜单（当用户点击下拉按钮时，使用 JS 将此类添加到 .theme_change-dropdown_content 容器中）*/
-.theme_change-dropdown_content.show {
-    display: block;
-}
-
-
-/*language*/
-
-#language_set_dropdown {
-    position: relative;
-    display: inline-block;
-}
-
-.language_change_buttons:hover {
+.menu_in_dropdown_buttons:hover {
     background-color: var(--hover-background);
 }
 
-.language_change_buttons {
-    color: var(--font-color);
-    font-size: 16px;
-    border: none;
-    width: 10vw;
-    cursor: pointer;
-    background-color: var(--bg-color2);
-    padding: 1vh 16px 16px;
-    border-radius: 6px;
-    min-width: 140px;
-    text-decoration: none;
-    display: block;
+
+.menu_in_dropdown_buttons:focus {
+    outline: none;
+    border: 2px solid var(--focus-border);
 }
 
-#language_change_dropdown {
-    max-height: 50vh;
-    overflow-y: auto;
-    overflow-x: hidden;
-}
 
-#language_change_dropdown.show {
-    display: block;
-    animation-name : pop_down_and_expand;
-    animation-duration: 0.3s;
-}
+

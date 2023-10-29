@@ -91,13 +91,5 @@ body {
 }
 
 @keyframes pop_down_and_expand {
-    0% {
-        overflow: hidden;
-        width: 0%;
-        height: 100%;
-    }
-    100% {
-        height: 100%;
-        width: 100%;
-    }
+
 }

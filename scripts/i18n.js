@@ -58,7 +58,7 @@ function add_language_change_button() {
     for (let [key, value] of Object.entries(supported_languages)) {
         let button = document.createElement("button");
         button.textContent = value["language_self_identification"];
-        button.classList.add("language_change_buttons");
+        button.classList.add("menu_in_dropdown_buttons");
 
         button.onclick = function () {//button被点击后切换语言
             options["language"] = key;
