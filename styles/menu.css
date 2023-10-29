@@ -168,8 +168,11 @@
 #language_change_dropdown {
     max-height: 50vh;
     overflow-y: auto;
+    overflow-x: hidden;
 }
 
 #language_change_dropdown.show {
     display: block;
+    animation-name : pop_down_and_expand;
+    animation-duration: 0.3s;
 }
