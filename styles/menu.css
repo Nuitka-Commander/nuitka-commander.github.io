@@ -92,14 +92,14 @@
     outline: none;
     color: var(--font-color);
     text-align: center;
-    transition: 0.5s;
     margin: 0.5vh 0.5vw;
     padding: 2vh 1vw;
     display: none;
     min-height: 80px;
-    animation: pop_down_and_expand 0.5s;
     max-height: 300px;
     overflow-y: auto;
+    transition: 0.5s;
+    /*animation: pop_down_and_expand 0.5s;*/ /*todo 动画效果*/
 }
 
 

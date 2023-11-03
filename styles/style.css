@@ -91,5 +91,11 @@ body {
 }
 
 @keyframes pop_down_and_expand {
+    0% {
+        transform: translateY(-1000vh) scale(0.5);
+    }
 
+    100% {
+        transform: translateY(0) scale(1);
+    }
 }
