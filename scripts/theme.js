@@ -25,7 +25,7 @@ function change_theme(theme) {
             now_theme_img.src = "src/images/light_theme.svg";
             break;
         case "dark":
-            document.body.classList.add("dark_mode")
+            document.body.classList.add("dark_mode");
             now_theme_img.src = "src/images/dark_theme.svg";
             break;
         case "auto":

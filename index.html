@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Nuitka Commander</title>
-    <meta content="在线轻松生成Nuitka命令" name="description"><!--描述内容-->
+    <meta content="在线生成Nuitka命令" name="description"><!--描述内容-->
     <meta content="erduotong" name="author"> <!--作者-->
 
     <link href="styles/themes/light.css" rel="stylesheet">
@@ -99,9 +99,8 @@
     <p>dark_theme : <span tKey="dark_theme"></span></p>
 </main>
 <footer></footer>
-
 <script>
-    change_theme(options["theme"]);//加载主题
+    change_theme(options["theme"]); //加载主题 放在这是因为防止闪烁
 </script>
 </body>
 </html>
