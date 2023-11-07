@@ -1,10 +1,12 @@
-// *************************************************************************************
-// 没必要新建一个js文件，直接在这里写就行了的东西
-// *************************************************************************************
-//打开加载页面
+/*
+=====================
+常用功能函数
+=====================
+ */
 
 
-function start_loading() {
+//开启加载界面
+export function start_loading() {
     document.querySelectorAll(".loading_page span").forEach(span => {
         span.style.animationPlayState = "running"; // 恢复动画
     });
@@ -13,7 +15,7 @@ function start_loading() {
 }
 
 //关闭加载页面
-function stop_loading() {
+export function stop_loading() {
     document.querySelectorAll(".loading_page span").forEach(span => {
         span.style.animationPlayState = "paused"; // 暂停动画
     });

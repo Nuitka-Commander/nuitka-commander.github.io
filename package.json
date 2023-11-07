@@ -1,0 +1,19 @@
+{
+  "name": "nuitka-commander",
+  "version": "1.0.0",
+  "description": " Nuitka Command Generator Web GUI",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Nuitka-Commander/nuitka-commander.github.io.git"
+  },
+  "author": "Nuitka Commander",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/Nuitka-Commander/nuitka-commander.github.io/issues"
+  },
+  "homepage": "https://github.com/Nuitka-Commander/nuitka-commander.github.io#readme"
+}
