@@ -1,6 +1,8 @@
 <template>
   <div id="app">
-    <h1>ToDo list</h1>
+    <button @click="count++">{{ count }}</button>
+    <button @click="b = !b;">change b</button>
+    <p>b : {{ b }}</p>
   </div>
 </template>
 
@@ -8,9 +10,14 @@
 
 
 export default {
-  name: 'App',
-
-}
+  name: "App",
+  data() {
+    return {
+      count: 0,
+      b: false,
+    };
+  },
+};
 </script>
 
 <style>
