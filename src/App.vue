@@ -14,6 +14,7 @@ function toggleB() {
     <button @click="toggleB">change b</button>
     <p>b : {{ b }}</p>
     <p v-if="b">Can you see me? b is {{ b }}</p>
+
   </div>
 </template>
 
