@@ -16,6 +16,7 @@ function toggleB() {
     <p v-if="b">Can you see me? b is {{ b }}</p>
 
   </div>
+
 </template>
 
 <script>
