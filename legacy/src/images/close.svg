@@ -1,8 +1,0 @@
-<svg width="25" height="25" xmlns="http://www.w3.org/2000/svg">
-    <g >
-        <g id="svg_1" stroke-linecap="round" stroke-width="4">
-            <line  id="svg_2" stroke-linejoin="round" stroke="#000" y2="23" x2="23" y1="2" x1="2"/>
-            <line id="svg_3" stroke-linejoin="round" stroke="#000" y2="23" x2="2" y1="2" x1="23"/>
-        </g>
-    </g>
-</svg>
