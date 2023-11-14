@@ -7,7 +7,7 @@ on:
   #    branches:
   #      - master
   workflow_dispatch:
-
+permissions: write-all
 jobs:
   docs:
     runs-on: ubuntu-latest
