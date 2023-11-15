@@ -11,7 +11,8 @@ import {Edit} from "@element-plus/icons-vue";
       <edit></edit>
 
     </el-icon>
-    <hello-world></hello-world>
+    <hello-world></hello-world> 
+    <h1>hello,mworld!</h1>
   </div>
 </template>
 
