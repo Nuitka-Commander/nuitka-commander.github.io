@@ -9,7 +9,9 @@ import {Edit} from "@element-plus/icons-vue";
     <img src="@/assets/vue.svg" alt="">
     <el-icon>
       <edit></edit>
+
     </el-icon>
+    <hello-world></hello-world>
   </div>
 </template>
 
