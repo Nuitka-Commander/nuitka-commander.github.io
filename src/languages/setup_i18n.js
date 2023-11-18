@@ -38,11 +38,8 @@ function async_load_languages(lang) {
     }
     // 检查通过 加载语言
     import(`@/languages/translations/${supported_i18n[lang].path_name}.js`).then((module) => {
-        i18n.global.messages = {
-            [lang]: module.message,
-        };
+        i18n.global.setLocaleMessage(lang, module.default);
         //给i18n.global.messages这个对象变成字符串
-        console.log(JSON.stringify(i18n.global.messages));
         // console.log("语言加载成功");
         // console.log(i18n.global.messages);
     }).catch(error => {
