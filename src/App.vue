@@ -4,7 +4,7 @@
 
 <template>
   <div id="app">
-    <el-button class="button1" @click="">red</el-button>
+      <p>{{ $t("hello")}}</p>
   </div>
 </template>
 
