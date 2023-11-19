@@ -28,27 +28,38 @@ export function init_i18n() {
         }
     }
     //如果最终仍未找到语言，则使用en作为默认值
-    set_i18n_language(i18n.global.locale.value);
-
-
+    document.querySelector("html").setAttribute("lang", i18n.global.locale.value);
+    load_locale_messages(i18n.global.locale.value, "en");
 }
 
 export function set_i18n_language(locale) {
+    if (locale === i18n.global.locale.value) {
+        return;//语言相同的时候不加载
+    }
+    const old_locale = i18n.global.locale.value;
     i18n.global.locale.value = locale;
     user_options.value.language = locale;
     document.querySelector("html").setAttribute("lang", locale);
-    load_locale_messages(locale);
+
+    load_locale_messages(locale, old_locale);
+
 
 }
 
 //加载语言文件
-function load_locale_messages(locale) {
+function load_locale_messages(locale, old_locale) {
     const path = supported_i18n[locale].path_name;
     import(
         `@/languages/translations/${path}.js`
         ).then((messages) => {
         //todo 加载动画？
         i18n.global.setLocaleMessage(locale, messages.default);
+        //删除旧的语言文件
+        if (old_locale !== undefined) {
+            i18n.global.setLocaleMessage(old_locale, null);
+        }
+        console.log(i18n.global.messages.value);
+
     });
 
 
