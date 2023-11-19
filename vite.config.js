@@ -5,6 +5,7 @@ import Components from "unplugin-vue-components/vite";
 import {ElementPlusResolver} from "unplugin-vue-components/resolvers";
 import {resolve} from "path";
 // https://vitejs.dev/config/
+// noinspection JSUnresolvedReference
 export default defineConfig({
     plugins: [vue(), AutoImport({
         resolvers: [ElementPlusResolver()],
