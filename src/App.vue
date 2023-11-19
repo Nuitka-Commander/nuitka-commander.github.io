@@ -1,10 +1,11 @@
 <script setup>
-
 </script>
 
 <template>
   <div id="app">
       <p>{{ $t("hello")}}</p>
+    <p>{{$t("testFather.test")}}</p>
+
   </div>
 </template>
 

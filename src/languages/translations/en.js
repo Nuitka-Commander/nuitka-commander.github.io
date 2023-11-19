@@ -1,4 +1,4 @@
 //翻译文件
-export const message = {
-    hello : "Hello"
+export default {
+    hello: "Hello",
 };
