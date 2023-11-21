@@ -24,8 +24,9 @@ export const i18n = createI18n({
 export function init_i18n() {
     let final_language = "en";
     // 设置语言
-    if (user_options.value.language !== undefined && supported_i18n[user_options.value.language] !== undefined) { // 已经设置了语言
+    if (user_options.value.language !== undefined && supported_i18n[user_options.value.language] !== undefined) { // 已经设置了语言且存在
         final_language = user_options.value.language;
+
     } else {
         //尝试从浏览器获取语言
         const browser_language = navigator.languages;
