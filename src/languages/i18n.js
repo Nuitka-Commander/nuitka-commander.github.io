@@ -1,21 +1,20 @@
 // 设置i18n
 import {createI18n} from "vue-i18n";
 import {user_options} from "@/utils/global_stores/user_options.js";
-import {supported_i18n} from "@/languages/translations/supported_i18n.js";
+import {supported_i18n} from "@/languages/supported_i18n.js";
 
 let is_language_load = false; //语言是否加载完成
 
 export const i18n = createI18n({
     legacy: false,
     globalInjection: true,
-    silentTranslationWarn: true,
     missing(locale, key) {
         //防止语言文件未加载完成时报错
         if (!is_language_load) {
             return;
         }
         console.error(`i18n: missing '${key}' for locale '${locale}'`);
-        return "panic";
+        return "error!";
     },
     messages: {},
 });
