@@ -8,6 +8,8 @@ let is_language_load = false; //语言是否加载完成
 export const i18n = createI18n({
     legacy: false,
     globalInjection: true,
+    fallbackWarn: false,
+    silentTranslationWarn: true,
     missing(locale, key) {
         //防止语言文件未加载完成时报错
         if (!is_language_load) {
