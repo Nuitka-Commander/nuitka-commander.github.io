@@ -1,0 +1,8 @@
+@use 'sass:map';
+@use '../theme_vars/index' as *;
+//light mode
+@forward 'element-plus/theme-chalk/src/common/var' with (
+  $bg-color: ( //
+    'page': map.get($light, --bg-color),
+  )
+);

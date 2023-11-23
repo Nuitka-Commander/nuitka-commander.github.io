@@ -1,0 +1,10 @@
+@use 'sass:map';
+@use '../theme_vars/index' as *;
+//dark mode
+@forward 'element-plus/theme-chalk/src/dark/var'with (
+$colors:(
+  'primary': ( //
+    'base': map.get($dark, --bg-color),
+  ),
+));
+@use "element-plus/theme-chalk/src/dark/css-vars";

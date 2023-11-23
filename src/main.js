@@ -1,8 +1,7 @@
 import {createApp} from "vue";
-import "./style.css";
 import App from "./App.vue";
 import {init_utils} from "@/utils/init_utils.js";
-import {i18n} from "@/languages/i18n.js";
+import {i18n} from "@/assets/languages/i18n.js";
 
 init_utils();
 const app = createApp(App);

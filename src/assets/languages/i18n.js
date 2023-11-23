@@ -1,7 +1,7 @@
 // 设置i18n
 import {createI18n} from "vue-i18n";
 import {user_options} from "@/utils/global_stores/user_options.js";
-import {supported_i18n} from "@/languages/supported_i18n.js";
+import {supported_i18n} from "@/assets/languages/supported_i18n.js";
 
 let is_language_load = false; //语言是否加载完成
 
@@ -13,7 +13,7 @@ export const i18n = createI18n({
     missing(locale, key) {
         //防止语言文件未加载完成时报错
         if (!is_language_load) {
-            return;
+            return "你先别急,让vue-i18n先急";
         }
         console.error(`i18n: missing '${key}' for locale '${locale}'`);
         return "error!";
@@ -24,7 +24,7 @@ export const i18n = createI18n({
 export function init_i18n() {
     let final_language = "en";
     // 设置语言
-    if (user_options.value.language !== undefined && supported_i18n[user_options.value.language] !== undefined) { // 已经设置了语言且存在
+    if (user_options.value.language !== undefined && supported_i18n[user_options.value.language] !== undefined) { // 已经设置了语言且存在支持
         final_language = user_options.value.language;
 
     } else {
@@ -55,7 +55,7 @@ export function set_i18n_language(locale) {
 function load_locale_messages(locale) {
     const path = supported_i18n[locale].path_name;
     import(
-        `@/languages/translations/${path}.js`
+        `@/assets/languages/translations/${path}.js`
         ).then((messages) => {
 
         //todo 加载动画？
