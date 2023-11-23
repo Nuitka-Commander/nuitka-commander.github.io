@@ -38,7 +38,7 @@ export function read_local_storage(key) {
         return;
     }
     try {
-        return localStorage.getItem(key);
+        return localStorage.getItem(key)
     } catch (e) {
         console.warn("localStorage is not available! \nError: " + e);
     }

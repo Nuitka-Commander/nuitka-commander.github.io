@@ -1,0 +1,15 @@
+//合并变量
+@import "dark";
+@import "light";
+
+html {
+  @each $key, $value in $light {
+    #{$key}: #{$value};
+  }
+}
+
+html .dark {
+  @each $key, $value in $dark {
+    #{$key}: #{$value};
+  }
+}
