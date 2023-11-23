@@ -2,7 +2,9 @@
 @use '../theme_vars/index' as *;
 //light mode
 @forward 'element-plus/theme-chalk/src/common/var' with (
-  $bg-color: ( //
-    'page': map.get($light, --bg-color),
+  $colors:(
+    'primary': ( //
+      'base': map.get($dark, --bg-color),
+    ),
   )
 );
