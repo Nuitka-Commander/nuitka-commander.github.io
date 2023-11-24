@@ -4,7 +4,7 @@
 @forward 'element-plus/theme-chalk/src/common/var' with (
   $colors:(
     'primary': ( //
-      'base': map.get($dark, --bg-color),
+      'base': map.get($light, --bg-color),
     ),
   )
 );
