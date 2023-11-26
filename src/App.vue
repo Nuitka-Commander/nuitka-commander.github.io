@@ -1,31 +1,20 @@
 <script setup>
-
-
-import {i18n, set_i18n_language} from "@/assets/languages/i18n.js";
-import {set_theme} from "@/utils/use_theme.js";
-import {set_loading} from "@/stores/is_loading.js";
 import LoadingPage from "@/components/loadingPage.vue";
-
 
 </script>
 
 <template>
-  <div id="app">
-    <loading-page></loading-page>
-    <p>{{ $t("hello") }}</p>
-    <p>{{ $t("testFather.test") }}</p>
-    <el-button @click="set_i18n_language('en')">to en</el-button>
-    <el-button @click="set_i18n_language('zh-CN') ">to zh</el-button>
-    <el-button @click="console.log(i18n.global.messages.value)">show value</el-button>
-    <br>
-    <el-button @click="set_theme('dark')">to dark</el-button>
-    <el-button @click="set_theme('light')">to light</el-button>
-    <el-button @click="set_theme('auto')">to auto</el-button>
-    <br>
-    <el-button @click="set_loading(true)"></el-button>
 
-    <button>hello</button>
-  </div>
+  <loading-page></loading-page>
+  <header>
+
+    <a href="#" target="_self">
+      <img src="@/assets/images/Nuitka.svg" alt="Nuitka logo">
+      Nuitka Commander
+    </a>
+
+  </header>
+
 </template>
 
 <script>
@@ -33,6 +22,38 @@ import LoadingPage from "@/components/loadingPage.vue";
 
 </script>
 <style lang="scss" scoped>
+header {
+  background-color: grey;
+  display: flex;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  position: relative;
+  border: none;
+  height: 60px;
 
+  a {
+    color:white;
+    text-decoration: none;
+
+    img {
+      width: 25px;
+      height: 25px;
+      padding-right: 15px;
+    }
+
+    display: flex;
+    flex-wrap: nowrap;
+    padding-top: 17.5px;
+    padding-left: 15vw;
+    font-size: 1.26rem;
+
+    &:hover {
+      color: white;
+    }
+  }
+
+
+}
 
 </style>
