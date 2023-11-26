@@ -4,8 +4,5 @@
   "authors": [
     "erduotong"
   ],
-  "urls": {
-    "report_issue": "https://github.com/Nuitka-Commander/nuitka-commander.github.io/issues",
-    "get_involved": "https://github.com/Nuitka-Commander/nuitka-commander.github.io/docs/get_involved.md"
-  }
+  "base_url": "https://github.com/nuitka-commander/nuitka-commander.github.io/"
 }
