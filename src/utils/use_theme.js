@@ -1,5 +1,14 @@
-import {user_options} from "@/utils/global_stores/user_options.js";
-//更新网页的主题
+/**
+ * @Description 管理网页主题相关逻辑
+ * @Author: erduotong
+ * @Date: 2023-11-26 10:34:05
+ */
+import {user_options} from "@/stores/user_options.js";
+
+/**
+ * 更新网页主题
+ * @param theme {"light"|"dark"} 要更新到的主题
+ */
 function update_theme(theme) {
     switch (theme) {
         case "light":
@@ -13,6 +22,9 @@ function update_theme(theme) {
     }
 }
 
+/**
+ * 初始化网页主题
+ */
 export function init_theme() {
     window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", e => {
         const newColorScheme = e.matches ? "dark" : "light";
@@ -23,6 +35,10 @@ export function init_theme() {
     set_theme(user_options.value.theme);//手动调用一次保证页面不会出问题
 }
 
+/**
+ * 设置主题(暴露给外部的接口)
+ * @param new_theme {"light"|"dark"|"auto"} 要设置的主题
+ */
 //设置主题
 export function set_theme(new_theme) {
     //判断new_theme是否合法
@@ -38,8 +54,6 @@ export function set_theme(new_theme) {
 
     //手动读取一次系统设置
     const colorScheme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
-    console.log(colorScheme);
     update_theme(colorScheme);
-
 
 }

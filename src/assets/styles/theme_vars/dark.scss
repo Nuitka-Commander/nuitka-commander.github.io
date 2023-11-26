@@ -1,8 +1,0 @@
-@use "sass:map";
-@import "light";
-
-$dark: () !default;
-// dark theme
-$dark: map.deep-merge($light, (
-    "--bg-color": red,
-))

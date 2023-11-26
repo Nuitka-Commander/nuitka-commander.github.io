@@ -1,15 +1,31 @@
-// 设置i18n
+/**
+ * @Description 国际化相关逻辑管理
+ * @Author: erduotong
+ * @Date: 2023-11-26 10:49:04
+ */
 import {createI18n} from "vue-i18n";
-import {user_options} from "@/utils/global_stores/user_options.js";
+import {user_options} from "@/stores/user_options.js";
 import {supported_i18n} from "@/assets/languages/supported_i18n.js";
 
-let is_language_load = false; //语言是否加载完成
+/**
+ * @Description 是否语言加载完成
+ * @type {boolean} true:加载完成 false:未加载完成
+ */
+let is_language_load = false;
 
+/** i18n实例
+ */
 export const i18n = createI18n({
     legacy: false,
     globalInjection: true,
     fallbackWarn: false,
     silentTranslationWarn: true,
+    /**
+     * @Description 语言文件加载失败时的回调
+     * @param locale 语言
+     * @param key 翻译key
+     * @returns {string} 错误提示
+     */
     missing(locale, key) {
         //防止语言文件未加载完成时报错
         if (!is_language_load) {
@@ -21,6 +37,9 @@ export const i18n = createI18n({
     messages: {},
 });
 
+/**
+ * 初始化i18n 尝试读取用户设置的语言，如果没有则使用浏览器推荐的语言
+ */
 export function init_i18n() {
     let final_language = "en";
     // 设置语言
@@ -43,6 +62,10 @@ export function init_i18n() {
     set_i18n_language(final_language);
 }
 
+/**
+ * @Description 设置语言
+ * @param locale {string} 要设置的语言 需在supported_i18n中存在
+ */
 export function set_i18n_language(locale) {
     if (locale === i18n.global.locale.value) {
         return;//语言相同的时候不加载
@@ -51,7 +74,10 @@ export function set_i18n_language(locale) {
     load_locale_messages(locale);
 }
 
-//加载语言文件
+/**
+ * @Description 加载语言文件并设置为当前语言 删除旧的语言文件释放内存
+ * @param locale 要加载的语言 需在supported_i18n中存在
+ */
 function load_locale_messages(locale) {
     const path = supported_i18n[locale].path_name;
     import(
@@ -59,7 +85,6 @@ function load_locale_messages(locale) {
         ).then((messages) => {
 
         //todo 加载动画？
-
         const old_locale = i18n.global.locale.value;
         i18n.global.locale.value = locale;  //设置新的值
         user_options.value.language = locale;  //保存到用户设置
@@ -69,8 +94,7 @@ function load_locale_messages(locale) {
         }
         is_language_load = true;
     }).catch((e) => {
-        //todo global error
-        console.error("load language error: " + e);
+        throw new Error(`i18n: load locale messages failed: ${e}`);
     });
 
 

@@ -1,6 +1,12 @@
 <script setup>
+
+
 import {i18n, set_i18n_language} from "@/assets/languages/i18n.js";
 import {set_theme} from "@/utils/use_theme.js";
+import {set_loading} from "@/stores/is_loading.js";
+import LoadingPage from "@/components/loadingPage.vue";
+
+
 </script>
 
 <template>
@@ -14,14 +20,21 @@ import {set_theme} from "@/utils/use_theme.js";
     <el-button @click="set_theme('dark')">to dark</el-button>
     <el-button @click="set_theme('light')">to light</el-button>
     <el-button @click="set_theme('auto')">to auto</el-button>
-
+    <br>
+    <el-button @click="set_loading(true)"></el-button>
+    <loading-page></loading-page>
+    <button>hello</button>
   </div>
 </template>
 
 <script>
 
+
 </script>
 <style lang="scss" scoped>
+button{
+  color:var(--red);
+}
 
 
 </style>

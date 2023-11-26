@@ -1,0 +1,4 @@
+html .dark {
+    --el-bg-color: red;
+    --red: red;
+}

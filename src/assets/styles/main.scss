@@ -1,1 +1,13 @@
-@import "theme_vars/index";
+/**
+ * @Description 全局样式入口
+ * @Author: erduotong
+ * @Date: 2023-11-26 11:09:19
+ */
+@import "./themes/light.css";
+@import "./themes/dark.css";
+button{
+  color: var(--red);
+}
+
+
+

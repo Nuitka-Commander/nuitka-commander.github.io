@@ -1,5 +1,20 @@
-let local_storage_enabled = false;
+/**
+ * @Description 管理localStorage
+ * @Author: erduotong
+ * @Date: 2023-11-26 10:38:36
+ **/
 
+import {warn} from "vue";
+
+/**
+ * localStorage是否可用
+ * @type {boolean} true: 可用 false: 不可用
+ */
+export let local_storage_enabled = false;
+
+/**
+ * 进行初始化操作 并检查localStorage是否可用
+ */
 export function init_local_storage() {
     //检查localStorage是否可用
     try {
@@ -9,13 +24,16 @@ export function init_local_storage() {
         localStorage.removeItem(x);
         local_storage_enabled = true;
     } catch (e) {
-        console.warn("localStorage is not available! \nError: " + e);
+        console.log("not able to use localStorage! ")
+        local_storage_enabled = false;
     }
 }
 
-//保存数据到localStorage
-//key: 键名
-//value:要存储的值(string)
+/**
+ * 保存数据到localStorage中
+ * @param key {string} localStorage的键名
+ * @param value {string} localStorage的值
+ */
 export function save_local_storage(key, value) {
     if (typeof value !== "string") {
         throw new Error("value must be string!");
@@ -26,20 +44,24 @@ export function save_local_storage(key, value) {
     try {
         localStorage.setItem(key, value);
     } catch (e) {
+        //todo 告诉用户localStorage不可用
         console.warn("localStorage is not available! \nError: " + e);
+        local_storage_enabled = false;
     }
 }
 
-//阅读localStorage中的数据
-//key: 要读取的键名
-//return: string
+/**
+ * 从localStorage中读取数据
+ * @param key {string} 要读取的localStorage的键名
+ * @returns {string}
+ */
 export function read_local_storage(key) {
     if (!local_storage_enabled) {
-        return;
+        throw new warn("localStorage is not available! You can't read any data from it!");
     }
     try {
-        return localStorage.getItem(key)
+        return localStorage.getItem(key);
     } catch (e) {
-        console.warn("localStorage is not available! \nError: " + e);
+        throw new Error("localStorage is not available! \nError: " + e);
     }
 }
