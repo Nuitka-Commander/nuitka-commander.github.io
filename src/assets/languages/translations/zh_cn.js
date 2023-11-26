@@ -6,9 +6,12 @@
  * @Date: 2023-11-26 11:09:00
  */
 export default {
-    hello: "你好",
-    testFather: {
-        test: "测试",
+    website_info: {
+        supported_to_nuitka_version: "支持到 Nuitka 版本",
+        report_issue: "报告问题",
+        nuitka_website: "Nuitka官网",
+        get_involved: "参与贡献",
     },
+
 
 };
