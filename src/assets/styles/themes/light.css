@@ -1,4 +1,8 @@
-html{
-    --el-bg-color: blue;
-    --red:blue;
+/**
+ * @Description light主题css变量
+ * @Author: erduotong
+ * @Date: 2023-11-26 15:17:18
+ */
+:root {
+    --loading-page-bg-rgba: rgba(217, 217, 217, 0.67);
 }

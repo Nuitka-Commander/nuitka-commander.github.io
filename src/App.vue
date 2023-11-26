@@ -11,6 +11,7 @@ import LoadingPage from "@/components/loadingPage.vue";
 
 <template>
   <div id="app">
+    <loading-page></loading-page>
     <p>{{ $t("hello") }}</p>
     <p>{{ $t("testFather.test") }}</p>
     <el-button @click="set_i18n_language('en')">to en</el-button>
@@ -22,7 +23,7 @@ import LoadingPage from "@/components/loadingPage.vue";
     <el-button @click="set_theme('auto')">to auto</el-button>
     <br>
     <el-button @click="set_loading(true)"></el-button>
-    <loading-page></loading-page>
+
     <button>hello</button>
   </div>
 </template>
@@ -32,9 +33,6 @@ import LoadingPage from "@/components/loadingPage.vue";
 
 </script>
 <style lang="scss" scoped>
-button{
-  color:var(--red);
-}
 
 
 </style>

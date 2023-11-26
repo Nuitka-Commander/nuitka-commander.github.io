@@ -10,7 +10,7 @@ import {is_loading} from "@/stores/is_loading.js";
   <!--怪方法 但是好用-->
   <el-text
       v-loading.fullscreen.lock="is_loading"
-      element-loading-background=""
+      element-loading-background="var(--loading-page-bg-rgba)"
   >loading...
   </el-text>
 </template>
@@ -25,11 +25,10 @@ export default {
 </script>
 <style lang="scss" scoped>
 @use "sass:map";
+
 .el-text {
   display: none;
 }
-
-
 
 
 </style>

@@ -1,4 +1,9 @@
-html .dark {
-    --el-bg-color: red;
-    --red: red;
+/**
+ * @Description dark主题css变量
+ * @Author: erduotong
+ * @Date: 2023-11-26 15:17:35
+ */
+html.dark {
+    --loading-page-bg-rgba: rgba(21, 21, 21, 0.67);
+
 }

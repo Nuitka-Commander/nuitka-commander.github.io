@@ -8,9 +8,7 @@ import App from "./App.vue";
 import {init_all} from "@/utils/init_all.js";
 import {i18n} from "@/assets/languages/i18n.js";
 import "element-plus/theme-chalk/dark/css-vars.css"
-// import "@/assets/styles/themes/light.css"
-import "@/assets/styles/themes/dark.css"
-// import "@/assets/styles/main.scss";
+import "@/assets/styles/main.scss";
 
 init_all();
 const app = createApp(App);
