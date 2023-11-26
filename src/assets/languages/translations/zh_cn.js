@@ -18,7 +18,11 @@ export default {
         local_use:"本地使用",
         current_version_author: "当前版本贡献者",
         open_source_license: "开源协议",
-    },
+        long_info: {
+            license: "我们使用GPLv3开源协议，您可以在此处查看完整协议:",
+            author: "截止到目前版本，感谢以下贡献者为此项目做出的贡献(排名不分先后):",
+        }
+    }
 
 
 };

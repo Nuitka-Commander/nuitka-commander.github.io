@@ -2,7 +2,9 @@
   "website_version": "0.1.0",
   "support_nuitka_version": "1.9.*",
   "authors": [
-    "erduotong"
+    {
+      "id": "erduotong"
+    }
   ],
   "base_url": "https://github.com/nuitka-commander/nuitka-commander.github.io/"
 }

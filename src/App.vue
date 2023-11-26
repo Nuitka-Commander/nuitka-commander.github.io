@@ -1,6 +1,11 @@
 <script setup>
 import LoadingPage from "@/components/loadingPage.vue";
 import constants from "@/stores/constants.json";
+import {ref} from "vue";
+// 作者信息是否可见
+const author_info_visible = ref(false);
+// 开源协议信息是否可见
+const license_info_visible = ref(false);
 </script>
 
 <template>
@@ -16,6 +21,36 @@ import constants from "@/stores/constants.json";
   </header>
 
   <footer>
+    <!--贡献者dialog-->
+    <el-dialog
+        v-model="author_info_visible"
+        :title="$t('website_info.current_version_author')"
+    >
+      <el-text size="large"> {{ $t("website_info.long_info.author") }}</el-text>
+      <div id="authors_div">
+        <span v-for="item in constants.authors" :key="item.id" class="author_item">
+          <a :href="'https://github.com/'+item.id">@{{ item.id }}&nbsp;&nbsp;</a>
+        </span>
+
+      </div>
+    </el-dialog>
+
+    <!--开源协议dialog-->
+    <el-dialog
+        v-model="license_info_visible"
+        :title="$t('website_info.open_source_license')"
+    >
+      <el-text size="large">
+        {{ $t("website_info.long_info.license") }}
+        <br>
+        <a href="https://www.gnu.org/licenses/gpl-3.0.en.html"
+           target="_blank" id="license_link"
+        >https://www.gnu.org/licenses/gpl-3.0.en.html</a>
+
+
+      </el-text>
+    </el-dialog>
+
     <div id="footer_left">
       <!--链接信息-->
       <div>
@@ -26,7 +61,7 @@ import constants from "@/stores/constants.json";
           </a></li>
           <li><a href="https://nuitka-commander.github.io/">{{ $t("website_info.github_website") }}</a></li>
           <!--todo gitee-->
-          <li><a href="">{{ $t("website_info.gitee_website")}}</a></li>
+          <li><a href="">{{ $t("website_info.gitee_website") }}</a></li>
         </ul>
       </div>
       <!--项目开发/使用相关-->
@@ -36,7 +71,7 @@ import constants from "@/stores/constants.json";
           <li><a :href="constants.base_url + 'docs/get_involved.md'">{{ $t("website_info.get_involved") }}</a></li>
           <li><a :href="constants.base_url + 'releases/latest'">{{ $t("website_info.changelog") }}</a></li>
           <!--todo-->
-          <li><a href="">{{$t("website_info.local_use")}}</a></li>
+          <li><a href="">{{ $t("website_info.local_use") }}</a></li>
         </ul>
       </div>
     </div>
@@ -50,18 +85,21 @@ import constants from "@/stores/constants.json";
           {{ $t("website_info.supported_to_nuitka_version") }}
           <strong>{{ constants.support_nuitka_version }}</strong>
         </li>
-        <li>{{ $t("website_info.current_version_author")}}</li>
-        <li>{{ $t("website_info.open_source_license")}}</li>
+        <li>
+          <button @click="author_info_visible = true"
+          >{{ $t("website_info.current_version_author") }}
+          </button>
+        </li>
+        <li>
+          <button @click="license_info_visible=true">{{ $t("website_info.open_source_license") }}</button>
+        </li>
       </ul>
     </div>
   </footer>
 
 </template>
 
-<script>
 
-
-</script>
 <style lang="scss" scoped>
 header {
   background-color: grey;
@@ -71,7 +109,7 @@ header {
   width: 100%;
   position: relative;
   border: none;
-  height: 60px;
+  height: auto;
 
   a {
     color: white;
@@ -88,6 +126,7 @@ header {
     padding-top: 17.5px;
     padding-left: 15vw;
     font-size: 1.26rem;
+    padding-bottom: 17.5px;
 
     &:hover {
       color: white;
@@ -108,12 +147,18 @@ footer {
   padding-right: 10vw;
   padding-bottom: 10px;
 
-  a {
+  a, button, li {
     color: white;
+    background: none;
+    border: none;
     text-decoration: none;
+    font-size: 1rem;
+  }
 
+  a, button {
     &:hover {
       color: gray;
+      cursor: pointer;
     }
   }
 
@@ -132,5 +177,19 @@ footer {
   #footer_left, #footer_right {
     display: flex;
   }
+
+  #license_link {
+    color: lightblue;
+  }
+}
+
+#authors_div {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: left;
+  align-items: center;
+  padding-top: 10px;
+  max-height: 50vh;
+  overflow-y: auto;
 }
 </style>
