@@ -3,7 +3,8 @@
   "support_nuitka_version": "1.9.*",
   "authors": [
     {
-      "id": "erduotong"
+      "name": "erduotong",
+      "avatar": "https://avatars.githubusercontent.com/u/109658174?v=4"
     }
   ],
   "base_url": "https://github.com/nuitka-commander/nuitka-commander.github.io/"
