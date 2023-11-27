@@ -42,7 +42,7 @@ header {
     padding-bottom: 17.5px;
 
     &:hover {
-      color: white;
+      color: var(--el-border-color-hover);
     }
   }
 
