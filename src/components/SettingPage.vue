@@ -5,7 +5,7 @@ import {Close, Edit} from "@element-plus/icons-vue";
 const settings_page_show = ref(false);
 //关闭设置页面 event:点击事件
 const close_setting_page = (event) => {
-  if (event.target.id === "setting_mask") {
+  if (event.target.id === "setting_mask") { //不是点击在设置页上
     settings_page_show.value = false;
   }
 };
@@ -14,13 +14,14 @@ const close_setting_page = (event) => {
 <template>
   <div id="setting_mask" v-show="settings_page_show" @click="close_setting_page($event)">
     <div id="setting_drawer">
-
       <el-button id="close_setting_button" @click="settings_page_show=false">
         <el-icon :size="30">
           <close></close>
         </el-icon>
       </el-button>
+
     </div>
+
   </div>
 
 
@@ -46,6 +47,9 @@ const close_setting_page = (event) => {
   backdrop-filter: blur(10px);
   z-index: 9999;
   display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+
 }
 
 #close_setting_button {
