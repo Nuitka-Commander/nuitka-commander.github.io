@@ -4,6 +4,7 @@
  * @Date: 2023-11-26 15:17:35
  */
 html.dark {
+    color-scheme: dark;
     --loading-page-bg-rgba: rgba(21, 21, 21, 0.67);
 
 }

@@ -19,8 +19,7 @@ const license_info_visible = ref(false);
       <div id="authors_div">
         <span v-for="item in constants.authors" :key="item['name']" class="author_item">
           <el-link :href="'https://github.com/'+item['name']">
-            <!--实现懒加载-->
-            <img :src="item['avatar']" alt="avatar_img" v-show="author_info_visible">
+            <img :src="item['avatar']" alt="avatar_img">
               &nbsp;&nbsp;{{ item.name }}
           </el-link>
         </span>

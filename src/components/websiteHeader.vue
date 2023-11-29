@@ -14,7 +14,7 @@
 </template>
 
 <style scoped lang="scss">
-header {
+header { //todo color
   background-color: grey;
   display: flex;
   padding: 0;
