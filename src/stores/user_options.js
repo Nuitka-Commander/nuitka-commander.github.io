@@ -7,7 +7,7 @@ import {ref, watch} from "vue";
 import {read_local_storage, save_local_storage} from "@/utils/local_storage.js";
 
 /**
- * 响应式的用户设置 尽可能避免直接修改 而是使用函数间接修改
+ * 响应式的用户设置
  */
 export const user_options = ref({
     theme: "auto",

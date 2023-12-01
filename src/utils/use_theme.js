@@ -36,7 +36,7 @@ export function init_theme() {
 }
 
 /**
- * 设置主题(暴露给外部的接口)
+ * 设置主题
  * @param new_theme {"light"|"dark"|"auto"} 要设置的主题
  */
 //设置主题
@@ -57,3 +57,4 @@ export function set_theme(new_theme) {
     update_theme(colorScheme);
 
 }
+

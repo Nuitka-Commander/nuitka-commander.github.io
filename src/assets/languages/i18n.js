@@ -6,6 +6,7 @@
 import {createI18n} from "vue-i18n";
 import {user_options} from "@/stores/user_options.js";
 import {supported_i18n} from "@/assets/languages/supported_i18n.js";
+import {set_loading} from "@/stores/is_loading.js";
 
 /**
  * @Description 是否语言加载完成
@@ -80,11 +81,11 @@ export function set_i18n_language(locale) {
  */
 function load_locale_messages(locale) {
     const path = supported_i18n[locale].path_name;
+    set_loading(true);
     import(
         `@/assets/languages/translations/${path}.js`
         ).then((messages) => {
-
-        //todo 加载动画？
+        set_loading(false);
         const old_locale = i18n.global.locale.value;
         i18n.global.locale.value = locale;  //设置新的值
         user_options.value.language = locale;  //保存到用户设置

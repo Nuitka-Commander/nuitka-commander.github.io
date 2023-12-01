@@ -17,12 +17,8 @@ import {is_loading} from "@/stores/is_loading.js";
 
 <script>
 
-
-export default {
-  name: "loadingPage",
-};
-
 </script>
+
 <style lang="scss" scoped>
 @use "sass:map";
 

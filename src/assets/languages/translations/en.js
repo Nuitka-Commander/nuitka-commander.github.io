@@ -6,8 +6,7 @@
  * @Date: 2023-11-26 11:08:45
  */
 export default {
-    hello: "Hello",
-    testFather: {
-        test: "test ",
+    footer: {
+        supported_to_nuitka_version: "Supported to Nuitka version",
     },
 };
