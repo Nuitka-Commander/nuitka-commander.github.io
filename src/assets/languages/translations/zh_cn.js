@@ -24,9 +24,13 @@ export default {
         },
     },
     setting: { //设置页面
-        theme: {        auto: "跟随系统",
-        light: "浅色模式",
-        dark: "深色模式",}
+        theme: {
+            auto: "跟随系统",
+            light: "浅色模式",
+            dark: "深色模式",
+            theme: "主题",
+        },
+        language: "语言",
 
 
     },
