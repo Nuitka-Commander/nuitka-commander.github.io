@@ -84,7 +84,7 @@ const close_setting_page = (event) => {
 
 <style scoped lang="scss">
 #setting_drawer {
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(black, 0.5);
   position: fixed;
   top: 0;
   right: 0;
@@ -136,6 +136,8 @@ const close_setting_page = (event) => {
     width: 20px;
     height: 20px;
     margin-right: 10px;
+    filter: drop-shadow(1000vw 0 white);
+    transform: translateX(-1000vw)
   }
 
   //设置文字上下居中
@@ -146,13 +148,16 @@ const close_setting_page = (event) => {
 //设置页面的选择器的标题部分
 .setting_page_selects_fa {
 
-  border: 0.5rem outset pink;
+  background: none;
   border-radius: 12px;
   min-width: 170px;
   width: min(330px, 15vw);
+  box-shadow: -5px 5px 15px rgba(white, 0.5);
 
   h1 {
     img {
+      filter: drop-shadow(1000vw 0 white);
+      transform: translateX(-1000vw);
       width: 30px;
       height: 30px;
       margin-right: 10px;
