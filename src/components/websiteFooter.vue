@@ -35,7 +35,7 @@ const license_info_visible = ref(false);
       <el-text size="large">
         {{ $t("website_info.long_info.license") }}
         <br>
-        <el-link type="primary" href="https://www.gnu.org/licenses/gpl-3.0.en.html" target="_blank">
+        <el-link href="https://www.gnu.org/licenses/gpl-3.0.en.html" target="_blank" type="primary">
           https://www.gnu.org/licenses/gpl-3.0.en.html
         </el-link>
 
@@ -94,13 +94,13 @@ const license_info_visible = ref(false);
         </li>
         <!--button_el_text = 作为button的el-text -->
         <li>
-          <el-text @click="author_info_visible=true" class="button_el_text"> {{
+          <el-text class="button_el_text" @click="author_info_visible=true"> {{
               $t("website_info.current_version_author")
             }}
           </el-text>
         </li>
         <li>
-          <el-text type="" @click="license_info_visible=true" class="button_el_text">
+          <el-text class="button_el_text" type="" @click="license_info_visible=true">
             {{ $t("website_info.open_source_license") }}
           </el-text>
         </li>
@@ -111,24 +111,24 @@ const license_info_visible = ref(false);
   </footer>
 </template>
 
-<style scoped lang="scss">
+<style lang="scss" scoped>
 footer {
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  margin: 0;
-  width: 80%;
   position: relative;
-  padding-left: 10vw;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  width: 80%;
+  margin: 0;
   padding-right: 10vw;
   padding-bottom: 10px;
+  padding-left: 10vw;
 
   li {
 
-    background: none;
-    border: none;
-    text-decoration: none;
     padding-top: 11px;
+    text-decoration: none;
+    border: none;
+    background: none;
 
   }
 
@@ -157,12 +157,12 @@ footer {
 
   #authors_div {
     display: flex;
+    overflow-y: auto;
+    align-items: center;
     flex-wrap: wrap;
     justify-content: left;
-    align-items: center;
-    padding-top: 10px;
     max-height: 50vh;
-    overflow-y: auto;
+    padding-top: 10px;
 
     a {
       display: flex;
@@ -172,8 +172,8 @@ footer {
     }
 
     img {
-      border-radius: 9999px;
       height: 30px;
+      border-radius: 9999px;
     }
 
   }

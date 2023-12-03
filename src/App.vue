@@ -4,8 +4,6 @@ import WebsiteHeader from "@/components/websiteHeader.vue";
 import WebsiteFooter from "@/components/websiteFooter.vue";
 import {set_theme} from "@/utils/use_theme.js";
 import SettingPage from "@/components/SettingPage.vue";
-
-
 </script>
 
 <template>
