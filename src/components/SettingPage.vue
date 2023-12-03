@@ -16,9 +16,9 @@ const close_setting_page = (event) => {
 </script>
 
 <template>
-  <div id="setting_mask" v-show="settings_page_show" @click="close_setting_page($event)">
+  <div v-show="settings_page_show" id="setting_mask" @click="close_setting_page($event)">
     <transition name="setting_drawer">
-      <div id="setting_drawer" v-show="settings_page_show">
+      <div v-show="settings_page_show" id="setting_drawer">
         <el-button id="close_setting_button" @click="settings_page_show=false">
           <el-icon :size="30">
             <close></close>
@@ -27,27 +27,27 @@ const close_setting_page = (event) => {
 
         <div class="setting_page_selects_fa">
           <h1>
-            <img src="@/assets/images/auto_theme.svg" alt="auto theme" v-show="user_options.theme==='auto'">
-            <img src="@/assets/images/sun.svg" alt="light theme" v-show="user_options.theme==='light'">
-            <img src="@/assets/images/moon.svg" alt="dark theme" v-show="user_options.theme==='dark'">
+            <img v-show="user_options.theme==='auto'" alt="auto theme" src="@/assets/images/auto_theme.svg">
+            <img v-show="user_options.theme==='light'" alt="light theme" src="@/assets/images/sun.svg">
+            <img v-show="user_options.theme==='dark'" alt="dark theme" src="@/assets/images/moon.svg">
             {{ $t("setting.theme.theme") }}
           </h1>
           <el-select v-model="user_options.theme" @change="set_theme(user_options.theme)">
             <el-option key="auto" :label="$t('setting.theme.auto')" value="auto">
              <span slot="label" class="theme_select_content">
-                  <img src="@/assets/images/auto_theme.svg" alt="auto theme">
+                  <img alt="auto theme" src="@/assets/images/auto_theme.svg">
                   {{ $t("setting.theme.auto") }}
              </span>
             </el-option>
             <el-option key="light" :label="$t('setting.theme.light')" value="light">
                 <span slot="label" class="theme_select_content">
-                  <img src="@/assets/images/sun.svg" alt="light theme">
+                  <img alt="light theme" src="@/assets/images/sun.svg">
                   {{ $t("setting.theme.light") }}
                 </span>
             </el-option>
             <el-option key="dark" :label="$t('setting.theme.dark')" value="dark">
                 <span slot="label" class="theme_select_content">
-                  <img src="@/assets/images/moon.svg" alt="dark theme">
+                  <img alt="dark theme" src="@/assets/images/moon.svg">
                   {{ $t("setting.theme.dark") }}
                 </span>
             </el-option>
@@ -58,7 +58,7 @@ const close_setting_page = (event) => {
 
         <div class="setting_page_selects_fa">
           <h1>
-            <img src="@/assets/images/language.svg" alt="language icon">
+            <img alt="language icon" src="@/assets/images/language.svg">
             {{ $t("setting.language") }}
           </h1>
           <el-select v-model="user_options.language" @change="set_i18n_language(user_options.language)">
@@ -70,7 +70,7 @@ const close_setting_page = (event) => {
             </el-option>
           </el-select>
         </div>
-      <!--todo localstorage-->
+        <!--todo localstorage-->
       </div>
 
     </transition>
@@ -87,35 +87,35 @@ const close_setting_page = (event) => {
   </el-button>
 </template>
 
-<style scoped lang="scss">
+<style lang="scss" scoped>
 @import "@/assets/styles/animations.scss";
 
 #setting_drawer {
-  background-color: rgba(black, 0.5);
   position: fixed;
+  z-index: 9999;
   top: 0;
   right: 0;
-  height: 100%;
-  min-width: 192px;
+  display: flex;
+  overflow-y: auto;
+  flex-direction: column;
   width: min(350px, 30vw);
+  min-width: 192px;
+  height: 100%;
   border-top-left-radius: 20px;
   border-bottom-left-radius: 20px;
+  background-color: rgba(black, 0.5);
   backdrop-filter: blur(10px);
-  z-index: 9999;
-  display: flex;
-  flex-direction: column;
-  overflow-y: auto;
 
 
   #close_setting_button {
-    border: none;
-    padding: 8px;
     height: 40px;
-    background: none;
-    border-radius: 10px;
     margin-top: 10px;
     margin-right: 10px;
     margin-left: auto;
+    padding: 8px;
+    border: none;
+    border-radius: 10px;
+    background: none;
     //悬停的效果是一个小方块
     &:hover {
       color: white;
@@ -126,57 +126,57 @@ const close_setting_page = (event) => {
 
 //遮罩层
 #setting_mask {
-  background-color: rgba(0, 0, 0, 0.2);
-  z-index: 2000;
   position: fixed;
+  z-index: 2000;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
+  background-color: rgba(0, 0, 0, 0.2);
 
 }
 
 
 //theme选择器内容
 .theme_select_content {
+  display: flex;
+
+  align-items: center;
   img {
     width: 20px;
     height: 20px;
     margin-right: 10px;
+    transform: translateX(-1000vw);
     filter: drop-shadow(1000vw 0 white);
-    transform: translateX(-1000vw)
   }
-
-  display: flex;
-  align-items: center;
 }
 
 //设置页面的选择器的标题部分
 .setting_page_selects_fa {
 
-  background: none;
-  border-radius: 12px;
-  min-width: 170px;
   width: min(330px, 15vw);
-  box-shadow: -5px 5px 15px rgba(white, 0.5);
+  min-width: 170px;
+  margin-bottom: 12px;
+  margin-left: 12px;
+  padding: 10px 13px;
 
+  border-radius: 12px;
+
+  background: none;
+  box-shadow: -5px 5px 15px rgba(white, 0.5);
   h1 {
+    font-size: 1.5rem;
+
+    display: flex;
+    align-items: center;
     img {
-      filter: drop-shadow(1000vw 0 white);
-      transform: translateX(-1000vw);
       width: 30px;
       height: 30px;
       margin-right: 10px;
+      transform: translateX(-1000vw);
+      filter: drop-shadow(1000vw 0 white);
     }
-
-    font-size: 1.5rem;
-    display: flex;
-    align-items: center;
   }
-
-  padding: 10px 13px;
-  margin-bottom: 12px;
-  margin-left: 12px
 }
 
 //动画

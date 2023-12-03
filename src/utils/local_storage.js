@@ -24,7 +24,7 @@ export function init_local_storage() {
         localStorage.removeItem(x);
         local_storage_enabled = true;
     } catch (e) {
-        console.log("not able to use localStorage! ")
+        console.log("not able to use localStorage! ");
         local_storage_enabled = false;
     }
 }
