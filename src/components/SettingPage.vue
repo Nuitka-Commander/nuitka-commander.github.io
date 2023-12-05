@@ -5,7 +5,7 @@
 import {ref} from "vue";
 import {Close, Setting} from "@element-plus/icons-vue";
 import {user_options} from "@/stores/user_options.js";
-import {set_theme} from "@/utils/use_theme.js";
+import {set_theme} from "@/modules/use_theme.js";
 import {set_i18n_language} from "@/assets/languages/i18n.js";
 import {supported_i18n} from "@/assets/languages/supported_i18n.js";
 //设置页面的显示与隐藏
@@ -35,7 +35,7 @@ const close_setting_page = (event) => {
             <img v-show="user_options.theme==='dark'" alt="dark theme" src="@/assets/images/moon.svg">
             {{ $t("setting.theme.theme") }}
           </h1>
-          <el-select v-model="user_options.theme" @change="set_theme(user_options.theme)" >
+          <el-select v-model="user_options.theme" @change="set_theme(user_options.theme)">
             <el-option key="auto" :label="$t('setting.theme.auto')" value="auto">
              <span slot="label" class="theme_select_content">
                   <img alt="auto theme" src="@/assets/images/auto_theme.svg">
@@ -64,7 +64,7 @@ const close_setting_page = (event) => {
             <img alt="language icon" src="@/assets/images/language.svg">
             {{ $t("setting.language") }}
           </h1>
-          <el-select v-model="user_options.language" @change="set_i18n_language(user_options.language)" filterable>
+          <el-select v-model="user_options.language" filterable @change="set_i18n_language(user_options.language)">
             <el-option
                 v-for="(value, key) in supported_i18n"
                 :key="key"
@@ -82,8 +82,8 @@ const close_setting_page = (event) => {
   </div>
 
   <!--这里内联禁用了padding等外边界元素 实在不想用那一坨选择器了-->
-  <el-button @click="settings_page_show = !settings_page_show"
-             style="border:none;padding: 0;margin: 0;"
+  <el-button style="border:none;padding: 0;margin: 0;"
+             @click="settings_page_show = !settings_page_show"
   >
     <el-icon size="30">
       <setting></setting>

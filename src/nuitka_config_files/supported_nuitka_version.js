@@ -6,8 +6,11 @@
 /**
  * 可用的配置文件支持的Nuitka版本
  */
-export default [
-    {
-        "version": "1.9.*",
+export default {
+    latest_key: "1.9.*",//最新版本的key
+    versions: { //version:path
+        "1.9.*": "1.9._",
+        "2.0.*": "2.0._",
+
     },
-];
+};

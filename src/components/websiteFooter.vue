@@ -86,10 +86,10 @@ const license_info_visible = ref(false);
     <div id="footer_right">
       <ul>
         <li>
-          <el-text> Nuitka Commander <strong> {{ constants.website_version }}</strong></el-text>
+          <el-text type="info"> Nuitka Commander <strong> {{ constants.website_version }}</strong></el-text>
         </li>
         <li>
-          <el-text> {{ $t("website_info.supported_to_nuitka_version") }}
+          <el-text type="info"> {{ $t("website_info.supported_to_nuitka_version") }}
             <strong>{{ constants.support_nuitka_version }}</strong></el-text>
         </li>
         <!--button_el_text = 作为button的el-text -->

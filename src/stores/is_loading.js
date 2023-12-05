@@ -18,5 +18,5 @@ export const is_loading = ref(false);
  */
 export function set_loading(state) {
     is_loading.value = state;
-    
+
 }
