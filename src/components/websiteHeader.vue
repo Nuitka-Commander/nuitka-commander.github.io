@@ -15,11 +15,12 @@
 
 <style lang="scss" scoped>
 header {
+
   position: relative;
   display: flex;
   width: 100%;
   height: auto;
-  margin: 0;
+  margin-bottom: 10px;
   padding: 0;
   border: none;
   background-color: grey;
@@ -35,6 +36,7 @@ header {
     padding-left: 15vw;
     text-decoration: none;
     color: white;
+
     img {
       width: 25px;
       height: 25px;

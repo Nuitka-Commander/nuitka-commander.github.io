@@ -34,6 +34,16 @@ export default {
 
 
     },
+    nav_bar: { //导航栏
+        mode: {
+            easy_mode: "简单模式",
+            full_mode: "完整模式",
+            info: `是否展示完整的指令选项列表 <br> 简单模式:显示Nuitka常用选项 <br>复杂模式:显示完整的可用选项`, //保证格式大体不变
+        },
+        now_nuitka_version: "当前选择的Nuitka版本:",
+        select_nuitka_version: "选择您使用的Nuitka的版本",
+
+    },
 
 
 };

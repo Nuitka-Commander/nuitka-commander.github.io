@@ -12,6 +12,7 @@ import {read_local_storage, save_local_storage} from "@/utils/local_storage.js";
 export const user_options = ref({
     theme: "auto",
     language: "undefined",
+    is_full_mode: true,
 });
 /**
  * 监听用户设置的变化 并保存到localStorage

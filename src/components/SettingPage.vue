@@ -1,6 +1,9 @@
 <script setup>
+/**
+ * 设置页面相关逻辑
+ */
 import {ref} from "vue";
-import {Close, Edit} from "@element-plus/icons-vue";
+import {Close, Setting} from "@element-plus/icons-vue";
 import {user_options} from "@/stores/user_options.js";
 import {set_theme} from "@/utils/use_theme.js";
 import {set_i18n_language} from "@/assets/languages/i18n.js";
@@ -32,7 +35,7 @@ const close_setting_page = (event) => {
             <img v-show="user_options.theme==='dark'" alt="dark theme" src="@/assets/images/moon.svg">
             {{ $t("setting.theme.theme") }}
           </h1>
-          <el-select v-model="user_options.theme" @change="set_theme(user_options.theme)">
+          <el-select v-model="user_options.theme" @change="set_theme(user_options.theme)" >
             <el-option key="auto" :label="$t('setting.theme.auto')" value="auto">
              <span slot="label" class="theme_select_content">
                   <img alt="auto theme" src="@/assets/images/auto_theme.svg">
@@ -61,7 +64,7 @@ const close_setting_page = (event) => {
             <img alt="language icon" src="@/assets/images/language.svg">
             {{ $t("setting.language") }}
           </h1>
-          <el-select v-model="user_options.language" @change="set_i18n_language(user_options.language)">
+          <el-select v-model="user_options.language" @change="set_i18n_language(user_options.language)" filterable>
             <el-option
                 v-for="(value, key) in supported_i18n"
                 :key="key"
@@ -78,12 +81,13 @@ const close_setting_page = (event) => {
 
   </div>
 
-
-  <el-button @click="settings_page_show = !settings_page_show">
-    <el-icon>
-      <Edit></Edit>
+  <!--这里内联禁用了padding等外边界元素 实在不想用那一坨选择器了-->
+  <el-button @click="settings_page_show = !settings_page_show"
+             style="border:none;padding: 0;margin: 0;"
+  >
+    <el-icon size="30">
+      <setting></setting>
     </el-icon>
-    click to open area
   </el-button>
 </template>
 
@@ -142,6 +146,7 @@ const close_setting_page = (event) => {
   display: flex;
 
   align-items: center;
+
   img {
     width: 20px;
     height: 20px;
@@ -164,11 +169,13 @@ const close_setting_page = (event) => {
 
   background: none;
   box-shadow: -5px 5px 15px rgba(white, 0.5);
+
   h1 {
     font-size: 1.5rem;
 
     display: flex;
     align-items: center;
+
     img {
       width: 30px;
       height: 30px;
