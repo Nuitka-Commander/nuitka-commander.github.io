@@ -8,10 +8,10 @@ import supported_nuitka_version from "@/nuitka_config_files/supported_nuitka_ver
 import {user_options} from "@/stores/user_options.js";
 
 /**
- * 上一次加载的版本
- * @type {string}
+ * 已加载的版本，进行缓存
+ * @type {Object}
  */
-let last_version = "";
+let versions = {};
 
 /**
  * 初始化
@@ -37,16 +37,15 @@ export function init_nuitka_config() {
  */
 export function load_new_config() {
     let new_version = user_options.value.nuitka_version;
-    if (new_version === last_version) {
+    if (new_version in versions) {
         //todo 下一步操作
         return;
     }
+
     import(
         `@/nuitka_config_files/${new_version}.js`
         ).then((messages) => {
-
-        last_version = new_version;
-
+        versions[new_version] = messages.default;
         // todo 下一步操作
     }).catch((e) => {
             throw new Error(`nuitka_config: load new config files failed: ${e}`);
