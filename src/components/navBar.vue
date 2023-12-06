@@ -7,6 +7,7 @@
 import SettingPage from "@/components/SettingPage.vue";
 import {user_options} from "@/stores/user_options.js";
 import supported_nuitka_version from "@/nuitka_config_files/supported_nuitka_version.js";
+import {load_new_config} from "@/modules/use_nuitka_config.js";
 </script>
 
 <template>
@@ -14,7 +15,7 @@ import supported_nuitka_version from "@/nuitka_config_files/supported_nuitka_ver
     <!--left-->
     <div class="top_nav_bar">
 
-      <el-tooltip show-after="120">
+      <el-tooltip>
         <el-switch
             v-model="user_options.is_full_mode"
             :active-text="$t('nav_bar.mode.full_mode')"
@@ -29,7 +30,7 @@ import supported_nuitka_version from "@/nuitka_config_files/supported_nuitka_ver
       <el-select
           v-model="user_options.nuitka_version"
           filterable
-          @change=""
+          @change="load_new_config()"
       >
         <template #header>
           {{ $t("nav_bar.select_nuitka_version") }}

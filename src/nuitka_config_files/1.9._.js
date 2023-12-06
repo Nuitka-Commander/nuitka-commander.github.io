@@ -3,4 +3,6 @@
  * @Author: erduotong
  * @Date: 2023-12-05 22:28:39
  */
-export default {};
+export default {
+hello:"你好",
+};
