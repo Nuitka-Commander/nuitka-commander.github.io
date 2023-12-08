@@ -41,7 +41,7 @@ export function load_new_config() {
         //todo 下一步操作
         return;
     }
-
+    new_version = supported_nuitka_version.versions[new_version];// 获取路径
     import(
         `@/nuitka_config_files/${new_version}.js`
         ).then((messages) => {
