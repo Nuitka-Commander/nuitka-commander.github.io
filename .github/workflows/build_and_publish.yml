@@ -19,7 +19,7 @@ jobs:
           if [ ! -f storedData.json ]; then
             echo '{}' > storedData.json
           fi
-      - name: 加载storedData
+      - name: 加载storedData.json
         uses: actions/download-artifact@v2
         with:
           name: storedData
