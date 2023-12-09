@@ -1,5 +1,5 @@
-const fs = require("fs");
-const path = require("path");
+import fs from 'fs';
+import path from 'path';
 
 // 读取constants.json文件
 const constantsPath = path.join(__dirname, "/src/stores/constants.json");
