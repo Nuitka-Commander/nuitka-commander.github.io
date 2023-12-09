@@ -43,8 +43,6 @@ jobs:
           git clone https://gitee.com/nuitka-commander/nuitka-commander.git
           cp -r ./dist/* ./nuitka-commander/
           cd ./nuitka-commander
-          git checkout -- README.md
-          git checkout -- LICENSE
           git add .
           git commit -m "Update from GitHub Actions"
           git push https://oauth2:${{ secrets.GITEE_TOKEN }}@gitee.com/nuitka-commander/nuitka-commander.git
