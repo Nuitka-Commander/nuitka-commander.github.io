@@ -37,7 +37,6 @@ jobs:
        # build gitee
       - name: 推送到Gitee Page
         run: |
-          echo ${{ secrets.GITEE_TOKEN }}
           git config --global user.name "erduotong"
           git config --global user.email "action_bot@github.com."
           git clone https://gitee.com/nuitka-commander/nuitka-commander.git
@@ -47,6 +46,6 @@ jobs:
           git checkout -- LICENSE
           git add .
           git commit -m "Update from GitHub Actions"
-          git push https://${{ secrets.GITEE_TOKEN }}@gitee.com/nuitka-commander/nuitka-commander.git
+          git push https://oauth2:${{ secrets.GITEE_TOKEN }}@gitee.com/nuitka-commander/nuitka-commander.git
 
 
