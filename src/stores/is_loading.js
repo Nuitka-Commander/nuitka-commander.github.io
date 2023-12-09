@@ -11,11 +11,6 @@ import {ref} from "vue";
  */
 export const is_loading = ref(false);
 
-/**
- * 加载页面实例
- * @type {null}
- */
-
 
 /**
  * 设置加载页面是否开启
@@ -23,8 +18,5 @@ export const is_loading = ref(false);
  */
 export function set_loading(state) {
     is_loading.value = state;
-
-
-
 
 }

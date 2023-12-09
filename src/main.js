@@ -5,9 +5,9 @@
  */
 import {createApp} from "vue";
 import App from "./App.vue";
-import {init_all} from "@/utils/init_all.js";
+import {init_all} from "@/modules/init_all.js";
 import {i18n} from "@/assets/languages/i18n.js";
-import "element-plus/theme-chalk/dark/css-vars.css"
+import "element-plus/theme-chalk/dark/css-vars.css";
 import "@/assets/styles/main.scss";
 
 init_all();

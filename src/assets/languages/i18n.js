@@ -30,7 +30,7 @@ export const i18n = createI18n({
     missing(locale, key) {
         //防止语言文件未加载完成时报错
         if (!is_language_load) {
-            return "你先别急,让vue-i18n先急";
+            return "loading...";
         }
         console.error(`i18n: missing '${key}' for locale '${locale}'`);
         return "error!";

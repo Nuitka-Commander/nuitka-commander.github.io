@@ -24,10 +24,28 @@ export default {
         },
     },
     setting: { //设置页面
-        theme: {        auto: "跟随系统",
-        light: "浅色模式",
-        dark: "深色模式",}
+        theme: {
+            auto: "跟随系统",
+            light: "浅色模式",
+            dark: "深色模式",
+            theme: "主题",
+        },
+        language: "语言",
 
+
+    },
+    nav_bar: { //导航栏
+        mode: {
+            easy_mode: "简单模式",
+            full_mode: "完整模式",
+            info: {
+                l1: "是否显示完整的指令列表",
+                l2: "简单模式:显示Nuitka常用选项",
+                l3: "复杂模式:显示完整的可用选项",
+            },
+        },
+        now_nuitka_version: "当前选择的Nuitka版本:",
+        select_nuitka_version: "选择您使用的Nuitka的版本",
 
     },
 

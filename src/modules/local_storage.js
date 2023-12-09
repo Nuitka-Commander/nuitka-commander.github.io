@@ -24,7 +24,7 @@ export function init_local_storage() {
         localStorage.removeItem(x);
         local_storage_enabled = true;
     } catch (e) {
-        console.log("not able to use localStorage! ")
+        console.log("not able to use localStorage! ");
         local_storage_enabled = false;
     }
 }
@@ -44,7 +44,7 @@ export function save_local_storage(key, value) {
     try {
         localStorage.setItem(key, value);
     } catch (e) {
-        //todo 告诉用户localStorage不可用
+
         console.warn("localStorage is not available! \nError: " + e);
         local_storage_enabled = false;
     }

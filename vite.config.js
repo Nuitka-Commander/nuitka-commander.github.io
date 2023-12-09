@@ -15,8 +15,6 @@ export default defineConfig({
     }), Components({
         extensions: ["vue"],
         resolvers: [ElementPlusResolver(({
-            //importStyle配置样式引入方式，自动引入修改主题色设置此属性
-            // importStyle可以配置element-plus的样式引入方式，它默认是css，利用scss变量修改主题时，需要将这个属性设置为scss
             importStyle: "sass",
         }))],
     })],

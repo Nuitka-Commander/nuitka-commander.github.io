@@ -4,7 +4,8 @@
  * @Date: 2023-11-26 10:59:18
  */
 import {ref, watch} from "vue";
-import {read_local_storage, save_local_storage} from "@/utils/local_storage.js";
+import {read_local_storage, save_local_storage} from "@/modules/local_storage.js";
+import supported_nuitka_version from "@/nuitka_config_files/supported_nuitka_version.js";
 
 /**
  * 响应式的用户设置
@@ -12,7 +13,10 @@ import {read_local_storage, save_local_storage} from "@/utils/local_storage.js";
 export const user_options = ref({
     theme: "auto",
     language: "undefined",
+    is_full_mode: true,
+    nuitka_version: supported_nuitka_version.versions[supported_nuitka_version.latest_key], //获取最新版
 });
+
 /**
  * 监听用户设置的变化 并保存到localStorage
  */
@@ -24,6 +28,7 @@ watch(user_options, () => {
  * 初始化用户设置 读取localStorage并覆盖默认设置
  */
 export function init_user_options() {
+
     const r = JSON.parse(read_local_storage("user_options"));
     if (r === null || r === undefined) {
         save_local_storage("user_options", JSON.stringify(user_options.value));
