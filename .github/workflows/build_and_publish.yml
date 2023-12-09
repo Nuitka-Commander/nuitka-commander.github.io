@@ -14,5 +14,6 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: '16'
-      - name: 检查版本号并输出
+      - name: 输出
         run: node .github/workflows/scripts/check.js
+  
