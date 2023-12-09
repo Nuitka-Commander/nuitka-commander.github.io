@@ -1,7 +1,12 @@
 name: 构建并发布
 on:
-
   workflow_dispatch:
+    inputs:
+    # 仅允许手动发布
+    publish:
+      description: '发布'
+      required: true
+      default: 'false'
 jobs:
   check:
     name: 检查版本号
