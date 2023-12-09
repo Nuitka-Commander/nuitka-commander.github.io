@@ -1,4 +1,4 @@
-name: 构建并发布
+name: build and publish
 on:
   workflow_dispatch:
     inputs:
@@ -32,6 +32,3 @@ jobs:
         with:
           name: storedData
           path: ./storedData.json
-  build:
-    runs-on: ubuntu-latest
-    needs: check
