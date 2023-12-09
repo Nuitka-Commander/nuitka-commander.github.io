@@ -11,7 +11,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: 'latest'
+          node-version: '17'
       - name: 缓存依赖
         uses: actions/cache@v2
         id: yarn-cache
