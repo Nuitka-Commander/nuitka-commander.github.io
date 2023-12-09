@@ -14,20 +14,5 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: '16'
-      - name: 检查并创建storedData.json
-        run: |
-          if [ ! -f storedData.json ]; then
-            echo '{}' > storedData.json
-          fi
-      - name: 加载storedData
-        uses: actions/download-artifact@v2
-        with:
-          name: storedData
-          path: ./
       - name: 检查版本号并输出
         run: node .github/workflows/scripts/check.js
-      - name: 更新 storedData.json
-        uses: actions/upload-artifact@v2
-        with:
-          name: storedData
-          path: ./storedData.json
