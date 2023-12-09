@@ -86,7 +86,7 @@ const license_info_visible = ref(false);
     <div id="footer_right">
       <ul>
         <li>
-          <el-text type="info"> Nuitka Commander <strong> {{ constants.website_version }}</strong></el-text>
+          <el-text type="info"> Nuitka Commander <strong> {{ constants.version }}</strong></el-text>
         </li>
         <li>
           <el-text type="info"> {{ $t("website_info.supported_to_nuitka_version") }}
@@ -100,7 +100,7 @@ const license_info_visible = ref(false);
           </el-text>
         </li>
         <li>
-          <el-text class="button_el_text" type="" @click="license_info_visible=true">
+          <el-text class="button_el_text"  @click="license_info_visible=true">
             {{ $t("website_info.open_source_license") }}
           </el-text>
         </li>

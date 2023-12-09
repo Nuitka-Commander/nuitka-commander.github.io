@@ -6,6 +6,7 @@
 
 import supported_nuitka_version from "@/nuitka_config_files/supported_nuitka_version.js";
 import {user_options} from "@/stores/user_options.js";
+import {statusMachine} from "@/stores/status_machine.js";
 
 /**
  * 已加载的版本，进行缓存
@@ -38,7 +39,7 @@ export function init_nuitka_config() {
 export function load_new_config() {
     let new_version = user_options.value.nuitka_version;
     if (new_version in versions) {
-        //todo 下一步操作
+        statusMachine.update_config(versions[new_version]);
         return;
     }
     new_version = supported_nuitka_version.versions[new_version];// 获取路径
@@ -46,7 +47,7 @@ export function load_new_config() {
         `@/nuitka_config_files/${new_version}.js`
         ).then((messages) => {
         versions[new_version] = messages.default;
-        // todo 下一步操作
+        statusMachine.update_config(messages.default);
     }).catch((e) => {
             throw new Error(`nuitka_config: load new config files failed: ${e}`);
         },
