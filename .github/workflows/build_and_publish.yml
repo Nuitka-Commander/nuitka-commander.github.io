@@ -14,6 +14,11 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: '16'
+      - name: 检查并创建storedData.json
+        run: |
+          if [ ! -f storedData.json ]; then
+            echo '{}' > storedData.json
+          fi
       - name: 加载storedData
         uses: actions/download-artifact@v2
         with:
