@@ -1,12 +1,6 @@
-name: 构建并发布
+name: build and publish
 on:
   workflow_dispatch:
-    inputs:
-    # 仅允许手动发布
-    publish:
-      description: '发布'
-      required: true
-      default: 'false'
 jobs:
   check:
     name: 检查版本号
@@ -32,6 +26,3 @@ jobs:
         with:
           name: storedData
           path: ./storedData.json
-  build:
-    runs-on: ubuntu-latest
-    needs: check
