@@ -1,7 +1,11 @@
-import fs from 'fs';
-import path from 'path';
+import fs from "fs";
+import path, {dirname} from "path";
 
-// 读取constants.json文件
+import {fileURLToPath} from "url";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
 const constantsPath = path.join(__dirname, "/src/stores/constants.json");
 const constants = JSON.parse(fs.readFileSync(constantsPath, "utf8"));
 const version = constants.version;
