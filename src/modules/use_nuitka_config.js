@@ -7,7 +7,6 @@
 import supported_nuitka_version from "@/nuitka_config_files/supported_nuitka_version.js";
 import {user_options} from "@/stores/user_options.js";
 import {statusMachine} from "@/stores/status_machine.js";
-import {override_import} from "@/modules/override_import.js";
 
 /**
  * 已加载的版本，进行缓存
@@ -44,9 +43,9 @@ export function load_new_config() {
         return;
     }
     new_version = supported_nuitka_version.versions[new_version];// 获取路径
-    override_import(
-        `@/nuitka_config_files/${new_version}.js`,
-    ).then((messages) => {
+    import(
+        `@/nuitka_config_files/${new_version}.js`
+        ).then((messages) => {
         versions[new_version] = messages.default;
         statusMachine.update_config(messages.default);
     }).catch((e) => {
