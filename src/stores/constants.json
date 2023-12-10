@@ -3,7 +3,8 @@
   "support_nuitka_version": "1.9.*",
   "authors": [
     {
-      "name": "erduotong",
+      "name": "erduotong 这只是用于测试 请不要直接修改 Github Action会自动修改的喵~",
+      "html_url": "https://github.com/erduotong",
       "avatar": "https://avatars.githubusercontent.com/u/109658174?v=4"
     }
   ],

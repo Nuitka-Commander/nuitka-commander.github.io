@@ -23,9 +23,9 @@ import {load_new_config} from "@/modules/use_nuitka_config.js";
             size="large"
         ></el-switch>
         <template #content>
-          {{$t('nav_bar.mode.info.l1')}} <br>
-          {{$t('nav_bar.mode.info.l2')}} <br>
-          {{$t('nav_bar.mode.info.l3 ')}}
+          {{ $t("nav_bar.mode.info.l1") }} <br>
+          {{ $t("nav_bar.mode.info.l2") }} <br>
+          {{ $t("nav_bar.mode.info.l3") }}
         </template>
       </el-tooltip>
 

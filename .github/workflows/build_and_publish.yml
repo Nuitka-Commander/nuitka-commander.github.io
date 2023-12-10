@@ -34,8 +34,8 @@ jobs:
           build_dir: ./dist
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-       # 暂时Github和gitee构建文件一致，无需额外进行构建
-       # build gitee
+      # 暂时Github和gitee构建文件一致，无需额外进行构建
+      # build gitee
       - name: 推送到Gitee Page
         run: |
           git config --global user.name "erduotong"
