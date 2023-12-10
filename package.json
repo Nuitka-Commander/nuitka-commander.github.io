@@ -16,6 +16,7 @@
     "axios": "^1.6.2",
     "cheerio": "^1.0.0-rc.12",
     "element-plus": "^2.4.2",
+    "node-fetch": "^3.3.2",
     "scss-loader": "^0.0.1",
     "vite-plugin-imagemin": "^0.6.1",
     "vue": "^3.3.4",
