@@ -16,6 +16,7 @@
     "axios": "^1.6.2",
     "element-plus": "^2.4.2",
     "scss-loader": "^0.0.1",
+    "vite-plugin-imagemin": "^0.6.1",
     "vue": "^3.3.4",
     "vue-i18n": "^9.7.0",
     "vue-i18n-loader": "^0.1.1"

@@ -1,13 +1,14 @@
 // noinspection JSUnusedGlobalSymbols
-
 import vue from "@vitejs/plugin-vue";
 import AutoImport from "unplugin-auto-import/vite";
 import Components from "unplugin-vue-components/vite";
 import {ElementPlusResolver} from "unplugin-vue-components/resolvers";
 import {resolve} from "path";
+import viteImagemin from "vite-plugin-imagemin";
+
 // https://vitejs.dev/config/
 const timestamp = new Date().getTime();
-// noinspection JSUnresolvedReference
+// noinspection JSUnusedGlobalSymbols
 export default ({mode}) => {
     if (mode === "local_use") {
         //打包成本地可以直接运行的html
@@ -22,6 +23,18 @@ export default ({mode}) => {
                     resolvers: [ElementPlusResolver(({
                         importStyle: "sass",
                     }))],
+                }), viteImagemin({
+                    svgo: {
+                        plugins: [
+                            {
+                                name: "removeViewBox",
+                            },
+                            {
+                                name: "removeEmptyAttrs",
+                                active: false,
+                            },
+                        ],
+                    },
                 })],
             resolve: {
                 alias: {
@@ -51,7 +64,15 @@ export default ({mode}) => {
                 resolvers: [ElementPlusResolver(({
                     importStyle: "sass",
                 }))],
-            })],
+            }), viteImagemin({
+                svgo: {
+                    plugins: [{name: "removeViewBox"}, {
+                        name: "removeEmptyAttrs",
+                        active: false,
+                    }],
+                },
+            }),
+            ],
             resolve: {
                 alias: {
                     "@": resolve(__dirname, "src"),
