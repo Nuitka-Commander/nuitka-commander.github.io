@@ -1,11 +1,14 @@
 import fs from "fs";
 import path from "path";
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
 
+const __dirname = dirname(fileURLToPath(import.meta.url));
 // GitHub API URL
 const API_URL = "https://api.github.com/repositories/687001179/contributors";
 
 // Path to constants.json file
-const CONSTANTS_PATH = path.join(__dirname, "src/stores/constants.json");
+const CONSTANTS_PATH = path.join(__dirname, "../../src/stores/constants.json");
 
 // Fetch contributors from GitHub API
 fetch(API_URL)
