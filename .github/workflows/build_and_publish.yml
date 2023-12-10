@@ -26,7 +26,7 @@ jobs:
         if: steps.yarn-cache.outputs.cache-hit != 'true'
         run: yarn install --frozen-lockfile
       - name: 构建网页
-        run: yarn build
+        run: yarn build:website
       - name: 发布到 GitHub Pages
         uses: crazy-max/ghaction-github-pages@v2.1.3
         with:
