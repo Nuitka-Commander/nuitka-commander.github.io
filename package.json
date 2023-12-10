@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build:website": "vite build --mode website",
+    "build:local": "vite build --mode local",
     "preview": "vite preview"
   },
   "dependencies": {
