@@ -42,10 +42,7 @@ export function load_new_config() {
         statusMachine.update_config(versions[new_version]);
         return;
     }
-    new_version = supported_nuitka_version.versions[new_version];// 获取路径
-    import(
-        `@/nuitka_config_files/${new_version}.js`
-        ).then((messages) => {
+    import(`@/nuitka_config_files/configs/${supported_nuitka_version.versions[new_version]}.js`).then((messages) => {
         versions[new_version] = messages.default;
         statusMachine.update_config(messages.default);
     }).catch((e) => {

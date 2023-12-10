@@ -11,6 +11,5 @@ export default {
     versions: { //version:path
         "1.9.*": "1.9._",
         "2.0.*": "2.0._",
-
     },
 };

@@ -9,17 +9,20 @@ import {resolve} from "path";
 const timestamp = new Date().getTime();
 // noinspection JSUnresolvedReference
 export default ({mode}) => {
-    if (mode === "local") {
+    if (mode === "local_use") {
         //打包成本地可以直接运行的html
         return {
-            plugins: [vue(), AutoImport({
-                resolvers: [ElementPlusResolver()],
-            }), Components({
-                extensions: ["vue"],
-                resolvers: [ElementPlusResolver(({
-                    importStyle: "sass",
-                }))],
-            })],
+            plugins: [
+                vue(),
+                AutoImport({
+                    resolvers: [ElementPlusResolver()],
+                }),
+                Components({
+                    extensions: ["vue"],
+                    resolvers: [ElementPlusResolver(({
+                        importStyle: "sass",
+                    }))],
+                })],
             resolve: {
                 alias: {
                     "@": resolve(__dirname, "src"),
@@ -29,9 +32,9 @@ export default ({mode}) => {
                 rollupOptions: {
                     output: {
                         // 入口文件名
-                        entryFileNames: `assets/[name].${timestamp}.js`,
+                        entryFileNames: `[name].js`,
                         // 块文件名
-                        chunkFileNames: `assets/[name]-[hash].${timestamp}.js`,
+                        chunkFileNames: `chunk-[name].js`,
                         // 资源文件名 css 图片等等
                         assetFileNames: `assets/[name]-[hash].${timestamp}.[ext]`,
                     },

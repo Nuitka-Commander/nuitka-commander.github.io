@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build:website": "vite build --mode website",
-    "build:local": "vite build --mode local",
+    "build:local_use": "vite build --mode local_use",
     "preview": "vite preview"
   },
   "dependencies": {
