@@ -70,7 +70,10 @@ const license_info_visible = ref(false);
             <el-link :href="constants.base_url + 'issues'">{{ $t("website_info.report_issue") }}</el-link>
           </li>
           <li>
-            <el-link href="https://github.com/Nuitka-Commander/nuitka-commander.github.io/blob/main/docs/get_involved.md">{{ $t("website_info.get_involved") }}</el-link>
+            <el-link
+                href="https://github.com/Nuitka-Commander/nuitka-commander.github.io/blob/main/docs/get_involved.md">
+              {{ $t("website_info.get_involved") }}
+            </el-link>
           </li>
           <li>
             <el-link :href="constants.base_url + 'releases/latest'">{{ $t("website_info.changelog") }}</el-link>
@@ -100,7 +103,7 @@ const license_info_visible = ref(false);
           </el-text>
         </li>
         <li>
-          <el-text class="button_el_text"  @click="license_info_visible=true">
+          <el-text class="button_el_text" @click="license_info_visible=true">
             {{ $t("website_info.open_source_license") }}
           </el-text>
         </li>

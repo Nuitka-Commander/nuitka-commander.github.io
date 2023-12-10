@@ -14,6 +14,7 @@
     "@voerkai18n/runtime": "^2.0.29",
     "@vueuse/core": "^10.6.1",
     "axios": "^1.6.2",
+    "cheerio": "^1.0.0-rc.12",
     "element-plus": "^2.4.2",
     "scss-loader": "^0.0.1",
     "vite-plugin-imagemin": "^0.6.1",
