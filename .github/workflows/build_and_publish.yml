@@ -25,6 +25,8 @@ jobs:
       - name: 安装依赖
         if: steps.yarn-cache.outputs.cache-hit != 'true'
         run: yarn install --frozen-lockfile
+      - name: 更新制作人员列表
+        run: node ./scripts/update_authors.js
       - name: 构建网页
         run: yarn build:website
       - name: 发布到 GitHub Pages
