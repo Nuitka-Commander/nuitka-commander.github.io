@@ -13,17 +13,16 @@ export default ({mode}) => {
     if (mode === "local_use") {
         //打包成本地可以直接运行的html
         return {
-            plugins: [
-                vue(),
-                AutoImport({
-                    resolvers: [ElementPlusResolver()],
-                }),
-                Components({
-                    extensions: ["vue"],
-                    resolvers: [ElementPlusResolver(({
-                        importStyle: "sass",
-                    }))],
-                }), viteImagemin({
+            plugins: [vue(),
+                      AutoImport({
+                          resolvers: [ElementPlusResolver()],
+                      }),
+                      Components({
+                          extensions: ["vue"],
+                          resolvers: [ElementPlusResolver(({
+                              importStyle: "sass",
+                          }))],
+                      }), viteImagemin({
                     svgo: {
                         plugins: [
                             {
