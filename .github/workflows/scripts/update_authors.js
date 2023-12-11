@@ -1,8 +1,7 @@
 import fs from "fs";
-import path from "path";
+import path, {dirname} from "path";
 import fetch from "node-fetch";
-import { fileURLToPath } from 'url';
-import { dirname } from 'path';
+import {fileURLToPath} from "url";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 // GitHub API URL
@@ -22,7 +21,7 @@ fetch(API_URL)
                 process.exit(1);
             } else {
                 // Parse JSON string to JSON object
-                const constants = data.toJSON();
+                const constants = JSON.parse(data.toString());
 
                 // Clear authors array
                 constants.authors = [];
