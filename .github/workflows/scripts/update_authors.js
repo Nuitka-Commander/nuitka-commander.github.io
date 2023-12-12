@@ -22,7 +22,7 @@ fetch(API_URL)
             } else {
                 // Parse JSON string to JSON object
                 const constants = JSON.parse(data.toString());
-
+                constants.debug = false;//先把debug关掉
                 // Clear authors array
                 constants.authors = [];
 

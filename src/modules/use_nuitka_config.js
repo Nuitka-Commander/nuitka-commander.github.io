@@ -8,6 +8,7 @@ import supported_nuitka_version from "@/nuitka_config_files/supported_nuitka_ver
 import {user_options} from "@/stores/user_options.js";
 import {statusMachine} from "@/stores/status_machine.js";
 
+
 /**
  * 已加载的版本，进行缓存
  * @type {Object}
@@ -45,8 +46,5 @@ export function load_new_config() {
     import(`@/nuitka_config_files/configs/${supported_nuitka_version.versions[new_version]}.js`).then((messages) => {
         versions[new_version] = messages.default;
         statusMachine.update_config(messages.default);
-    }).catch((e) => {
-            throw new Error(`nuitka_config: load new config files failed: ${e}`);
-        },
-    );
+    })
 }
