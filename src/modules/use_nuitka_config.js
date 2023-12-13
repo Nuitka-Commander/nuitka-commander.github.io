@@ -6,7 +6,7 @@
 
 import supported_nuitka_version from "@/nuitka_config_files/supported_nuitka_version.js";
 import {user_options} from "@/stores/user_options.js";
-import {statusMachine} from "@/stores/status_machine.js";
+import {command_status} from "@/stores/command_status.js";
 
 
 /**
@@ -40,11 +40,11 @@ export function init_nuitka_config() {
 export function load_new_config() {
     let new_version = user_options.value.nuitka_version;
     if (new_version in versions) {
-        statusMachine.update_config(versions[new_version]);
+        command_status.update_config(versions[new_version]);
         return;
     }
     import(`@/nuitka_config_files/configs/${supported_nuitka_version.versions[new_version]}.js`).then((messages) => {
         versions[new_version] = messages.default;
-        statusMachine.update_config(messages.default);
-    })
+        command_status.update_config(messages.default);
+    });
 }

@@ -11,8 +11,8 @@ export const nuitka_templates = {
         type: nuitka_element_type.Bool, //类型
         show: {
             command: "",//命令描述 可用于生成 在非默认值时显示
-            command_i18n: "command.", //国际化命令描述 自动拼接
-            desc_i18n: "desc.", //国际化介绍 自动拼接
+            command_i18n: "", //国际化命令描述 自动拼接
+            desc_i18n: "", //国际化介绍 自动拼接
         },
         depend: {
             effects: [], //影响元素
@@ -20,9 +20,38 @@ export const nuitka_templates = {
             disable: [], //可以被其中任意元素禁用
             any_need: [], //可以被其中任意元素启用
         },
+        is_unmeaning: undefined, //是否为无语义元素 如果是则不会被显示 如果需要显示请设置为非undefined
         show_when_false: true, //当值为false时是否显示
         id: undefined, //id编号
         default: false, //默认值 元素值自动补充
     },
+    //  单选
+    single_options_element: {
+        show: {
+            command: String,
+            command_i18n: String,
+            desc_i18n: String,
+        },
+        //每个元素都可以有自身的依赖和影响 实现更复杂的逻辑
+        depend: {
+            effects: [],
+            needs: [],
+            disable: [],
+            any_need: [],
+        },
+        enable: true, //是否启用
+
+    },
+    Single_option: {
+        type: nuitka_element_type.Single_option,
+        elements: {
+            //请用单选元素模板
+        },
+        show_when_false: true,
+        id: undefined,
+        default: undefined,//请填写默认值的id
+
+    },
+
 
 };

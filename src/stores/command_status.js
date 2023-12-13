@@ -5,33 +5,27 @@
  */
 import {ref} from "vue";
 import {nuitka_element_type} from "@/stores/enums.js";
+import {local_nuitka_version_config} from "@/modules/use_local_forage.js";
+import {user_options} from "@/stores/user_options.js";
 
+/**
+ * @Description 根据类型处理函数
+ * @type {{[nuitka_element_type.Bool]: ((function())|*)}}
+ */
 const handlers = {
-    chose(type) {//不想用map 假装这是一个表编程吧
-        switch (type) {
-            case nuitka_element_type.Bool:
-                this.bool();
-                return;
-
-            default:
-                console.error(`未知的类型${type}`);
-                return;
-        }
-    },
-    bool() {
-        //似乎不需要做什么
+    [nuitka_element_type.Bool]: () => {
+        //似乎没啥好处理的
     },
 };
 
-/**
- * @Description 状态机相关
- */
-class StatusMachine {
+
+class CommandStatus {
     constructor() {
         //未改变的配置 用于重置
         this.original_status = {};
         //已预处理完成的配置
         this.status = ref({});
+        this.watch_functions = []; //更新监听函数
     }
 
     /**
@@ -40,7 +34,6 @@ class StatusMachine {
      */
     update_config(config) {
         let global_id = 0;
-        // 对config进行预处理 并尝试加载当前版本记录的配置
         // 预处理
         Object.keys(config).forEach((top_key) => {
             const top_value = config[top_key];
@@ -67,9 +60,24 @@ class StatusMachine {
             });
         });
         console.log(this.original_status);
+        //转换异步继续操作
+        local_nuitka_version_config.read_config(user_options.value.nuitka_version, (result) => {
+            console.log(result);
+
+            if (result !== null) {
+                //todo 加载配置
+            }
+            //清空监听函数
+            this.watch_functions.forEach(stop_watcher => stop_watcher());
+            this.watch_functions = [];
+
+            this.status.value = this.original_status;
+            //todo重新绑定监听更新函数
+
+        });
+
     }
 
 }
 
-export const statusMachine = new StatusMachine();
-
+export const command_status = new CommandStatus();
