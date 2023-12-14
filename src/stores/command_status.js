@@ -3,23 +3,44 @@
  * @Author: erduotong
  * @Date: 2023-12-08 23:47:42
  */
-import {ref} from "vue";
+import {ref, watch} from "vue";
 import {nuitka_element_type} from "@/stores/enums.js";
 import {local_nuitka_version_config} from "@/modules/use_local_forage.js";
 import {user_options} from "@/stores/user_options.js";
 
 /**
  * @Description 根据类型处理函数
- * @type {{[nuitka_element_type.Bool]: ((function())|*)}}
+ * @type {{}}
  */
 const handlers = {
     [nuitka_element_type.Bool]: () => {
         //似乎没啥好处理的
     },
 };
+/**
+ * 监听函数
+ * @type {{}}
+ */
+const watchers = {
+
+    [nuitka_element_type.Bool]: (path, cite) => {
+        return watch(cite, (new_value, old_value) => {
+            //todo 生成命令
+//old_value和new_value是引用
+            //todo old val 和 new val的值相同
+            console.log(`监听到 ${path} 的变化 `);
+            console.log(old_value);
+            console.log(new_value);
+        });
+    },
+};
 
 
 class CommandStatus {
+    original_status = {};
+    status = {};
+    watch_functions = [];
+
     constructor() {
         //未改变的配置 用于重置
         this.original_status = {};
@@ -55,11 +76,13 @@ class CommandStatus {
                 this.original_status[top_key][second_value.type][second_key] = {
                     ...second_value,
                     path: [top_key, second_value.type, second_key],
-                    type: undefined,
                 };
+                //删掉type
+                delete second_value.type;
+
             });
         });
-        console.log(this.original_status);
+
         //转换异步继续操作
         local_nuitka_version_config.read_config(user_options.value.nuitka_version, (result) => {
             console.log(result);
@@ -72,12 +95,28 @@ class CommandStatus {
             this.watch_functions = [];
 
             this.status.value = this.original_status;
-            //todo重新绑定监听更新函数
+
+            console.log(this.status.value);
+            //todo 重新绑定监听更新函数
+            //三层遍历 记得存Key value
+            Object.keys(this.status.value).forEach((key_1) => {
+                const value_1 = this.status.value[key_1];
+                Object.keys(value_1).forEach((key_2) => {
+                    const value_2 = value_1[key_2];
+                    Object.keys(value_2).forEach((key_3) => {
+                        const value_3 = value_2[key_3];
+                        const stop_watcher = watchers[key_2](value_3.path, value_3);
+                        this.watch_functions.push(stop_watcher); //添加到监听函数数组
+                        console.log(`已监听 ${key_1}.${key_2}.${key_3}`);
+                    });
+                });
+            });
 
         });
 
     }
-
 }
 
 export const command_status = new CommandStatus();
+
+

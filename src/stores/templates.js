@@ -20,7 +20,7 @@ export const nuitka_templates = {
             disable: [], //可以被其中任意元素禁用
             any_need: [], //可以被其中任意元素启用
         },
-        is_unmeaning: undefined, //是否为无语义元素 如果是则不会被显示 如果需要显示请设置为非undefined
+        meaningful:true, //是否为无语义元素
         show_when_false: true, //当值为false时是否显示
         id: undefined, //id编号
         default: false, //默认值 元素值自动补充
@@ -40,6 +40,7 @@ export const nuitka_templates = {
             any_need: [],
         },
         enable: true, //是否启用
+        meaningful:true, //是否为无语义元素
 
     },
     Single_option: {
@@ -49,8 +50,7 @@ export const nuitka_templates = {
         },
         show_when_false: true,
         id: undefined,
-        default: undefined,//请填写默认值的id
-
+        default: undefined,//请填写默认值
     },
 
 
