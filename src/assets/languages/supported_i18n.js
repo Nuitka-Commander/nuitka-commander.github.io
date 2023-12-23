@@ -13,5 +13,4 @@ export const supported_i18n = {
         path_name: "zh_cn",
     },
 
-
 };

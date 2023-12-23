@@ -38,7 +38,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       # 暂时Github和gitee构建文件一致，无需额外进行构建
       # build gitee
-      - name: 推送到Gitee Page
+      - name: 推送到Gitee
         run: |
           git config --global user.name "erduotong"
           git config --global user.email "action_bot@github.com."
@@ -48,5 +48,12 @@ jobs:
           git add .
           git commit -m "Update from GitHub Actions"
           git push https://oauth2:${{ secrets.GITEE_TOKEN }}@gitee.com/nuitka-commander/nuitka-commander.git
-
+      - name: 部署Gitee Page
+        uses: yanglbme/gitee-pages-action@main
+        with:
+          gitee-user-name: ${{secrets.GITEE_USERNAME}}
+          gitee-password: ${{secrets.GITEE_PASSWORD}}
+          gitee-repo: nuitka-commander/nuitka-commander
+          gitee-branch: master
+      
 

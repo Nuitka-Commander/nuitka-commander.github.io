@@ -3,6 +3,13 @@
  * @Author: erduotong
  * @Date: 2023-12-05 22:28:39
  */
+import {nuitka_templates} from "@/stores/templates.js";
+
 export default {
-    hello: "你好",
+    basic: { //顶级元素
+        some_content: {//二级元素
+            ...nuitka_templates.Bool, //继承模板
+        },
+
+    },
 };

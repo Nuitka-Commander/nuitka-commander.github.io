@@ -8,5 +8,6 @@
       "avatar": "https://avatars.githubusercontent.com/u/109658174?v=4"
     }
   ],
-  "base_url": "https://github.com/nuitka-commander/nuitka-commander.github.io/"
+  "base_url": "https://github.com/nuitka-commander/nuitka-commander.github.io/",
+  "debug": true
 }
