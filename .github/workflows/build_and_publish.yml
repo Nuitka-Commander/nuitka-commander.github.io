@@ -51,7 +51,7 @@ jobs:
       - name: 部署Gitee Page
         uses: yanglbme/gitee-pages-action@main
         with:
-          gitee-user-name: ${{secrets.GITEE_USERNAME}}
+          gitee-username: ${{secrets.GITEE_USERNAME}}
           gitee-password: ${{secrets.GITEE_PASSWORD}}
           gitee-repo: nuitka-commander/nuitka-commander
           gitee-branch: master
