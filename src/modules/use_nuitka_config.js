@@ -47,4 +47,5 @@ export function load_new_config() {
         versions[new_version] = messages.default;
         command_status.update_config(messages.default);
     });
+
 }
