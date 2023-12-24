@@ -3,8 +3,8 @@ on:
   workflow_dispatch:
 permissions: write-all
 jobs:
-  build_website:
-    name: 构建网站
+  pretreatment:
+    name: 预处理
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -13,23 +13,57 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: 'yarn'
-      - name: yarn-cache
+          cache: 'npm'
+      - name: npm-cache
         uses: actions/cache@v2
-        id: yarn-cache
+        id: npm-cache
         with:
           path: |
             **/node_modules
-          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          key: ${{ runner.os }}-npm-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
-            ${{ runner.os }}-yarn-
-      - name: 安装依赖
-        if: steps.yarn-cache.outputs.cache-hit != 'true'
-        run: yarn install --frozen-lockfile
-      - name: 更新制作人员列表
+            ${{ runner.os }}-npm-
+      - name : 安装依赖
+        if: steps.npm-cache.outputs.cache-hit != 'true'
+        run: npm ci
+      - name : 更新制作人员列表
         run: node ${{ github.workspace }}/.github/workflows/scripts/update_authors.js
-      - name: 构建网页
-        run: yarn build:website
+      - name: 检查版本号冲突
+        run: node ${{ github.workspace }}/.github/workflows/scripts/check_version.js
+      # 其他预处理以后要用的时候在上方添加
+      - name : Upload updated code as artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: updated_code
+          path: ./
+  build_website:
+    name : 为网站构建
+    needs: pretreatment
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download Checkout
+        uses: actions/download-artifact@v2
+        with:
+          name: updated_code
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+      - name: npm-cache
+        uses: actions/cache@v2
+        id: npm-cache
+        with:
+          path: |
+            **/node_modules
+          key: ${{ runner.os }}-npm-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-npm-
+      - name : 安装依赖
+        if: steps.npm-cache.outputs.cache-hit != 'true'
+        run: npm ci
+      - name : 构建
+        run: npm run build:website
       - name: 发布到 GitHub Pages
         uses: crazy-max/ghaction-github-pages@v2.1.3
         with:
@@ -37,8 +71,6 @@ jobs:
           build_dir: ./dist
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      # 暂时Github和gitee构建文件一致，无需额外进行构建
-      # build gitee
       - name: 推送到Gitee
         run: |
           git config --global user.name "erduotong"
@@ -56,5 +88,37 @@ jobs:
           gitee-password: ${{secrets.GITEE_PASSWORD}}
           gitee-repo: nuitka-commander/nuitka-commander
           gitee-branch: master
-      
+
+
+    build_local:
+      name: 为本地使用构建(单文件)并发布
+      needs: pretreatment
+      runs-on: ubuntu-latest
+      steps:
+        - name: Download Checkout
+          uses: actions/download-artifact@v2
+          with:
+            name: updated_code
+        - name: Setup Node.js
+          uses: actions/setup-node@v4
+          with:
+            node-version: 20
+            cache: 'npm'
+        - name: npm-cache
+          uses: actions/cache@v2
+          id: npm-cache
+          with:
+            path: |
+              **/node_modules
+            key: ${{ runner.os }}-npm-${{ hashFiles('**/package-lock.json') }}
+            restore-keys: |
+              ${{ runner.os }}-npm-
+        - name: 安装依赖
+          if: steps.npm-cache.outputs.cache-hit != 'true'
+          run: npm ci
+        - name: 构建
+          run: npm run build:local_use
+
+
+
 
