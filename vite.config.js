@@ -11,44 +11,36 @@ export default ({mode}) => {
     if (mode === "local_use") {
         //打包成本地可以直接运行的html
         return {
-
-            plugins: [
-                viteImagemin({
-                    svgo: {
-                        plugins: [
-                            {
-                                name: "removeViewBox",
-                            },
-                            {
-                                name: "removeEmptyAttrs",
-                                active: false,
-                            },
-                        ],
-                    },
-                }), vue(),
-                AutoImport({
-                    resolvers: [ElementPlusResolver()],
-                }),
-                Components({
-                    extensions: ["vue"],
-                    resolvers: [ElementPlusResolver(({
-                        importStyle: "sass",
-                    }))],
-                })],
+            plugins: [viteImagemin({
+                svgo: {
+                    plugins: [{
+                        name: "removeViewBox",
+                    }, {
+                        name: "removeEmptyAttrs",
+                        active: false,
+                    }],
+                },
+            }), vue(), AutoImport({
+                resolvers: [ElementPlusResolver()],
+            }), Components({
+                extensions: ["vue"],
+                resolvers: [ElementPlusResolver(({
+                    importStyle: "sass",
+                }))],
+            })],
             resolve: {
                 alias: {
                     "@": resolve(__dirname, "src"),
                 },
             },
             build: {
+                assetsInlineLimit: 32768,
                 rollupOptions: {
                     output: {
                         // 入口文件名
-                        entryFileNames: `[name].js`,
-                        // 块文件名
-                        chunkFileNames: `chunk-[name].js`,
-                        // 资源文件名 css 图片等等
-                        assetFileNames: `assets/[name]-[hash].${timestamp}.[ext]`,
+                        entryFileNames: `[name].js`, // 块文件名
+                        chunkFileNames: `chunk-[name].js`, // 资源文件名 css 图片等等
+                        assetFileNames: `[name]-[hash].${timestamp}.[ext]`,
                     },
                 },
             },
@@ -70,8 +62,7 @@ export default ({mode}) => {
                 resolvers: [ElementPlusResolver(({
                     importStyle: "sass",
                 }))],
-            }),
-            ],
+            })],
             resolve: {
                 alias: {
                     "@": resolve(__dirname, "src"),
@@ -81,10 +72,8 @@ export default ({mode}) => {
                 rollupOptions: {
                     output: {
                         // 入口文件名
-                        entryFileNames: `assets/[name].${timestamp}.js`,
-                        // 块文件名
-                        chunkFileNames: `assets/[name]-[hash].${timestamp}.js`,
-                        // 资源文件名 css 图片等等
+                        entryFileNames: `assets/[name].${timestamp}.js`, // 块文件名
+                        chunkFileNames: `assets/[name]-[hash].${timestamp}.js`, // 资源文件名 css 图片等等
                         assetFileNames: `assets/[name]-[hash].${timestamp}.[ext]`,
                     },
                 },
