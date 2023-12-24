@@ -3,7 +3,7 @@
  * @Author: erduotong
  * @Date: 2023-12-11 22:10:51
  */
-import {nuitka_element_type} from "@/stores/enums.js";
+import {nuitka_element_type} from "@/vals/enums.js";
 //设置模板 用于拓展 类型请首字母大写
 export const nuitka_templates = {
 

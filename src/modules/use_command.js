@@ -4,9 +4,9 @@
  * @Date: 2023-12-08 23:47:42
  */
 import {ref, watch} from "vue";
-import {nuitka_element_type} from "@/stores/enums.js";
+import {nuitka_element_type} from "@/vals/enums.js";
 import {local_nuitka_version_config} from "@/modules/use_local_forage.js";
-import {user_options} from "@/stores/user_options.js";
+import {user_options} from "@/vals/stores/user_options.js";
 
 /**
  * @Description 根据类型处理函数
@@ -117,6 +117,6 @@ class CommandStatus {
     }
 }
 
-export const command_status = new CommandStatus();
+export const use_command = new CommandStatus();
 
 

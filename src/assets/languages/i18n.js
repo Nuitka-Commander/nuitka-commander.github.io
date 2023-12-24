@@ -4,9 +4,9 @@
  * @Date: 2023-11-26 10:49:04
  */
 import {createI18n} from "vue-i18n";
-import {user_options} from "@/stores/user_options.js";
+import {user_options} from "@/vals/stores/user_options.js";
 import {supported_i18n} from "@/assets/languages/supported_i18n.js";
-import {set_loading} from "@/stores/is_loading.js";
+import {set_loading} from "@/vals/stores/is_loading.js";
 
 /**
  * @Description 是否语言加载完成

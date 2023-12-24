@@ -4,7 +4,7 @@
  * @Date: 2023-11-26 10:58:34
  */
 import {init_local_storage} from "@/modules/local_storage.js";
-import {init_stores} from "@/stores/init_stores.js";
+import {init_stores} from "@/vals/stores/init_stores.js";
 import {init_i18n} from "@/assets/languages/i18n.js";
 import {init_theme} from "@/modules/use_theme.js";
 import {init_nuitka_config} from "@/modules/use_nuitka_config.js";

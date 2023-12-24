@@ -21,7 +21,7 @@ export const user_options = ref({
  * 监听用户设置的变化 并保存到localStorage
  */
 watch(user_options, () => {
-    save_local_storage("user_options", JSON.stringify(user_options.value));
+    save_local_storage("_Nuitka_Commander_user_options", JSON.stringify(user_options.value));
 }, {deep: true});
 
 /**
