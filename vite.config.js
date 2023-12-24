@@ -4,30 +4,94 @@ import Components from "unplugin-vue-components/vite";
 import {ElementPlusResolver} from "unplugin-vue-components/resolvers";
 import {resolve} from "path";
 import viteImagemin from "vite-plugin-imagemin";
+import {viteSingleFile} from "vite-plugin-singlefile";
+import {createHtmlPlugin} from "vite-plugin-html";
+import fs, {readFileSync, writeFileSync} from "fs";
+import {JSDOM} from "jsdom";
+
 
 const timestamp = new Date().getTime();
+const finally_process = () => {
+    return {
+        name: "inline-svg",
+        apply: "build",
+        enforce: "post",
+
+        closeBundle() {
+            console.log("内联svg");
+            const indexPath = resolve(__dirname, "dist", "index.html");
+            const html = readFileSync(indexPath, "utf-8");
+            const dom = new JSDOM(html);
+            const document = dom.window.document;
+
+            const links = document.querySelectorAll("link[href$='.svg']");
+            links.forEach((link) => {
+                let href = link.getAttribute("href");
+                if (href.startsWith("/")) {
+                    href = href.substring(1);
+                } else if (href.startsWith("./")) {
+                    href = href.substring(2);
+                }
+                const svgPath = resolve(__dirname, "dist", href);
+                const svgContent = readFileSync(svgPath, "utf-8");
+                const dataUrl = `data:image/svg+xml,${encodeURIComponent(svgContent)}`;
+
+                // Set the data URL as the href attribute of the link element
+                link.setAttribute("href", dataUrl);
+
+                // Delete the SVG file
+                fs.unlinkSync(svgPath);
+            });
+
+            const updatedHtml = dom.serialize();
+            writeFileSync(indexPath, updatedHtml);
+            console.log("内联svg完成");
+        },
+    };
+};
+// 共用插件列表
+const plugin_array = [viteImagemin({
+    svgo: {
+        plugins: [{
+            name: "removeViewBox",
+        }, {
+            name: "removeEmptyAttrs",
+            active: false,
+        }],
+    },
+}), vue(), AutoImport({
+    resolvers: [ElementPlusResolver()],
+}), Components({
+    extensions: ["vue"],
+    resolvers: [ElementPlusResolver(({
+        importStyle: "sass",
+    }))],
+})];
+// https://vitejs.dev/config/
 // noinspection JSUnusedGlobalSymbols
 export default ({mode}) => {
     if (mode === "local_use") {
         //打包成本地可以直接运行的html
         return {
-            plugins: [viteImagemin({
-                svgo: {
-                    plugins: [{
-                        name: "removeViewBox",
-                    }, {
-                        name: "removeEmptyAttrs",
-                        active: false,
-                    }],
-                },
-            }), vue(), AutoImport({
-                resolvers: [ElementPlusResolver()],
-            }), Components({
-                extensions: ["vue"],
-                resolvers: [ElementPlusResolver(({
-                    importStyle: "sass",
-                }))],
-            })],
+            base: "./",
+            plugins: [...plugin_array,
+                      viteSingleFile(),
+                      createHtmlPlugin({
+                          minify: {
+                              collapseWhitespace: true,
+                              removeComments: true,
+                              removeEmptyAttributes: true,
+                              removeRedundantAttributes: true,
+                              removeScriptTypeAttributes: true,
+                              removeStyleLinkTypeAttributes: true,
+                              useShortDoctype: true,
+                              minifyJS: true,
+                              minifyCSS: true,
+                              minifyURLs: true,
+                          },
+                      }), finally_process(),
+            ],
+
             resolve: {
                 alias: {
                     "@": resolve(__dirname, "src"),
@@ -43,26 +107,13 @@ export default ({mode}) => {
                         assetFileNames: `[name]-[hash].${timestamp}.[ext]`,
                     },
                 },
+
             },
         };
 
     } else { //正常为网站构建
         return {
-            plugins: [viteImagemin({
-                svgo: {
-                    plugins: [{name: "removeViewBox"}, {
-                        name: "removeEmptyAttrs",
-                        active: false,
-                    }],
-                },
-            }), vue(), AutoImport({
-                resolvers: [ElementPlusResolver()],
-            }), Components({
-                extensions: ["vue"],
-                resolvers: [ElementPlusResolver(({
-                    importStyle: "sass",
-                }))],
-            })],
+            plugins: [...plugin_array],
             resolve: {
                 alias: {
                     "@": resolve(__dirname, "src"),
