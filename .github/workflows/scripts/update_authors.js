@@ -1,3 +1,8 @@
+/**
+ * @Description 更新制作人员信息
+ * @Author: erduotong
+ * @Date: 2023-12-25 23:35:41
+ */
 import fs from "fs";
 import path, {dirname} from "path";
 import fetch from "node-fetch";

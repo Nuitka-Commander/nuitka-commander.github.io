@@ -1,3 +1,8 @@
+/**
+ * @Description 检查版本号是否符合规范
+ * @Author: erduotong
+ * @Date: 2023-12-25 23:35:26
+ */
 import path, {dirname} from "path";
 import {fileURLToPath} from "url";
 import fs from "fs";
@@ -40,7 +45,7 @@ fetch(URL)
                         console.log(`当前版本号${data["name"]}与constants.json中的版本号${constants["version"]}不一致\n请检查是否已更新版本号/误发布`);
                         process.exit(1);
                     }
-                    if (change_log["version"] === "please_write_here"){
+                    if (change_log["version"] === "please_write_here") {
                         console.log("请在change_log.yaml中写入版本号");
                         process.exit(1);
                     }
