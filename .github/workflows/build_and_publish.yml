@@ -31,6 +31,11 @@ jobs:
         run: node ${{ github.workspace }}/.github/workflows/scripts/update_authors.js
       - name: 检查版本号冲突
         run: node ${{ github.workspace }}/.github/workflows/scripts/check_version.js
+      - name: 检查更新日志并转markdown
+        id: changelog
+        run: |
+          output=$(node ${{ github.workspace }}/.github/workflows/scripts/check_changelog.js)
+          echo "::set-output name=changelog::$output"
       # todo 检查更新日志并准备重置
 
       # 其他预处理以后要用的时候在上方添加
