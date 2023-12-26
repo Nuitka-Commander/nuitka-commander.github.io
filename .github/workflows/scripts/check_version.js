@@ -36,7 +36,7 @@ fetch(URL)
                         process.exit(1);
                     }
                     //加载yaml到json
-                    const change_log = yaml.load(change_log_data);
+                    const change_log = yaml.load(change_log_data.toString(), {json: true});
                     if (change_log["version"] === data["name"]) {
                         console.log(`当前版本号${data["name"]}与change_log.yaml中的版本号${change_log["version"]}一致\n请检查是否已更新版本号/误发布`);
                         process.exit(1);

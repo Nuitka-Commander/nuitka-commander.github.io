@@ -16,7 +16,7 @@ fs.readFile(constants_path, "utf8", (err, file_data) => {
         process.exit(1);
     }
     //加载yaml到json
-    const change_log = yaml.load(file_data.toString());
+    const change_log = yaml.load(file_data.toString(), {json: true});
     if (change_log["version"] === "please_write_here") {
         console.log("请在change_log.yaml中写入版本号");
         process.exit(1);
