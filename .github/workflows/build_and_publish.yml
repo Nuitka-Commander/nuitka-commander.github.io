@@ -32,12 +32,8 @@ jobs:
       - name: 检查版本号冲突
         run: node ${{ github.workspace }}/.github/workflows/scripts/check_version.js
       - name: 检查更新日志并转markdown
-        id: changelog
         run: |
-          output=$(node ${{ github.workspace }}/.github/workflows/scripts/check_changelog.js)
-          echo "::set-output name=changelog::$output"
-      # todo 检查更新日志并准备重置
-
+          node ${{ github.workspace }}/.github/workflows/scripts/check_changelog.js
       # 其他预处理以后要用的时候在上方添加
       - name: 保存当前工作区
         uses: actions/upload-artifact@v2
@@ -81,9 +77,21 @@ jobs:
           path: .
       # 这可以做一些其他特殊的所需处理
       - name: 为本地运行构建
-        run: npm run build:local_use
-
-
-
-
-
+        run: |
+          npm run build:local_use
+          mv ${{ github.workspace }}/dist/index.html ${{ github.workspace }}/dist/Nuitka\ Commander.html
+      - name: 读取版本号
+        id: read_version
+        run: |
+          echo "::set-output name=version::$(cat ${{ github.workspace }}/.github/workflows/scripts/version)"
+      - name: 为Github发布release
+        run: |
+          run: |
+           gh release create \
+           ${{ steps.read_version.outputs.version }} \
+           ${{ github.workspace }}/dist/Nuitka\ Commander.html \
+           -F ${{ github.workspace }}/.github/workflows/docs/change_log.md \
+           --latest \ 
+           -t ${{ steps.read_version.outputs.version }}
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

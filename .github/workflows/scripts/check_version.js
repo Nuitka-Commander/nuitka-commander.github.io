@@ -49,6 +49,7 @@ fetch(URL)
                         console.log("请在change_log.yaml中写入版本号");
                         process.exit(1);
                     }
+                    fs.writeFileSync(path.join(__dirname, "./version"), change_log["version"]); //将版本号写入文件
                 });
                 console.log("版本号检查通过"); //相安无事
                 process.exit(0);

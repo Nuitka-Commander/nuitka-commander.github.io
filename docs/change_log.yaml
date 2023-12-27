@@ -2,16 +2,20 @@
 # 如果是please_write_here,则说明还未填写，需要填写
 version: 0.1.0
 added: #新增的功能
-  -
+  - 添加了一个新功能
 changed: #已更改的功能
-  -
-Deprecated: #已弃用的功能
-  -
-Removed: #已移除的功能
-  -
-Fixed: #已修复的bug
-  -
-Security: #已修复的安全问题
-  -
+  - 修改了一个功能
+deprecated: #已弃用的功能
+  - 丢弃了一个功能
+removed: #已移除的功能
+  - 移除了一个功能
+fixed: #已修复的bug
+  - 修复了一个bug
+security: #已修复的安全问题
+  - 修复了一个安全问题
+  - 修复了另一个安全问题
 others: #其他的内容
-  -
+  - | 
+    hi
+    我是多行内容
+    你好
