@@ -35,11 +35,6 @@ jobs:
         run: |
           node ${{ github.workspace }}/.github/workflows/scripts/check_changelog.js
       # 其他预处理以后要用的时候在上方添加
-      - name: 保存当前工作区
-        uses: actions/upload-artifact@v2
-        with:
-          name: workspace_before
-          path: .
 
       - name: 为网站构建
         run: npm run build:website
@@ -70,11 +65,10 @@ jobs:
           gitee-password: ${{secrets.GITEE_PASSWORD}}
           gitee-repo: nuitka-commander/nuitka-commander
           gitee-branch: master
-      - name: 重置工作区
-        uses: actions/download-artifact@v2
-        with:
-          name: workspace_before
-          path: .
+      - name: 删除dist文件夹
+        run: |
+          cd ${{ github.workspace }}
+          rm -rf ./dist
       # 这可以做一些其他特殊的所需处理
       - name: 为本地运行构建
         run: |
