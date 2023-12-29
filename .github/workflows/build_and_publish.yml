@@ -26,7 +26,7 @@ jobs:
             ${{ runner.os }}-npm-
       - name: 安装依赖
         if: steps.npm-cache.outputs.cache-hit != 'true'
-        run: npm ci
+        run: npm install
 
       - name: 更新制作人员列表
         run: node ${{ github.workspace }}/.github/workflows/scripts/update_authors.js
