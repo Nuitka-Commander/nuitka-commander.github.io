@@ -52,11 +52,13 @@ fs.readFile(constants_path, "utf8", (err, file_data) => {
 
     // 尝试生成更新日志。如果失败，格式不正确
     let opt = `# ${change_log["version"]}  \n\n` + `## 更新内容 Update Content  \n\n`;
+    let tot = 0;
     for (const [key, value] of Object.entries(change_log)) {
         if (key === "version") {
             continue;
         }
         if (value === [] || value === null) {
+            tot+=1;
             continue;
         }
         try {
@@ -67,6 +69,10 @@ fs.readFile(constants_path, "utf8", (err, file_data) => {
             console.log("更新日志格式不正确\n", e);
             process.exit(1);
         }
+    }
+    if (tot >= formatter.length) {
+        console.log("更新日志内容为空，请检查change_log.yaml中的内容");
+        process.exit(1);
     }
     console.log("更新日志格式正确，已处理完毕");
     //保存opt到./CHANGELOG.md
