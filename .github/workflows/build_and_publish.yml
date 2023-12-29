@@ -77,10 +77,10 @@ jobs:
       - name: 读取版本号
         id: read_version
         run: |
-          echo "::set-output name=version::$(cat ${{ github.workspace }}/.github/workflows/scripts/version)"
+          echo "VERSION=$(cat ${{ github.workspace }}/.github/workflows/scripts/version)" >> $GITHUB_ENV
       - name: 为Github发布release
         run: |
-          gh release create ${{ steps.read_version.outputs.version }} ${{ github.workspace }}/dist/Nuitka-Commander.html -F ${{ github.workspace }}/.github/workflows/docs/change_log.md --latest -t ${{ steps.read_version.outputs.version }}
+          gh release create $VERSION ${{ github.workspace }}/dist/Nuitka-Commander.html -F ${{ github.workspace }}/.github/workflows/docs/change_log.md --latest -t "Release $VERSION"
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       # todo
