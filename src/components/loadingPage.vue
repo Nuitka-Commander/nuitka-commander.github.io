@@ -4,7 +4,7 @@
  * @Author: erduotong
  * @Date: 2023-11-26 10:33:25
  */
-import {is_loading} from "@/stores/is_loading.js";
+import {is_loading} from "@/vals/stores/is_loading.js";
 </script>
 <template>
   <!--怪方法 但是好用-->

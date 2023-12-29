@@ -5,18 +5,18 @@
  * @Date: 2023-12-03 22:40:21
  */
 import SettingPage from "@/components/SettingPage.vue";
-import {user_options} from "@/stores/user_options.js";
+import {user_options} from "@/vals/stores/user_options.js";
 import supported_nuitka_version from "@/nuitka_config_files/supported_nuitka_version.js";
 import {load_new_config} from "@/modules/use_nuitka_config.js";
-import {command_status} from "@/stores/command_status.js";
-import {nuitka_element_type} from "@/stores/enums.js";
+import {use_command} from "@/modules/use_command.js";
+import {nuitka_element_type} from "@/vals/enums.js";
 </script>
 
 <template>
   <div id="nav_bar">
 
     <el-button
-        @click="command_status.status.value['basic'][nuitka_element_type.Bool]['some_content']['val']=!command_status.status.value['basic'][nuitka_element_type.Bool]['some_content']['val']">
+        @click="use_command.status.value['basic'][nuitka_element_type.Bool]['some_content']['val']=!use_command.status.value['basic'][nuitka_element_type.Bool]['some_content']['val']">
       test
     </el-button>
     <!--left-->

@@ -1,3 +1,8 @@
+/**
+ * @Description 更新制作人员信息
+ * @Author: erduotong
+ * @Date: 2023-12-25 23:35:41
+ */
 import fs from "fs";
 import path, {dirname} from "path";
 import fetch from "node-fetch";
@@ -8,7 +13,7 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const API_URL = "https://api.github.com/repositories/687001179/contributors";
 
 // Path to constants.json file
-const CONSTANTS_PATH = path.join(__dirname, "../../../src/stores/constants.json");
+const CONSTANTS_PATH = path.join(__dirname, "../../../src/vals/constants.json");
 
 // Fetch contributors from GitHub API
 fetch(API_URL)

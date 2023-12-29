@@ -14,15 +14,17 @@
     "@voerkai18n/runtime": "^2.0.29",
     "@vueuse/core": "^10.6.1",
     "axios": "^1.6.2",
-    "cheerio": "^1.0.0-rc.12",
     "element-plus": "^2.4.2",
+    "html-minifier-terser": "^7.2.0",
+    "js-yaml": "^4.1.0",
+    "jsdom": "^23.0.1",
     "localforage": "^1.10.0",
     "node-fetch": "^3.3.2",
     "scss-loader": "^0.0.1",
+    "vite-plugin-html": "^3.2.0",
     "vite-plugin-imagemin": "^0.6.1",
     "vue": "^3.3.4",
-    "vue-i18n": "^9.7.0",
-    "vue-i18n-loader": "^0.1.1"
+    "vue-i18n": "^9.7.0"
   },
   "devDependencies": {
     "@kazupon/vue-i18n-loader": "^0.5.0",
@@ -30,6 +32,7 @@
     "sass": "^1.69.5",
     "unplugin-auto-import": "^0.16.7",
     "unplugin-vue-components": "^0.25.2",
-    "vite": "^4.4.5"
+    "vite": "^5.0.10",
+    "vite-plugin-singlefile": "^0.13.5"
   }
 }

@@ -8,8 +8,8 @@ import localforage from "localforage";
 class LocalNuitkaVersionConfig {
     constructor() {
         this.localforage = localforage.createInstance({
-            name: "nuitka_version_config",
-            storeName: "nuitka_version_config",
+            name: "nuitka_commander_version_configs",
+            storeName: "nuitka_commander_version_config",
         });
     }
 

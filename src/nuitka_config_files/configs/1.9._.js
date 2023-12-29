@@ -3,7 +3,7 @@
  * @Author: erduotong
  * @Date: 2023-12-05 22:28:39
  */
-import {nuitka_templates} from "@/stores/templates.js";
+import {nuitka_templates} from "@/vals/templates.js";
 
 export default {
     basic: { //顶级元素

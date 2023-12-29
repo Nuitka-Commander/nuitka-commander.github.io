@@ -1,5 +1,5 @@
 <script setup>
-import constants from "@/stores/constants.json";
+import constants from "@/vals/constants.json";
 import {ref} from "vue";
 // 作者信息是否可见
 const author_info_visible = ref(false);
