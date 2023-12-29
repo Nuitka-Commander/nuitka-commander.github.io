@@ -80,13 +80,12 @@ jobs:
           echo "::set-output name=version::$(cat ${{ github.workspace }}/.github/workflows/scripts/version)"
       - name: 为Github发布release
         run: |
-          run: |
-           gh release create \
-           ${{ steps.read_version.outputs.version }} \
-           ${{ github.workspace }}/dist/Nuitka\ Commander.html \
-           -F ${{ github.workspace }}/.github/workflows/docs/change_log.md \
-           --latest \ 
-           -t ${{ steps.read_version.outputs.version }}
+          gh release create \
+          ${{ steps.read_version.outputs.version }} \
+          ${{ github.workspace }}/dist/Nuitka\ Commander.html \
+          -F ${{ github.workspace }}/.github/workflows/docs/change_log.md \
+          --latest \ 
+          -t ${{ steps.read_version.outputs.version }}
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       # todo
