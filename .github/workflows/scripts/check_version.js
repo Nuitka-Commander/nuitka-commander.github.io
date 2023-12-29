@@ -26,7 +26,7 @@ fetch(URL)
                     process.exit(1);
                 }
                 if (data["name"] === constants["version"]) {
-                    console.log(`当前版本号${data["name"]}与constants.json中的版本号${constants["version"]}一致\n请检查是否已更新版本号/误发布`);
+                    console.log(`当前latest版本号${data["name"]}与constants.json中的版本号${constants["version"]}一致\n请检查是否已更新版本号/误发布`);
                     process.exit(1);
                 }
                 //检查更新日志中的版本号
@@ -38,11 +38,11 @@ fetch(URL)
                     //加载yaml到json
                     const change_log = yaml.load(change_log_data.toString(), {json: true});
                     if (change_log["version"] === data["name"]) {
-                        console.log(`当前版本号${data["name"]}与change_log.yaml中的版本号${change_log["version"]}一致\n请检查是否已更新版本号/误发布`);
+                        console.log(`当前latest版本号${data["name"]}与change_log.yaml中的版本号${change_log["version"]}一致\n请检查是否已更新版本号/误发布`);
                         process.exit(1);
                     }
                     if (change_log["version"] !== constants["version"]) {
-                        console.log(`当前版本号${change_log["name"]}与constants.json中的版本号${constants["version"]}不一致\n请检查是否已更新版本号/误发布`);
+                        console.log(`当前changelog版本号${change_log["version"]}与constants.json中的版本号${constants["version"]}不一致\n请检查是否已更新版本号/误发布`);
                         process.exit(1);
                     }
                     if (change_log["version"] === "please_write_here") {
