@@ -42,17 +42,19 @@ fetch(URL)
                         process.exit(1);
                     }
                     if (change_log["version"] !== constants["version"]) {
-                        console.log(`当前版本号${data["name"]}与constants.json中的版本号${constants["version"]}不一致\n请检查是否已更新版本号/误发布`);
+                        console.log(`当前版本号${change_log["name"]}与constants.json中的版本号${constants["version"]}不一致\n请检查是否已更新版本号/误发布`);
                         process.exit(1);
                     }
                     if (change_log["version"] === "please_write_here") {
                         console.log("请在change_log.yaml中写入版本号");
                         process.exit(1);
                     }
+
                     fs.writeFileSync(path.join(__dirname, "./version"), change_log["version"]); //将版本号写入文件
+                    console.log("版本号检查通过"); //相安无事
+                    process.exit(0);
                 });
-                console.log("版本号检查通过"); //相安无事
-                process.exit(0);
+
             }
         });
     })
