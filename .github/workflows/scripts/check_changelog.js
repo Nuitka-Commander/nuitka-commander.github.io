@@ -13,6 +13,7 @@ const constants_path = path.join(__dirname, "../../../docs/change_log.yaml");
 
 // 通用的格式化函数
 const formatContent = (title, content) => {
+    let tot = 0;
     let result = `### ${title}  \n\n`;
     content.forEach((item) => {
         if (item === null || item === undefined || item === "") {
@@ -21,7 +22,11 @@ const formatContent = (title, content) => {
         item = item.toString();
         item = item.replace(/\n/g, "  \n");
         result += `* ${item}  \n`;
+        tot++;
     });
+    if (tot === 0) {
+        return "";
+    }
     return result;
 };
 
@@ -58,7 +63,7 @@ fs.readFile(constants_path, "utf8", (err, file_data) => {
             continue;
         }
         if (value === [] || value === null) {
-            tot+=1;
+            tot += 1;
             continue;
         }
         try {
