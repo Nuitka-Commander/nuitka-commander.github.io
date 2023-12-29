@@ -54,7 +54,7 @@ jobs:
 
       - name: 推送到Gitee
         run: |
-          git config --global user.name "erduotong"
+          git config --global user.name "github action"
           git config --global user.email "action_bot@github.com."
           git clone https://gitee.com/nuitka-commander/nuitka-commander.git
           cp -r ./dist/* ./nuitka-commander/
@@ -102,4 +102,10 @@ jobs:
       - name: ReCheckout
         uses: actions/checkout@v4
       - name: 重置更新日志
-        run: node ${{ github.workspace }}/.github/workflows/scripts/reset_changelog.js
+        run: |
+          node ${{ github.workspace }}/.github/workflows/scripts/reset_changelog.js
+          git config --global user.name "github action"
+          git config --global user.email "action_bot@github.com"
+          git add .
+          git commit -m "Reset changelog"
+          git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/Nuitka-Commander/nuitka-commander.github.io.git
