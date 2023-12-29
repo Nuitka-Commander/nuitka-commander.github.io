@@ -56,7 +56,7 @@ fs.readFile(constants_path, "utf8", (err, file_data) => {
     }
 
     // 尝试生成更新日志。如果失败，格式不正确
-    let opt = `# ${change_log["version"]}  \n\n` + `## 更新内容 Update Content  \n\n`;
+    let opt = `# v${change_log["version"]}  \n\n` + `## 更新内容 Update Content  \n\n`;
     let tot = 0;
     for (const [key, value] of Object.entries(change_log)) {
         if (key === "version") {

@@ -6,13 +6,14 @@ jobs:
   publish:
     name: 发布新版本
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 18
           cache: 'npm'
       - name: npm-cache
         uses: actions/cache@v2
@@ -64,7 +65,7 @@ jobs:
           gitee-username: ${{secrets.GITEE_USERNAME}}
           gitee-password: ${{secrets.GITEE_PASSWORD}}
           gitee-repo: nuitka-commander/nuitka-commander
-          gitee-branch: master
+          branch: master
       - name: 删除dist文件夹
         run: |
           cd ${{ github.workspace }}
