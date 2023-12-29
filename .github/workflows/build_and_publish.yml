@@ -95,3 +95,11 @@ jobs:
            -t ${{ steps.read_version.outputs.version }}
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      # todo
+      - name: 为Gitee发布release
+        run: echo todo
+      # 重置更新日志并发布邮件提醒
+      - name: ReCheckout
+        uses: actions/checkout@v4
+      - name: 重置更新日志
+        run: node ${{ github.workspace }}/.github/workflows/scripts/reset_changelog.js

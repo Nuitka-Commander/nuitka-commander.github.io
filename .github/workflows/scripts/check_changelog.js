@@ -11,71 +11,29 @@ import * as yaml from "js-yaml";
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const constants_path = path.join(__dirname, "../../../docs/change_log.yaml");
 
+// 通用的格式化函数
+const formatContent = (title, content) => {
+    let result = `### ${title}  \n\n`;
+    content.forEach((item) => {
+        if (item === null || item === undefined || item === "") {
+            return;
+        }
+        item = item.toString();
+        item = item.replace(/\n/g, "  \n");
+        result += `* ${item}  \n`;
+    });
+    return result;
+};
+
 // 用于格式化更新日志内容的对象
 const formatter = {
-    // 格式化 'added' 内容
-    added: (content) => {
-        let result = "### ✨ 新增 Added  \n\n";
-        content.forEach((item) => {
-            item = item.replace(/\n/g, "  \n");
-            result += `* ${item}  \n`;
-        });
-        return result;
-    },
-    // 格式化 'changed' 内容
-    changed: (content) => {
-        let result = `### 🔧 更改 Changed  \n\n`;
-        content.forEach((item) => {
-            item = item.replace(/\n/g, "  \n");
-            result += `* ${item}  \n`;
-        });
-        return result;
-    },
-    // 格式化 'deprecated' 内容
-    deprecated: (content) => {
-        let result = `### 🚨 弃用 Deprecated  \n\n`;
-        content.forEach((item) => {
-            item = item.replace(/\n/g, "  \n");
-            result += `* ${item}  \n`;
-        });
-        return result;
-    },
-    // 格式化 'removed' 内容
-    removed: (content) => {
-        let result = `### 🗑️ 删除 Removed  \n\n`;
-        content.forEach((item) => {
-            item = item.replace(/\n/g, "  \n");
-            result += `* ${item}  \n`;
-        });
-        return result;
-    },
-    // 格式化 'fixed' 内容
-    fixed: (content) => {
-        let result = `### 🐛 修复 Fixed  \n\n`;
-        content.forEach((item) => {
-            item = item.replace(/\n/g, "  \n");
-            result += `* ${item}  \n`;
-        });
-        return result;
-    },
-    // 格式化 'security' 内容
-    security: (content) => {
-        let result = `### 🔒 安全 Security  \n\n`;
-        content.forEach((item) => {
-            item = item.replace(/\n/g, "  \n");
-            result += `* ${item}  \n`;
-        });
-        return result;
-    },
-    // 格式化 'others' 内容
-    others: (content) => {
-        let result = `### 📦 其他 Others  \n\n`;
-        content.forEach((item) => {
-            item = item.replace(/\n/g, "  \n");
-            result += `* ${item}  \n`;
-        });
-        return result;
-    },
+    added: (content) => formatContent("✨ 新增 Added", content),
+    changed: (content) => formatContent("🔧 更改 Changed", content),
+    deprecated: (content) => formatContent("🚨 弃用 Deprecated", content),
+    removed: (content) => formatContent("🗑️ 删除 Removed", content),
+    fixed: (content) => formatContent("🐛 修复 Fixed", content),
+    security: (content) => formatContent("🔒 安全 Security", content),
+    others: (content) => formatContent("📦 其他 Others", content),
 };
 
 // 读取更新日志文件
@@ -104,7 +62,7 @@ fs.readFile(constants_path, "utf8", (err, file_data) => {
         try {
             const content = formatter[key](value);
             // 为内容添加缩进
-           opt += content
+            opt += content;
         } catch (e) {
             console.log("更新日志格式不正确\n", e);
             process.exit(1);
