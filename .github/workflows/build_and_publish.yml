@@ -80,7 +80,7 @@ jobs:
           echo "VERSION=$(cat ${{ github.workspace }}/.github/workflows/scripts/version)" >> $GITHUB_ENV
       - name: 为Github发布release
         run: |
-          gh release create $VERSION ${{ github.workspace }}/dist/Nuitka-Commander.html -F ${{ github.workspace }}/.github/workflows/docs/change_log.md --latest -t "Release $VERSION"
+          gh release create $VERSION ${{ github.workspace }}/dist/Nuitka-Commander.html -F ${{ github.workspace }}/.github/workflows/scripts/CHANGELOG.md --latest -t "Release $VERSION"
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       # todo
