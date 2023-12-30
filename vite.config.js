@@ -23,7 +23,11 @@ const finally_process = () => {
             const html = readFileSync(indexPath, "utf-8");
             const dom = new JSDOM(html);
             const document = dom.window.document;
-
+            // Remove all meta tags with name="description"
+            const metaTags = document.querySelectorAll("meta[name=\"description\"]");
+            metaTags.forEach(tag => {
+                tag.parentNode.removeChild(tag);
+            });
             const links = document.querySelectorAll("link[href$='.svg']");
             links.forEach((link) => {
                 let href = link.getAttribute("href");
@@ -101,7 +105,7 @@ export default ({mode}) => {
                 },
             },
             build: {
-                assetsInlineLimit: 32768,
+                assetsInlineLimit: Number.MAX_SAFE_INTEGER,
                 rollupOptions: {
                     output: {
                         // 入口文件名
