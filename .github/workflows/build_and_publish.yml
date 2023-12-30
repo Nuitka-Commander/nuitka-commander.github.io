@@ -70,6 +70,8 @@ jobs:
         run: |
           cd ${{ github.workspace }}
           rm -rf ./dist
+          rm -rf ./nuitka-commander
+          ls
       # 这可以做一些其他特殊的所需处理
       - name: 为本地运行构建
         run: |
