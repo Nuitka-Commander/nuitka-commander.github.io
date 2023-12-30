@@ -91,7 +91,10 @@ class CommandStatus {
                 //todo 加载配置
             }
             //清空监听函数
-            this.watch_functions.forEach(stop_watcher => stop_watcher());
+
+            if (this.watch_functions.length > 0) {
+                this.watch_functions.forEach(stop_watcher => stop_watcher());
+            }
             this.watch_functions = [];
 
             this.status.value = this.original_status;
