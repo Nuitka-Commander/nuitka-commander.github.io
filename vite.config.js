@@ -73,6 +73,9 @@ export default ({mode}) => {
     if (mode === "local_use") {
         //打包成本地可以直接运行的html
         return {
+            server: {
+                port: 3000,
+            },
             base: "./",
             plugins: [...plugin_array,
                       viteSingleFile(),
@@ -113,6 +116,9 @@ export default ({mode}) => {
 
     } else { //正常为网站构建
         return {
+            server: {
+                port: 3000,
+            },
             plugins: [...plugin_array],
             resolve: {
                 alias: {
