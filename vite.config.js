@@ -105,7 +105,7 @@ export default ({mode}) => {
                 },
             },
             build: {
-                assetsInlineLimit: 32768,
+                assetsInlineLimit: Number.MAX_SAFE_INTEGER,
                 rollupOptions: {
                     output: {
                         // 入口文件名
