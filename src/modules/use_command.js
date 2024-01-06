@@ -25,12 +25,7 @@ const watchers = {
 
     [nuitka_element_type.Bool]: (path, cite) => {
         return watch(cite, (new_value, old_value) => {
-            //todo 生成命令
-//old_value和new_value是引用
-            //todo old val 和 new val的值相同
-            console.log(`监听到 ${path} 的变化 `);
-            console.log(old_value);
-            console.log(new_value);
+            //todo 创建多个监听函数返回
         });
     },
 };
@@ -53,7 +48,7 @@ class CommandStatus {
      * @Description 更新原始配置
      * @param config {Object}
      */
-    update_config(config) {
+    async update_config(config) {
         let global_id = 0;
         // 预处理
         Object.keys(config).forEach((top_key) => {
@@ -83,38 +78,40 @@ class CommandStatus {
             });
         });
 
-        //转换异步继续操作
-        local_nuitka_version_config.read_config(user_options.value.nuitka_version, (result) => {
-            console.log(result);
+        //获取已有配置
+        const local_config = await new Promise((resolve) => {
+            local_nuitka_version_config.read_config(user_options.value.nuitka_version, (result) => {
+                resolve(result);
+            });
+        });
+        console.log(local_config);
 
-            if (result !== null) {
-                //todo 加载配置
-            }
-            //清空监听函数
+        if (local_config !== null) {
+            //todo 加载配置
+        }
+        //清空监听函数
 
-            if (this.watch_functions.length > 0) {
-                this.watch_functions.forEach(stop_watcher => stop_watcher());
-            }
-            this.watch_functions = [];
+        if (this.watch_functions.length > 0) {
+            this.watch_functions.forEach(stop_watcher => stop_watcher());
+        }
+        this.watch_functions = [];
 
-            this.status.value = this.original_status;
+        this.status.value = this.original_status;
 
-            console.log(this.status.value);
-            //todo 重新绑定监听更新函数
-            //三层遍历 记得存Key value
-            Object.keys(this.status.value).forEach((key_1) => {
-                const value_1 = this.status.value[key_1];
-                Object.keys(value_1).forEach((key_2) => {
-                    const value_2 = value_1[key_2];
-                    Object.keys(value_2).forEach((key_3) => {
-                        const value_3 = value_2[key_3];
-                        const stop_watcher = watchers[key_2](value_3.path, value_3);
-                        this.watch_functions.push(stop_watcher); //添加到监听函数数组
-                        console.log(`已监听 ${key_1}.${key_2}.${key_3}`);
-                    });
+        console.log(this.status.value);
+        //todo 重新绑定监听更新函数
+        //三层遍历 记得存Key value
+        Object.keys(this.status.value).forEach((key_1) => {
+            const value_1 = this.status.value[key_1];
+            Object.keys(value_1).forEach((key_2) => {
+                const value_2 = value_1[key_2];
+                Object.keys(value_2).forEach((key_3) => {
+                    const value_3 = value_2[key_3];
+                    const stop_watchers = watchers[key_2](value_3.path, value_3);
+                    this.watch_functions.push(...stop_watchers);
+                    console.log(`已监听 ${key_1}.${key_2}.${key_3}`);
                 });
             });
-
         });
 
     }

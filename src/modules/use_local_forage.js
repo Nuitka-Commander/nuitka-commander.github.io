@@ -29,7 +29,7 @@ class LocalNuitkaVersionConfig {
      * @param callback {Function} 回调函数
      */
     read_config(version, callback) {
-        this.localforage.getItem(version).then(callback);
+       this.localforage.getItem(version).then(callback);
     }
 
     /**
