@@ -24,9 +24,12 @@ const handlers = {
 const watchers = {
 
     [nuitka_element_type.Bool]: (path, cite) => {
-        return watch(cite, (new_value, old_value) => {
-            //todo 创建多个监听函数返回
-        });
+        return [
+            watch(() => cite.val, (newValue) => {
+                console.log(newValue);
+                console.log("↑has been changed");
+            }),
+        ];
     },
 };
 
@@ -50,62 +53,58 @@ class CommandStatus {
      */
     async update_config(config) {
         let global_id = 0;
-        // 预处理
-        Object.keys(config).forEach((top_key) => {
+
+        // 预处理配置
+        Object.keys(config).forEach(top_key => {
             const top_value = config[top_key];
-            Object.keys(top_value).forEach((second_key) => {
+            Object.keys(top_value).forEach(second_key => {
                 const second_value = top_value[second_key];
-                //id处理
+
+                // 处理 id 和默认值
                 second_value.id = second_value.id || global_id++;
-                // 值处理
                 if (second_value.default === undefined) {
                     console.warn(`配置文件中 ${top_key}.${second_key} 的default值未定义`);
                 } else {
                     second_value.val = second_value.default;
                 }
-                //根据类型处理
+
+                // 根据类型处理
                 handlers[second_value.type]?.();
+
+                // 添加到原始配置中
                 this.original_status[top_key] = this.original_status[top_key] || {};
                 this.original_status[top_key][second_value.type] = this.original_status[top_key][second_value.type] || {};
-                //添加到原始配置中
                 this.original_status[top_key][second_value.type][second_key] = {
                     ...second_value,
                     path: [top_key, second_value.type, second_key],
                 };
-                //删掉type
-                delete second_value.type;
 
+                // 删除 type
+                delete second_value.type;
             });
         });
 
-        //获取已有配置
-        const local_config = await new Promise((resolve) => {
-            local_nuitka_version_config.read_config(user_options.value.nuitka_version, (result) => {
-                resolve(result);
-            });
+        // 获取已有配置
+        const local_config = await new Promise(resolve => {
+            local_nuitka_version_config.read_config(user_options.value.nuitka_version, resolve);
         });
         console.log(local_config);
 
-        if (local_config !== null) {
-            //todo 加载配置
-        }
-        //清空监听函数
+        // TODO: 加载配置
 
-        if (this.watch_functions.length > 0) {
-            this.watch_functions.forEach(stop_watcher => stop_watcher());
-        }
+        // 清空监听函数
+        this.watch_functions.forEach(stop_watcher => stop_watcher());
         this.watch_functions = [];
 
         this.status.value = this.original_status;
-
         console.log(this.status.value);
-        //todo 重新绑定监听更新函数
-        //三层遍历 记得存Key value
-        Object.keys(this.status.value).forEach((key_1) => {
+
+        // 重新绑定监听更新函数
+        Object.keys(this.status.value).forEach(key_1 => {
             const value_1 = this.status.value[key_1];
-            Object.keys(value_1).forEach((key_2) => {
+            Object.keys(value_1).forEach(key_2 => {
                 const value_2 = value_1[key_2];
-                Object.keys(value_2).forEach((key_3) => {
+                Object.keys(value_2).forEach(key_3 => {
                     const value_3 = value_2[key_3];
                     const stop_watchers = watchers[key_2](value_3.path, value_3);
                     this.watch_functions.push(...stop_watchers);
@@ -114,6 +113,7 @@ class CommandStatus {
             });
         });
 
+        this.status.value.basic[nuitka_element_type.Bool].some_content.val = true;
     }
 }
 
