@@ -24,12 +24,17 @@ const handlers = {
 const watchers = {
 
     [nuitka_element_type.Bool]: (path, cite) => {
-        return [
+        const return_functions = [
+            //监听值变化
             watch(() => cite.val, (newValue) => {
                 console.log(newValue);
                 console.log("↑has been changed");
             }),
         ];
+        if (Object.keys(cite.depend).length !== 0) {//如果需要处理依赖项
+            
+        }
+        return return_functions;
     },
 };
 
@@ -52,7 +57,7 @@ class CommandStatus {
      * @param config {Object}
      */
     async update_config(config) {
-        let global_id = 0;
+
 
         // 预处理配置
         Object.keys(config).forEach(top_key => {
@@ -60,8 +65,7 @@ class CommandStatus {
             Object.keys(top_value).forEach(second_key => {
                 const second_value = top_value[second_key];
 
-                // 处理 id 和默认值
-                second_value.id = second_value.id || global_id++;
+                // 检查是否有默认值
                 if (second_value.default === undefined) {
                     console.warn(`配置文件中 ${top_key}.${second_key} 的default值未定义`);
                 } else {
