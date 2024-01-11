@@ -3,19 +3,77 @@ import LoadingPage from "@/components/loadingPage.vue";
 import WebsiteHeader from "@/components/websiteHeader.vue";
 import WebsiteFooter from "@/components/websiteFooter.vue";
 import NavBar from "@/components/navBar.vue";
+import {Edit, Share, Upload} from "@element-plus/icons-vue";
 </script>
 
 <template>
 
-  <loading-page></loading-page>   <!--先把加载页面挂上-->
-  <website-header></website-header>  <!--头-->
-  <nav-bar></nav-bar>  <!--导航栏-->
-  <website-footer></website-footer>  <!--网页底部-->
+  <loading-page></loading-page>
+  <header>
+    <website-header></website-header>
+  </header>
+
+  <nav>
+    <nav-bar></nav-bar>
+  </nav>
+
+
+  <main>
+    <el-tabs stretch tab-position="right">
+      <el-tab-pane>
+        <template #default>
+          <el-link type="primary">just click</el-link>
+        </template>
+        <template #label>
+          <el-icon size="25" style="margin-right: 10px">
+            <edit></edit>
+          </el-icon>
+          {{ $t("tabs.edit") }}
+        </template>
+      </el-tab-pane>
+
+      <el-tab-pane>
+        <template #default>
+
+        </template>
+        <template #label>
+          <el-icon size="25" style="margin-right: 10px">
+            <share></share>
+          </el-icon>
+          {{ $t(`tabs.output`) }}
+        </template>
+      </el-tab-pane>
+
+      <el-tab-pane>
+        <template #default>
+
+        </template>
+        <template #label>
+          <el-icon size="25" style="margin-right: 10px">
+            <upload></upload>
+          </el-icon>
+          {{ $t(`tabs.input`) }}
+        </template>
+
+      </el-tab-pane>
+    </el-tabs>
+  </main>
+
+  <!---->
+  <footer>
+    <website-footer></website-footer>
+  </footer>
+
 
 </template>
 
 
 <style lang="scss" scoped>
+main {
+  margin-top: 20px;
+  margin-right: 20px;
+  margin-left: 20px;
 
+}
 
 </style>

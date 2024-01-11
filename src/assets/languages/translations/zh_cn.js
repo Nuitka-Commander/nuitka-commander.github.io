@@ -48,6 +48,13 @@ export default {
         select_nuitka_version: "选择您使用的Nuitka的版本",
 
     },
+    tabs: {
+        edit: "编辑",
+        output: "输出",
+        input: "输入",
+
+
+    },
 
 
 };
