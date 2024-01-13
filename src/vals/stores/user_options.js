@@ -7,6 +7,7 @@ import {ref, watch} from "vue";
 import {read_local_storage, save_local_storage} from "@/modules/local_storage.js";
 import supported_nuitka_version from "@/nuitka_config_files/supported_nuitka_version.js";
 
+const localstorage_name = "_Nuitka_Commander_user_options";
 /**
  * 响应式的用户设置
  */
@@ -15,13 +16,15 @@ export const user_options = ref({
     language: "undefined",
     is_full_mode: true,
     nuitka_version: supported_nuitka_version.versions[supported_nuitka_version.latest_key], //获取最新版
+    show_original_command: false,
+    action_tab: "edit",
 });
 
 /**
  * 监听用户设置的变化 并保存到localStorage
  */
 watch(user_options, () => {
-    save_local_storage("_Nuitka_Commander_user_options", JSON.stringify(user_options.value));
+    save_local_storage(localstorage_name, JSON.stringify(user_options.value));
 }, {deep: true});
 
 /**
@@ -29,15 +32,19 @@ watch(user_options, () => {
  */
 export function init_user_options() {
 
-    const r = JSON.parse(read_local_storage("user_options"));
+    const r = JSON.parse(read_local_storage(localstorage_name));
     if (r === null || r === undefined) {
-        save_local_storage("user_options", JSON.stringify(user_options.value));
+        save_local_storage(localstorage_name, JSON.stringify(user_options.value));
         return;
     }
+
     for (let key in user_options.value) {
+
         if (r[key] !== undefined) {
             user_options.value[key] = r[key];
+
         }
     }
+
 }
 

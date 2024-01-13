@@ -43,11 +43,20 @@ export default {
                 l2: "简单模式:显示Nuitka常用选项",
                 l3: "复杂模式:显示完整的可用选项",
             },
+            show_raw_command: "显示原命令",
+            no_show_raw_command: "隐藏原命令",
+            show_raw_command_info: "是否在命令设置中显示原始命令",
         },
         now_nuitka_version: "当前选择的Nuitka版本:",
         select_nuitka_version: "选择您使用的Nuitka的版本",
 
     },
+    tabs: {
+        edit: "编辑",
+        output: "输出",
+        input: "输入",
+    },
+
 
 
 };
