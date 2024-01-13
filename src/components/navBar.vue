@@ -22,7 +22,6 @@ import {load_new_config} from "@/modules/use_nuitka_config.js";
             v-model="user_options.is_full_mode"
             :active-text="$t('nav_bar.mode.full_mode')"
             :inactive-text="$t('nav_bar.mode.easy_mode')"
-            size="large"
         ></el-switch>
         <template #content>
           {{ $t("nav_bar.mode.info.l1") }} <br>
@@ -30,7 +29,16 @@ import {load_new_config} from "@/modules/use_nuitka_config.js";
           {{ $t("nav_bar.mode.info.l3") }}
         </template>
       </el-tooltip>
-
+      <el-tooltip>
+        <el-switch
+            v-model="user_options.show_original_command"
+            :active-text="$t('nav_bar.mode.show_raw_command')"
+            :inactive-text="$t('nav_bar.mode.no_show_raw_command')"
+        ></el-switch>
+        <template #content>
+          {{ $t("nav_bar.mode.show_raw_command_info") }}
+        </template>
+      </el-tooltip>
       <el-select
           v-model="user_options.nuitka_version"
           filterable

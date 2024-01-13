@@ -4,6 +4,8 @@ import WebsiteHeader from "@/components/websiteHeader.vue";
 import WebsiteFooter from "@/components/websiteFooter.vue";
 import NavBar from "@/components/navBar.vue";
 import {Edit, Share, Upload} from "@element-plus/icons-vue";
+import CommandEdit from "@/components/commandEdit.vue";
+import {user_options} from "@/vals/stores/user_options.js";
 </script>
 
 <template>
@@ -19,20 +21,11 @@ import {Edit, Share, Upload} from "@element-plus/icons-vue";
 
 
   <main>
-    <el-tabs stretch tab-position="right">
-      <el-tab-pane>
-        <template #default>
-          <el-link type="primary">just click</el-link>
-        </template>
-        <template #label>
-          <el-icon size="25" style="margin-right: 10px">
-            <edit></edit>
-          </el-icon>
-          {{ $t("tabs.edit") }}
-        </template>
-      </el-tab-pane>
 
-      <el-tab-pane>
+    <el-tabs stretch tab-position="right" v-model="user_options.action_tab">
+
+
+      <el-tab-pane name="output">
         <template #default>
 
         </template>
@@ -44,7 +37,7 @@ import {Edit, Share, Upload} from "@element-plus/icons-vue";
         </template>
       </el-tab-pane>
 
-      <el-tab-pane>
+      <el-tab-pane name="input">
         <template #default>
 
         </template>
@@ -56,7 +49,21 @@ import {Edit, Share, Upload} from "@element-plus/icons-vue";
         </template>
 
       </el-tab-pane>
+      <el-tab-pane name="edit">
+        <template #default>
+          <command-edit></command-edit>
+        </template>
+        <template #label>
+          <el-icon size="25" style="margin-right: 10px">
+            <edit></edit>
+          </el-icon>
+          {{ $t("tabs.edit") }}
+        </template>
+
+      </el-tab-pane>
+
     </el-tabs>
+
   </main>
 
   <!---->

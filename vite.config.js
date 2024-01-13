@@ -116,6 +116,11 @@ export default ({mode}) => {
                 },
 
             },
+            esbuild: {
+                pure: ["console.log", "console.debug"]
+                ,
+                drop: ["debugger"],
+            },
         };
 
     } else { //正常为网站构建
@@ -138,6 +143,11 @@ export default ({mode}) => {
                         assetFileNames: `assets/[name]-[hash].${timestamp}.[ext]`,
                     },
                 },
+            },
+            esbuild: {
+                pure: ["console.log", "console.debug"]
+                ,
+                drop: ["debugger"],
             },
         };
     }
