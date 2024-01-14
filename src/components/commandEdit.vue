@@ -6,6 +6,7 @@
  */
 import {use_command} from "@/modules/use_command.js";
 import {nuitka_element_type} from "@/vals/enums.js";
+import BoolOption from "@/components/nuitka_elements/boolOption.vue";
 
 const command = use_command;
 
@@ -24,8 +25,8 @@ const command = use_command;
           </template>
           <template #default>
 
-            <template v-for="(value2,key2) in value1[nuitka_element_type.Bool]">
-              {{ key2 }}<br>{{ value2 }}
+            <template v-for="value2 in value1[nuitka_element_type.Bool]">
+              <bool-option :content="value2"></bool-option>
             </template>
           </template>
         </el-tab-pane>
