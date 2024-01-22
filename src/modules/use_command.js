@@ -39,6 +39,9 @@ class CommandStatus {
 
         // 预处理配置 转换成事宜遍历的形式
         Object.keys(config).forEach(top_key => {
+            if (top_key === "support_language") {
+                return; //跳过循环 不进行处理
+            }
             const top_value = config[top_key];
             Object.keys(top_value).forEach(second_key => {
                 const second_value = top_value[second_key];

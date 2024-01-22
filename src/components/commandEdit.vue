@@ -21,7 +21,7 @@ const command = use_command;
         <el-tab-pane>
           <template #label>
             {{ key1 }}
-            <!--  todo 翻译如何解决-->
+
           </template>
           <template #default>
 
@@ -37,6 +37,6 @@ const command = use_command;
   </div>
 </template>
 
-<style scoped lang="scss">
+<style lang="scss" scoped>
 
 </style>

@@ -7,7 +7,6 @@ import {ref} from "vue";
 
 /**
  * 加载页面是否开启
- * @type {ref<boolean>}
  */
 export const is_loading = ref(false);
 

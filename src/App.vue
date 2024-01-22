@@ -22,7 +22,7 @@ import {user_options} from "@/vals/stores/user_options.js";
 
   <main>
 
-    <el-tabs stretch tab-position="right" v-model="user_options.action_tab">
+    <el-tabs v-model="user_options.action_tab" stretch tab-position="right">
 
 
       <el-tab-pane name="output">

@@ -7,6 +7,7 @@ import {createI18n} from "vue-i18n";
 import {user_options} from "@/vals/stores/user_options.js";
 import {supported_i18n} from "@/assets/languages/supported_i18n.js";
 import {set_loading} from "@/vals/stores/is_loading.js";
+import {load_config_language} from "@/modules/use_nuitka_config.js";
 
 /**
  * @Description 是否语言加载完成
@@ -72,31 +73,32 @@ export function set_i18n_language(locale) {
         return;//语言相同的时候不加载
     }
     document.querySelector("html").setAttribute("lang", locale);
-    load_locale_messages(locale);
+    load_locale_messages(locale).catch(r => {
+        console.error(`Failed to load language file: \n${r}`);
+    });
 }
 
 /**
  * @Description 加载语言文件并设置为当前语言 删除旧的语言文件释放内存
  * @param locale 要加载的语言 需在supported_i18n中存在
  */
-function load_locale_messages(locale) {
+async function load_locale_messages(locale) {
+
     const path = supported_i18n[locale].path_name;
     set_loading(true);
-    import(
-        `@/assets/languages/translations/${path}.js`
-        ).then((messages) => {
-        set_loading(false);
-        const old_locale = i18n.global.locale.value;
-        i18n.global.locale.value = locale;  //设置新的值
-        user_options.value.language = locale;  //保存到用户设置
-        i18n.global.setLocaleMessage(locale, messages.default);
-        if (old_locale !== undefined) {      //删除旧的语言文件
-            i18n.global.setLocaleMessage(old_locale, null);
-        }
+    const messages = await import(`@/assets/languages/translations/${path}.js`);
+    set_loading(false);
+    const old_locale = i18n.global.locale.value;
+    i18n.global.locale.value = locale;  //设置新的值
+    user_options.value.language = locale;  //保存到用户设置
+    i18n.global.setLocaleMessage(locale, messages.default);
+    if (old_locale !== undefined) {      //删除旧的语言文件
+        i18n.global.setLocaleMessage(old_locale, null);
+    }
+    if (is_language_load) {
+        await load_config_language(locale);
+    } else {
         is_language_load = true;
-    }).catch((e) => {
-        throw new Error(`i18n: load locale messages failed: ${e}`);
-    });
-
+    }
 
 }
