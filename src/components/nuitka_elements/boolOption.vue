@@ -6,8 +6,11 @@
  */
 //传入的props
 const props = defineProps({
-  content: Object,
+  content:Object
+
 });
+//将content解包
+
 </script>
 
 <template>
@@ -15,7 +18,7 @@ const props = defineProps({
     <el-tooltip>
       <template #content> {{ content["show"]["desc_i18n"] }}</template>
       <el-card>
-        {{ content["show"]["command_i18n"] }}
+        {{ $t(`nuitka_info.${content["show"]["command_i18n"]}`) }}
         <el-switch v-model="content['val']"></el-switch>
       </el-card>
 

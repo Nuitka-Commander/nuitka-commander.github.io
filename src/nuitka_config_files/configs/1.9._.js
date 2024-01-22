@@ -11,7 +11,7 @@ export default {
             ...nuitka_templates.Bool, //继承模板
             show: {
                 command: "some_content command",//命令描述 可用于生成 在非默认值时显示
-                command_i18n: "some_content i18n", //国际化命令描述 自动拼接
+                command_i18n: "i18n", //国际化命令描述 自动拼接
                 desc_i18n: "some_content desc", //国际化介绍 自动拼接
             },
         },
