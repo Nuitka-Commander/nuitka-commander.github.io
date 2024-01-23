@@ -20,14 +20,19 @@ const command = use_command;
         <!--做出分页-->
         <el-tab-pane>
           <template #label>
-            {{ key1 }}
+            <el-text>
+              {{ key1 }}
+            </el-text>
+
 
           </template>
           <template #default>
 
-            <template v-for="value2 in value1[nuitka_element_type.Bool]">
-              <bool-option :content="value2"></bool-option>
-            </template>
+            <div class="edit_content_area">
+              <template v-for="value2 in value1[nuitka_element_type.Bool]">
+                <bool-option :content="value2"></bool-option>
+              </template>
+            </div>
           </template>
         </el-tab-pane>
       </template>
@@ -38,5 +43,14 @@ const command = use_command;
 </template>
 
 <style lang="scss" scoped>
+.edit_content_area {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: center;
 
+
+}
 </style>

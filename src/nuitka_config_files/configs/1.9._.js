@@ -11,8 +11,104 @@ export default {
             ...nuitka_templates.Bool, //继承模板
             show: {
                 command: "some_content command",//命令描述 可用于生成 在非默认值时显示
-                command_i18n: "i18n", //国际化命令描述 自动拼接
-                desc_i18n: "some_content desc", //国际化介绍 自动拼接
+                i18n: "content0",
+            },
+        },
+        some_content1: {//二级元素
+            ...nuitka_templates.Bool, //继承模板
+            show: {
+                command: "some_content command",//命令描述 可用于生成 在非默认值时显示
+                i18n: "content0",
+            },
+        },
+        some_conten2t: {//二级元素
+            ...nuitka_templates.Bool, //继承模板
+            show: {
+                command: "some_content command",//命令描述 可用于生成 在非默认值时显示
+                i18n: "content0",
+            },
+        },
+        some_con3tent: {//二级元素
+            ...nuitka_templates.Bool, //继承模板
+            show: {
+                command: "some_content command",//命令描述 可用于生成 在非默认值时显示
+                i18n: "content0",
+            },
+        },
+        some_co4n3tent: {//二级元素
+            ...nuitka_templates.Bool, //继承模板
+            show: {
+                command: "some_content command",//命令描述 可用于生成 在非默认值时显示
+                i18n: "content0",
+            },
+        },
+        some4_con3tent: {//二级元素
+            ...nuitka_templates.Bool, //继承模板
+            show: {
+                command: "some_content command",//命令描述 可用于生成 在非默认值时显示
+                i18n: "content0",
+            },
+
+        },
+        some_co1n3tent: {//二级元素
+            ...nuitka_templates.Bool, //继承模板
+            show: {
+                command: "some_content command",//命令描述 可用于生成 在非默认值时显示
+                i18n: "content0",
+            },
+        },some_co1n3t1ent: {//二级元素
+            ...nuitka_templates.Bool, //继承模板
+            show: {
+                command: "some_content command",//命令描述 可用于生成 在非默认值时显示
+                i18n: "content0",
+            },
+        },some_c2o1n3tent: {//二级元素
+            ...nuitka_templates.Bool, //继承模板
+            show: {
+                command: "some_content command",//命令描述 可用于生成 在非默认值时显示
+                i18n: "content0",
+            },
+        },some_3co1n3tent: {//二级元素
+            ...nuitka_templates.Bool, //继承模板
+            show: {
+                command: "some_content command",//命令描述 可用于生成 在非默认值时显示
+                i18n: "content0",
+            },
+        },some_5co1n3tent: {//二级元素
+            ...nuitka_templates.Bool, //继承模板
+            show: {
+                command: "some_content command",//命令描述 可用于生成 在非默认值时显示
+                i18n: "content0",
+            },
+        },
+    },
+    basi2c: { //顶级元素
+        some_content: {//二级元素
+            ...nuitka_templates.Bool, //继承模板
+            show: {
+                command: "some_content command",//命令描述 可用于生成 在非默认值时显示
+                i18n: "content0",
+            },
+        },
+        some_content1: {//二级元素
+            ...nuitka_templates.Bool, //继承模板
+            show: {
+                command: "some_content command",//命令描述 可用于生成 在非默认值时显示
+                i18n: "content0",
+            },
+        },
+        some_conten2t: {//二级元素
+            ...nuitka_templates.Bool, //继承模板
+            show: {
+                command: "some_content command",//命令描述 可用于生成 在非默认值时显示
+                i18n: "content0",
+            },
+        },
+        some_con3tent: {//二级元素
+            ...nuitka_templates.Bool, //继承模板
+            show: {
+                command: "some_content command",//命令描述 可用于生成 在非默认值时显示
+                i18n: "content0",
             },
         },
     },
