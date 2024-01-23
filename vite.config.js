@@ -18,6 +18,7 @@ const finally_process = () => {
         enforce: "post",
 
         closeBundle() {
+            //注意Linux上会失效 需要单独一个网页头图片
             console.log("内联svg");
             const indexPath = resolve(__dirname, "dist", "index.html");
             const html = readFileSync(indexPath, "utf-8");
