@@ -7,6 +7,7 @@
 import {use_command} from "@/modules/use_command.js";
 import {nuitka_element_type} from "@/vals/enums.js";
 import BoolOption from "@/components/nuitka_elements/boolOption.vue";
+import SingleOption from "@/components/nuitka_elements/singleOption.vue";
 
 const command = use_command;
 
@@ -21,7 +22,7 @@ const command = use_command;
         <el-tab-pane>
           <template #label>
             <el-text>
-              {{ key1 }}
+             {{ $t(`nuitka_info.title.${key1}`) }}
             </el-text>
 
 
@@ -29,9 +30,15 @@ const command = use_command;
           <template #default>
 
             <div class="edit_content_area">
+
               <template v-for="value2 in value1[nuitka_element_type.Bool]">
                 <bool-option :content="value2"></bool-option>
               </template>
+
+            <template v-for="value2 in value1[nuitka_element_type.Single_option]">
+                <single-option :content="value2"></single-option>
+              </template>
+
             </div>
           </template>
         </el-tab-pane>
