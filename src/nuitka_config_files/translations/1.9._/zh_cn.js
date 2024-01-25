@@ -11,7 +11,7 @@ export default {
     },
     "content0": {
         name: "内容0",
-        desc: "内容0的介绍喵",
+        desc: "内容0\n的介绍喵",
     },
     "content_single_test": {
         name: "玩原玩的",

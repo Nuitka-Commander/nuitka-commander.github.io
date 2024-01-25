@@ -1,6 +1,6 @@
 <script setup>
 import {user_options} from "@/vals/stores/user_options.js";
-import ElementCard from "@/components/elementCard.vue";
+import ElementCard from "@/components/untils/elementCard.vue";
 import * as constants from "@/vals/constants.json";
 
 /**
@@ -22,7 +22,10 @@ const show_after = constants.element_show_after_time;
 
   <el-tooltip :show-after="show_after">
     <template #content>
-      {{ $t(`nuitka_info.${content["show"]["i18n"]}.desc`) }}
+      <div class="use_original_text">
+        {{ $t(`nuitka_info.${content["show"]["i18n"]}.desc`) }}
+      </div>
+
     </template>
     <element-card>
       <el-text size="large">{{ $t(`nuitka_info.${content["show"]["i18n"]}.name`) }}</el-text>
@@ -39,6 +42,8 @@ const show_after = constants.element_show_after_time;
 </template>
 
 <style lang="scss" scoped>
-
+.use_original_text{
+  white-space: pre-wrap;
+}
 
 </style>
