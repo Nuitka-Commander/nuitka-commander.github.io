@@ -1,4 +1,8 @@
 <script setup>
+import {user_options} from "@/vals/stores/user_options.js";
+import ElementCard from "@/components/untils/elementCard.vue";
+import * as constants from "@/vals/constants.json";
+
 /**
  * @Description bool选项
  * @Author: erduotong
@@ -7,25 +11,39 @@
 //传入的props
 const props = defineProps({
   content: Object,
+
 });
+const content = props.content;
+
+const show_after = constants.element_show_after_time;
 </script>
 
 <template>
-  <div>
-    <el-tooltip>
-      <template #content> {{ content["show"]["desc_i18n"] }}</template>
-      <el-card>
-        {{ content["show"]["command_i18n"] }}
-        <el-switch v-model="content['val']"></el-switch>
-      </el-card>
+
+  <el-tooltip :show-after="show_after">
+    <template #content>
+      <div class="use_original_text">
+        {{ $t(`nuitka_info.${content["show"]["i18n"]}.desc`) }}
+      </div>
+
+    </template>
+    <element-card>
+      <el-text size="large">{{ $t(`nuitka_info.${content["show"]["i18n"]}.name`) }}</el-text>
+
+      <!--  original command-->
+      <el-text size="large" v-if="user_options.show_original_command"> ({{ content["show"]["command"] }})</el-text>
 
 
-    </el-tooltip>
+      <el-switch v-model="content['val']"></el-switch>
+    </element-card>
+  </el-tooltip>
 
 
-  </div>
 </template>
 
 <style lang="scss" scoped>
+.use_original_text{
+  white-space: pre-wrap;
+}
 
 </style>

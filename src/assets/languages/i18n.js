@@ -7,7 +7,7 @@ import {createI18n} from "vue-i18n";
 import {user_options} from "@/vals/stores/user_options.js";
 import {supported_i18n} from "@/assets/languages/supported_i18n.js";
 import {set_loading} from "@/vals/stores/is_loading.js";
-import {load_config_language} from "@/modules/use_nuitka_config.js";
+import {load_config_language, nuitka_info_loaded} from "@/modules/use_nuitka_config.js";
 
 /**
  * @Description 是否语言加载完成
@@ -22,6 +22,7 @@ export const i18n = createI18n({
     globalInjection: true,
     fallbackWarn: false,
     silentTranslationWarn: true,
+
     /**
      * @Description 语言文件加载失败时的回调
      * @param locale 语言
@@ -33,7 +34,11 @@ export const i18n = createI18n({
         if (!is_language_load) {
             return "loading...";
         }
-        console.error(`i18n: missing '${key}' for locale '${locale}'`);
+        if (key.startsWith("nuitka_info.") && nuitka_info_loaded === false) {
+            return "loading...";
+        }
+
+        console.error(` i18n: missing '${key}' for locale '${locale}'`);
         return "error!";
     },
     messages: {},

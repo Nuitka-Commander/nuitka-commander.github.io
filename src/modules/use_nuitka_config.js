@@ -11,7 +11,7 @@ import {use_command} from "@/modules/use_command.js";
 import {i18n} from "@/assets/languages/i18n.js";
 
 let support_language = {};
-
+export let nuitka_info_loaded = false;
 
 /**
  * 初始化
@@ -69,5 +69,6 @@ export async function load_config_language(language) {
         ...message,
         "nuitka_info": translation.default,
     });
+    nuitka_info_loaded = true;
 
 }

@@ -7,6 +7,7 @@
 import {use_command} from "@/modules/use_command.js";
 import {nuitka_element_type} from "@/vals/enums.js";
 import BoolOption from "@/components/nuitka_elements/boolOption.vue";
+import SingleOption from "@/components/nuitka_elements/singleOption.vue";
 
 const command = use_command;
 
@@ -20,14 +21,25 @@ const command = use_command;
         <!--做出分页-->
         <el-tab-pane>
           <template #label>
-            {{ key1 }}
+            <el-text>
+             {{ $t(`nuitka_info.title.${key1}`) }}
+            </el-text>
+
 
           </template>
           <template #default>
 
-            <template v-for="value2 in value1[nuitka_element_type.Bool]">
-              <bool-option :content="value2"></bool-option>
-            </template>
+            <div class="edit_content_area">
+
+              <template v-for="value2 in value1[nuitka_element_type.Bool]">
+                <bool-option :content="value2"></bool-option>
+              </template>
+
+            <template v-for="value2 in value1[nuitka_element_type.Single_option]">
+                <single-option :content="value2"></single-option>
+              </template>
+
+            </div>
           </template>
         </el-tab-pane>
       </template>
@@ -38,5 +50,14 @@ const command = use_command;
 </template>
 
 <style lang="scss" scoped>
+.edit_content_area {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: center;
 
+
+}
 </style>

@@ -9,5 +9,6 @@
     }
   ],
   "base_url": "https://github.com/nuitka-commander/nuitka-commander.github.io/",
-  "debug": true
+  "debug": true,
+  "element_show_after_time": 400
 }
