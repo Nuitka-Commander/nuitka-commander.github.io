@@ -6,8 +6,8 @@
  */
 import SettingPage from "@/components/SettingPage.vue";
 import {user_options} from "@/vals/stores/user_options.js";
-import supported_nuitka_version from "@/nuitka_config_files/supported_nuitka_version.js";
 import {load_new_config} from "@/modules/use_nuitka_config.js";
+import supported_nuitka_version from "@/nuitka_config_files/supported_nuitka_version.js";
 </script>
 
 <template>
@@ -16,7 +16,6 @@ import {load_new_config} from "@/modules/use_nuitka_config.js";
 
     <!--left-->
     <div class="top_nav_bar">
-
       <el-tooltip>
         <el-switch
             v-model="user_options.is_full_mode"
@@ -29,6 +28,7 @@ import {load_new_config} from "@/modules/use_nuitka_config.js";
           {{ $t("nav_bar.mode.info.l3") }}
         </template>
       </el-tooltip>
+
       <el-tooltip>
         <el-switch
             v-model="user_options.show_original_command"
@@ -43,6 +43,7 @@ import {load_new_config} from "@/modules/use_nuitka_config.js";
           v-model="user_options.nuitka_version"
           filterable
           @change="load_new_config()"
+
       >
         <template #header>
           {{ $t("nav_bar.select_nuitka_version") }}
@@ -67,6 +68,8 @@ import {load_new_config} from "@/modules/use_nuitka_config.js";
 
     <!--right-->
     <div class="top_nav_bar">
+
+
       <setting-page></setting-page>
       <a href="https://github.com/Nuitka-Commander/nuitka-commander.github.io">
         <img id="nav_github_logo" alt="github logo" src="@/assets/images/github.svg">
@@ -93,17 +96,15 @@ import {load_new_config} from "@/modules/use_nuitka_config.js";
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0 10px;
-    gap: 20px;
+    padding: 0 3px;
 
-    div {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
+    gap: 5px;
+
   }
 
+
 }
+
 
 #nav_github_logo {
   width: 30px;

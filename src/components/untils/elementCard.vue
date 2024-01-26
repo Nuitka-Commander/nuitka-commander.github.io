@@ -31,9 +31,7 @@
     box-shadow: 0 0 3px #3b3c3d;
   }
 
-  > * { //每个元素都要有自己的边距 不然会挤在一起的
-    margin: 3px;
-  }
+  gap: 5px;
 
 }
 </style>
