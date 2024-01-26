@@ -28,7 +28,7 @@ export const nuitka_templates = {
             "i18n": "", // 如果此处为null，那么说明这是由用户提供的值 表达在父元素中的子值
         },
         enabled: true,
-        val: false, //记录该值是否被选中 用于本地化存储
+
     },
 
     SingleOption: {
@@ -40,7 +40,7 @@ export const nuitka_templates = {
         enabled: true,
         elements: {}, //元素列表
         default: undefined, //请填elements中的一个键值
-        val: undefined,
+        val: undefined,//list or string
     },
 
 

@@ -16,6 +16,14 @@ export default {
     "content_single_test": {
         name: "玩原玩的",
         desc: "GENSHIN IMPACT",
-        options: {},
+        elements: {
+            python: "蟒蛇",
+            go: "去",
+            genshin_impact: "原神冲击",
+            kotlin: "锅炉",
+
+
+
+        },
     },
 };

@@ -22,6 +22,34 @@ export default {
                 i18n: "content0",
             },
         },
+         some_con2tent1: {//二级元素
+            ...nuitka_templates.Bool, //继承模板
+            show: {
+                command: "some_content command",//命令描述 可用于生成 在非默认值时显示
+                i18n: "content0",
+            },
+        },
+         som1e_content1: {//二级元素
+            ...nuitka_templates.Bool, //继承模板
+            show: {
+                command: "some_content command",//命令描述 可用于生成 在非默认值时显示
+                i18n: "content0",
+            },
+        },
+         some_c124ontent1: {//二级元素
+            ...nuitka_templates.Bool, //继承模板
+            show: {
+                command: "some_content command",//命令描述 可用于生成 在非默认值时显示
+                i18n: "content0",
+            },
+        },
+         some1_content1: {//二级元素
+            ...nuitka_templates.Bool, //继承模板
+            show: {
+                command: "some_content command",//命令描述 可用于生成 在非默认值时显示
+                i18n: "content0",
+            },
+        },
         some_conten2t: {//二级元素
             ...nuitka_templates.Bool, //继承模板
             show: {

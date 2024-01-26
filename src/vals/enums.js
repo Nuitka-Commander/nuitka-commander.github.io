@@ -11,3 +11,7 @@ export const nuitka_element_type = Object.freeze({
     Single_option: "single_option_",
     User_provided_multiple: "user_provided_multiple_",
 });
+export const nuitka_element_status = Object.freeze({
+    user_provided: null,
+
+});
