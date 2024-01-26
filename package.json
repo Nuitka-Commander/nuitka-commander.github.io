@@ -15,7 +15,7 @@
     "@voerkai18n/runtime": "^2.1.4",
     "@vueuse/core": "^10.7.2",
     "axios": "^1.6.6",
-    "element-plus": "^2.5.3",
+    "element-plus": "^2.4.4",
     "html-minifier-terser": "^7.2.0",
     "js-yaml": "^4.1.0",
     "jsdom": "^24.0.0",
