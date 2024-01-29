@@ -1,4 +1,9 @@
 <script setup>
+/**
+ * @Description 单选
+ * @Author: erduotong
+ * @Date: 2024-01-29 17:10:18
+ */
 import ElementCard from "@/components/untils/elementCard.vue";
 import * as constants from "@/vals/constants.json";
 import {user_options} from "@/vals/stores/user_options.js";
@@ -13,7 +18,7 @@ const show_after = constants.element_show_after_time;
 </script>
 
 <template>
-  <el-tooltip :show-after="show_after">
+  <el-tooltip :show-after="show_after" placement="top">
 
     <template #content>
       <div class="use_original_text">
@@ -30,19 +35,25 @@ const show_after = constants.element_show_after_time;
 
         <el-select
             v-model="content['val']">
-
-          <el-option
-              v-for="(value,key) in content['elements']"
-              :key="key+value"
-              :label="$t(`nuitka_info.${content['show']['i18n']}.elements.${content['elements'][key]['show']['i18n']}`)"
-              :value="content['elements'][key]['show']['command']">
+          <template v-for="(value,key) in content['elements']">
             <el-tooltip placement="left-start" :show-after="show_after">
               <template #content>
-                genshin impact
+                <div class="use_original_text">
+                  {{
+                    $t(`nuitka_info.${content["show"]["i18n"]}.elements.${content["elements"][key]["show"]["i18n"]}.desc`)
+                  }}
+                </div>
               </template>
-              {{ $t(`nuitka_info.${content["show"]["i18n"]}.elements.${content["elements"][key]["show"]["i18n"]}`) }}
+              <el-option
+
+                  :key="key+value"
+                  :label="$t(`nuitka_info.${content['show']['i18n']}.elements.${content['elements'][key]['show']['i18n']}.name`)"
+                  :value="content['elements'][key]['show']['command']">
+
+              </el-option>
             </el-tooltip>
-          </el-option>
+          </template>
+
         </el-select>
       </div>
 

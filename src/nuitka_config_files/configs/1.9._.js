@@ -156,6 +156,7 @@ export default {
             },
             default: "python",
         },
+
     },
     basi2c: { //顶级元素
         some_content: {//二级元素

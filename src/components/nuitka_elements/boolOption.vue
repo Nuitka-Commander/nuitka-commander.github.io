@@ -20,7 +20,7 @@ const show_after = constants.element_show_after_time;
 
 <template>
 
-  <el-tooltip :show-after="show_after">
+  <el-tooltip :show-after="show_after" placement="top">
     <template #content>
       <div class="use_original_text">
         {{ $t(`nuitka_info.${content["show"]["i18n"]}.desc`) }}
