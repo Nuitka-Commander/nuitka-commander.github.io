@@ -18,7 +18,7 @@ const show_after = constants.element_show_after_time;
 </script>
 
 <template>
-  <el-tooltip :show-after="show_after" placement="top">
+  <el-tooltip :show-after="show_after" >
 
     <template #content>
       <div class="use_original_text">
