@@ -2,7 +2,7 @@
 /**
  * @Description 单选
  * @Author: erduotong
- * @Date: 2024-01-29 17:10:18
+ * @Date: 2024-01-29 17:21:48
  */
 import ElementCard from "@/components/untils/elementCard.vue";
 import * as constants from "@/vals/constants.json";
@@ -33,10 +33,12 @@ const show_after = constants.element_show_after_time;
           <el-text size="large" v-if="user_options.show_original_command"> ({{ content["show"]["command"] }})</el-text>
         </div>
 
-        <el-select
-            v-model="content['val']">
+        <el-select v-model="content['val']">
+
           <template v-for="(value,key) in content['elements']">
+
             <el-tooltip placement="left-start" :show-after="show_after">
+
               <template #content>
                 <div class="use_original_text">
                   {{
@@ -44,13 +46,13 @@ const show_after = constants.element_show_after_time;
                   }}
                 </div>
               </template>
-              <el-option
 
+              <el-option
                   :key="key+value"
                   :label="$t(`nuitka_info.${content['show']['i18n']}.elements.${content['elements'][key]['show']['i18n']}.name`)"
                   :value="content['elements'][key]['show']['command']">
-
               </el-option>
+
             </el-tooltip>
           </template>
 
