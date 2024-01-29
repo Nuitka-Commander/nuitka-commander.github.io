@@ -30,11 +30,18 @@ const show_after = constants.element_show_after_time;
 
         <el-select
             v-model="content['val']">
+
           <el-option
               v-for="(value,key) in content['elements']"
               :key="key+value"
               :label="$t(`nuitka_info.${content['show']['i18n']}.elements.${content['elements'][key]['show']['i18n']}`)"
               :value="content['elements'][key]['show']['command']">
+            <el-tooltip placement="left-start" :show-after="show_after">
+              <template #content>
+                genshin impact
+              </template>
+              {{ $t(`nuitka_info.${content["show"]["i18n"]}.elements.${content["elements"][key]["show"]["i18n"]}`) }}
+            </el-tooltip>
           </el-option>
         </el-select>
       </div>
