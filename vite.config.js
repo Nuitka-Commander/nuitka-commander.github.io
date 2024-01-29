@@ -79,7 +79,7 @@ export default ({mode}) => {
         //打包成本地可以直接运行的html
         return {
             server: {
-                port: 3000,
+                port: 3001,
             },
             base: "./",
             plugins: [...plugin_array,
@@ -127,7 +127,7 @@ export default ({mode}) => {
     } else { //正常为网站构建
         return {
             server: {
-                port: 3000,
+                port: 3001,
             },
             plugins: [...plugin_array],
             resolve: {
