@@ -14,12 +14,13 @@ const show_after = constants.element_show_after_time;
 
 <template>
   <el-tooltip :show-after="show_after">
+
     <template #content>
       <div class="use_original_text">
         {{ $t(`nuitka_info.${content["show"]["i18n"]}.desc`) }}
       </div>
-
     </template>
+
     <element-card>
       <div class="single_option_card">
         <div>
@@ -28,17 +29,12 @@ const show_after = constants.element_show_after_time;
         </div>
 
         <el-select
-            v-model="content['val']"
-
-        >
+            v-model="content['val']">
           <el-option
               v-for="(value,key) in content['elements']"
               :key="key+value"
               :label="$t(`nuitka_info.${content['show']['i18n']}.elements.${content['elements'][key]['show']['i18n']}`)"
-              :value="content['elements'][key]['show']['command']"
-
-          >
-
+              :value="content['elements'][key]['show']['command']">
           </el-option>
         </el-select>
       </div>
