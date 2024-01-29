@@ -15,6 +15,7 @@ export default {
         some_content: {//二级元素
             ...nuitka_templates.Bool, //继承模板
             show: {
+
                 command: "some_content command",//命令描述 可用于生成 在非默认值时显示
                 i18n: "content0",
             },
@@ -23,6 +24,7 @@ export default {
         ////////////////////////////////
         content_opt_test: {
             ...nuitka_templates.SingleOption,
+
             show: {
                 command: "nmd",
                 i18n: "content_single_test",

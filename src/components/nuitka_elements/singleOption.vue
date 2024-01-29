@@ -18,7 +18,7 @@ const show_after = constants.element_show_after_time;
 </script>
 
 <template>
-  <el-tooltip :show-after="show_after" >
+  <el-tooltip :show-after="show_after" placement="top">
 
     <template #content>
       <div class="use_original_text">
@@ -33,7 +33,7 @@ const show_after = constants.element_show_after_time;
           <el-text size="large" v-if="user_options.show_original_command"> ({{ content["show"]["command"] }})</el-text>
         </div>
 
-        <el-select v-model="content['val']">
+        <el-select v-model="content['val']" filterable :disabled="!content['enabled']">
 
           <template v-for="(value,key) in content['elements']">
 
@@ -46,11 +46,12 @@ const show_after = constants.element_show_after_time;
                   }}
                 </div>
               </template>
-
+              <!--如果该选项可能为disabled,那么就需要一个监听函数。如果当前选择的情况正好还是disabled的，那么就切换一个选项。-->
               <el-option
-                  :key="key+value"
+                  :key="key"
                   :label="$t(`nuitka_info.${content['show']['i18n']}.elements.${content['elements'][key]['show']['i18n']}.name`)"
-                  :value="content['elements'][key]['show']['command']">
+                  :value="value['show']['command']"
+                  :disabled="!value['enabled']">
               </el-option>
 
             </el-tooltip>
