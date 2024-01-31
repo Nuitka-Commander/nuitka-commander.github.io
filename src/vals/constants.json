@@ -10,5 +10,8 @@
   ],
   "base_url": "https://github.com/nuitka-commander/nuitka-commander.github.io/",
   "debug": true,
-  "element_show_after_time": 400
+  "element_show_after_time": 400,
+  "nuitka_multi_option": {
+    "use_transfer_need": 6
+  }
 }

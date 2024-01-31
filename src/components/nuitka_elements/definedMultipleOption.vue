@@ -19,7 +19,6 @@ const show_after = constants.element_show_after_time;
     <element-card>
 
 
-
     </element-card>
   </el-tooltip>
 </template>
