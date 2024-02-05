@@ -15,18 +15,18 @@ jobs:
         with:
           node-version: 20
           cache: 'npm'
-      - name: npm-cache
+      - name: pnpm-cache
         uses: actions/cache@v2
-        id: npm-cache
+        id: pnpm-cache
         with:
           path: |
             **/node_modules
-          key: ${{ runner.os }}-npm-${{ hashFiles('**/package-lock.json') }}
+          key: ${{ runner.os }}-pnpm-${{ hashFiles('**/pnpm-lock.yaml') }}
           restore-keys: |
-            ${{ runner.os }}-npm-
+            ${{ runner.os }}-pnpm-
       - name: 安装依赖
-        if: steps.npm-cache.outputs.cache-hit != 'true'
-        run: npm install
+        if: steps.pnpm-cache.outputs.cache-hit != 'true'
+        run: pnpm install
 
       - name: 更新制作人员列表
         run: node ${{ github.workspace }}/.github/workflows/scripts/update_authors.js
@@ -38,7 +38,7 @@ jobs:
       # 其他预处理以后要用的时候在上方添加
 
       - name: 为网站构建
-        run: npm run build:website
+        run: pnpm run build:website
 
       - name: 发布到 GitHub Pages
         uses: crazy-max/ghaction-github-pages@v2.1.3
@@ -75,7 +75,7 @@ jobs:
       # 这可以做一些其他特殊的所需处理
       - name: 为本地运行构建 # todo 图片出不来
         run: |
-          npm run build:local_use
+          pnpm run build:local_use
           mv ${{ github.workspace }}/dist/index.html ${{ github.workspace }}/dist/Nuitka-Commander.html
       - name: 读取版本号
         id: read_version
