@@ -24,25 +24,25 @@ const command = use_command;
             <el-text>
               {{ $t(`nuitka_info.title.${key1}`) }}
             </el-text>
-
-
           </template>
           <template #default>
 
             <div class="edit_content_area">
+              <!--内容实际所在地-->
               <div>
+                <!--Bool-->
                 <template v-for="value2 in value1[nuitka_element_type.Bool]">
                   <bool-option :content="value2"></bool-option>
                 </template>
               </div>
               <div>
+                <!--单选-->
                 <template v-for="value2 in value1[nuitka_element_type.Single_option]">
                   <single-option :content="value2"></single-option>
                 </template>
               </div>
-
-
             </div>
+
           </template>
         </el-tab-pane>
       </template>
