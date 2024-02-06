@@ -67,7 +67,7 @@ import supported_nuitka_version from "@/nuitka_config_files/supported_nuitka_ver
     </div>
 
     <!--right-->
-    <div class="top_nav_bar">
+    <div class="top_nav_bar" >
 
 
       <setting-page></setting-page>
@@ -98,9 +98,10 @@ import supported_nuitka_version from "@/nuitka_config_files/supported_nuitka_ver
     justify-content: space-between;
     padding: 0 3px;
 
-    gap: 5px;
+    gap: 15px;
 
   }
+
 
 
 }

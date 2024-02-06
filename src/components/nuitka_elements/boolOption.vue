@@ -20,7 +20,7 @@ const show_after = constants.element_show_after_time;
 
 <template>
 
-  <el-tooltip :show-after="show_after">
+  <el-tooltip :show-after="show_after" placement="top">
     <template #content>
       <div class="use_original_text">
         {{ $t(`nuitka_info.${content["show"]["i18n"]}.desc`) }}
@@ -34,7 +34,7 @@ const show_after = constants.element_show_after_time;
       <el-text size="large" v-if="user_options.show_original_command"> ({{ content["show"]["command"] }})</el-text>
 
 
-      <el-switch v-model="content['val']"></el-switch>
+      <el-switch v-model="content['val']" :disabled="!content['enabled']"></el-switch>
     </element-card>
   </el-tooltip>
 

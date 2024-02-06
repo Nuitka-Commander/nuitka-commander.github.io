@@ -22,24 +22,27 @@ const command = use_command;
         <el-tab-pane>
           <template #label>
             <el-text>
-             {{ $t(`nuitka_info.title.${key1}`) }}
+              {{ $t(`nuitka_info.title.${key1}`) }}
             </el-text>
-
-
           </template>
           <template #default>
 
             <div class="edit_content_area">
-
-              <template v-for="value2 in value1[nuitka_element_type.Bool]">
-                <bool-option :content="value2"></bool-option>
-              </template>
-
-            <template v-for="value2 in value1[nuitka_element_type.Single_option]">
-                <single-option :content="value2"></single-option>
-              </template>
-
+              <!--内容实际所在地-->
+              <div>
+                <!--Bool-->
+                <template v-for="value2 in value1[nuitka_element_type.Bool]">
+                  <bool-option :content="value2"></bool-option>
+                </template>
+              </div>
+              <div>
+                <!--单选-->
+                <template v-for="value2 in value1[nuitka_element_type.Single_option]">
+                  <single-option :content="value2"></single-option>
+                </template>
+              </div>
             </div>
+
           </template>
         </el-tab-pane>
       </template>
@@ -53,11 +56,25 @@ const command = use_command;
 .edit_content_area {
   width: 100%;
   display: flex;
-  flex-direction: row;
+
   flex-wrap: wrap;
   justify-content: flex-start;
-  align-items: center;
+  align-items: start;
+  flex-direction: column;
+  margin-left: 10px;
 
+
+
+  div {
+
+    display: flex;
+    margin-top: 10px;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: row;
+
+  }
 
 }
 </style>
