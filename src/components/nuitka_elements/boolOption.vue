@@ -14,7 +14,7 @@ const props = defineProps({
 
 });
 const content = props.content;
-
+//鼠标需要在tooltip上停留的时间
 const show_after = constants.element_show_after_time;
 </script>
 

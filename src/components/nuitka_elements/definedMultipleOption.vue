@@ -8,8 +8,12 @@ const props = defineProps({
   content: Object,
 });
 const content = props.content;
+//鼠标需要在tooltip上停留的时间
 const show_after = constants.element_show_after_time;
-//使用的控件类型，transfer还是select
+/**
+ * 使用的控件类型判断
+ * @type {ComputedRef<boolean>}
+ */
 const is_use_select = computed(() => {
   if (content["component"] === nuitka_element_status.use_select) {
     return true;
