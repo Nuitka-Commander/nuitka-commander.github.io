@@ -35,7 +35,7 @@ const show_after = constants.element_show_after_time;
 
         <el-select v-model="content['val']" filterable :disabled="!content['enabled']">
 
-          <template v-for="(value,key) in content['elements']">
+          <template v-for="(value,key) in content['elements']" :key="key">
 
             <el-tooltip placement="left-start" :show-after="show_after">
 

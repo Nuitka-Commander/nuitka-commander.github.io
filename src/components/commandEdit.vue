@@ -17,7 +17,7 @@ const command = use_command;
   <div>
 
     <el-tabs stretch tab-position="left" type="card">
-      <template v-for="(value1,key1) in command.status.value">
+      <template v-for="(value1,key1) in command.status.value" :key="key1">
         <!--做出分页-->
         <el-tab-pane>
           <template #label>
@@ -31,13 +31,13 @@ const command = use_command;
               <!--内容实际所在地-->
               <div>
                 <!--Bool-->
-                <template v-for="value2 in value1[nuitka_element_type.Bool]">
+                <template v-for="(value2,key2) in value1[nuitka_element_type.Bool]" :key="key2">
                   <bool-option :content="value2"></bool-option>
                 </template>
               </div>
               <div>
                 <!--单选-->
-                <template v-for="value2 in value1[nuitka_element_type.Single_option]">
+                <template v-for="(value2,key2) in value1[nuitka_element_type.Single_option]" :key="key2">
                   <single-option :content="value2"></single-option>
                 </template>
               </div>
