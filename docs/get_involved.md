@@ -1,8 +1,8 @@
-# 加入开发
+# 帮助我们完善
 
 > 返回[README](../README.md)
 
-## 开发环境配置
+## 环境配置
 
 您可直接通过pnpm install让pnpm帮您安装环境
 
@@ -16,4 +16,7 @@
 * CI/CD: `Github Action`
 
 ## 文档
+
+* [翻译相关]()
+* [Nuitka版本配置文件]()
 

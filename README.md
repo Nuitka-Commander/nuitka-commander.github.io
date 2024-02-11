@@ -22,11 +22,14 @@
 请从 -> [Release](https://github.com/Nuitka-Commander/nuitka-commander.github.io/releases/latest) <-
 界面下载`Nuitka-Commander.html`到本地，随后通过浏览器打开该文件以使用。
 
-## 加入开发
+## 帮助我们完善
 
 Nuitka Commander是一个开源项目，遵循[GPL v3](./LICENSE)开源协议开源。如果您希望Nuitka Commander更加完善，我们十分欢迎您一起贡献代码，使Nuitka
-Commander更加完善，例如更多的语言支持或更多的Nuitka版本支持。  
-如果您有意愿，可以通过Github Fork一个仓库，随后通过Git拉取到本地开发后再提交Pull Request，具体细节不再赘述。  
-更多的信息，请点击 -> [开发文档](./docs/get_involved.md) <- 以获得
+Commander更加完善，例如更多的语言支持或更多的Nuitka版本支持。    
+如果您有意愿，请点击 -> [开发文档](./docs/get_involved.md) <- 以获得更多文档
+
+## 开源协议
+
+遵循[GPL v3](./LICENSE)
 
 
