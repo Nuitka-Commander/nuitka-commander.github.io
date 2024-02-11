@@ -19,7 +19,14 @@
 
 如果您仍然希望在本地使用，那么我们也提供了单个的html文件以供使用(非Electron)  
 您可通过该文件使用在该版本下和网页版完全一致的功能。  
-请从 -> [Release](https://github.com/Nuitka-Commander/nuitka-commander.github.io/releases/latest) <- 
+请从 -> [Release](https://github.com/Nuitka-Commander/nuitka-commander.github.io/releases/latest) <-
 界面下载`Nuitka-Commander.html`到本地，随后通过浏览器打开该文件以使用。
 
-## 文档
+## 加入开发
+
+Nuitka Commander是一个开源项目，遵循[GPL v3](./LICENSE)开源协议开源。如果您希望Nuitka Commander更加完善，我们十分欢迎您一起贡献代码，使Nuitka
+Commander更加完善，例如更多的语言支持或更多的Nuitka版本支持。  
+如果您有意愿，可以通过Github Fork一个仓库，随后通过Git拉取到本地开发后再提交Pull Request，具体细节不再赘述。  
+更多的信息，请点击 -> [开发文档](./docs/get_involved.md) <- 以获得
+
+
