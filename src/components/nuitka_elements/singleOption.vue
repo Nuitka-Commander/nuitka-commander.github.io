@@ -8,11 +8,8 @@ import ElementCard from "@/components/untils/elementCard.vue";
 import * as constants from "@/vals/constants.json";
 import {user_options} from "@/vals/stores/user_options.js";
 
-const props = defineProps({
-  content: Object,
-
-});
-const content = props.content;
+const model = defineModel()
+const content = model;
 //鼠标需要在tooltip上停留的时间
 const show_after = constants.element_show_after_time;
 </script>

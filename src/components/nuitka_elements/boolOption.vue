@@ -9,11 +9,8 @@ import * as constants from "@/vals/constants.json";
  * @Date: 2023-12-08 22:16:35
  */
 //传入的props
-const props = defineProps({
-  content: Object,
-
-});
-const content = props.content;
+const model = defineModel();
+const content = model;
 //鼠标需要在tooltip上停留的时间
 const show_after = constants.element_show_after_time;
 </script>
@@ -42,7 +39,7 @@ const show_after = constants.element_show_after_time;
 </template>
 
 <style lang="scss" scoped>
-.use_original_text{
+.use_original_text {
   white-space: pre-wrap;
 }
 

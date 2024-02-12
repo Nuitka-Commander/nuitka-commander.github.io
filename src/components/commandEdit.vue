@@ -26,7 +26,7 @@ const command = use_command;
             </el-text>
           </template>
           <template #default>
-
+            <!--todo 将defineModel的访问换成.而不是[]-->
 
             <div class="edit_content_area">
               <!--内容实际所在地-->
@@ -35,14 +35,14 @@ const command = use_command;
                 <!--Bool-->
                 <!--suppress JSUnusedLocalSymbols -->
                 <template v-for="(_,key2) in value1[nuitka_element_type.Bool]" :key="key2">
-                  <bool-option :content="value1[key2]"></bool-option>
+                  <bool-option v-model="value1[nuitka_element_type.Bool][key2]"></bool-option>
                 </template>
               </div>
               <div>
                 <!--单选-->
                 <!--suppress JSUnusedLocalSymbols -->
                 <template v-for="(_,key2) in value1[nuitka_element_type.Single_option]" :key="key2">
-                  <single-option :content="value1[key2]"></single-option>
+                  <single-option v-model="value1[nuitka_element_type.Single_option][key2]"></single-option>
                 </template>
               </div>
             </div>
