@@ -27,18 +27,22 @@ const command = use_command;
           </template>
           <template #default>
 
+
             <div class="edit_content_area">
               <!--内容实际所在地-->
+              <!--允许未使用变量用于v-for占位-->
               <div>
                 <!--Bool-->
-                <template v-for="(value2,key2) in value1[nuitka_element_type.Bool]" :key="key2">
-                  <bool-option :content="value2"></bool-option>
+                <!--suppress JSUnusedLocalSymbols -->
+                <template v-for="(_,key2) in value1[nuitka_element_type.Bool]" :key="key2">
+                  <bool-option :content="value1[key2]"></bool-option>
                 </template>
               </div>
               <div>
                 <!--单选-->
-                <template v-for="(value2,key2) in value1[nuitka_element_type.Single_option]" :key="key2">
-                  <single-option :content="value2"></single-option>
+                <!--suppress JSUnusedLocalSymbols -->
+                <template v-for="(_,key2) in value1[nuitka_element_type.Single_option]" :key="key2">
+                  <single-option :content="value1[key2]"></single-option>
                 </template>
               </div>
             </div>
@@ -62,7 +66,6 @@ const command = use_command;
   align-items: start;
   flex-direction: column;
   margin-left: 10px;
-
 
 
   div {
