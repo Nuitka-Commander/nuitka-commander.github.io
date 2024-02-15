@@ -28,6 +28,6 @@
 
 ## 文档
 
-* [翻译相关]()
+* [翻译相关](development/translation.md)
 * [Nuitka版本配置文件]()
 
