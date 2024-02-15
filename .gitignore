@@ -6,7 +6,7 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
-
+# 构建产物/依赖
 node_modules
 dist
 dist-ssr
@@ -21,4 +21,3 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
-.idea/*
