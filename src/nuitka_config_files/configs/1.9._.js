@@ -6,6 +6,7 @@
 import {nuitka_templates} from "@/vals/templates.js";
 
 
+// noinspection JSUnusedGlobalSymbols
 export default {
     support_language: {
         //国际标识符 位于transitions中的路径

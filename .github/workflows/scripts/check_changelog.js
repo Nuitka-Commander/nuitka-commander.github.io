@@ -31,6 +31,7 @@ const formatContent = (title, content) => {
 };
 
 // 用于格式化更新日志内容的对象
+// noinspection JSUnusedGlobalSymbols
 const formatter = {
     added: (content) => formatContent("✨ 新增 Added", content),
     changed: (content) => formatContent("🔧 更改 Changed", content),
