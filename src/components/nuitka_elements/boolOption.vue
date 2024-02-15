@@ -28,7 +28,7 @@ const show_after = constants.element_show_after_time;
       <el-text size="large">{{ $t(`nuitka_info.${content["show"]["i18n"]}.name`) }}</el-text>
 
       <!--  original command-->
-      <el-text size="large" v-if="user_options.show_original_command"> ({{ content["show"]["command"] }})</el-text>
+      <el-text v-if="user_options.show_original_command" size="large"> ({{ content["show"]["command"] }})</el-text>
 
 
       <el-switch v-model="content['val']" :disabled="!content['enabled']"></el-switch>

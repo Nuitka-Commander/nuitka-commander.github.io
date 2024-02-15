@@ -58,24 +58,24 @@ const command = use_command;
 
 <style lang="scss" scoped>
 .edit_content_area {
-  width: 100%;
   display: flex;
+  align-items: start;
 
+  flex-direction: column;
   flex-wrap: wrap;
   justify-content: flex-start;
-  align-items: start;
-  flex-direction: column;
+  width: 100%;
   margin-left: 10px;
 
 
   div {
 
     display: flex;
-    margin-top: 10px;
-    flex-wrap: wrap;
-    justify-content: flex-start;
     align-items: center;
     flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    margin-top: 10px;
 
   }
 

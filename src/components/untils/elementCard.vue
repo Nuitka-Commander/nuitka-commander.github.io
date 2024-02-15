@@ -12,20 +12,20 @@
   </div>
 </template>
 
-<style scoped lang="scss">
+<style lang="scss" scoped>
 .edit_content_card {
   display: flex;
-  flex-direction: row;
   align-items: center;
+  flex-direction: row;
   justify-content: space-between;
-  margin: 10px;
-  border: 1px solid #3b3c3d;
-  background-color: #1f1e33; //掺点怪东西
-  border-radius: 6px;
-  padding: 5px 10px;
   min-width: 60px;
-  box-shadow: 0 0 10px #3b3c3d;
+  margin: 10px;
+  padding: 5px 10px;
   transition: all 0.3s;
+  border: 1px solid #3b3c3d;
+  border-radius: 6px;
+  background-color: #1f1e33; //掺点怪东西
+  box-shadow: 0 0 10px #3b3c3d;
 
   &:hover {
     box-shadow: 0 0 3px #3b3c3d;

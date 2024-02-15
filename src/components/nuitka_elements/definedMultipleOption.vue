@@ -36,7 +36,7 @@ const is_use_select = computed(() => {
     <element-card>
       <div>
         <el-text size="large">{{ $t(`nuitka_info.${content["show"]["i18n"]}.name`) }}</el-text>
-        <el-text size="large" v-if="user_options.show_original_command"> ({{ content["show"]["command"] }})</el-text>
+        <el-text v-if="user_options.show_original_command" size="large"> ({{ content["show"]["command"] }})</el-text>
       </div>
       <template v-if="is_use_select===true">
 

@@ -54,7 +54,7 @@ export const nuitka_templates = {
         elements: {}, //元素
         default: [], //请填elements中的键值
         val: [], //同上
-        component:  nuitka_element_status.use_default, //使用默认组件 强烈建议手动指定
+        component: nuitka_element_status.use_default, //使用默认组件 强烈建议手动指定
 
     },
 };
