@@ -15,10 +15,9 @@ export default {
     basic: { //顶级元素
         some_content: {//二级元素
             ...nuitka_templates.Bool, //继承模板
-            show: {
-
-                command: "some_content command",//命令描述 可用于生成 在非默认值时显示
-                i18n: "content0",
+            i18n: "content0",
+            command: {
+                original: "some_content command",
             },
         },
 
@@ -68,13 +67,7 @@ export default {
 
     },
     page2: {
-        bool_content: {
-            ...nuitka_templates.Bool,
-            show: {
-                command: "bool_content",
-                i18n: "content0",
-            },
-        },
+
     },
 
 };
