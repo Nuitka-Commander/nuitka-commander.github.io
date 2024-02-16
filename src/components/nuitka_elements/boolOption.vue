@@ -8,7 +8,10 @@ import * as constants from "@/vals/constants.json";
  * @Author: erduotong
  * @Date: 2023-12-08 22:16:35
  */
-//传入的props
+/**
+ * 传入的ModelRef
+ * @type {ModelRef<{}>}
+ */
 const model = defineModel();
 const content = model;
 //鼠标需要在tooltip上停留的时间
