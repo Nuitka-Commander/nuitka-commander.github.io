@@ -13,9 +13,9 @@ export const nuitka_templates = {
     //不要过早的优化
     Bool: {
         type: nuitka_element_type.Bool, //类型
-        i18n: "", //国际化名称 自动拼接
+        i18n: String, //国际化名称 自动拼接
         command: {//命令描述 可用于生成 在非默认值时显示
-            original: "", //原始命令 其他位置交给生成器处理
+            original: String, //原始命令 其他位置交给生成器处理
         },
         enabled: true, //是否启用 (可以被选择)
         default: false, //默认值 元素值自动补充
@@ -24,9 +24,9 @@ export const nuitka_templates = {
 
     // 单个的选择元素 为后面所有的一般多选元素作为可选值
     multi_select_elements: {
-        show: {
-            "command": "",
-            "i18n": "", // 如果此处为null，那么说明这是由用户提供的值 表达在父元素中的子值
+        i18n: String,
+        command: {
+            original: String,
         },
         enabled: true,
 
@@ -34,9 +34,9 @@ export const nuitka_templates = {
 
     SingleOption: {
         type: nuitka_element_type.Single_option,
-        show: {
-            command: "",
-            i18n: "",
+        i18n: String,
+        command: {
+            original: String,
         },
         enabled: true,
         elements: {}, //元素列表
@@ -46,9 +46,9 @@ export const nuitka_templates = {
 
     DefinedMultipleOption: {
         type: nuitka_element_type.Defined_multiple,
-        show: {
-            command: "",
-            i18n: "",
+        i18n: String,
+        command: {
+            original: String,
         },
         enabled: true,
         elements: {}, //元素

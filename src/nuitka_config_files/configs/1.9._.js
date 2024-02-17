@@ -25,39 +25,39 @@ export default {
         content_opt_test: {
             ...nuitka_templates.SingleOption,
 
-            show: {
-                command: "nmd",
-                i18n: "content_single_test",
+            command: {
+                original: "genshin imapct",
             },
+            i18n: "content_single_test",
             elements: {
                 python: {
                     ...nuitka_templates.multi_select_elements,
-                    show: {
-                        command: "python",
-                        i18n: "python",
+                    command: {
+                        original: "python",
                     },
+                    i18n: "python",
                 },
                 go: {
                     ...nuitka_templates.multi_select_elements,
-                    show: {
-                        command: "go",
-                        i18n: "go",
+                    command: {
+                        original: "go",
                     },
+                    i18n: "go",
 
                 },
                 genshin_impact: {
                     ...nuitka_templates.multi_select_elements,
-                    show: {
-                        command: "genshin_impact",
-                        i18n: "genshin_impact",
+                    command: {
+                        original: "genshin_impact",
                     },
+                    i18n: "genshin_impact",
                 },
                 kotlin: {
                     ...nuitka_templates.multi_select_elements,
-                    show: {
-                        command: "kotlin",
-                        i18n: "kotlin",
+                    command: {
+                        original: "kotlin",
                     },
+                    i18n: "kotlin",
 
                 },
 
@@ -66,9 +66,7 @@ export default {
         },
 
     },
-    page2: {
-
-    },
+    page2: {},
 
 };
 
