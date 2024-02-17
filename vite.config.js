@@ -13,7 +13,7 @@ import {JSDOM} from "jsdom";
 
 
 const timestamp = new Date().getTime();
-const finally_process = () => {
+const inline_icon = () => {
     // noinspection JSUnusedGlobalSymbols
     return {
         name: "inline-svg",
@@ -100,7 +100,7 @@ export default ({mode}) => {
                               minifyCSS: true,
                               minifyURLs: true,
                           },
-                      }), finally_process(),
+                      }), inline_icon(),
             ],
 
             resolve: {
