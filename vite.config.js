@@ -1,3 +1,5 @@
+// noinspection JSCheckFunctionSignatures
+
 import vue from "@vitejs/plugin-vue";
 import AutoImport from "unplugin-auto-import/vite";
 import Components from "unplugin-vue-components/vite";
@@ -11,7 +13,8 @@ import {JSDOM} from "jsdom";
 
 
 const timestamp = new Date().getTime();
-const finally_process = () => {
+const inline_icon = () => {
+    // noinspection JSUnusedGlobalSymbols
     return {
         name: "inline-svg",
         apply: "build",
@@ -97,7 +100,7 @@ export default ({mode}) => {
                               minifyCSS: true,
                               minifyURLs: true,
                           },
-                      }), finally_process(),
+                      }), inline_icon(),
             ],
 
             resolve: {

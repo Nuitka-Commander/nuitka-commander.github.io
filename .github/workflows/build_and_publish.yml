@@ -73,7 +73,7 @@ jobs:
           rm -rf ./nuitka-commander
           ls
       # 这可以做一些其他特殊的所需处理
-      - name: 为本地运行构建 # todo 图片出不来
+      - name: 为本地运行构建
         run: |
           pnpm run build:local_use
           mv ${{ github.workspace }}/dist/index.html ${{ github.workspace }}/dist/Nuitka-Commander.html
@@ -86,9 +86,6 @@ jobs:
           gh release create $VERSION ${{ github.workspace }}/dist/Nuitka-Commander.html -F ${{ github.workspace }}/.github/workflows/scripts/CHANGELOG.md --latest -t $VERSION
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      # todo
-      - name: 为Gitee发布release
-        run: echo todo
       # 重置更新日志并发布邮件提醒
       - name: 重置更新日志
         run: |

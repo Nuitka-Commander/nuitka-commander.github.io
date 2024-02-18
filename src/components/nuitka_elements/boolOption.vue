@@ -8,41 +8,42 @@ import * as constants from "@/vals/constants.json";
  * @Author: erduotong
  * @Date: 2023-12-08 22:16:35
  */
-//传入的props
-const props = defineProps({
-  content: Object,
-
-});
-const content = props.content;
-
-const show_after = constants.element_show_after_time;
+/**
+ * 传入的ModelRef
+ * @type {ModelRef<
+ * {
+ *    val:boolean,
+ *    enabled: boolean,
+ *    i18n: string,
+ *    command: {
+ *      original: string,
+ *    }
+ * }>}
+ */
+const model = defineModel();
 </script>
 
 <template>
 
-  <el-tooltip :show-after="show_after" placement="top">
+  <el-tooltip :show-after="constants.element_show_after_time" placement="top">
     <template #content>
       <div class="use_original_text">
-        {{ $t(`nuitka_info.${content["show"]["i18n"]}.desc`) }}
+        {{ $t(`nuitka_info.${model.i18n}.desc`) }}
       </div>
-
     </template>
+
     <element-card>
-      <el-text size="large">{{ $t(`nuitka_info.${content["show"]["i18n"]}.name`) }}</el-text>
-
+      <el-text size="large">{{ $t(`nuitka_info.${model.i18n}.name`) }}</el-text>
       <!--  original command-->
-      <el-text size="large" v-if="user_options.show_original_command"> ({{ content["show"]["command"] }})</el-text>
-
-
-      <el-switch v-model="content['val']" :disabled="!content['enabled']"></el-switch>
+      <el-text v-if="user_options.show_original_command" size="large"> ({{ model.command.original }})</el-text>
+      <el-switch v-model="model.val" :disabled="!model.enabled"></el-switch>
     </element-card>
   </el-tooltip>
-
 
 </template>
 
 <style lang="scss" scoped>
-.use_original_text{
+.use_original_text {
   white-space: pre-wrap;
 }
 

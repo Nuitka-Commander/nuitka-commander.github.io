@@ -8,50 +8,64 @@ import ElementCard from "@/components/untils/elementCard.vue";
 import * as constants from "@/vals/constants.json";
 import {user_options} from "@/vals/stores/user_options.js";
 
-const props = defineProps({
-  content: Object,
+/**
+ * @type {ModelRef<{
+ *  i18n: string,
+ *  val:string,
+ *  command: {
+ *    original:string,
+ *  }
+ *  enabled: boolean,
+ *  elements: {
+ *    [key: string]: {
+ *      i18n: string,
+ *      command:{
+ *        original:string,
+ *        enabled:boolean,
+ *      }
+ *    }
+ *  }
+ * }>}
+ */
+const model = defineModel();
 
-});
-const content = props.content;
-
-const show_after = constants.element_show_after_time;
 </script>
 
 <template>
-  <el-tooltip :show-after="show_after" placement="top">
+  <el-tooltip :show-after=" constants.element_show_after_time" placement="top">
 
     <template #content>
       <div class="use_original_text">
-        {{ $t(`nuitka_info.${content["show"]["i18n"]}.desc`) }}
+        {{ $t(`nuitka_info.${model.i18n}.desc`) }}
       </div>
     </template>
 
     <element-card>
       <div class="single_option_card">
         <div>
-          <el-text size="large">{{ $t(`nuitka_info.${content["show"]["i18n"]}.name`) }}</el-text>
-          <el-text size="large" v-if="user_options.show_original_command"> ({{ content["show"]["command"] }})</el-text>
+          <el-text size="large">{{ $t(`nuitka_info.${model.i18n}.name`) }}</el-text>
+          <el-text v-if="user_options.show_original_command" size="large"> ({{ model.command.original }})</el-text>
         </div>
 
-        <el-select v-model="content['val']" filterable :disabled="!content['enabled']">
+        <el-select v-model="model.val" :disabled="!model.enabled" filterable>
 
-          <template v-for="(value,key) in content['elements']">
+          <template v-for="(value,key) in model.elements" :key="key">
 
-            <el-tooltip placement="left-start" :show-after="show_after">
+            <el-tooltip :show-after=" constants.element_show_after_time" placement="left-start">
 
               <template #content>
                 <div class="use_original_text">
                   {{
-                    $t(`nuitka_info.${content["show"]["i18n"]}.elements.${content["elements"][key]["show"]["i18n"]}.desc`)
+                    $t(`nuitka_info.${model.i18n}.elements.${model.elements[key].i18n}.desc`)
                   }}
                 </div>
               </template>
               <!--如果该选项可能为disabled,那么就需要一个监听函数。如果当前选择的情况正好还是disabled的，那么就切换一个选项。-->
               <el-option
                   :key="key"
-                  :label="$t(`nuitka_info.${content['show']['i18n']}.elements.${content['elements'][key]['show']['i18n']}.name`)"
-                  :value="value['show']['command']"
-                  :disabled="!value['enabled']">
+                  :disabled="!value.enabled"
+                  :label="$t(`nuitka_info.${model.i18n}.elements.${model.elements[key].i18n}.name`)"
+                  :value="key">
               </el-option>
 
             </el-tooltip>
@@ -72,8 +86,8 @@ const show_after = constants.element_show_after_time;
 
 .single_option_card {
   display: flex;
-  justify-content: space-between;
   flex-direction: column;
+  justify-content: space-between;
   min-width: 100px;
   margin: 5px 5px;
 }
