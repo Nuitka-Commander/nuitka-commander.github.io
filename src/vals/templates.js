@@ -7,10 +7,28 @@ import {nuitka_element_status, nuitka_element_type} from "@/vals/enums.js";
 
 
 /**
- * @Description 模板
+ * @Description 模板 样式: ```
+ * {
+ *  type,
+ *  i18n,
+ *  commands,
+ *  others,
+ *  enabled,
+ *  default,
+ *  val,
+ * }
+ * ```
  */
 export const nuitka_templates = {
-    //不要过早的优化
+    // 单个的选择元素 为后面所有的一般多选元素作为可选值
+    multi_select_elements: {
+        i18n: String,
+        command: {
+            original: String,
+        },
+        enabled: true,
+    },
+
     Bool: {
         type: nuitka_element_type.Bool, //类型
         i18n: String, //国际化名称 自动拼接
@@ -22,24 +40,14 @@ export const nuitka_templates = {
         val: undefined, //值 等待程序自动补充
     },
 
-    // 单个的选择元素 为后面所有的一般多选元素作为可选值
-    multi_select_elements: {
-        i18n: String,
-        command: {
-            original: String,
-        },
-        enabled: true,
-
-    },
-
     SingleOption: {
         type: nuitka_element_type.Single_option,
         i18n: String,
         command: {
             original: String,
         },
-        enabled: true,
         elements: {}, //元素列表
+        enabled: true,
         default: undefined, //请填elements中的一个键值
         val: undefined,//string
     },
@@ -50,11 +58,10 @@ export const nuitka_templates = {
         command: {
             original: String,
         },
-        enabled: true,
         elements: {}, //元素
+        component: nuitka_element_status.use_default, //使用默认组件 强烈建议手动指定
+        enabled: true,
         default: [], //请填elements中的键值
         val: [], //同上
-        component: nuitka_element_status.use_default, //使用默认组件 强烈建议手动指定
-
     },
 };
