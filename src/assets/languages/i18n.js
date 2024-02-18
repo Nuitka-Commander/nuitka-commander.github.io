@@ -8,6 +8,7 @@ import {user_options} from "@/vals/stores/user_options.js";
 import {supported_i18n} from "@/assets/languages/supported_i18n.js";
 import {set_loading} from "@/vals/stores/is_loading.js";
 import {load_config_language, nuitka_info_loaded} from "@/modules/use_nuitka_config.js";
+import * as constants from "@/vals/constants.json";
 
 /**
  * @Description 是否语言加载完成
@@ -37,8 +38,14 @@ export const i18n = createI18n({
         if (key.startsWith("nuitka_info.") && nuitka_info_loaded === false) {
             return "loading...";
         }
-
-        console.error(` i18n: missing '${key}' for locale '${locale}'`);
+        if (constants.debug === true) {
+            //构建后文件结构不同，就不给用户看了
+            const error = new Error(`i18n: missing '${key}' for locale '${locale}`);
+            Error.captureStackTrace(error, i18n.global.missing);
+            console.error(error.stack);
+        } else {
+            console.error(`i18n: missing '${key}' for locale '${locale}`);
+        }
         return "error!";
     },
     messages: {},
