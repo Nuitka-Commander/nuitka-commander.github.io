@@ -21,7 +21,6 @@ export default {
             },
         },
 
-        ////////////////////////////////
         content_opt_test: {
             ...nuitka_templates.SingleOption,
 
@@ -64,6 +63,7 @@ export default {
             },
             default: "python",
         },
+
 
     },
     page2: {},

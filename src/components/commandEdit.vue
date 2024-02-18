@@ -8,6 +8,7 @@ import {use_command} from "@/modules/use_command.js";
 import {nuitka_element_type} from "@/vals/enums.js";
 import BoolOption from "@/components/nuitka_elements/boolOption.vue";
 import SingleOption from "@/components/nuitka_elements/singleOption.vue";
+import DefinedMultipleOption from "@/components/nuitka_elements/definedMultipleOption.vue";
 
 const command = use_command;
 
@@ -45,7 +46,16 @@ const command = use_command;
                   <single-option v-model="value1[nuitka_element_type.Single_option][key2]"></single-option>
                 </template>
               </div>
+              <div>
+                <!--已定义多选-->
+                <!--suppress JSUnusedLocalSymbols -->
+                <template v-for="(_,key2) in value1[nuitka_element_type.Defined_multiple]" :key="key2">
+                  <defined-multiple-option
+                      v-model="value1[nuitka_element_type.Defined_multiple][key2]"></defined-multiple-option>
+                </template>
+              </div>
             </div>
+
 
           </template>
         </el-tab-pane>
