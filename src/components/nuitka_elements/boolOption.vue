@@ -18,8 +18,6 @@ import * as constants from "@/vals/constants.json";
  *    command: {
  *      original: string,
  *    }
- *
- *
  * }>}
  */
 const model = defineModel();
