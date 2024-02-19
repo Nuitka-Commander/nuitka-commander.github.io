@@ -12,7 +12,10 @@
   "debug": true,
   "element_show_after_time": 400,
   "nuitka_multi_option": {
-    "min_use_transfer_need": 20,
+    "use_checkbox_interval": {
+      "start": 15,
+      "end": 30
+    },
     "max_collapse_tags": 3
   }
 }

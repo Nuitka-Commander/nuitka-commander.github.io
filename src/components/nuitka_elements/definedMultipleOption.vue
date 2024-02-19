@@ -36,19 +36,28 @@ import {computed} from "vue";
 const model = defineModel();
 
 /**
- * 使用的控件类型判断
- * @type {ComputedRef<boolean>}
+ * 判断使用的控件
+ * @type {ComputedRef<string>}
  */
-const is_use_select = computed(() => {
-  if (model.value.component === nuitka_element_status.use_select) {
-    return true;
+const chose_element = computed(() => {
+  if (model.value.component === nuitka_element_status.use_select
+      || model.value.component === nuitka_element_status.use_transfer
+      || model.value.component === nuitka_element_status.use_checkbox
+  ) {
+    return model.value.component;
   }
-  if (model.value.component === nuitka_element_status.use_transfer) {
-    return false;
+  const elements_length = Object.keys(model.value.elements).length;
+  const {
+    start,
+    end,
+  } = constants.nuitka_multi_option.use_checkbox_interval;
+  if (elements_length < start) {
+    return nuitka_element_status.use_select;
+  } else if (elements_length > end) {
+    return nuitka_element_status.use_transfer;
+  } else {
+    return nuitka_element_status.use_checkbox;
   }
-  //default 小于最小值时使用select 否则使用transfer
-
-  return Object.keys(model.value.elements).length < constants.nuitka_multi_option.min_use_transfer_need;
 });
 </script>
 
@@ -65,7 +74,7 @@ const is_use_select = computed(() => {
         <el-text v-if="user_options.show_original_command" size="large"> ({{ model.command.original }})</el-text>
       </div>
 
-      <template v-if="is_use_select">
+      <template v-if="chose_element === nuitka_element_status.use_select">
         <!--select实现-->
 
         <el-select
@@ -75,6 +84,7 @@ const is_use_select = computed(() => {
             :max-collapse-tags="constants.nuitka_multi_option.max_collapse_tags"
             :placeholder="$t('nuitka_elements.select_placeholder')"
             v-model="model.val"
+            filterable
         >
           <template v-for="(value,key) in model.elements">
             <el-tooltip :show-after=" constants.element_show_after_time" placement="left-start">
@@ -99,10 +109,15 @@ const is_use_select = computed(() => {
 
         </el-select>
       </template>
-      <template v-else>
-        <!--穿梭框实现-->
-
+      <template v-else-if="chose_element===nuitka_element_status.use_checkbox">
+        <!--多选框实现-->
+        <!--todo-->
       </template>
+      <template v-else-if="chose_element === nuitka_element_status.use_transfer">
+        <!--穿梭框实现-->
+        <!--todo-->
+      </template>
+
 
     </element-card>
   </el-tooltip>

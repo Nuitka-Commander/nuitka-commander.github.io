@@ -15,5 +15,6 @@ export const nuitka_element_status = Object.freeze({
     user_provided: null,
     use_select: "use_select", //使用选择组件
     use_transfer: "use_transfer", //使用穿梭框组件
+    use_checkbox: "use_checkbox",//使用多选框
     use_default: "default", //使用默认值
 });
