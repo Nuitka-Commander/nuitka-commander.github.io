@@ -12,6 +12,7 @@
   "debug": true,
   "element_show_after_time": 400,
   "nuitka_multi_option": {
-    "min_use_transfer_need": 6
+    "min_use_transfer_need": 6,
+    "max_collapse_tags": 3
   }
 }
