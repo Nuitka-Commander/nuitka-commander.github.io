@@ -89,9 +89,10 @@ jobs:
       # 重置更新日志并发布邮件提醒
       - name: 重置更新日志并更新语言支持列表
         run: |
+          node ${{ github.workspace }}/.github/workflows/scripts/update_language_supports_list.js
           node ${{ github.workspace }}/.github/workflows/scripts/reset_changelog.js
           git config --global user.name "github action"
           git config --global user.email "action_bot@github.com"
           git add ./docs/change_log.yaml
-          git commit -m "Reset changelog"
+          git commit -m "Reset changelog & update language support list"
           git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/Nuitka-Commander/nuitka-commander.github.io.git
