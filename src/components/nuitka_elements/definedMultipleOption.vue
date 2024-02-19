@@ -26,6 +26,9 @@ import {nuitka_element_status} from "@/vals/enums.js";
  *      enabled: boolean,
  *    }
  *  }
+ *  val: string[],
+ *  enabled: boolean,
+ *  default: string[],
  *
  * }>}
  */
@@ -61,11 +64,40 @@ const is_use_select = computed(() => {
       </div>
 
       <template v-if="is_use_select===true">
-        <!--select-->
+        <!--select实现-->
 
+        <el-select
+            multiple
+            collapse-tags
+            collapse-tags-tooltip
+            :max-collapse-tags="constants.nuitka_multi_option.max_collapse_tags"
+            v-model="model.val"
+        >
+          <template v-for="(value,key) in model.elements">
+            <el-tooltip :show-after=" constants.element_show_after_time" placement="left-start">
+              <template #content>
+                <div class="use_original_text">
+                  {{
+                    $t(`nuitka_info.${model.i18n}.elements.${model.elements[key].i18n}.desc`)
+                  }}
+                </div>
+              </template>
+              <el-option
+                  :key="key"
+                  :disabled="!model.enabled"
+                  :label="$t(`nuitka_info.${model.i18n}.elements.${model.elements[key].i18n}.name`) +
+                  (user_options.show_original_command ? ` (${model.elements[key].command.original})` : '') "
+                  :value="key"
+              >
+
+              </el-option>
+            </el-tooltip>
+          </template>
+
+        </el-select>
       </template>
       <template v-else>
-        <!--穿梭框-->
+        <!--穿梭框实现-->
 
       </template>
 

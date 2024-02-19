@@ -64,7 +64,47 @@ export default {
             default: "python",
         },
 
+        content_mult_test: {
+            ...nuitka_templates.DefinedMultipleOption,
+            command: {
+                original: "star rail",
+            },
+            i18n: "content_mult_test",
+            elements: {
+                python: {
+                    ...nuitka_templates.multi_select_elements,
+                    command: {
+                        original: "python",
+                    },
+                    i18n: "python",
+                },
+                go: {
+                    ...nuitka_templates.multi_select_elements,
+                    command: {
+                        original: "go",
+                    },
+                    i18n: "go",
 
+                },
+                genshin_impact: {
+                    ...nuitka_templates.multi_select_elements,
+                    command: {
+                        original: "genshin_impact",
+                    },
+                    i18n: "genshin_impact",
+                },
+                kotlin: {
+                    ...nuitka_templates.multi_select_elements,
+                    command: {
+                        original: "kotlin",
+                    },
+                    i18n: "kotlin",
+
+                },
+
+            },
+            default: ["python", "go"],
+        },
     },
     page2: {},
 
