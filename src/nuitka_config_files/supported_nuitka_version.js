@@ -10,6 +10,5 @@ export default {
     latest_key: "1.9.*",//最新版本的key
     versions: { //version:path
         "1.9.*": "1.9._",
-        "2.0.*": "2.0._",
     },
 };

@@ -87,7 +87,7 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       # 重置更新日志并发布邮件提醒
-      - name: 重置更新日志
+      - name: 重置更新日志并更新语言支持列表
         run: |
           node ${{ github.workspace }}/.github/workflows/scripts/reset_changelog.js
           git config --global user.name "github action"

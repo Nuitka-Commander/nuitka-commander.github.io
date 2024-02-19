@@ -3,7 +3,7 @@
  * @Author: erduotong
  * @Date: 2023-12-11 22:10:51
  */
-import {nuitka_element_status, nuitka_element_type} from "@/vals/enums.js";
+import {nuitka_element_status, nuitka_element_type} from "./enums.js"; //这里不能改成@开头的路径
 
 
 /**
