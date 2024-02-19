@@ -70,9 +70,6 @@ class CommandStatus {
         });
 
         // 获取已有配置
-        const local_config = await new Promise(resolve => {
-            local_nuitka_version_config.read_config(user_options.value.nuitka_version, resolve);
-        });
         // TODO: 加载配置
 
         this.status.value = this.original_status;
