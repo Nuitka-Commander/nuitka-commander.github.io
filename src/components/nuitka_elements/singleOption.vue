@@ -64,8 +64,10 @@ const model = defineModel();
               <el-option
                   :key="key"
                   :disabled="!value.enabled"
-                  :label="$t(`nuitka_info.${model.i18n}.elements.${model.elements[key].i18n}.name`)"
+                  :label="$t(`nuitka_info.${model.i18n}.elements.${model.elements[key].i18n}.name`) +
+                  (user_options.show_original_command ? ` (${model.elements[key].command.original})` : '') "
                   :value="key">
+
               </el-option>
 
             </el-tooltip>
