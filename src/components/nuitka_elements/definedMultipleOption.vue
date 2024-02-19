@@ -8,6 +8,7 @@ import ElementCard from "@/components/untils/elementCard.vue";
 import * as constants from "@/vals/constants.json";
 import {user_options} from "@/vals/stores/user_options.js";
 import {nuitka_element_status} from "@/vals/enums.js";
+import {computed} from "vue";
 
 /**
  *
@@ -46,7 +47,8 @@ const is_use_select = computed(() => {
     return false;
   }
   //default 小于最小值时使用select 否则使用transfer
-  return model.value.elements.length < constants.nuitka_multi_option.min_use_transfer_need;
+
+  return Object.keys(model.value.elements).length < constants.nuitka_multi_option.min_use_transfer_need;
 });
 </script>
 
@@ -63,7 +65,7 @@ const is_use_select = computed(() => {
         <el-text v-if="user_options.show_original_command" size="large"> ({{ model.command.original }})</el-text>
       </div>
 
-      <template v-if="is_use_select===true">
+      <template v-if="is_use_select">
         <!--select实现-->
 
         <el-select
@@ -71,6 +73,7 @@ const is_use_select = computed(() => {
             collapse-tags
             collapse-tags-tooltip
             :max-collapse-tags="constants.nuitka_multi_option.max_collapse_tags"
+            :placeholder="$t('nuitka_elements.select_placeholder')"
             v-model="model.val"
         >
           <template v-for="(value,key) in model.elements">
@@ -78,15 +81,15 @@ const is_use_select = computed(() => {
               <template #content>
                 <div class="use_original_text">
                   {{
-                    $t(`nuitka_info.${model.i18n}.elements.${model.elements[key].i18n}.desc`)
+                    $t(`nuitka_info.${model.i18n}.elements.${value.i18n}.desc`)
                   }}
                 </div>
               </template>
               <el-option
                   :key="key"
                   :disabled="!model.enabled"
-                  :label="$t(`nuitka_info.${model.i18n}.elements.${model.elements[key].i18n}.name`) +
-                  (user_options.show_original_command ? ` (${model.elements[key].command.original})` : '') "
+                  :label="$t(`nuitka_info.${model.i18n}.elements.${value.i18n}.name`) +
+                  (user_options.show_original_command ? ` (${value.command.original})` : '') "
                   :value="key"
               >
 
