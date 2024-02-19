@@ -9,7 +9,7 @@ export const nuitka_element_type = Object.freeze({
     Definable_single: "definable_single_",
     Defined_multiple: "defined_multiple_",
     Single_option: "single_option_",
-    User_provided_multiple: "user_provided_multiple_",
+    Definable_multiple_option: "definable_multiple_option___",
 });
 export const nuitka_element_status = Object.freeze({
     user_provided: null,
