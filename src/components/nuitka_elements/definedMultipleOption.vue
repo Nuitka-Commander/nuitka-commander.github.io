@@ -42,21 +42,15 @@ const model = defineModel();
 const chose_element = computed(() => {
   if (model.value.component === nuitka_element_status.use_select
       || model.value.component === nuitka_element_status.use_transfer
-      || model.value.component === nuitka_element_status.use_checkbox
   ) {
     return model.value.component;
   }
   const elements_length = Object.keys(model.value.elements).length;
-  const {
-    start,
-    end,
-  } = constants.nuitka_multi_option.use_checkbox_interval;
-  if (elements_length < start) {
+
+  if (elements_length < constants.nuitka_multi_option.min_use_transfer) {
     return nuitka_element_status.use_select;
-  } else if (elements_length > end) {
-    return nuitka_element_status.use_transfer;
   } else {
-    return nuitka_element_status.use_checkbox;
+    return nuitka_element_status.use_transfer;
   }
 });
 </script>
@@ -108,10 +102,6 @@ const chose_element = computed(() => {
           </template>
 
         </el-select>
-      </template>
-      <template v-else-if="chose_element===nuitka_element_status.use_checkbox">
-        <!--多选框实现-->
-        <!--todo-->
       </template>
       <template v-else-if="chose_element === nuitka_element_status.use_transfer">
         <!--穿梭框实现-->
