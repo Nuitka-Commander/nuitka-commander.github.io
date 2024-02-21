@@ -57,7 +57,9 @@ export default {
         input: "输入",
     },
     nuitka_elements: {
-        "select_placeholder": "选择",
+        select_placeholder: "选择",
+        not_selected: "未选择",
+        selected: "已选择",
     },
 
 
