@@ -62,21 +62,21 @@ const transfer_data = computed(() => {
   const data = [];
   Object.keys(model.value.elements).forEach((key) => {
     data.push({
-      key: key,
-      label: $t(`nuitka_info.${model.value.i18n}.elements.${value.i18n}.name`) +
-          (user_options.value.show_original_command ? ` (${value.command.original})` : ""),
+      key: key,//无需label因为设置了渲染函数
+      i18n: model.value.elements[key].i18n,
+      command: model.value.elements[key].command.original,
       disabled: !model.value.elements[key].enabled,
     });
   });
   return data;
 });
 /**
- *
+ * transfer内的渲染函数
  * @param h 用于创建虚拟节点
  * @param option el-transfer的配置项
  */
 const render_function = (h, option) => {
-
+// todo 完成渲染函数
 };
 </script>
 
