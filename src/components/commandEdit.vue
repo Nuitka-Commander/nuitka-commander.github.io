@@ -16,7 +16,6 @@ const command = use_command;
 
 <template>
   <div>
-
     <el-tabs stretch tab-position="left" type="card">
       <template v-for="(value1,key1) in command.status.value" :key="key1">
         <!--做出分页-->
@@ -27,11 +26,11 @@ const command = use_command;
             </el-text>
           </template>
           <template #default>
-            <!--todo 将defineModel的访问换成.而不是[]-->
 
             <div class="edit_content_area">
               <!--内容实际所在地-->
               <!--允许未使用变量用于v-for占位-->
+
               <div>
                 <!--Bool-->
                 <!--suppress JSUnusedLocalSymbols -->

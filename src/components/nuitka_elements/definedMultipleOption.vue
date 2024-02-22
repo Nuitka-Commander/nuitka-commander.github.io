@@ -76,7 +76,58 @@ const transfer_data = computed(() => {
  * @param option el-transfer的配置项
  */
 const render_function = (h, option) => {
-// todo 完成渲染函数
+  return h(
+    'el-tooltip',
+    {
+      props: {
+        showAfter: constants.element_show_after_time,
+        placement: 'left-start',
+      },
+    },
+    [
+      h(
+        'template',
+        {
+          slot: 'content',
+        },
+        [
+          h(
+            'div',
+            {
+              class: 'use_original_text',
+            },
+            [
+              this.$t(`nuitka_info.${model.value.i18n}.elements.${option.i18n}.desc`),
+            ]
+          ),
+        ]
+      ),
+      h(
+        'template',
+        {
+          slot: 'default',
+        },
+        [
+          h(
+            'span',
+            {},
+            [
+              this.$t(`nuitka_info.${model.value.i18n}.elements.${option.i18n}.name`),
+            ]
+          ),
+          user_options.value.show_original_command === true
+            ? h(
+                'span',
+                {},
+                [
+                  option.command,
+                ]
+              )
+            : null,
+        ]
+      ),
+    ]
+  );
 };
 </script>
 
@@ -135,6 +186,7 @@ const render_function = (h, option) => {
             v-model="model.val"
             :titles="[$t('nuitka_elements.not_selected'), $t('nuitka_elements.selected')]"
             :data="transfer_data"
+            :render-content="render_function"
         >
 
         </el-transfer>
@@ -143,6 +195,7 @@ const render_function = (h, option) => {
 
     </element-card>
   </el-tooltip>
+
 </template>
 
 <style lang="scss" scoped>
