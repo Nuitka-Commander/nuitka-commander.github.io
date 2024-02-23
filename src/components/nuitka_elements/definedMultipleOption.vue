@@ -9,7 +9,7 @@ import * as constants from "@/vals/constants.json";
 import {user_options} from "@/vals/stores/user_options.js";
 import {nuitka_element_status} from "@/vals/enums.js";
 import {computed} from "vue";
-
+import TransferRender from "@/components/nuitka_elements/package/transferRender.vue";
 /**
  *
  * @type {ModelRef<{
@@ -63,7 +63,8 @@ const transfer_data = computed(() => {
   Object.keys(model.value.elements).forEach((key) => {
     data.push({
       key: key,//无需label因为设置了渲染函数
-      i18n: model.value.elements[key].i18n,
+      // i18n: model.value.elements[key].i18n,
+      i18n: `nuitka_info.${model.value.i18n}.elements.${model.value.elements[key].i18n}`,
       command: model.value.elements[key].command.original,
       disabled: !model.value.elements[key].enabled,
     });
@@ -71,67 +72,30 @@ const transfer_data = computed(() => {
   return data;
 });
 /**
+ * 翻译函数
+ */
+
+/**
  * transfer内的渲染函数
  * @param h 用于创建虚拟节点
  * @param option el-transfer的配置项
  */
 const render_function = (h, option) => {
   return h(
-    'el-tooltip',
-    {
-      props: {
-        showAfter: constants.element_show_after_time,
-        placement: 'left-start',
+      "transfer-render",
+      {
+        props: {
+          i18n: option.i18n,
+          command: option.command,
+
+        },
       },
-    },
-    [
-      h(
-        'template',
-        {
-          slot: 'content',
-        },
-        [
-          h(
-            'div',
-            {
-              class: 'use_original_text',
-            },
-            [
-              this.$t(`nuitka_info.${model.value.i18n}.elements.${option.i18n}.desc`),
-            ]
-          ),
-        ]
-      ),
-      h(
-        'template',
-        {
-          slot: 'default',
-        },
-        [
-          h(
-            'span',
-            {},
-            [
-              this.$t(`nuitka_info.${model.value.i18n}.elements.${option.i18n}.name`),
-            ]
-          ),
-          user_options.value.show_original_command === true
-            ? h(
-                'span',
-                {},
-                [
-                  option.command,
-                ]
-              )
-            : null,
-        ]
-      ),
-    ]
   );
 };
 </script>
 
 <template>
+
   <el-tooltip :show-after=" constants.element_show_after_time">
     <template #content>
       <div class="use_original_text">
