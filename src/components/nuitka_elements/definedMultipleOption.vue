@@ -9,7 +9,7 @@ import * as constants from "@/vals/constants.json";
 import {user_options} from "@/vals/stores/user_options.js";
 import {nuitka_element_status} from "@/vals/enums.js";
 import {computed} from "vue";
-import TransferRender from "@/components/nuitka_elements/package/transferRender.vue";
+
 /**
  *
  * @type {ModelRef<{
