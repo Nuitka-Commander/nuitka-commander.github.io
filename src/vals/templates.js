@@ -7,61 +7,88 @@ import {nuitka_element_status, nuitka_element_type} from "./enums.js"; //这里�
 
 
 /**
- * @Description 模板 样式: ```
- * {
- *  type,
- *  i18n,
- *  commands,
- *  others,
- *  enabled,
- *  default,
- *  val,
- * }
- * ```
+ * @Description 生成一个新的元素，请使用...来将生成后的对象扩展到你的对象中
  */
-export const nuitka_templates = {
-    // 单个的选择元素 为后面所有的一般多选元素作为可选值
-    multi_select_elements: {
-        i18n: String,
-        command: {
-            original: String,
-        },
-        enabled: true,
+export const new_option = {
+    /**
+     * @Description 生成一个Bool元素
+     * @param i18n {string}
+     * @param command {{
+     *     original: string
+     * }}
+     * @param enabled {boolean}
+     * @param default_value {boolean}
+     * @return {{val: BooleanConstructor, default:boolean, type: string, i18n:string, command: {original:string}, enabled:boolean}}
+     */
+    bool: (i18n, command, enabled, default_value) => {
+        return {
+            type: nuitka_element_type.Bool,
+            i18n: i18n,
+            command: command,
+            enabled: enabled,
+            default: default_value,
+            val: Boolean,
+
+        };
+    },
+    /**
+     * @Description 生成一个多选元素
+     * @param i18n {string}
+     * @param command {{original:string}}
+     * @param enabled {boolean}
+     * @return {{i18n:string, command: {original:string}, enabled:boolean}}
+     */
+    multi_elements: (i18n, command, enabled) => {
+        return {
+            i18n: i18n,
+            command: command,
+            enabled: enabled,
+        };
+    },
+    /**
+     * 生成一个单选元素
+     * @param i18n {string}
+     * @param command {{original:string}}
+     * @param enabled {boolean}
+     * @param elements {{string: object}} 元素列表，key为一个string,value是一个对象，需要使用multi_elements生成
+     * @param default_value {string} 默认值 填写elements中的键值
+     * @return {{val: StringConstructor, default:string, elements:object, type: string, i18n:string, command:{original:string}, enabled:boolean}}
+     */
+    single_option: (i18n, command, enabled, elements, default_value) => {
+        return {
+            type: nuitka_element_type.Single_option,
+            i18n: i18n,
+            command: command,
+            enabled: enabled,
+            elements: elements,
+            default: default_value,
+            val: String,
+        };
+    },
+    /**
+     * @Description 生成一个多选元素
+     * @param i18n {string}
+     * @param command {{original:string}}
+     * @param enabled {boolean}
+     * @param elements {{string: object}} 元素列表，key为一个string,value是一个对象，需要使用multi_elements生成
+     * @param default_value {string[]} 默认值 填写elements中的键值
+     * @param component {nuitka_element_status.use_select | nuitka_element_status.use_transfer} 指定使用组件的类型 不指定则自动判断
+     * @return {{val: *[], component: nuitka_element_status.use_select | nuitka_element_status.use_transfer,
+     * default: [string], elements:object, type: string, i18n:string, command:{original:string}, enabled:boolean}}
+     */
+    defined_multi: (i18n, command, enabled, elements, default_value, component) => {
+        return {
+            type: nuitka_element_type.Defined_multiple,
+            i18n: i18n,
+            command: command,
+            enabled: enabled,
+            component: component,
+            elements: elements,
+            default: default_value,
+            val: [],
+
+        };
     },
 
-    Bool: {
-        type: nuitka_element_type.Bool, //类型
-        i18n: String, //国际化名称 自动拼接
-        command: {//命令描述 可用于生成 在非默认值时显示
-            original: String, //原始命令 其他位置交给生成器处理
-        },
-        enabled: true, //是否启用 (可以被选择)
-        default: false, //默认值 元素值自动补充
-        val: undefined, //值 等待程序自动补充
-    },
 
-    SingleOption: {
-        type: nuitka_element_type.Single_option,
-        i18n: String,
-        command: {
-            original: String,
-        },
-        elements: {}, //元素列表
-        enabled: true,
-        default: undefined, //请填elements中的一个键值
-        val: undefined,//string
-    },
-
-    DefinedMultipleOption: {
-        type: nuitka_element_type.Defined_multiple,
-        i18n: String,
-        command: {
-            original: String,
-        },
-        elements: {}, //元素
-        component: nuitka_element_status.use_default, //使用默认组件 强烈建议手动指定
-        enabled: true,
-        default: [], //请填elements中的键值
-        val: [], //同上
-    },
 };
