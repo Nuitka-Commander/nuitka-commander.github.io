@@ -54,6 +54,21 @@ export default {
                 nuitka_element_status.use_select,
             ),
         },
+        single_mutable: {
+            ...new_option.definable_single(
+                "content_mult_test",
+                {original: "star rail"},
+                true,
+                {
+                    python: new_option.multi_elements("python", {original: "python"}, true),
+                    go: new_option.multi_elements("go", {original: "go"}, true),
+                    genshin_impact: new_option.multi_elements("genshin_impact", {original: "genshin_impact"}, true),
+                    kotlin: new_option.multi_elements("kotlin", {original: "kotlin"}, true),
+                },
+                "python",
+                nuitka_element_status.use_select,
+            ),
+        },
     },
 
 
