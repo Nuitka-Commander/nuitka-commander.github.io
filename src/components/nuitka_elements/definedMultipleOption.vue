@@ -40,18 +40,19 @@ const model = defineModel();
  * @type {ComputedRef<string>}
  */
 const chose_element = computed(() => {
-  if (model.value.component === nuitka_element_status.use_select
-      || model.value.component === nuitka_element_status.use_transfer
-  ) {
-    return model.value.component;
-  }
-  const elements_length = Object.keys(model.value.elements).length;
-
-  if (elements_length < constants.nuitka_multi_option.min_use_transfer) {
-    return nuitka_element_status.use_select;
-  } else {
-    return nuitka_element_status.use_transfer;
-  }
+  return nuitka_element_status.use_select;//todo 完成穿梭组件
+  // if (model.value.component === nuitka_element_status.use_select
+  //     || model.value.component === nuitka_element_status.use_transfer
+  // ) {
+  //   return model.value.component;
+  // }
+  // const elements_length = Object.keys(model.value.elements).length;
+  //
+  // if (elements_length < constants.nuitka_multi_option.min_use_transfer) {
+  //   return nuitka_element_status.use_select;
+  // } else {
+  //   return nuitka_element_status.use_transfer;
+  // }
 });
 /**
  * 生成穿梭框所需的渲染数据
