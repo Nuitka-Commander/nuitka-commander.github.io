@@ -6,6 +6,8 @@
  */
 import * as constants from "@/vals/constants.json";
 import ElementCard from "@/components/untils/elementCard.vue";
+import {user_options} from "@/vals/stores/user_options.js";
+
 /**
  * @type {ModelRef<{
  *  i18n: string,
@@ -19,8 +21,9 @@ import ElementCard from "@/components/untils/elementCard.vue";
  *      i18n: string,
  *      command:{
  *        original:string,
- *        enabled:boolean,
  *      }
+ *      enabled:boolean,
+ *      user_provide: boolean,
  *    }
  *  }
  * }>}
@@ -32,11 +35,17 @@ const model = defineModel();
   <el-tooltip :show-after="constants.element_show_after_time" placement="top">
     <template #content>
       <div class="use_original_text">
-
+        {{ $t(`nuitka_info.${model.i18n}.desc`) }}
       </div>
     </template>
     <element-card>
+      <div>
+        <el-text size="large">{{ $t(`nuitka_info.${model.i18n}.name`) }}</el-text>
+        <el-text v-if="user_options.show_original_command" size="large"> ({{ model.command.original }})</el-text>
+      </div>
+      <el-select v-model="model.val" :disabled="!model.enabled" filterable>
 
+      </el-select>
     </element-card>
 
   </el-tooltip>
