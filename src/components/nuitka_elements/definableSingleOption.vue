@@ -78,6 +78,8 @@ function delete_element(key) {
     });
   });
 }
+
+
 </script>
 <!--todo 完成多个可用控件-->
 <template>
@@ -115,7 +117,7 @@ function delete_element(key) {
                   (user_options.show_original_command ? ` (${model.elements[key].command.original})` : '')"
                 :value="key"
             >
-              <!--todo 根据用户情况提供一个计算属性-->
+              <!--todo 根据的用户的情况修改一下 还有上面的label 如果该选项是用户自定义的话就没有i18n只有command original了-->
               {{
                 $t(`nuitka_info.${model.i18n}.elements.${model.elements[key].i18n}.name`) +
                 (user_options.show_original_command ? ` (${model.elements[key].command.original})` : "")
