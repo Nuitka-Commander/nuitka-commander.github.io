@@ -121,7 +121,7 @@ function delete_element(key) {
                 (user_options.show_original_command ? ` (${model.elements[key].command.original})` : "")
               }}
               <!--如果他是用户定义的，那么就有个删除符号-->
-              <span v-if="value.user_provide===true" @click.stop="delete_element(key,$event)">
+              <span v-if="value.user_provide===true" @click.stop="delete_element(key)">
                 <el-icon><Delete /></el-icon>
               </span>
             </el-option>
