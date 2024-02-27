@@ -130,6 +130,7 @@ const render_function = (h, option) => {
                   }}
                 </div>
               </template>
+              <!--todo 快捷全选(all_)-->
               <el-option
                   :key="key"
                   :disabled="!model.enabled"
