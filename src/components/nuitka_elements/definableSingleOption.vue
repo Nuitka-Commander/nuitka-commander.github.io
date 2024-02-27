@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="js">
 /**
  * @Description 可以让用户定义的单选
  * @Author: erduotong
@@ -79,7 +79,22 @@ function delete_element(key) {
   });
 }
 
-
+/**
+ * 获取选项的label 如果用户定义则直接返回命令，否则考虑是否显示原始命令并返回
+ * @param key
+ * @param value
+ * @return {string}
+ */
+function get_option_label(key, value) {
+  if (value.user_provide === true) {
+    return value.command.original;
+  }
+  let return_val = t(`nuitka_info.${model.value.i18n}.elements.${model.value.elements[key].i18n}.name`);
+  if (user_options.value.show_original_command) {
+    return_val += ` （${model.value.elements[key].command.original})`;
+  }
+  return return_val;
+}
 </script>
 <!--todo 完成多个可用控件-->
 <template>
@@ -113,15 +128,10 @@ function delete_element(key) {
             <el-option
                 :key="key"
                 :disabled="!value.enabled"
-                :label="$t(`nuitka_info.${model.i18n}.elements.${model.elements[key].i18n}.name`) +
-                  (user_options.show_original_command ? ` (${model.elements[key].command.original})` : '')"
+                :label="get_option_label(key, value)"
                 :value="key"
             >
-              <!--todo 根据的用户的情况修改一下 还有上面的label 如果该选项是用户自定义的话就没有i18n只有command original了-->
-              {{
-                $t(`nuitka_info.${model.i18n}.elements.${model.elements[key].i18n}.name`) +
-                (user_options.show_original_command ? ` (${model.elements[key].command.original})` : "")
-              }}
+              {{ get_option_label(key, value) }}
               <!--如果他是用户定义的，那么就有个删除符号-->
               <span v-if="value.user_provide===true" @click.stop="delete_element(key)">
                 <el-icon><Delete /></el-icon>

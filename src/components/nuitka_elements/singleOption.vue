@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="js">
 /**
  * @Description 单选
  * @Author: erduotong
