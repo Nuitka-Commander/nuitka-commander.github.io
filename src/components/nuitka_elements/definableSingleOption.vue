@@ -8,8 +8,10 @@ import * as constants from "@/vals/constants.json";
 import ElementCard from "@/components/untils/elementCard.vue";
 import {user_options} from "@/vals/stores/user_options.js";
 import {Delete} from "@element-plus/icons-vue";
-import {ElMessage, ElMessageBox} from "element-plus";
+import {ElInput, ElMessage, ElMessageBox} from "element-plus";
 import {useI18n} from "vue-i18n";
+import {ref} from "vue";
+import {new_option} from "@/vals/templates.js";
 
 /**
  * @type {ModelRef<{
@@ -95,6 +97,37 @@ function get_option_label(key, value) {
   }
   return return_val;
 }
+
+//////////////////////////////////////////////// 添加选项逻辑 ////////////////////////////////////////////////
+const is_adding = ref(false);
+const option_name = ref("");
+
+function on_adding() {
+  is_adding.value = true;
+}
+
+function on_confirm() {
+  if (option_name.value.trim() !== "") {
+    console.log(`add option: ${option_name.value}`);
+    model.value.elements[option_name.value] = {
+      ...new_option.multi_elements(
+          "",
+          {
+            original: option_name.value,
+          },
+          true,
+          true,
+      ),
+    };
+  }
+  on_cancel();
+}
+
+function on_cancel() {
+  option_name.value = "";
+  is_adding.value = false;
+}
+
 </script>
 <!--todo 完成多个可用控件-->
 <template>
@@ -138,6 +171,23 @@ function get_option_label(key, value) {
               </span>
             </el-option>
           </el-tooltip>
+        </template>
+        <template #footer>
+          <el-button v-if="!is_adding" text bg size="small" @click="on_adding">
+            {{ $t("nuitka_elements.add_option") }}
+          </el-button>
+          <template v-else>
+            <el-input
+                v-model="option_name"
+                :placeholder="t('nuitka_elements.input_an_option')"
+                size="small"
+                style="width: 100%;margin-bottom: 8px;"
+            />
+            <el-button type="primary" size="small" @click="on_confirm">
+              {{ $t("message.OK") }}
+            </el-button>
+            <el-button size="small" @click="on_cancel">{{ $t("message.cancel") }}</el-button>
+          </template>
         </template>
       </el-select>
     </element-card>

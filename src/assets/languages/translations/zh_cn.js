@@ -61,6 +61,8 @@ export default {
         not_selected: "未选择",
         selected: "已选择",
         user_provide: "这是你自定义的选项",
+        add_option: "添加一个选项",
+        input_an_option: "输入一个选项",
     },
     message: {
         will_del_option: "你即将删除此该自定义选项",
