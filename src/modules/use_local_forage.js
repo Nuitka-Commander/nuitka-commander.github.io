@@ -6,10 +6,12 @@
 import localforage from "localforage";
 
 class LocalNuitkaVersionConfig {
+
     constructor() {
         this.localforage = localforage.createInstance({
             name: "nuitka_commander_version_configs",
             storeName: "nuitka_commander_version_config",
+            driver: localforage.INDEXEDDB,
         });
     }
 
@@ -17,36 +19,36 @@ class LocalNuitkaVersionConfig {
      * 更新版本的配置
      * @param version {String} 版本号
      * @param config {Object} 配置对象
-     * @param callback {Function} 回调函数
+     * @returns {Promise}
      */
-    update_config(version, config, callback) {
-        this.localforage.setItem(version, config).then(callback);
+    update_config(version, config) {
+        return this.localforage.setItem(version, config);
     }
 
     /**
      * 读取版本的配置
      * @param version {String} 版本号
-     * @param callback {Function} 回调函数
+     * @returns {Promise}
      */
-    read_config(version, callback) {
-        this.localforage.getItem(version).then(callback);
+    read_config(version) {
+        return this.localforage.getItem(version);
     }
 
     /**
      * 删除该版本的配置
      * @param version {String} 版本号
-     * @param callback  {Function} 回调函数
+     * @returns {Promise}
      */
-    remove_config(version, callback) {
-        this.localforage.removeItem(version).then(callback);
+    remove_config(version) {
+        return this.localforage.removeItem(version);
     }
 
     /**
      * 删除所有版本的配置 谨慎使用
-     * @param callback {Function} 回调函数
+     * @returns {Promise}
      */
-    remove_all_config(callback) {
-        this.localforage.clear().then(callback);
+    remove_all_config() {
+        return this.localforage.clear();
     }
 
 }

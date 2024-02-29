@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="js">
 /**
  * @Description 多选组件
  * @Author: erduotong
@@ -7,7 +7,6 @@
 import ElementCard from "@/components/untils/elementCard.vue";
 import * as constants from "@/vals/constants.json";
 import {user_options} from "@/vals/stores/user_options.js";
-import {nuitka_element_status} from "@/vals/enums.js";
 
 /**
  *
@@ -26,28 +25,73 @@ import {nuitka_element_status} from "@/vals/enums.js";
  *      enabled: boolean,
  *    }
  *  }
+ *  val: string[],
+ *  enabled: boolean,
+ *  default: string[],
  *
  * }>}
  */
 const model = defineModel();
 
-/**
- * 使用的控件类型判断
- * @type {ComputedRef<boolean>}
- */
-const is_use_select = computed(() => {
-  if (model.value.component === nuitka_element_status.use_select) {
-    return true;
-  }
-  if (model.value.component === nuitka_element_status.use_transfer) {
-    return false;
-  }
-  //default 小于最小值时使用select 否则使用transfer
-  return model.value.elements.length < constants.nuitka_multi_option.min_use_transfer_need;
-});
+// /**
+//  * 判断使用的控件
+//  * @type {ComputedRef<string>}
+//  */
+// const chose_element = computed(() => {
+//
+//   if (model.value.component === nuitka_element_status.use_select
+//       || model.value.component === nuitka_element_status.use_transfer
+//   ) {
+//     return model.value.component;
+//   }
+//   const elements_length = Object.keys(model.value.elements).length;
+//
+//   if (elements_length < constants.nuitka_multi_option.min_use_transfer) {
+//     return nuitka_element_status.use_select;
+//   } else {
+//     return nuitka_element_status.use_transfer;
+//   }
+// });
+// /**
+//  * 生成穿梭框所需的渲染数据
+//  * @type {ComputedRef<*[]>}
+//  * @return {Object[]}
+//  */
+// const transfer_data = computed(() => {
+//   const data = [];
+//   Object.keys(model.value.elements).forEach((key) => {
+//     data.push({
+//       key: key,//无需label因为设置了渲染函数
+//       // i18n: model.value.elements[key].i18n,
+//       i18n: `nuitka_info.${model.value.i18n}.elements.${model.value.elements[key].i18n}`,
+//       command: model.value.elements[key].command.original,
+//       disabled: !model.value.elements[key].enabled,
+//     });
+//   });
+//   return data;
+// });
+//
+// /**
+//  * transfer内的渲染函数
+//  * @param h 用于创建虚拟节点
+//  * @param option el-transfer的配置项
+//  */
+// const render_function = (h, option) => {
+//   return h(
+//       "transfer-render",
+//       {
+//         props: {
+//           i18n: option.i18n,
+//           command: option.command,
+//
+//         },
+//       },
+//   );
+// };
 </script>
 
 <template>
+
   <el-tooltip :show-after=" constants.element_show_after_time">
     <template #content>
       <div class="use_original_text">
@@ -60,17 +104,56 @@ const is_use_select = computed(() => {
         <el-text v-if="user_options.show_original_command" size="large"> ({{ model.command.original }})</el-text>
       </div>
 
-      <template v-if="is_use_select===true">
-        <!--select-->
 
-      </template>
-      <template v-else>
-        <!--穿梭框-->
+      <el-select
+          multiple
+          collapse-tags
+          collapse-tags-tooltip
+          :max-collapse-tags="constants.nuitka_multi_option.max_collapse_tags"
+          :placeholder="$t('nuitka_elements.select_placeholder')"
+          v-model="model.val"
+          filterable
+      >
+        <template v-for="(value,key) in model.elements" :key="key">
+          <el-tooltip :show-after=" constants.element_show_after_time" placement="left-start">
+            <template #content>
+              <div class="use_original_text">
+                {{
+                  $t(`nuitka_info.${model.i18n}.elements.${value.i18n}.desc`)
+                }}
+              </div>
+            </template>
+            <!--todo 快捷全选(all_)-->
+            <el-option
+                :key="key"
+                :disabled="!model.enabled"
+                :label="$t(`nuitka_info.${model.i18n}.elements.${value.i18n}.name`) +
+                  (user_options.show_original_command ? ` (${value.command.original})` : '') "
+                :value="key"
+            >
 
-      </template>
+            </el-option>
+          </el-tooltip>
+        </template>
+
+      </el-select>
+      <!--<template v-else-if="chose_element === nuitka_element_status.use_transfer">-->
+      <!--  &lt;!&ndash;穿梭框实现&ndash;&gt;-->
+      <!--  <el-transfer-->
+      <!--      filterable-->
+      <!--      v-model="model.val"-->
+      <!--      :titles="[$t('nuitka_elements.not_selected'), $t('nuitka_elements.selected')]"-->
+      <!--      :data="transfer_data"-->
+      <!--      :render-content="render_function"-->
+      <!--  >-->
+
+      <!--  </el-transfer>-->
+      <!--</template>-->
+
 
     </element-card>
   </el-tooltip>
+
 </template>
 
 <style lang="scss" scoped>

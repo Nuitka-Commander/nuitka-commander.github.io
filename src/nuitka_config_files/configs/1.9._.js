@@ -3,7 +3,8 @@
  * @Author: erduotong
  * @Date: 2023-12-05 22:28:39
  */
-import {nuitka_templates} from "@/vals/templates.js";
+import {new_option} from "@/vals/templates.js";
+import {nuitka_element_status} from "@/vals/enums.js";
 
 
 // noinspection JSUnusedGlobalSymbols
@@ -14,59 +15,79 @@ export default {
     },
     basic: { //顶级元素
         some_content: {//二级元素
-            ...nuitka_templates.Bool, //继承模板
-            i18n: "content0",
-            command: {
-                original: "some_content command",
-            },
+            ...new_option.bool(
+                "content0",
+                {original: "some_content command"},
+                true,
+                true),
         },
 
         content_opt_test: {
-            ...nuitka_templates.SingleOption,
-
-            command: {
-                original: "genshin imapct",
-            },
-            i18n: "content_single_test",
-            elements: {
-                python: {
-                    ...nuitka_templates.multi_select_elements,
-                    command: {
-                        original: "python",
-                    },
-                    i18n: "python",
+            ...new_option.single_option(
+                "content_single_test",
+                {original: "star rail"},
+                true,
+                {
+                    python: new_option.multi_elements("python", {original: "python"}, true),
+                    go: new_option.multi_elements("go", {original: "go"}, true),
+                    genshin_impact: new_option.multi_elements("genshin_impact", {original: "genshin_impact"}, true),
+                    kotlin: new_option.multi_elements("kotlin", {original: "kotlin"}, true),
                 },
-                go: {
-                    ...nuitka_templates.multi_select_elements,
-                    command: {
-                        original: "go",
-                    },
-                    i18n: "go",
-
-                },
-                genshin_impact: {
-                    ...nuitka_templates.multi_select_elements,
-                    command: {
-                        original: "genshin_impact",
-                    },
-                    i18n: "genshin_impact",
-                },
-                kotlin: {
-                    ...nuitka_templates.multi_select_elements,
-                    command: {
-                        original: "kotlin",
-                    },
-                    i18n: "kotlin",
-
-                },
-
-            },
+                "python",
+            ),
             default: "python",
         },
 
+        content_mult_test: {
 
+            ...new_option.defined_multi(
+                "content_mult_test",
+                {original: "star rail"},
+                true,
+                {
+                    python: new_option.multi_elements("python", {original: "python"}, true),
+                    go: new_option.multi_elements("go", {original: "go"}, true),
+                    genshin_impact: new_option.multi_elements("genshin_impact", {original: "genshin_impact"}, true),
+                    kotlin: new_option.multi_elements("kotlin", {original: "kotlin"}, true),
+                },
+                ["python", "go"],
+                nuitka_element_status.use_select,
+            ),
+        },
+        single_mutable: {
+            ...new_option.definable_single(
+                "content_mult_test",
+                {original: "star rail"},
+                true,
+                {
+                    python: new_option.multi_elements("python", {original: "python"}, true),
+                    go: new_option.multi_elements("go", {original: "go"}, true),
+                    genshin_impact: new_option.multi_elements("genshin_impact", {original: "genshin_impact"}, true),
+                    kotlin: new_option.multi_elements("kotlin", {original: "kotlin"}, true),
+                },
+                "python",
+                nuitka_element_status.use_select,
+            ),
+        },
+        multi_test: {
+            ...new_option.definable_multi(
+                "content_mult_test",
+                {original: "star rail"},
+                true,
+                {
+                    python: new_option.multi_elements("python", {original: "python"}, true),
+                    go: new_option.multi_elements("go", {original: "go"}, true),
+                    genshin_impact: new_option.multi_elements("genshin_impact", {original: "genshin_impact"}, true),
+                    kotlin: new_option.multi_elements("kotlin", {original: "kotlin"}, true),
+                },
+                ["python", "go"],
+                nuitka_element_status.use_select,
+            )
+        }
     },
-    page2: {},
 
+
+    page2: {},
 };
+
 

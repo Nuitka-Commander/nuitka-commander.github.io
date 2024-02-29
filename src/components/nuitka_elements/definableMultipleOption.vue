@@ -1,22 +1,22 @@
-<script setup lang="js">
+<script setup>
 /**
- * @Description 可以让用户定义的单选
+ * @Description 可以让用户定义的多选
  * @Author: erduotong
- * @Date: 2024-02-25 19:34:22
+ * @Date: 2024-02-29 19:58:39
  */
 import * as constants from "@/vals/constants.json";
-import ElementCard from "@/components/untils/elementCard.vue";
 import {user_options} from "@/vals/stores/user_options.js";
-import {Delete} from "@element-plus/icons-vue";
+import ElementCard from "@/components/untils/elementCard.vue";
 import {ElInput, ElMessage, ElMessageBox} from "element-plus";
-import {useI18n} from "vue-i18n";
 import {ref} from "vue";
 import {new_option} from "@/vals/templates.js";
+import {useI18n} from "vue-i18n";
+import {Delete} from "@element-plus/icons-vue";
 
 /**
  * @type {ModelRef<{
  *  i18n: string,
- *  val:string,
+ *  val: string[],
  *  command: {
  *    original:string,
  *  }
@@ -51,17 +51,10 @@ function delete_element(key) {
         type: "warning",
       },
   ).then(() => {
-    if (Object.keys(model.value.elements).length > 1) {
-      //如果删除最后一个，那么就选倒数第二个，否则就选下一个
-      const keys = Object.keys(model.value.elements);
-      const index = keys.indexOf(key);
-      if (index === keys.length - 1) {
-        model.value.val = keys[index - 1];
-      } else {
-        model.value.val = keys[index + 1];
-      }
-    } else {
-      model.value.val = "";
+    //从选项数组中删除并删除键值对
+    const index = model.value.val.indexOf(key);
+    if(index!==-1){//如果不在就不用删除了
+      model.value.val.splice(index, 1);
     }
     delete model.value.elements[key];
     // 出来力
@@ -127,9 +120,8 @@ function on_cancel() {
   option_name.value = "";
   is_adding.value = false;
 }
-
 </script>
-<!--todo 完成多个可用控件-->
+
 <template>
   <el-tooltip :show-after="constants.element_show_after_time" placement="top">
     <template #content>
@@ -143,10 +135,15 @@ function on_cancel() {
         <el-text v-if="user_options.show_original_command" size="large"> ({{ model.command.original }})</el-text>
       </div>
       <el-select
-          v-model="model.val"
-          :disabled="!model.enabled"
+          multiple
+          collapse-tags
+          collapse-tags-tooltip
+          :max-collapse-tags="constants.nuitka_multi_option.max_collapse_tags"
+          :placeholder="$t('nuitka_elements.select_placeholder')"
           filterable
-          :placeholder="$t('nuitka_elements.select_placeholder')">
+          :disabled="!model.enabled"
+          v-model="model.val"
+      >
         <template v-for="(value,key) in model.elements" :key="key">
           <el-tooltip :show-after="constants.element_show_after_time" placement="left-start">
             <template #content>
@@ -160,17 +157,15 @@ function on_cancel() {
                 </span>
               </div>
             </template>
-            <!--todo 这边可以考虑一下OptionGroupP 还有隔壁多选-->
             <el-option
                 :key="key"
                 :disabled="!value.enabled"
-                :label="get_option_label(key, value)"
+                :label="get_option_label(key,value)"
                 :value="key"
             >
               {{ get_option_label(key, value) }}
-              <!--如果他是用户定义的，那么就有个删除符号-->
               <span v-if="value.user_provide===true" @click.stop="delete_element(key)">
-                <el-icon><Delete /></el-icon>
+    <el-icon><Delete /></el-icon>
               </span>
             </el-option>
           </el-tooltip>
@@ -194,9 +189,7 @@ function on_cancel() {
         </template>
       </el-select>
     </element-card>
-
   </el-tooltip>
-
 </template>
 
 <style lang="scss" scoped>

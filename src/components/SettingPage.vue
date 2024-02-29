@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="js">
 /**
  * 设置页面相关逻辑
  */

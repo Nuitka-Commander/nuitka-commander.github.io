@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="js">
 import constants from "@/vals/constants.json";
 import {ref} from "vue";
 // 作者信息是否可见

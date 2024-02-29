@@ -27,7 +27,7 @@ import {user_options} from "@/vals/stores/user_options.js";
 
       <el-tab-pane name="output">
         <template #default>
-
+          前面的区域，以后再来探索吧
         </template>
         <template #label>
           <el-icon size="25" style="margin-right: 10px">
@@ -35,11 +35,12 @@ import {user_options} from "@/vals/stores/user_options.js";
           </el-icon>
           {{ $t(`tabs.output`) }}
         </template>
+
       </el-tab-pane>
 
       <el-tab-pane name="input">
         <template #default>
-
+          前面的区域，以后再来探索吧
         </template>
         <template #label>
           <el-icon size="25" style="margin-right: 10px">

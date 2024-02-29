@@ -56,6 +56,23 @@ export default {
         output: "输出",
         input: "输入",
     },
+    nuitka_elements: {
+        select_placeholder: "选择",
+        not_selected: "未选择",
+        selected: "已选择",
+        user_provide: "这是你自定义的选项",
+        add_option: "添加一个选项",
+        input_an_option: "输入一个选项",
+    },
+    message: {
+        will_del_option: "你即将删除此该自定义选项",
+        continue_del: "要继续吗?",
+        warning: "警告",
+        OK: "确认",
+        cancel: "取消",
+        cancel_del: "已取消删除",
+        del_success: "删除成功",
+    },
 
 
 };

@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="js">
 /**
  * @Description 加载页面(全屏)
  * @Author: erduotong

@@ -11,7 +11,9 @@
   "base_url": "https://github.com/nuitka-commander/nuitka-commander.github.io/",
   "debug": true,
   "element_show_after_time": 400,
+  "message_duration": 3000,
   "nuitka_multi_option": {
-    "min_use_transfer_need": 6
+    "min_use_transfer": 10,
+    "max_collapse_tags": 3
   }
 }
