@@ -142,8 +142,11 @@ function on_cancel() {
         <el-text size="large">{{ $t(`nuitka_info.${model.i18n}.name`) }}</el-text>
         <el-text v-if="user_options.show_original_command" size="large"> ({{ model.command.original }})</el-text>
       </div>
-      <el-select v-model="model.val" :disabled="!model.enabled" filterable
-                 :placeholder="$t('nuitka_elements.select_placeholder')">
+      <el-select
+          v-model="model.val"
+          :disabled="!model.enabled"
+          filterable
+          :placeholder="$t('nuitka_elements.select_placeholder')">
         <template v-for="(value,key) in model.elements" :key="key">
           <el-tooltip :show-after="constants.element_show_after_time" placement="left-start">
             <template #content>
