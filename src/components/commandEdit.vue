@@ -10,6 +10,7 @@ import BoolOption from "@/components/nuitka_elements/boolOption.vue";
 import SingleOption from "@/components/nuitka_elements/singleOption.vue";
 import DefinedMultipleOption from "@/components/nuitka_elements/definedMultipleOption.vue";
 import DefinableSingleOption from "@/components/nuitka_elements/definableSingleOption.vue";
+import DefinableMultipleOption from "@/components/nuitka_elements/definableMultipleOption.vue";
 
 const command = use_command;
 
@@ -60,6 +61,14 @@ const command = use_command;
                 <template v-for="(_,key2) in value1[nuitka_element_type.Definable_single]" :key="key2">
                   <definable-single-option
                       v-model="value1[nuitka_element_type.Definable_single][key2]"></definable-single-option>
+                </template>
+              </div>
+               <div>
+                <!--可定义的多选-->
+                <!--suppress JSUnusedLocalSymbols -->
+                <template v-for="(_,key2) in value1[nuitka_element_type.Definable_multiple_option]" :key="key2">
+                  <definable-multiple-option
+                      v-model="value1[nuitka_element_type.Definable_multiple_option][key2]"></definable-multiple-option>
                 </template>
               </div>
             </div>

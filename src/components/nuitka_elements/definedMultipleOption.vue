@@ -114,7 +114,7 @@ const model = defineModel();
           v-model="model.val"
           filterable
       >
-        <template v-for="(value,key) in model.elements">
+        <template v-for="(value,key) in model.elements" :key="key">
           <el-tooltip :show-after=" constants.element_show_after_time" placement="left-start">
             <template #content>
               <div class="use_original_text">
