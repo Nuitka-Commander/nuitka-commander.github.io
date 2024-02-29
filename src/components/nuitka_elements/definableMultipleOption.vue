@@ -53,9 +53,7 @@ function delete_element(key) {
   ).then(() => {
     //从选项数组中删除并删除键值对
     const index = model.value.val.indexOf(key);
-    if (index === -1) {
-      //error
-    } else {
+    if(index!==-1){//如果不在就不用删除了
       model.value.val.splice(index, 1);
     }
     delete model.value.elements[key];
