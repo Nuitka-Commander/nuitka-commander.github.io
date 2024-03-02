@@ -13,7 +13,10 @@ class LocalNuitkaVersionConfig {
             storeName: "nuitka_commander_version_config",
             driver: localforage.INDEXEDDB,
         });
+        this.enable = true;
+
     }
+
 
     /**
      * 更新版本的配置
@@ -21,7 +24,7 @@ class LocalNuitkaVersionConfig {
      * @param config {Object} 配置对象
      * @returns {Promise}
      */
-    update_config(version, config) {
+    async update_config(version, config) {
         return this.localforage.setItem(version, config);
     }
 
@@ -30,7 +33,7 @@ class LocalNuitkaVersionConfig {
      * @param version {String} 版本号
      * @returns {Promise}
      */
-    read_config(version) {
+    async read_config(version) {
         return this.localforage.getItem(version);
     }
 
@@ -39,7 +42,7 @@ class LocalNuitkaVersionConfig {
      * @param version {String} 版本号
      * @returns {Promise}
      */
-    remove_config(version) {
+    async remove_config(version) {
         return this.localforage.removeItem(version);
     }
 
@@ -47,7 +50,7 @@ class LocalNuitkaVersionConfig {
      * 删除所有版本的配置 谨慎使用
      * @returns {Promise}
      */
-    remove_all_config() {
+    async remove_all_config() {
         return this.localforage.clear();
     }
 
