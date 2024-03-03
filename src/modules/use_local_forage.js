@@ -4,6 +4,7 @@
  * @Date: 2023-12-13 21:27:08
  */
 import localforage from "localforage";
+import {ref} from "vue";
 
 class LocalNuitkaVersionConfig {
 
@@ -13,8 +14,28 @@ class LocalNuitkaVersionConfig {
             storeName: "nuitka_commander_version_config",
             driver: localforage.INDEXEDDB,
         });
-        this.enable = true;
+        this.enable = ref(true);
+        this.localforage.ready().then(() => {
+            this.test().then();
+        });
+    }
 
+    /**
+     * 测试可用性
+     * @return {Promise<void>}
+     */
+    async test() {
+        try {
+            const date = Date.now().toString();
+            await this.localforage.setItem(date, date);
+            console.log("测试indexDB写入成功");
+            await this.localforage.removeItem(date);
+            console.log("测试indexDB删除成功");
+            this.enable.value = true;
+        } catch (e) {
+            console.warn("测试indexDB失败\n", e);
+            this.enable.value = false;
+        }
     }
 
 
@@ -25,7 +46,12 @@ class LocalNuitkaVersionConfig {
      * @returns {Promise}
      */
     async update_config(version, config) {
-        return this.localforage.setItem(version, config);
+        try {
+            await this.localforage.setItem(version, config);
+        } catch (e) {
+            console.warn(`更新版本${version}的配置失败`, e);
+            this.enable.value = false;
+        }
     }
 
     /**
@@ -34,7 +60,12 @@ class LocalNuitkaVersionConfig {
      * @returns {Promise}
      */
     async read_config(version) {
-        return this.localforage.getItem(version);
+        try {
+            return await this.localforage.getItem(version);
+        } catch (e) {
+            console.warn(`读取版本${version}的配置失败`, e);
+            this.enable.value = false;
+        }
     }
 
     /**
@@ -43,7 +74,12 @@ class LocalNuitkaVersionConfig {
      * @returns {Promise}
      */
     async remove_config(version) {
-        return this.localforage.removeItem(version);
+        try {
+            await this.localforage.removeItem(version);
+        } catch (e) {
+            console.warn(`删除版本${version}的配置失败`, e);
+            this.enable.value = false;
+        }
     }
 
     /**
@@ -51,7 +87,12 @@ class LocalNuitkaVersionConfig {
      * @returns {Promise}
      */
     async remove_all_config() {
-        return this.localforage.clear();
+        try {
+            await this.localforage.clear();
+        } catch (e) {
+            console.warn(`删除所有版本的配置失败`, e);
+            this.enable.value = false;
+        }
     }
 
 }
