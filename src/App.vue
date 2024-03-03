@@ -6,6 +6,7 @@ import NavBar from "@/components/navBar.vue";
 import {Edit, Share, Upload} from "@element-plus/icons-vue";
 import CommandEdit from "@/components/commandEdit.vue";
 import {user_options} from "@/vals/stores/user_options.js";
+import OutputPage from "@/components/outputPage.vue";
 </script>
 
 <template>
@@ -23,21 +24,6 @@ import {user_options} from "@/vals/stores/user_options.js";
   <main>
 
     <el-tabs v-model="user_options.action_tab" stretch tab-position="right">
-
-
-      <el-tab-pane name="output">
-        <template #default>
-          前面的区域，以后再来探索吧
-        </template>
-        <template #label>
-          <el-icon size="25" style="margin-right: 10px">
-            <share></share>
-          </el-icon>
-          {{ $t(`tabs.output`) }}
-        </template>
-
-      </el-tab-pane>
-
       <el-tab-pane name="input">
         <template #default>
           前面的区域，以后再来探索吧
@@ -50,6 +36,21 @@ import {user_options} from "@/vals/stores/user_options.js";
         </template>
 
       </el-tab-pane>
+
+      <el-tab-pane name="output">
+        <template #default>
+          <output-page></output-page>
+        </template>
+        <template #label>
+          <el-icon size="25" style="margin-right: 10px">
+            <share></share>
+          </el-icon>
+          {{ $t(`tabs.output`) }}
+        </template>
+
+      </el-tab-pane>
+
+
       <el-tab-pane name="edit">
         <template #default>
           <command-edit></command-edit>

@@ -82,8 +82,8 @@ export default {
                 },
                 ["python", "go"],
                 nuitka_element_status.use_select,
-            )
-        }
+            ),
+        },
     },
 
 
