@@ -23,5 +23,15 @@
 </template>
 
 <style lang="scss" scoped>
+#cli_output {
 
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  border-radius: 8px;
+  background: #1f1e33;
+  gap: 20px;
+
+
+}
 </style>

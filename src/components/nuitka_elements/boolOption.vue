@@ -21,8 +21,9 @@ import * as constants from "@/vals/constants.json";
  * }>}
  */
 const model = defineModel();
-</script>
 
+</script>
+<!--  todo 多维护一个数组-->
 <template>
 
   <el-tooltip :show-after="constants.element_show_after_time" placement="top">
@@ -39,6 +40,19 @@ const model = defineModel();
       <el-switch v-model="model.val" :disabled="!model.enabled"></el-switch>
     </element-card>
   </el-tooltip>
+
+  <Teleport to="#cli_output">
+    <div>
+      <el-tooltip>
+        <template #content>
+          <div class="use_original_text">
+            {{ $t(`nuitka_info.${model.i18n}.desc`) }}
+          </div>
+        </template>
+        {{ model.command.original }}
+      </el-tooltip>
+    </div>
+  </Teleport>
 
 </template>
 
