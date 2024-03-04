@@ -36,7 +36,7 @@ class CommandStatus {
      */
     async update_config(config) {
 
-
+        let id = 0;
         // 预处理配置 转换成事宜遍历的形式
         Object.keys(config).forEach(top_key => {
             if (top_key === "support_language") {
@@ -62,8 +62,9 @@ class CommandStatus {
                 this.original_status[top_key][second_value.type][second_key] = {
                     ...second_value,
                     path: [top_key, second_value.type, second_key],
+                    id: id,
                 };
-
+                id++;
                 // 删除 type
                 delete second_value.type;
             });
