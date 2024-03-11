@@ -2,6 +2,8 @@
 import {user_options} from "@/vals/stores/user_options.js";
 import ElementCard from "@/components/untils/elementCard.vue";
 import * as constants from "@/vals/constants.json";
+import CliCommandCard from "@/components/command_cards/cliCommandCard.vue";
+import {useI18n} from "vue-i18n";
 
 /**
  * @Description bool选项
@@ -21,7 +23,7 @@ import * as constants from "@/vals/constants.json";
  * }>}
  */
 const model = defineModel();
-
+const t = useI18n().t;
 </script>
 <!--  todo 多维护一个数组-->
 <template>
@@ -42,16 +44,7 @@ const model = defineModel();
   </el-tooltip>
 
   <Teleport to="#cli_output">
-    <div>
-      <el-tooltip>
-        <template #content>
-          <div class="use_original_text">
-            {{ $t(`nuitka_info.${model.i18n}.desc`) }}
-          </div>
-        </template>
-        {{ model.command.original }}
-      </el-tooltip>
-    </div>
+    <cli-command-card :command="model.command.original" :desc="t(`nuitka_info.${model.i18n}.desc`)"></cli-command-card>
   </Teleport>
 
 </template>

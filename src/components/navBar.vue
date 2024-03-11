@@ -18,6 +18,7 @@ import supported_nuitka_version from "@/nuitka_config_files/supported_nuitka_ver
     <div class="top_nav_bar">
       <el-tooltip>
         <el-switch
+
             v-model="user_options.is_full_mode"
             :active-text="$t('nav_bar.mode.full_mode')"
             :inactive-text="$t('nav_bar.mode.easy_mode')"
