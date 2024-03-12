@@ -1,5 +1,5 @@
 <script setup>
-
+import {CopyDocument} from "@element-plus/icons-vue";
 </script>
 
 <template>
@@ -7,7 +7,14 @@
     <el-tabs stretch tab-position="left" type="card">
       <el-tab-pane>
         <template #label>CLI</template>
-        <div id="cli_output"></div>
+        <div id="cli_output_area">
+          <span class="copy_button">
+            <el-button round>
+               <el-icon><CopyDocument /></el-icon>
+            </el-button>
+          </span>
+          <div id="cli_output"></div>
+        </div>
       </el-tab-pane>
       <el-tab-pane>
         <template #label>JSON CONFIG</template>
@@ -23,15 +30,24 @@
 </template>
 
 <style lang="scss" scoped>
-#cli_output {
+#cli_output_area {
 
-  display: flex;
-  flex-direction: column;
-  padding: 20px;
-  border-radius: 8px;
+  margin: 10px 5px;
+  border-radius: 12px;
   background: #1f1e33;
-  gap: 20px;
 
+  #cli_output {
+    display: flex;
+    flex-direction: column;
+    padding: 25px 20px;
+    gap: 20px;
+  }
 
+  .copy_button {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+  }
 }
+
 </style>
