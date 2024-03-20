@@ -9,9 +9,19 @@ import {user_options} from "@/vals/stores/user_options.js";
 
 
 class CommandStatus {
+    /**
+     * 原始的状态 方便快速重置
+     * @type {{}}
+     */
     original_status = {};
+    /**
+     * 外部组件交互的对象
+     */
     status = ref({});
-
+    /**
+     * 一个间接数组 提供最终输出的顺序和内容
+     */
+    output = ref([]);
     constructor() {
         //未改变的配置 用于重置
         this.original_status = {};
@@ -65,6 +75,7 @@ class CommandStatus {
         console.log(this.status.value);
 
     }
+
 }
 
 export const use_command = new CommandStatus();
