@@ -4,19 +4,8 @@
  * @Date: 2023-12-08 23:47:42
  */
 import {ref} from "vue";
-import {nuitka_element_type} from "@/vals/enums.js";
 import {local_nuitka_version_config} from "@/modules/use_local_forage.js";
 import {user_options} from "@/vals/stores/user_options.js";
-
-/**
- * @Description 根据类型处理函数
- * @type {{}}
- */
-const handlers = {
-    [nuitka_element_type.Bool]: () => {
-        //似乎没啥好处理的
-    },
-};
 
 
 class CommandStatus {
@@ -28,6 +17,7 @@ class CommandStatus {
         this.original_status = {};
         //已预处理完成的配置
         this.status = ref({});
+
     }
 
     /**
@@ -35,7 +25,7 @@ class CommandStatus {
      * @param config {Object}
      */
     async update_config(config) {
-
+        //自增id 排序用
         let id = 0;
         // 预处理配置 转换成事宜遍历的形式
         Object.keys(config).forEach(top_key => {
@@ -52,9 +42,6 @@ class CommandStatus {
                 } else {
                     second_value.val = second_value.default;
                 }
-
-                // 根据类型处理
-                handlers[second_value.type]?.();
 
                 // 添加到原始配置中
                 this.original_status[top_key] = this.original_status[top_key] || {};
