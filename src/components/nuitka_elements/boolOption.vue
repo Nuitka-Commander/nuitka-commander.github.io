@@ -4,7 +4,8 @@ import ElementCard from "@/components/untils/elementCard.vue";
 import * as constants from "@/vals/constants.json";
 import CliCommandCard from "@/components/command_cards/cliCommandCard.vue";
 import {useI18n} from "vue-i18n";
-
+import {defineModel, onBeforeUnmount, onMounted} from "vue";
+import {use_command} from "@/modules/use_command.js";
 /**
  * @Description bool选项
  * @Author: erduotong
@@ -19,13 +20,26 @@ import {useI18n} from "vue-i18n";
  *    i18n: string,
  *    command: {
  *      original: string,
- *    }
+ *    },
+ *    id: number,
  * }>}
  */
 const model = defineModel();
 const t = useI18n().t;
+// 输出值 bool没有特殊变化 bool改变的时候直接删除/添加这个就好
+const output_value = {
+  cli: null,
+  json: null,
+  pyproject: null,
+};
+onMounted(() => {
+
+});
+onBeforeUnmount(() => {
+  delete use_command.output.value[model.value.id];
+});
 </script>
-<!--  todo 多维护一个数组-->
+
 <template>
 
   <el-tooltip :show-after="constants.element_show_after_time" placement="top">

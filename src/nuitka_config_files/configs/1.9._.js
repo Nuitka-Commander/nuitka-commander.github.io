@@ -42,7 +42,7 @@ export default {
 
             ...new_option.defined_multi(
                 "content_mult_test",
-                {original: "star rail"},
+                {original: "star000rail"},
                 true,
                 {
                     python: new_option.multi_elements("python", {original: "python"}, true),
@@ -57,7 +57,7 @@ export default {
         single_mutable: {
             ...new_option.definable_single(
                 "content_mult_test",
-                {original: "star rail"},
+                {original: "star_rail"},
                 true,
                 {
                     python: new_option.multi_elements("python", {original: "python"}, true),
@@ -72,7 +72,7 @@ export default {
         multi_test: {
             ...new_option.definable_multi(
                 "content_mult_test",
-                {original: "star rail"},
+                {original: "star-rail"},
                 true,
                 {
                     python: new_option.multi_elements("python", {original: "python"}, true),
