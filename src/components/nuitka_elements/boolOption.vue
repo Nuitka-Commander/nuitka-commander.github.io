@@ -4,7 +4,7 @@ import ElementCard from "@/components/untils/elementCard.vue";
 import * as constants from "@/vals/constants.json";
 import CliCommandCard from "@/components/command_cards/cliCommandCard.vue";
 import {useI18n} from "vue-i18n";
-import {defineModel, onBeforeUnmount, watch} from "vue";
+import {defineModel, onBeforeUnmount, watch, computed} from "vue";
 import {use_command} from "@/modules/use_command.js";
 /**
  * @Description bool选项
@@ -27,22 +27,20 @@ import {use_command} from "@/modules/use_command.js";
  */
 const model = defineModel();
 const t = useI18n().t;
-// 嵌套计算属性实现 todo
-const output_value = computed(() => {
-  const result = {
-    cli: null,
+///////////////////////////
+const is_equal = computed(() => model.value.val === model.value.default);
+const result = computed(() => {
+  return {
+    cli: model.value.command.original,
     json: null,
     pyproject: null,
   };
-  result.cli = model.value.command.original;
-  return result;
 });
-
-watch(() => model.value, (new_val) => {
-  if (new_val.val === new_val.default) {
+watch(() => [result.value, is_equal.value], ([new_result, new_is_equal]) => {
+  if (new_is_equal) {
     delete use_command.output.value[model.value.id];
   } else {
-    use_command.output.value[model.value.id] = output_value;
+    use_command.output.value[model.value.id] = new_result;
   }
 }, {
   immediate: true,

@@ -35,6 +35,7 @@ class CommandStatus {
      * @param config {Object}
      */
     async update_config(config) {
+        this.output.value = {};//清空 防止id重复的情况
         //自增id 排序用 这个id绝对不会重复
         let id = 0;
         // 预处理配置 转换成事宜遍历的形式
