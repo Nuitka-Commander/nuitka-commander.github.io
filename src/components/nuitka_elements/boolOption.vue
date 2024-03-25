@@ -4,7 +4,7 @@ import ElementCard from "@/components/untils/elementCard.vue";
 import * as constants from "@/vals/constants.json";
 import CliCommandCard from "@/components/command_cards/cliCommandCard.vue";
 import {useI18n} from "vue-i18n";
-import {defineModel, onBeforeUnmount, onMounted} from "vue";
+import {defineModel, onBeforeUnmount, watch} from "vue";
 import {use_command} from "@/modules/use_command.js";
 /**
  * @Description bool选项
@@ -16,6 +16,7 @@ import {use_command} from "@/modules/use_command.js";
  * @type {ModelRef<
  * {
  *    val:boolean,
+ *    default: boolean
  *    enabled: boolean,
  *    i18n: string,
  *    command: {
@@ -26,15 +27,28 @@ import {use_command} from "@/modules/use_command.js";
  */
 const model = defineModel();
 const t = useI18n().t;
-// 输出值 bool没有特殊变化 bool改变的时候直接删除/添加这个就好
-const output_value = {
-  cli: null,
-  json: null,
-  pyproject: null,
-};
-onMounted(() => {
-
+// 嵌套计算属性实现 todo
+const output_value = computed(() => {
+  const result = {
+    cli: null,
+    json: null,
+    pyproject: null,
+  };
+  result.cli = model.value.command.original;
+  return result;
 });
+
+watch(() => model.value, (new_val) => {
+  if (new_val.val === new_val.default) {
+    delete use_command.output.value[model.value.id];
+  } else {
+    use_command.output.value[model.value.id] = output_value;
+  }
+}, {
+  immediate: true,
+  deep: true,
+});
+// 组件销毁则必须移除
 onBeforeUnmount(() => {
   delete use_command.output.value[model.value.id];
 });

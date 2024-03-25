@@ -18,7 +18,9 @@ const command = use_command;
 
 <template>
   <div>
+    <el-button @click="console.log(use_command.output.value)">debug</el-button>
     <el-tabs stretch tab-position="left" type="card">
+
       <template v-for="(value1,key1) in command.status.value" :key="key1">
         <!--做出分页-->
         <el-tab-pane>
@@ -63,7 +65,7 @@ const command = use_command;
                       v-model="value1[nuitka_element_type.Definable_single][key2]"></definable-single-option>
                 </template>
               </div>
-               <div>
+              <div>
                 <!--可定义的多选-->
                 <!--suppress JSUnusedLocalSymbols -->
                 <template v-for="(_,key2) in value1[nuitka_element_type.Definable_multiple_option]" :key="key2">
