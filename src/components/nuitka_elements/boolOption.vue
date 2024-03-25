@@ -4,7 +4,7 @@ import ElementCard from "@/components/untils/elementCard.vue";
 import * as constants from "@/vals/constants.json";
 import CliCommandCard from "@/components/command_cards/cliCommandCard.vue";
 import {useI18n} from "vue-i18n";
-import {defineModel, onBeforeUnmount, watch, computed} from "vue";
+import {computed, defineModel, onBeforeUnmount, watch} from "vue";
 import {use_command} from "@/modules/use_command.js";
 /**
  * @Description bool选项
@@ -36,11 +36,11 @@ const result = computed(() => {
     pyproject: null,
   };
 });
-watch(() => [result.value, is_equal.value], ([new_result, new_is_equal]) => {
-  if (new_is_equal) {
+watch(() => [result, is_equal], ([new_result, new_is_equal]) => {
+  if (new_is_equal.value) {
     delete use_command.output.value[model.value.id];
   } else {
-    use_command.output.value[model.value.id] = new_result;
+    use_command.output.value[model.value.id] = new_result.value;
   }
 }, {
   immediate: true,
@@ -49,6 +49,13 @@ watch(() => [result.value, is_equal.value], ([new_result, new_is_equal]) => {
 // 组件销毁则必须移除
 onBeforeUnmount(() => {
   delete use_command.output.value[model.value.id];
+});
+///////////////////////////
+//在禁用时，将值设置为默认值
+watch(() => model.value.enabled, (new_enabled) => {
+  if (!new_enabled) {
+    model.value.val = model.value.default;
+  }
 });
 </script>
 
