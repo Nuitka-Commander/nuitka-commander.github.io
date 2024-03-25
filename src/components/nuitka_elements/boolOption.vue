@@ -1,4 +1,9 @@
 <script setup>
+/**
+ * @Description bool选项
+ * @Author: erduotong
+ * @Date: 2023-12-08 22:16:35
+ */
 import {user_options} from "@/vals/stores/user_options.js";
 import ElementCard from "@/components/untils/elementCard.vue";
 import * as constants from "@/vals/constants.json";
@@ -6,11 +11,6 @@ import CliCommandCard from "@/components/command_cards/cliCommandCard.vue";
 import {useI18n} from "vue-i18n";
 import {computed, defineModel, onBeforeUnmount, watch} from "vue";
 import {use_command} from "@/modules/use_command.js";
-/**
- * @Description bool选项
- * @Author: erduotong
- * @Date: 2023-12-08 22:16:35
- */
 /**
  * 传入的ModelRef
  * @type {ModelRef<
