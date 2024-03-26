@@ -53,7 +53,7 @@ function delete_element(key) {
   ).then(() => {
     //从选项数组中删除并删除键值对
     const index = model.value.val.indexOf(key);
-    if(index!==-1){//如果不在就不用删除了
+    if (index !== -1) {//如果不在就不用删除了
       model.value.val.splice(index, 1);
     }
     delete model.value.elements[key];
@@ -100,19 +100,32 @@ function on_adding() {
 }
 
 function on_confirm() {
-  if (option_name.value.trim() !== "") {
-    console.log(`add option: ${option_name.value}`);
-    model.value.elements[option_name.value] = {
-      ...new_option.multi_elements(
-          "",
-          {
-            original: option_name.value,
-          },
-          true,
-          true,
-      ),
-    };
+  if (option_name.value.trim() === "") {
+    return;
   }
+  //todo 其他的判断检测 是否和命令重复
+  if (option_name.value in model.value.elements) {
+    ElMessage({
+      type: "warning",
+      message: t("message.have_been_created"),
+      showClose: true,
+      duration: constants.message_duration,
+    });
+    return;
+  }
+
+  console.log(`add option: ${option_name.value}`);
+  model.value.elements[option_name.value] = {
+    ...new_option.multi_elements(
+        "",
+        {
+          original: option_name.value,
+        },
+        true,
+        true,
+    ),
+  };
+
   on_cancel();
 }
 

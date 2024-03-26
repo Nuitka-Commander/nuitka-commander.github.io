@@ -107,19 +107,30 @@ function on_adding() {
 }
 
 function on_confirm() {
-  if (option_name.value.trim() !== "") {
-    console.log(`add option: ${option_name.value}`);
-    model.value.elements[option_name.value] = {
-      ...new_option.multi_elements(
-          "",
-          {
-            original: option_name.value,
-          },
-          true,
-          true,
-      ),
-    };
+  if (option_name.value.trim() === "") {
+    return;
   }
+  //todo 其他的判断检测 是否和命令重复
+  if (option_name.value in model.value.elements) {
+    ElMessage({
+      type: "warning",
+      message: t("message.have_been_created"),
+      showClose: true,
+      duration: constants.message_duration,
+    });
+    return;
+  }
+  console.log(`add option: ${option_name.value}`);
+  model.value.elements[option_name.value] = {
+    ...new_option.multi_elements(
+        "",
+        {
+          original: option_name.value,
+        },
+        true,
+        true,
+    ),
+  };
   on_cancel();
 }
 

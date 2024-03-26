@@ -72,6 +72,7 @@ export default {
         cancel: "取消",
         cancel_del: "已取消删除",
         del_success: "删除成功",
+        have_been_created: "该选项已存在!",
     },
 
 
