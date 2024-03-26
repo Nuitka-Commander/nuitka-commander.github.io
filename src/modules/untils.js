@@ -3,6 +3,8 @@
  * @Author: erduotong
  * @Date: 2024-03-26 22:30:24
  */
+import {watch} from "vue";
+import {use_command} from "@/modules/use_command.js";
 
 /**
  *
@@ -17,7 +19,8 @@ export const is_array_equivalent = (arr1, arr2) => {
         return false;
     }
     for (let i of arr1) {
-        temp[i];
+
     }
 
 };
+

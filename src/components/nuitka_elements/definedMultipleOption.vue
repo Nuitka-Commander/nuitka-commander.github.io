@@ -137,18 +137,6 @@ const model = defineModel();
         </template>
 
       </el-select>
-      <!--<template v-else-if="chose_element === nuitka_element_status.use_transfer">-->
-      <!--  &lt;!&ndash;穿梭框实现&ndash;&gt;-->
-      <!--  <el-transfer-->
-      <!--      filterable-->
-      <!--      v-model="model.val"-->
-      <!--      :titles="[$t('nuitka_elements.not_selected'), $t('nuitka_elements.selected')]"-->
-      <!--      :data="transfer_data"-->
-      <!--      :render-content="render_function"-->
-      <!--  >-->
-
-      <!--  </el-transfer>-->
-      <!--</template>-->
 
 
     </element-card>
