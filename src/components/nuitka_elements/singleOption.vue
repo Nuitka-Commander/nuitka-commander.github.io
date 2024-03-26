@@ -7,11 +7,14 @@
 import ElementCard from "@/components/untils/elementCard.vue";
 import * as constants from "@/vals/constants.json";
 import {user_options} from "@/vals/stores/user_options.js";
+import {computed, defineModel, onBeforeUnmount, watch} from "vue";
+import {use_command} from "@/modules/use_command.js";
 
 /**
  * @type {ModelRef<{
  *  i18n: string,
  *  val:string,
+ *  id:number,
  *  command: {
  *    original:string,
  *  }
@@ -25,10 +28,41 @@ import {user_options} from "@/vals/stores/user_options.js";
  *      enabled:boolean,
  *    }
  *  }
+ *  default:string,
  * }>}
  */
 const model = defineModel();
-
+///////////////////////////
+const is_equal = computed(() => model.value.val === model.value.default);
+const result = computed(() => {
+  return {
+    cli: model.value.command.original + "一个单选" + "填入特征",
+    json: null,
+    pyproject: null,
+  };
+});
+watch(() => [result, is_equal], ([new_result, new_is_equal]) => {
+  if (new_is_equal.value) {
+    delete use_command.output.value[model.value.id];
+  } else {
+    use_command.output.value[model.value.id] = new_result.value;
+  }
+}, {
+  immediate: true,
+  deep: true,
+});
+// 组件销毁则必须移除
+onBeforeUnmount(() => {
+  delete use_command.output.value[model.value.id];
+});
+///////////////////////////
+//在禁用时，将值设置为默认值
+watch(() => model.value.enabled, (new_enabled) => {
+  if (!new_enabled) {
+    model.value.val = model.value.default;
+  }
+});
+//todo 可空考虑
 </script>
 
 <template>
