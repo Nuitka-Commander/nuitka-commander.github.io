@@ -13,6 +13,8 @@ import {user_options} from "@/vals/stores/user_options.js";
  * @type {ModelRef<{
  *  component: string,
  *  i18n: string,
+ *  default: string,
+ *  id: number,
  *  command: {
  *    original: string,
  *  }
