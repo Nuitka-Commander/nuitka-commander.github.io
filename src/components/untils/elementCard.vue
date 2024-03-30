@@ -1,4 +1,4 @@
-<script setup lang="js">
+<script lang="js" setup>
 /**
  * @Description 用于存储编辑界面内每一个设置选项的卡片 保证格式统一
  * @Author: erduotong

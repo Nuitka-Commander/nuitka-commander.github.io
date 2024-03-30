@@ -1,4 +1,4 @@
-<script setup lang="js">
+<script lang="js" setup>
 /**
  * @Description 多选组件
  * @Author: erduotong
@@ -7,13 +7,16 @@
 import ElementCard from "@/components/untils/elementCard.vue";
 import * as constants from "@/vals/constants.json";
 import {user_options} from "@/vals/stores/user_options.js";
+import {is_array_equivalent} from "@/modules/untils.js";
+import {use_command} from "@/modules/use_command.js";
+import {computed, onBeforeUnmount, watch} from "vue";
 
 /**
  *
  * @type {ModelRef<{
  *  component: string,
  *  i18n: string,
- *  default: string,
+ *  default: string[],
  *  id: number,
  *  command: {
  *    original: string,
@@ -34,8 +37,36 @@ import {user_options} from "@/vals/stores/user_options.js";
  * }>}
  */
 const model = defineModel();
-
-
+///////////////////////////
+const is_equal = computed(() => is_array_equivalent(model.value.val, model.value.default));
+const result = computed(() => {
+  return {
+    cli: model.value.command.original,
+    json: null,
+    pyproject: null,
+  };
+});
+watch(() => [result, is_equal], ([new_result, new_is_equal]) => {
+  if (new_is_equal.value) {
+    delete use_command.output.value[model.value.id];
+  } else {
+    use_command.output.value[model.value.id] = new_result.value;
+  }
+}, {
+  immediate: true,
+  deep: true,
+});
+// 组件销毁则必须移除
+onBeforeUnmount(() => {
+  delete use_command.output.value[model.value.id];
+});
+///////////////////////////
+//在禁用时，将值设置为默认值
+watch(() => model.value.enabled, (new_enabled) => {
+  if (!new_enabled) {
+    model.value.val = model.value.default;
+  }
+});
 </script>
 
 <template>
@@ -54,13 +85,13 @@ const model = defineModel();
 
 
       <el-select
-          multiple
-          collapse-tags
-          collapse-tags-tooltip
+          v-model="model.val"
           :max-collapse-tags="constants.nuitka_multi_option.max_collapse_tags"
           :placeholder="$t('nuitka_elements.select_placeholder')"
-          v-model="model.val"
+          collapse-tags
+          collapse-tags-tooltip
           filterable
+          multiple
       >
         <template v-for="(value,key) in model.elements" :key="key">
           <el-tooltip :show-after=" constants.element_show_after_time" placement="left-start">

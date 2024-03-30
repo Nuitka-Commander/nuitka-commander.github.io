@@ -1,4 +1,4 @@
-<script setup lang="js">
+<script lang="js" setup>
 /**
  * @Description 编辑命令的页面
  * @Author: erduotong

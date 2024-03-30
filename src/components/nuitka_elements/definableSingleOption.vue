@@ -1,4 +1,4 @@
-<script setup lang="js">
+<script lang="js" setup>
 /**
  * @Description 可以让用户定义的单选
  * @Author: erduotong
@@ -10,7 +10,7 @@ import {user_options} from "@/vals/stores/user_options.js";
 import {Delete} from "@element-plus/icons-vue";
 import {ElInput, ElMessage, ElMessageBox} from "element-plus";
 import {useI18n} from "vue-i18n";
-import {ref} from "vue";
+import {computed, onBeforeUnmount, ref, watch} from "vue";
 import {new_option} from "@/vals/templates.js";
 import {use_command} from "@/modules/use_command.js";
 
@@ -189,8 +189,8 @@ watch(() => model.value.enabled, (new_enabled) => {
       <el-select
           v-model="model.val"
           :disabled="!model.enabled"
-          filterable
-          :placeholder="$t('nuitka_elements.select_placeholder')">
+          :placeholder="$t('nuitka_elements.select_placeholder')"
+          filterable>
         <template v-for="(value,key) in model.elements" :key="key">
           <el-tooltip :show-after="constants.element_show_after_time" placement="left-start">
             <template #content>
@@ -220,7 +220,7 @@ watch(() => model.value.enabled, (new_enabled) => {
           </el-tooltip>
         </template>
         <template #footer>
-          <el-button v-if="!is_adding" text bg size="small" @click="on_adding">
+          <el-button v-if="!is_adding" bg size="small" text @click="on_adding">
             {{ $t("nuitka_elements.add_option") }}
           </el-button>
           <template v-else>
@@ -230,7 +230,7 @@ watch(() => model.value.enabled, (new_enabled) => {
                 size="small"
                 style="width: 100%;margin-bottom: 8px;"
             />
-            <el-button type="primary" size="small" @click="on_confirm">
+            <el-button size="small" type="primary" @click="on_confirm">
               {{ $t("message.OK") }}
             </el-button>
             <el-button size="small" @click="on_cancel">{{ $t("message.cancel") }}</el-button>

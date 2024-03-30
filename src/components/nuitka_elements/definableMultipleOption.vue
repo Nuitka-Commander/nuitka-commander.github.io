@@ -8,15 +8,19 @@ import * as constants from "@/vals/constants.json";
 import {user_options} from "@/vals/stores/user_options.js";
 import ElementCard from "@/components/untils/elementCard.vue";
 import {ElInput, ElMessage, ElMessageBox} from "element-plus";
-import {ref} from "vue";
+import {computed, onBeforeUnmount, ref, watch} from "vue";
 import {new_option} from "@/vals/templates.js";
 import {useI18n} from "vue-i18n";
 import {Delete} from "@element-plus/icons-vue";
+import {is_array_equivalent} from "@/modules/untils.js";
+import {use_command} from "@/modules/use_command.js";
 
 /**
  * @type {ModelRef<{
  *  i18n: string,
  *  val: string[],
+ *  default: string[],
+ *  id: number,
  *  command: {
  *    original:string,
  *  }
@@ -136,7 +140,35 @@ function on_cancel() {
 }
 
 ///////////////////////////
-
+const is_equal = computed(() => is_array_equivalent(model.value.val, model.value.default));
+const result = computed(() => {
+  return {
+    cli: model.value.command.original,
+    json: null,
+    pyproject: null,
+  };
+});
+watch(() => [result, is_equal], ([new_result, new_is_equal]) => {
+  if (new_is_equal.value) {
+    delete use_command.output.value[model.value.id];
+  } else {
+    use_command.output.value[model.value.id] = new_result.value;
+  }
+}, {
+  immediate: true,
+  deep: true,
+});
+// 组件销毁则必须移除
+onBeforeUnmount(() => {
+  delete use_command.output.value[model.value.id];
+});
+///////////////////////////
+//在禁用时，将值设置为默认值
+watch(() => model.value.enabled, (new_enabled) => {
+  if (!new_enabled) {
+    model.value.val = model.value.default;
+  }
+});
 </script>
 
 <template>
@@ -152,14 +184,14 @@ function on_cancel() {
         <el-text v-if="user_options.show_original_command" size="large"> ({{ model.command.original }})</el-text>
       </div>
       <el-select
-          multiple
-          collapse-tags
-          collapse-tags-tooltip
+          v-model="model.val"
+          :disabled="!model.enabled"
           :max-collapse-tags="constants.nuitka_multi_option.max_collapse_tags"
           :placeholder="$t('nuitka_elements.select_placeholder')"
+          collapse-tags
+          collapse-tags-tooltip
           filterable
-          :disabled="!model.enabled"
-          v-model="model.val"
+          multiple
       >
         <template v-for="(value,key) in model.elements" :key="key">
           <el-tooltip :show-after="constants.element_show_after_time" placement="left-start">
@@ -188,7 +220,7 @@ function on_cancel() {
           </el-tooltip>
         </template>
         <template #footer>
-          <el-button v-if="!is_adding" text bg size="small" @click="on_adding">
+          <el-button v-if="!is_adding" bg size="small" text @click="on_adding">
             {{ $t("nuitka_elements.add_option") }}
           </el-button>
           <template v-else>
@@ -198,7 +230,7 @@ function on_cancel() {
                 size="small"
                 style="width: 100%;margin-bottom: 8px;"
             />
-            <el-button type="primary" size="small" @click="on_confirm">
+            <el-button size="small" type="primary" @click="on_confirm">
               {{ $t("message.OK") }}
             </el-button>
             <el-button size="small" @click="on_cancel">{{ $t("message.cancel") }}</el-button>

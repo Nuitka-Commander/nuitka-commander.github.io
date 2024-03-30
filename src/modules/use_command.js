@@ -22,6 +22,7 @@ class CommandStatus {
      * 一个间接数组 提供最终输出的顺序和内容
      */
     output = ref({});
+
     constructor() {
         //未改变的配置 用于重置
         this.original_status = {};
