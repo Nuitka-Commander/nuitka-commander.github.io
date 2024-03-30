@@ -22,6 +22,10 @@ class CommandStatus {
      * 一个间接数组 提供最终输出的顺序和内容
      */
     output = ref({});
+    /**
+     * 用于在本地存储中存储的配置
+     */
+    storage_config = ref({});
 
     constructor() {
         //未改变的配置 用于重置
