@@ -21,6 +21,7 @@ import {Delete} from "@element-plus/icons-vue";
  *    original:string,
  *  }
  *  enabled: boolean,
+ *  default: string[],
  *  elements: {
  *    [key: string]: {
  *      i18n: string, // 如果是用户定义的，那么该属性不存在
@@ -133,6 +134,9 @@ function on_cancel() {
   option_name.value = "";
   is_adding.value = false;
 }
+
+///////////////////////////
+
 </script>
 
 <template>

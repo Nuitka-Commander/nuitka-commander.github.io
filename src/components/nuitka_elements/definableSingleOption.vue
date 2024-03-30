@@ -12,11 +12,14 @@ import {ElInput, ElMessage, ElMessageBox} from "element-plus";
 import {useI18n} from "vue-i18n";
 import {ref} from "vue";
 import {new_option} from "@/vals/templates.js";
+import {use_command} from "@/modules/use_command.js";
 
 /**
  * @type {ModelRef<{
  *  i18n: string,
  *  val:string,
+ *  default:string,
+ *  id:number,
  *  command: {
  *    original:string,
  *  }
@@ -139,8 +142,38 @@ function on_cancel() {
   is_adding.value = false;
 }
 
+///////////////////////////
+const is_equal = computed(() => model.value.val === model.value.default);
+const result = computed(() => {
+  return {
+    cli: model.value.command.original,
+    json: null,
+    pyproject: null,
+  };
+});
+watch(() => [result, is_equal], ([new_result, new_is_equal]) => {
+  if (new_is_equal.value) {
+    delete use_command.output.value[model.value.id];
+  } else {
+    use_command.output.value[model.value.id] = new_result.value;
+  }
+}, {
+  immediate: true,
+  deep: true,
+});
+// 组件销毁则必须移除
+onBeforeUnmount(() => {
+  delete use_command.output.value[model.value.id];
+});
+///////////////////////////
+//在禁用时，将值设置为默认值
+watch(() => model.value.enabled, (new_enabled) => {
+  if (!new_enabled) {
+    model.value.val = model.value.default;
+  }
+});
 </script>
-<!--todo 完成多个可用控件-->
+
 <template>
   <el-tooltip :show-after="constants.element_show_after_time" placement="top">
     <template #content>
