@@ -142,8 +142,17 @@ function on_cancel() {
 ///////////////////////////
 const is_equal = computed(() => is_array_equivalent(model.value.val, model.value.default));
 const result = computed(() => {
+  //cli输出
+  let cli = `${model.value.command.original}=`;
+  model.value.val.forEach((item, index) => {
+    cli += `"${model.value.elements[item].command.original}"`;
+    if (index !== model.value.val.length - 1) {
+      cli += ",";
+    }
+  });
+  //
   return {
-    cli: model.value.command.original,
+    cli,
     json: null,
     pyproject: null,
   };
