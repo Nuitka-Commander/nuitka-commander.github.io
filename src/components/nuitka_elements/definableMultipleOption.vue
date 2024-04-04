@@ -14,6 +14,7 @@ import {useI18n} from "vue-i18n";
 import {Delete} from "@element-plus/icons-vue";
 import {is_array_equivalent} from "@/modules/untils.js";
 import {use_command} from "@/modules/use_command.js";
+import CliCommandCard from "@/components/command_cards/cliCommandCard.vue";
 
 /**
  * @type {ModelRef<{
@@ -248,6 +249,13 @@ watch(() => model.value.enabled, (new_enabled) => {
       </el-select>
     </element-card>
   </el-tooltip>
+  <Teleport to="#cli_output">
+    <cli-command-card
+        :command="result.cli"
+        :desc="undefined"
+        :show="!is_equal"
+    ></cli-command-card>
+  </Teleport>
 </template>
 
 <style lang="scss" scoped>

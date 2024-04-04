@@ -13,6 +13,7 @@ import {useI18n} from "vue-i18n";
 import {computed, onBeforeUnmount, ref, watch} from "vue";
 import {new_option} from "@/vals/templates.js";
 import {use_command} from "@/modules/use_command.js";
+import CliCommandCard from "@/components/command_cards/cliCommandCard.vue";
 
 /**
  * @type {ModelRef<{
@@ -240,7 +241,13 @@ watch(() => model.value.enabled, (new_enabled) => {
     </element-card>
 
   </el-tooltip>
-
+  <Teleport to="#cli_output">
+    <cli-command-card
+        :command="result.cli"
+        :desc="undefined"
+        :show="!is_equal"
+    ></cli-command-card>
+  </Teleport>
 </template>
 
 <style lang="scss" scoped>
