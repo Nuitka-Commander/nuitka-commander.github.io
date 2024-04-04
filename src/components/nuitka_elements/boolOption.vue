@@ -78,7 +78,11 @@ watch(() => model.value.enabled, (new_enabled) => {
   </el-tooltip>
 
   <Teleport to="#cli_output">
-    <cli-command-card :command="model.command.original" :desc="t(`nuitka_info.${model.i18n}.desc`)"></cli-command-card>
+    <cli-command-card
+        :command="model.command.original"
+        :desc="t(`nuitka_info.${model.i18n}.desc`)"
+        :show="!is_equal"
+    ></cli-command-card>
   </Teleport>
 
 </template>

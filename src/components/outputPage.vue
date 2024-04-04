@@ -1,20 +1,35 @@
 <script setup>
 import {CopyDocument} from "@element-plus/icons-vue";
+import {use_command} from "@/modules/use_command.js";
+import {computed} from "vue";
 
 /**
  * 复制所选内容到剪贴板
- * @param content
+ * @param type {string} 要复制的类型
  * @return {Promise<void>}
  */
-const on_copy = async (content) => {
+const on_copy = async (type) => {
   try {
-    await navigator.clipboard.writeText(content);
+    await navigator.clipboard.writeText(output.value[type]);
     console.log("copied");
   } catch (err) {
-    console.error("Failed to copy: ", err);
+    console.error(`Failed to copy\nType:${type}\nError:\n`, err);
   }
 
 };
+const output = computed(() => {
+  const result = {
+    cli: "",
+    json: "",
+    pyproject: "",
+  };
+  Object.keys(use_command.output.value).forEach((key) => {
+    const value = use_command.output.value[key];
+    result.cli += value.cli + " ";
+  });
+  console.log("result:\n", result);
+  return result;
+});
 </script>
 
 <template>
@@ -25,7 +40,7 @@ const on_copy = async (content) => {
         <div id="cli_output_area">
           <!--todo 完成复制模块-->
           <span class="copy_button">
-            <el-button round>
+            <el-button round @click="on_copy('cli')">
                <el-icon><CopyDocument /></el-icon>
             </el-button>
           </span>

@@ -9,6 +9,7 @@ import * as constants from "@/vals/constants.json";
 const props = defineProps({
   command: String,
   desc: String,
+  show: Boolean,
 });
 </script>
 
@@ -20,7 +21,7 @@ const props = defineProps({
         <div class="use_original_text cli_tooltip_desc"> {{ props.desc }}</div>
       </div>
     </template>
-    <div class="cli_command">
+    <div v-show="show" class="cli_command">
       {{ props.command }}
     </div>
   </el-tooltip>

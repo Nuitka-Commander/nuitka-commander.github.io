@@ -17,7 +17,7 @@ export default {
         some_content: {//二级元素
             ...new_option.bool(
                 "content0",
-                {original: "some_content command"},
+                {original: "--play-genshin"},
                 true,
                 true),
         },
@@ -25,10 +25,10 @@ export default {
         content_opt_test: {
             ...new_option.single_option(
                 "content_single_test",
-                {original: "star rail"},
+                {original: "--python-flag"},
                 true,
                 {
-                    python: new_option.multi_elements("python", {original: "python"}, true),
+                    python: new_option.multi_elements("python", {original: "no_str"}, true),
                     go: new_option.multi_elements("go", {original: "go"}, true),
                     genshin_impact: new_option.multi_elements("genshin_impact", {original: "genshin_impact"}, true),
                     kotlin: new_option.multi_elements("kotlin", {original: "kotlin"}, true),
@@ -42,7 +42,7 @@ export default {
 
             ...new_option.defined_multi(
                 "content_mult_test",
-                {original: "star000rail"},
+                {original: "--star-rail"},
                 true,
                 {
                     python: new_option.multi_elements("python", {original: "python"}, true),
@@ -57,7 +57,7 @@ export default {
         single_mutable: {
             ...new_option.definable_single(
                 "content_mult_test",
-                {original: "star_rail"},
+                {original: "--star-rail-p"},
                 true,
                 {
                     python: new_option.multi_elements("python", {original: "python"}, true),
@@ -72,7 +72,7 @@ export default {
         multi_test: {
             ...new_option.definable_multi(
                 "content_mult_test",
-                {original: "star-rail"},
+                {original: "--tar-rail"},
                 true,
                 {
                     python: new_option.multi_elements("python", {original: "python"}, true),
