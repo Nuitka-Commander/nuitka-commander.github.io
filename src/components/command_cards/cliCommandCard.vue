@@ -44,8 +44,8 @@ const props = defineProps({
 
 .cli_command {
   max-width: max-content;
-  margin: 4px 4px;
-  padding: 4px 8px;
+  margin: 2px 2px;
+  padding: 4px;
   border-radius: 8px;
 
   &:hover {

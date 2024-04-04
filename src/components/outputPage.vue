@@ -82,9 +82,9 @@ const output = computed(() => {
 
   #cli_output {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     padding: 25px 20px;
-    gap: 20px;
+    gap: 0;
   }
 
 }
