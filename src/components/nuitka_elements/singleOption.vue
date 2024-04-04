@@ -36,7 +36,7 @@ const model = defineModel();
 const is_equal = computed(() => model.value.val === model.value.default);
 const result = computed(() => {
   return {
-    cli: model.value.command.original + "一个单选" + "填入特征",
+    cli: `${model.value.command.original}="${model.value.elements[model.value.val].command.original}"`,
     json: null,
     pyproject: null,
   };

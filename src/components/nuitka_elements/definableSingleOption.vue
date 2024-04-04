@@ -146,7 +146,7 @@ function on_cancel() {
 const is_equal = computed(() => model.value.val === model.value.default);
 const result = computed(() => {
   return {
-    cli: model.value.command.original,
+    cli: `${model.value.command.original}="${model.value.elements[model.value.val].command.original}"`,
     json: null,
     pyproject: null,
   };
