@@ -80,6 +80,7 @@ watch(() => model.value.enabled, (new_enabled) => {
   <Teleport to="#cli_output">
     <cli-command-card
         :command="result.cli"
+        :name="t(`nuitka_info.${model.i18n}.name`)"
         :desc="t(`nuitka_info.${model.i18n}.desc`)"
         :show="!is_equal"
     ></cli-command-card>

@@ -35,6 +35,14 @@ import {useI18n} from "vue-i18n";
  */
 const model = defineModel();
 const t = useI18n().t;
+const output_desc = computed(() => {
+
+  return `${t(`nuitka_info.${model.value.i18n}.desc`)}\n\n` +
+      `${t(`nuitka_elements.option_desc`)}:\n\n` +
+      `${model.value.elements[model.value.val].command.original}:\n` +
+      `${t(`nuitka_info.${model.value.i18n}.elements.${model.value.val}.desc`)}`;
+
+});
 ///////////////////////////
 const is_equal = computed(() => model.value.val === model.value.default);
 const result = computed(() => {
@@ -118,8 +126,9 @@ watch(() => model.value.enabled, (new_enabled) => {
 
   <Teleport to="#cli_output">
     <cli-command-card
+        :desc="output_desc"
         :command="result.cli"
-        :desc="undefined"
+        :name="t(`nuitka_info.${model.i18n}.name`)"
         :show="!is_equal"
     ></cli-command-card>
   </Teleport>

@@ -17,7 +17,7 @@ export default {
     },
     content_single_test: {
         name: "玩原玩的",
-        desc: "genshin impact",
+        desc: "genshin impact的介绍",
         elements: {
             python: {
                 name: "蟒蛇",

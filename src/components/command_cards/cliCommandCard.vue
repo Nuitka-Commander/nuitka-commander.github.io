@@ -9,6 +9,7 @@ import * as constants from "@/vals/constants.json";
 const props = defineProps({
   command: String,
   desc: String,
+  name: String,
   show: Boolean,
 });
 </script>
@@ -17,7 +18,7 @@ const props = defineProps({
   <el-tooltip :show-after="constants.element_show_after_time" effect="light" placement="top">
     <template #content>
       <div class="cli_tooltip">
-        {{ props.command }}
+        {{ props.name }}
         <div class="use_original_text cli_tooltip_desc"> {{ props.desc }}</div>
       </div>
     </template>
