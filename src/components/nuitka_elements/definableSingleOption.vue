@@ -39,6 +39,17 @@ import CliCommandCard from "@/components/command_cards/cliCommandCard.vue";
  */
 const model = defineModel();
 const t = useI18n().t;
+const output_desc = computed(() => {
+  let result = `${t(`nuitka_info.${model.value.i18n}.desc`)}\n\n` +
+      `${t(`nuitka_elements.option_desc`)}:\n\n` +
+      `${model.value.elements[model.value.val].command.original}:  `;
+  if (model.value.elements[model.value.val].user_provide === false) {
+    result += `${t(`nuitka_info.${model.value.i18n}.elements.${model.value.val}.desc`)}`;
+  } else {
+    result += `${t(`nuitka_elements.user_provide`)}`;
+  }
+  return result;
+});
 
 /**
  * 删除单个元素
@@ -244,7 +255,8 @@ watch(() => model.value.enabled, (new_enabled) => {
   <Teleport to="#cli_output">
     <cli-command-card
         :command="result.cli"
-        :desc="undefined"
+        :desc="output_desc"
+        :name="t(`nuitka_info.${model.i18n}.name`)"
         :show="!is_equal"
     ></cli-command-card>
   </Teleport>

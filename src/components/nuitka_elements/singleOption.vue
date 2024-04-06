@@ -39,7 +39,7 @@ const output_desc = computed(() => {
 
   return `${t(`nuitka_info.${model.value.i18n}.desc`)}\n\n` +
       `${t(`nuitka_elements.option_desc`)}:\n\n` +
-      `${model.value.elements[model.value.val].command.original}:\n` +
+      `${model.value.elements[model.value.val].command.original}:  ` +
       `${t(`nuitka_info.${model.value.i18n}.elements.${model.value.val}.desc`)}`;
 
 });
