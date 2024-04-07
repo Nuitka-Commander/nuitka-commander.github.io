@@ -11,6 +11,7 @@ import {is_array_equivalent} from "@/modules/untils.js";
 import {use_command} from "@/modules/use_command.js";
 import {computed, onBeforeUnmount, watch} from "vue";
 import CliCommandCard from "@/components/command_cards/cliCommandCard.vue";
+import {useI18n} from "vue-i18n";
 
 /**
  *
@@ -38,6 +39,20 @@ import CliCommandCard from "@/components/command_cards/cliCommandCard.vue";
  * }>}
  */
 const model = defineModel();
+const t = useI18n().t;
+const output_desc = computed(() => {
+
+  let result = `${t(`nuitka_info.${model.value.i18n}.desc`)}\n\n` +
+      `${t(`nuitka_elements.option_desc`)}:\n\n`;
+  model.value.val.forEach((item) => {
+    result += `${model.value.elements[item].command.original}:  `;
+    result += `${t(`nuitka_info.${model.value.i18n}.elements.${item}.desc`)}`;
+    result += "\n";
+  });
+
+  return result;
+
+});
 ///////////////////////////
 const is_equal = computed(() => is_array_equivalent(model.value.val, model.value.default));
 const result = computed(() => {
@@ -133,7 +148,8 @@ watch(() => model.value.enabled, (new_enabled) => {
   <Teleport to="#cli_output">
     <cli-command-card
         :command="result.cli"
-        :desc="undefined"
+        :desc="output_desc"
+        :name="t(`nuitka_info.${model.i18n}.name`)"
         :show="!is_equal"
     ></cli-command-card>
   </Teleport>
