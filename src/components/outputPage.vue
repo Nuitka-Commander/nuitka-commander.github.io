@@ -61,6 +61,8 @@ const output = computed(() => {
             </el-button>
           </span>
 
+          <pre><code>{{ use_command.storage_config }}</code></pre>
+
         </div>
       </el-tab-pane>
     </el-tabs>
