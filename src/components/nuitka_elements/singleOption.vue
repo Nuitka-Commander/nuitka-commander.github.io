@@ -55,8 +55,10 @@ const result = computed(() => {
 watch(() => [result, is_equal], ([new_result, new_is_equal]) => {
   if (new_is_equal.value) {
     delete use_command.output.value[model.value.id];
+    delete use_command.storage_config.value[model.value.command.original];
   } else {
     use_command.output.value[model.value.id] = new_result.value;
+    use_command.storage_config.value[model.value.command.original] = model.value.val;
   }
 }, {
   immediate: true,
@@ -126,8 +128,8 @@ watch(() => model.value.enabled, (new_enabled) => {
 
   <Teleport to="#cli_output">
     <cli-command-card
-        :desc="output_desc"
         :command="result.cli"
+        :desc="output_desc"
         :name="t(`nuitka_info.${model.i18n}.name`)"
         :show="!is_equal"
     ></cli-command-card>
