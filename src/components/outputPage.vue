@@ -47,8 +47,13 @@ const output = computed(() => {
           <div id="cli_output"></div>
         </div>
       </el-tab-pane>
+
       <el-tab-pane>
-        <template #label>JSON CONFIG</template>
+        <template #label>pyproject</template>
+        <div id="pyproject_output"></div>
+      </el-tab-pane>
+      <el-tab-pane>
+        <template #label>JSON</template>
         <div id="json_output_area">
             <span class="copy_button">
             <el-button round>
@@ -57,10 +62,6 @@ const output = computed(() => {
           </span>
 
         </div>
-      </el-tab-pane>
-      <el-tab-pane>
-        <template #label>pyproject</template>
-        <div id="pyproject_output"></div>
       </el-tab-pane>
     </el-tabs>
   </div>

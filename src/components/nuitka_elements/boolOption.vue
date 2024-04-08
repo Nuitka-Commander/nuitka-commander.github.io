@@ -33,7 +33,6 @@ const is_equal = computed(() => model.value.val === model.value.default);
 const result = computed(() => {
   return {
     cli: model.value.command.original,
-    json: null,
     pyproject: null,
   };
 });

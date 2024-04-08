@@ -169,7 +169,6 @@ const result = computed(() => {
   //
   return {
     cli,
-    json: null,
     pyproject: null,
   };
 });
