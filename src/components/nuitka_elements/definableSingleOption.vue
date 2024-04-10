@@ -38,6 +38,15 @@ import CliCommandCard from "@/components/command_cards/cliCommandCard.vue";
  * }>}
  */
 const model = defineModel();
+/**
+ * 额外的一些信息
+ */
+const props = defineProps({
+  key_name: {
+    type: String,
+    required: true,
+  },
+});
 const t = useI18n().t;
 const output_desc = computed(() => {
   let result = `${t(`nuitka_info.${model.value.i18n}.desc`)}\n\n` +
@@ -164,11 +173,11 @@ const result = computed(() => {
 });
 watch(() => [result, is_equal], ([new_result, new_is_equal]) => {
   if (new_is_equal.value) {
-    delete use_command.output.value[model.value.id];
-    delete use_command.storage_config.value[model.value.command.original];
+    delete use_command.output.value[props.key_name];
+    delete use_command.storage_config.value[props.key_name];
   } else {
-    use_command.output.value[model.value.id] = new_result.value;
-    use_command.storage_config.value[model.value.command.original] = model.value.val;
+    use_command.output.value[props.key_name] = new_result.value;
+    use_command.storage_config.value[props.key_name] = model.value.val;
   }
 }, {
   immediate: true,
@@ -176,7 +185,7 @@ watch(() => [result, is_equal], ([new_result, new_is_equal]) => {
 });
 // 组件销毁则必须移除
 onBeforeUnmount(() => {
-  delete use_command.output.value[model.value.id];
+  delete use_command.output.value[props.key_name];
 });
 ///////////////////////////
 //在禁用时，将值设置为默认值

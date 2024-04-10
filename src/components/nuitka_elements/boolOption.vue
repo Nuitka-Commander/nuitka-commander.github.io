@@ -27,6 +27,15 @@ import {use_command} from "@/modules/use_command.js";
  * }>}
  */
 const model = defineModel();
+/**
+ * 额外的一些信息
+ */
+const props = defineProps({
+  key_name: { //key_name因为javascript本身的限制，所以保证不会重复
+    type: String,
+    required: true,
+  },
+});
 const t = useI18n().t;
 ///////////////////////////
 const is_equal = computed(() => model.value.val === model.value.default);
@@ -39,11 +48,11 @@ const result = computed(() => {
 
 watch(() => [result, is_equal], ([new_result, new_is_equal]) => {
   if (new_is_equal.value) {
-    delete use_command.output.value[model.value.id];
-    delete use_command.storage_config.value[model.value.command.original];
+    delete use_command.output.value[props.key_name];
+    delete use_command.storage_config.value[props.key_name];
   } else {
-    use_command.output.value[model.value.id] = new_result.value;
-    use_command.storage_config.value[model.value.command.original] = model.value.val;
+    use_command.output.value[props.key_name] = new_result.value;
+    use_command.storage_config.value[props.key_name] = model.value.val;
   }
 }, {
   immediate: true,
@@ -51,7 +60,7 @@ watch(() => [result, is_equal], ([new_result, new_is_equal]) => {
 });
 // 组件销毁则必须移除
 onBeforeUnmount(() => {
-  delete use_command.output.value[model.value.id];
+  delete use_command.output.value[props.key_name];
 });
 ///////////////////////////
 //在禁用时，将值设置为默认值
