@@ -36,4 +36,20 @@ export const is_array_equivalent = (arr1, arr2) => {
     return Object.keys(temp).length === 0;
 
 };
+/**
+ * 防抖函数
+ * @param fn {Function} 需要防抖的函数
+ * @param delay {Number} 防抖时间(ms)
+ */
+export const debounce_func = (fn, delay = 500) => {
+    let timeout;
+    return function () {
+        const context = this;
+        const args = arguments;
+        clearTimeout(timeout);
+        timeout = setTimeout(() => {
+            fn.apply(context, args);
+        }, delay);
+    };
 
+};

@@ -3,9 +3,10 @@
  * @Author: erduotong
  * @Date: 2023-12-08 23:47:42
  */
-import {ref} from "vue";
+import {ref, watch} from "vue";
 import {local_nuitka_version_config} from "@/modules/use_local_forage.js";
 import {user_options} from "@/vals/stores/user_options.js";
+import {debounce_func} from "@/modules/untils.js";
 
 
 class CommandStatus {
@@ -18,6 +19,7 @@ class CommandStatus {
      * 外部组件交互的对象
      */
     status = ref({});
+    ///////////////////////////////////////////
     /**
      * 一个间接数组 提供最终输出的顺序和内容
      */
@@ -26,6 +28,11 @@ class CommandStatus {
      * 用于在本地存储中存储的配置
      */
     storage_config = ref({});
+    /**
+     *
+     * @type {undefined | Function}
+     */
+    storage_watcher = undefined;
 
     constructor() {
         //未改变的配置 用于重置
@@ -72,10 +79,22 @@ class CommandStatus {
                 delete second_value.type;
             });
         });
-
+        if (this.storage_watcher !== undefined) { //简单处理一下
+            this.storage_watcher();
+        }
         // 获取已有配置
         const local_config = await local_nuitka_version_config.read_config(user_options.value.nuitka_version);
         // TODO: 加载配置
+
+        //监听一下
+        this.storage_watcher = watch(
+            () => this.storage_config.value,
+            debounce_func((new_val) => {
+                console.log(new_val);
+            }, 500), {
+                deep: true,
+                immediate: true,
+            });
 
         this.status.value = this.original_status;
         console.log(this.status.value);
