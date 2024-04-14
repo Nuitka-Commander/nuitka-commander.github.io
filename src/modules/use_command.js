@@ -47,7 +47,7 @@ class CommandStatus {
      * @param config {Object}
      */
     async update_config(config) {
-        this.output.value = {};//清空 防止id重复的情况
+        this.output.value = {};//清空 防止重复
         //自增id 排序用 这个id绝对不会重复
         let id = 0;
         // 预处理配置 转换成事宜遍历的形式
@@ -79,18 +79,29 @@ class CommandStatus {
                 delete second_value.type;
             });
         });
-        if (this.storage_watcher !== undefined) { //简单处理一下
+        if (this.storage_watcher !== undefined) { //简单处理一下 防止内存泄露
             this.storage_watcher();
         }
         // 获取已有配置
-        const local_config = await local_nuitka_version_config.read_config(user_options.value.nuitka_version);
+        let local_config = {};
+        try {
+            local_config = JSON.parse(await local_nuitka_version_config.read_config(user_options.value.nuitka_version));
+        } catch (e) {
+            console.log(`读取配置失败\nversion:${user_options.value.nuitka_version}\n`, e);
+        }
+        Object.keys(this.original_status).forEach();
+
+
+
         // TODO: 加载配置
 
         //监听一下
         this.storage_watcher = watch(
             () => this.storage_config.value,
             debounce_func((new_val) => {
-                console.log(new_val);
+                const new_config = JSON.stringify(new_val);
+                console.log("saved", "\n", new_config);
+                local_nuitka_version_config.update_config(user_options.value.nuitka_version, new_config);
             }, 500), {
                 deep: true,
                 immediate: true,

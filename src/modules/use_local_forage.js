@@ -7,6 +7,8 @@ import localforage from "localforage";
 import {ref} from "vue";
 
 class LocalNuitkaVersionConfig {
+    enable = ref(true);
+    is_working = false;
 
     constructor() {
         this.localforage = localforage.createInstance({
@@ -14,7 +16,6 @@ class LocalNuitkaVersionConfig {
             storeName: "nuitka_commander_version_config",
             driver: localforage.INDEXEDDB,
         });
-        this.enable = ref(true);
         this.localforage.ready().then(() => {
             this.test().then();
         });
@@ -46,11 +47,18 @@ class LocalNuitkaVersionConfig {
      * @returns {Promise}
      */
     async update_config(version, config) {
+        if (this.is_working) {
+            console.warn("正在工作，发出了异常的请求");
+            return;
+        }
+        this.is_working = true;
         try {
             await this.localforage.setItem(version, config);
         } catch (e) {
             console.warn(`更新版本${version}的配置失败`, e);
             this.enable.value = false;
+        } finally {
+            this.is_working = false;
         }
     }
 
