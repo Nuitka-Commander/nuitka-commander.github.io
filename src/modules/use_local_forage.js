@@ -29,9 +29,7 @@ class LocalNuitkaVersionConfig {
         try {
             const date = Date.now().toString();
             await this.localforage.setItem(date, date);
-            console.log("测试indexDB写入成功");
             await this.localforage.removeItem(date);
-            console.log("测试indexDB删除成功");
             this.enable.value = true;
         } catch (e) {
             console.warn("测试indexDB失败\n", e);

@@ -50,7 +50,19 @@ class CommandStatus {
         this.output.value = {};//清空 防止重复
         //自增id 排序用 这个id绝对不会重复
         let id = 0;
-        // 预处理配置 转换成事宜遍历的形式
+        //清除监听
+        if (this.storage_watcher !== undefined) { //简单处理一下 防止内存泄露
+            this.storage_watcher();
+        }
+        // 获取已有配置
+        let local_config = {};
+        try {
+            local_config = JSON.parse(await local_nuitka_version_config.read_config(user_options.value.nuitka_version));
+        } catch (e) {
+            console.log(`读取配置失败\nversion:${user_options.value.nuitka_version}\n`, e);
+        }
+
+        // 预处理配置+加载存储配置
         Object.keys(config).forEach(top_key => {
             if (top_key === "support_language") {
                 return; //跳过循环 不进行处理
@@ -65,7 +77,10 @@ class CommandStatus {
                 } else {
                     second_value.val = second_value.default;
                 }
-
+                // 检查是否有存储值
+                if (local_config[second_key] !== undefined) {
+                    second_value.val = local_config[second_key];
+                }
                 // 添加到原始配置中
                 this.original_status[top_key] = this.original_status[top_key] || {};
                 this.original_status[top_key][second_value.type] = this.original_status[top_key][second_value.type] || {};
@@ -79,28 +94,13 @@ class CommandStatus {
                 delete second_value.type;
             });
         });
-        if (this.storage_watcher !== undefined) { //简单处理一下 防止内存泄露
-            this.storage_watcher();
-        }
-        // 获取已有配置
-        let local_config = {};
-        try {
-            local_config = JSON.parse(await local_nuitka_version_config.read_config(user_options.value.nuitka_version));
-        } catch (e) {
-            console.log(`读取配置失败\nversion:${user_options.value.nuitka_version}\n`, e);
-        }
-        Object.keys(this.original_status).forEach();
 
-
-
-        // TODO: 加载配置
 
         //监听一下
         this.storage_watcher = watch(
             () => this.storage_config.value,
             debounce_func((new_val) => {
                 const new_config = JSON.stringify(new_val);
-                console.log("saved", "\n", new_config);
                 local_nuitka_version_config.update_config(user_options.value.nuitka_version, new_config);
             }, 500), {
                 deep: true,
@@ -108,7 +108,6 @@ class CommandStatus {
             });
 
         this.status.value = this.original_status;
-        console.log(this.status.value);
 
     }
 
