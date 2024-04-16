@@ -15,7 +15,20 @@ class Debug {
         if (config.support_language === undefined) {
             console.error(`Version:${user_options.value.nuitka_version} \n 未找到support_language`);
         }
-        // todo 遍历其中的所有项，寻找是否有重复项
+        const temp = {};
+        Object.keys(config).forEach(key => {
+            const value = config[key];
+            Object.keys(value).forEach(sub_key => {
+                if (temp[sub_key] === undefined) {
+                    temp[sub_key] = 0;
+                }
+                temp[sub_key] += 1;
+                if (temp[sub_key] > 1) {
+                    console.error(`Version:${user_options.value.nuitka_version} \n @${key}  @${sub_key} 重复`);
+                }
+            });
+        });
+
     }
 }
 

@@ -7,6 +7,7 @@ import {ref, watch} from "vue";
 import {local_nuitka_version_config} from "@/modules/use_local_forage.js";
 import {user_options} from "@/vals/stores/user_options.js";
 import {debounce_func} from "@/modules/untils.js";
+import {debug} from "@/modules/debug.js";
 
 
 class CommandStatus {
@@ -47,6 +48,7 @@ class CommandStatus {
      * @param config {Object}
      */
     async update_config(config) {
+        debug.check_nuitka_config(config);//检查配置文件是否符合格式
         this.output.value = {};//清空 防止重复
         //自增id 排序用 这个id绝对不会重复
         let id = 0;
