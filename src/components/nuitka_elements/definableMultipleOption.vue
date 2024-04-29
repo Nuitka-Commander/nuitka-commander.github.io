@@ -8,19 +8,25 @@ import * as constants from "@/vals/constants.json";
 import {user_options} from "@/vals/stores/user_options.js";
 import ElementCard from "@/components/untils/elementCard.vue";
 import {ElInput, ElMessage, ElMessageBox} from "element-plus";
-import {ref} from "vue";
+import {computed, onBeforeUnmount, ref, watch} from "vue";
 import {new_option} from "@/vals/templates.js";
 import {useI18n} from "vue-i18n";
 import {Delete} from "@element-plus/icons-vue";
+import {is_array_equivalent} from "@/modules/untils.js";
+import {use_command} from "@/modules/use_command.js";
+import CliCommandCard from "@/components/command_cards/cliCommandCard.vue";
 
 /**
  * @type {ModelRef<{
  *  i18n: string,
  *  val: string[],
+ *  default: string[],
+ *  id: number,
  *  command: {
  *    original:string,
  *  }
  *  enabled: boolean,
+ *  default: string[],
  *  elements: {
  *    [key: string]: {
  *      i18n: string, // 如果是用户定义的，那么该属性不存在
@@ -34,7 +40,31 @@ import {Delete} from "@element-plus/icons-vue";
  * }>}
  */
 const model = defineModel();
+/**
+ * 额外的一些信息
+ */
+const props = defineProps({
+  key_name: {
+    type: String,
+    required: true,
+  },
+});
 const t = useI18n().t;
+const output_desc = computed(() => {
+  let result = `${t(`nuitka_info.${model.value.i18n}.desc`)}\n\n` +
+      `${t(`nuitka_elements.option_desc`)}:\n\n`;
+  model.value.val.forEach((item) => {
+    result += `${model.value.elements[item].command.original}:  `;
+    if (model.value.elements[item].user_provide === false) {
+      result += `${t(`nuitka_info.${model.value.i18n}.elements.${item}.desc`)}`;
+    } else {
+      result += `${t(`nuitka_elements.user_provide`)}`;
+    }
+    result += "\n";
+  });
+
+  return result;
+});
 
 /**
  * 删除单个元素
@@ -53,7 +83,7 @@ function delete_element(key) {
   ).then(() => {
     //从选项数组中删除并删除键值对
     const index = model.value.val.indexOf(key);
-    if(index!==-1){//如果不在就不用删除了
+    if (index !== -1) {//如果不在就不用删除了
       model.value.val.splice(index, 1);
     }
     delete model.value.elements[key];
@@ -100,19 +130,32 @@ function on_adding() {
 }
 
 function on_confirm() {
-  if (option_name.value.trim() !== "") {
-    console.log(`add option: ${option_name.value}`);
-    model.value.elements[option_name.value] = {
-      ...new_option.multi_elements(
-          "",
-          {
-            original: option_name.value,
-          },
-          true,
-          true,
-      ),
-    };
+  if (option_name.value.trim() === "") {
+    return;
   }
+  //todo 其他的判断检测 是否和命令重复
+  if (option_name.value in model.value.elements) {
+    ElMessage({
+      type: "warning",
+      message: t("message.have_been_created"),
+      showClose: true,
+      duration: constants.message_duration,
+    });
+    return;
+  }
+
+  console.log(`add option: ${option_name.value}`);
+  model.value.elements[option_name.value] = {
+    ...new_option.multi_elements(
+        "",
+        {
+          original: option_name.value,
+        },
+        true,
+        true,
+    ),
+  };
+
   on_cancel();
 }
 
@@ -120,6 +163,47 @@ function on_cancel() {
   option_name.value = "";
   is_adding.value = false;
 }
+
+///////////////////////////
+const is_equal = computed(() => is_array_equivalent(model.value.val, model.value.default));
+const result = computed(() => {
+  //cli输出
+  let cli = `${model.value.command.original}=`;
+  model.value.val.forEach((item, index) => {
+    cli += `"${model.value.elements[item].command.original}"`;
+    if (index !== model.value.val.length - 1) {
+      cli += ",";
+    }
+  });
+  //
+  return {
+    cli,
+    pyproject: null,
+  };
+});
+watch(() => [result, is_equal], ([new_result, new_is_equal]) => {
+  if (new_is_equal.value) {
+    delete use_command.output.value[props.key_name];
+    delete use_command.storage_config.value[props.key_name];
+  } else {
+    use_command.output.value[props.key_name] = new_result.value;
+    use_command.storage_config.value[props.key_name] = model.value.val;
+  }
+}, {
+  immediate: true,
+  deep: true,
+});
+// 组件销毁则必须移除
+onBeforeUnmount(() => {
+  delete use_command.output.value[props.key_name];
+});
+///////////////////////////
+//在禁用时，将值设置为默认值
+watch(() => model.value.enabled, (new_enabled) => {
+  if (!new_enabled) {
+    model.value.val = model.value.default;
+  }
+});
 </script>
 
 <template>
@@ -135,14 +219,14 @@ function on_cancel() {
         <el-text v-if="user_options.show_original_command" size="large"> ({{ model.command.original }})</el-text>
       </div>
       <el-select
-          multiple
-          collapse-tags
-          collapse-tags-tooltip
+          v-model="model.val"
+          :disabled="!model.enabled"
           :max-collapse-tags="constants.nuitka_multi_option.max_collapse_tags"
           :placeholder="$t('nuitka_elements.select_placeholder')"
+          collapse-tags
+          collapse-tags-tooltip
           filterable
-          :disabled="!model.enabled"
-          v-model="model.val"
+          multiple
       >
         <template v-for="(value,key) in model.elements" :key="key">
           <el-tooltip :show-after="constants.element_show_after_time" placement="left-start">
@@ -171,7 +255,7 @@ function on_cancel() {
           </el-tooltip>
         </template>
         <template #footer>
-          <el-button v-if="!is_adding" text bg size="small" @click="on_adding">
+          <el-button v-if="!is_adding" bg size="small" text @click="on_adding">
             {{ $t("nuitka_elements.add_option") }}
           </el-button>
           <template v-else>
@@ -181,7 +265,7 @@ function on_cancel() {
                 size="small"
                 style="width: 100%;margin-bottom: 8px;"
             />
-            <el-button type="primary" size="small" @click="on_confirm">
+            <el-button size="small" type="primary" @click="on_confirm">
               {{ $t("message.OK") }}
             </el-button>
             <el-button size="small" @click="on_cancel">{{ $t("message.cancel") }}</el-button>
@@ -190,6 +274,14 @@ function on_cancel() {
       </el-select>
     </element-card>
   </el-tooltip>
+  <Teleport to="#cli_output">
+    <cli-command-card
+        :command="result.cli"
+        :desc="output_desc"
+        :name="t(`nuitka_info.${model.i18n}.name`)"
+        :show="!is_equal"
+    ></cli-command-card>
+  </Teleport>
 </template>
 
 <style lang="scss" scoped>

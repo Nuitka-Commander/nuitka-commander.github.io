@@ -63,6 +63,7 @@ export default {
         user_provide: "这是你自定义的选项",
         add_option: "添加一个选项",
         input_an_option: "输入一个选项",
+        option_desc: "选项描述",
     },
     message: {
         will_del_option: "你即将删除此该自定义选项",
@@ -72,6 +73,7 @@ export default {
         cancel: "取消",
         cancel_del: "已取消删除",
         del_success: "删除成功",
+        have_been_created: "该选项已存在!",
     },
 
 

@@ -1,4 +1,4 @@
-<script setup lang="js">
+<script lang="js" setup>
 /**
  * @Description 编辑命令的页面
  * @Author: erduotong
@@ -18,6 +18,8 @@ const command = use_command;
 
 <template>
   <div>
+    <el-button @click="console.log(use_command.storage_config.value);console.log(use_command.output.value)">debug
+    </el-button>
     <el-tabs stretch tab-position="left" type="card">
       <template v-for="(value1,key1) in command.status.value" :key="key1">
         <!--做出分页-->
@@ -37,14 +39,15 @@ const command = use_command;
                 <!--Bool-->
                 <!--suppress JSUnusedLocalSymbols -->
                 <template v-for="(_,key2) in value1[nuitka_element_type.Bool]" :key="key2">
-                  <bool-option v-model="value1[nuitka_element_type.Bool][key2]"></bool-option>
+                  <bool-option v-model="value1[nuitka_element_type.Bool][key2]" :key_name="key2"></bool-option>
                 </template>
               </div>
               <div>
                 <!--单选-->
                 <!--suppress JSUnusedLocalSymbols -->
                 <template v-for="(_,key2) in value1[nuitka_element_type.Single_option]" :key="key2">
-                  <single-option v-model="value1[nuitka_element_type.Single_option][key2]"></single-option>
+                  <single-option v-model="value1[nuitka_element_type.Single_option][key2]"
+                                 :key_name="key2"></single-option>
                 </template>
               </div>
               <div>
@@ -52,23 +55,24 @@ const command = use_command;
                 <!--suppress JSUnusedLocalSymbols -->
                 <template v-for="(_,key2) in value1[nuitka_element_type.Defined_multiple]" :key="key2">
                   <defined-multiple-option
-                      v-model="value1[nuitka_element_type.Defined_multiple][key2]"></defined-multiple-option>
+                      v-model="value1[nuitka_element_type.Defined_multiple][key2]"
+                      :key_name="key2"></defined-multiple-option>
                 </template>
               </div>
               <div>
                 <!--可定义的单选-->
                 <!--suppress JSUnusedLocalSymbols -->
                 <template v-for="(_,key2) in value1[nuitka_element_type.Definable_single]" :key="key2">
-                  <definable-single-option
-                      v-model="value1[nuitka_element_type.Definable_single][key2]"></definable-single-option>
+                  <definable-single-option v-model="value1[nuitka_element_type.Definable_single][key2]"
+                                           :key_name="key2"></definable-single-option>
                 </template>
               </div>
-               <div>
+              <div>
                 <!--可定义的多选-->
                 <!--suppress JSUnusedLocalSymbols -->
                 <template v-for="(_,key2) in value1[nuitka_element_type.Definable_multiple_option]" :key="key2">
-                  <definable-multiple-option
-                      v-model="value1[nuitka_element_type.Definable_multiple_option][key2]"></definable-multiple-option>
+                  <definable-multiple-option v-model="value1[nuitka_element_type.Definable_multiple_option][key2]"
+                                             :key_name="key2"></definable-multiple-option>
                 </template>
               </div>
             </div>

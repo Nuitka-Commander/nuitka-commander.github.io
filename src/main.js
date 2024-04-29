@@ -2,6 +2,9 @@
  * @Description 入口主文件
  * @Author: erduotong
  * @Date: 2023-11-26 11:03:51
+ * ## 圣经:
+ * 1. 不要过早优化
+ * 2. 考虑该产品的使用场景，性能问题不是第一位
  */
 import {createApp} from "vue";
 import App from "./App.vue";
@@ -12,8 +15,8 @@ import "element-plus/theme-chalk/el-message-box.css";
 import "element-plus/theme-chalk/el-loading.css";
 import "element-plus/theme-chalk/el-message.css";
 import "element-plus/theme-chalk/el-notification.css";
-//////////////////////////////////////////////////////////
 import "@/assets/styles/main.scss";
+
 
 init_all();
 const app = createApp(App);

@@ -1,4 +1,4 @@
-<script setup lang="js">
+<script lang="js" setup>
 /**
  * @Description 多选组件
  * @Author: erduotong
@@ -7,12 +7,19 @@
 import ElementCard from "@/components/untils/elementCard.vue";
 import * as constants from "@/vals/constants.json";
 import {user_options} from "@/vals/stores/user_options.js";
+import {is_array_equivalent} from "@/modules/untils.js";
+import {use_command} from "@/modules/use_command.js";
+import {computed, onBeforeUnmount, watch} from "vue";
+import CliCommandCard from "@/components/command_cards/cliCommandCard.vue";
+import {useI18n} from "vue-i18n";
 
 /**
  *
  * @type {ModelRef<{
  *  component: string,
  *  i18n: string,
+ *  default: string[],
+ *  id: number,
  *  command: {
  *    original: string,
  *  }
@@ -32,62 +39,69 @@ import {user_options} from "@/vals/stores/user_options.js";
  * }>}
  */
 const model = defineModel();
+/**
+ * 额外的一些信息
+ */
+const props = defineProps({
+  key_name: {
+    type: String,
+    required: true,
+  },
+});
+const t = useI18n().t;
+const output_desc = computed(() => {
 
-// /**
-//  * 判断使用的控件
-//  * @type {ComputedRef<string>}
-//  */
-// const chose_element = computed(() => {
-//
-//   if (model.value.component === nuitka_element_status.use_select
-//       || model.value.component === nuitka_element_status.use_transfer
-//   ) {
-//     return model.value.component;
-//   }
-//   const elements_length = Object.keys(model.value.elements).length;
-//
-//   if (elements_length < constants.nuitka_multi_option.min_use_transfer) {
-//     return nuitka_element_status.use_select;
-//   } else {
-//     return nuitka_element_status.use_transfer;
-//   }
-// });
-// /**
-//  * 生成穿梭框所需的渲染数据
-//  * @type {ComputedRef<*[]>}
-//  * @return {Object[]}
-//  */
-// const transfer_data = computed(() => {
-//   const data = [];
-//   Object.keys(model.value.elements).forEach((key) => {
-//     data.push({
-//       key: key,//无需label因为设置了渲染函数
-//       // i18n: model.value.elements[key].i18n,
-//       i18n: `nuitka_info.${model.value.i18n}.elements.${model.value.elements[key].i18n}`,
-//       command: model.value.elements[key].command.original,
-//       disabled: !model.value.elements[key].enabled,
-//     });
-//   });
-//   return data;
-// });
-//
-// /**
-//  * transfer内的渲染函数
-//  * @param h 用于创建虚拟节点
-//  * @param option el-transfer的配置项
-//  */
-// const render_function = (h, option) => {
-//   return h(
-//       "transfer-render",
-//       {
-//         props: {
-//           i18n: option.i18n,
-//           command: option.command,
-//
-//         },
-//       },
-//   );
-// };
+  let result = `${t(`nuitka_info.${model.value.i18n}.desc`)}\n\n` +
+      `${t(`nuitka_elements.option_desc`)}:\n\n`;
+  model.value.val.forEach((item) => {
+    result += `${model.value.elements[item].command.original}:  `;
+    result += `${t(`nuitka_info.${model.value.i18n}.elements.${item}.desc`)}`;
+    result += "\n";
+  });
+
+  return result;
+
+});
+///////////////////////////
+const is_equal = computed(() => is_array_equivalent(model.value.val, model.value.default));
+const result = computed(() => {
+  //cli输出
+  let cli = `${model.value.command.original}=`;
+  model.value.val.forEach((item, index) => {
+    cli += `"${model.value.elements[item].command.original}"`;
+    if (index !== model.value.val.length - 1) {
+      cli += ",";
+    }
+  });
+  //
+  return {
+    cli,
+    pyproject: null,
+  };
+});
+watch(() => [result, is_equal], ([new_result, new_is_equal]) => {
+  if (new_is_equal.value) {
+    delete use_command.output.value[props.key_name];
+    delete use_command.storage_config.value[props.key_name];
+  } else {
+    use_command.output.value[props.key_name] = new_result.value;
+    use_command.storage_config.value[props.key_name] = model.value.val;
+  }
+}, {
+  immediate: true,
+  deep: true,
+});
+// 组件销毁则必须移除
+onBeforeUnmount(() => {
+  delete use_command.output.value[props.key_name];
+});
+///////////////////////////
+//在禁用时，将值设置为默认值
+watch(() => model.value.enabled, (new_enabled) => {
+  if (!new_enabled) {
+    model.value.val = model.value.default;
+  }
+});
 </script>
 
 <template>
@@ -106,13 +120,13 @@ const model = defineModel();
 
 
       <el-select
-          multiple
-          collapse-tags
-          collapse-tags-tooltip
+          v-model="model.val"
           :max-collapse-tags="constants.nuitka_multi_option.max_collapse_tags"
           :placeholder="$t('nuitka_elements.select_placeholder')"
-          v-model="model.val"
+          collapse-tags
+          collapse-tags-tooltip
           filterable
+          multiple
       >
         <template v-for="(value,key) in model.elements" :key="key">
           <el-tooltip :show-after=" constants.element_show_after_time" placement="left-start">
@@ -137,23 +151,18 @@ const model = defineModel();
         </template>
 
       </el-select>
-      <!--<template v-else-if="chose_element === nuitka_element_status.use_transfer">-->
-      <!--  &lt;!&ndash;穿梭框实现&ndash;&gt;-->
-      <!--  <el-transfer-->
-      <!--      filterable-->
-      <!--      v-model="model.val"-->
-      <!--      :titles="[$t('nuitka_elements.not_selected'), $t('nuitka_elements.selected')]"-->
-      <!--      :data="transfer_data"-->
-      <!--      :render-content="render_function"-->
-      <!--  >-->
-
-      <!--  </el-transfer>-->
-      <!--</template>-->
 
 
     </element-card>
   </el-tooltip>
-
+  <Teleport to="#cli_output">
+    <cli-command-card
+        :command="result.cli"
+        :desc="output_desc"
+        :name="t(`nuitka_info.${model.i18n}.name`)"
+        :show="!is_equal"
+    ></cli-command-card>
+  </Teleport>
 </template>
 
 <style lang="scss" scoped>

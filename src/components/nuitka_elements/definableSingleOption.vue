@@ -1,4 +1,4 @@
-<script setup lang="js">
+<script lang="js" setup>
 /**
  * @Description 可以让用户定义的单选
  * @Author: erduotong
@@ -10,13 +10,17 @@ import {user_options} from "@/vals/stores/user_options.js";
 import {Delete} from "@element-plus/icons-vue";
 import {ElInput, ElMessage, ElMessageBox} from "element-plus";
 import {useI18n} from "vue-i18n";
-import {ref} from "vue";
+import {computed, onBeforeUnmount, ref, watch} from "vue";
 import {new_option} from "@/vals/templates.js";
+import {use_command} from "@/modules/use_command.js";
+import CliCommandCard from "@/components/command_cards/cliCommandCard.vue";
 
 /**
  * @type {ModelRef<{
  *  i18n: string,
  *  val:string,
+ *  default:string,
+ *  id:number,
  *  command: {
  *    original:string,
  *  }
@@ -34,7 +38,27 @@ import {new_option} from "@/vals/templates.js";
  * }>}
  */
 const model = defineModel();
+/**
+ * 额外的一些信息
+ */
+const props = defineProps({
+  key_name: {
+    type: String,
+    required: true,
+  },
+});
 const t = useI18n().t;
+const output_desc = computed(() => {
+  let result = `${t(`nuitka_info.${model.value.i18n}.desc`)}\n\n` +
+      `${t(`nuitka_elements.option_desc`)}:\n\n` +
+      `${model.value.elements[model.value.val].command.original}:  `;
+  if (model.value.elements[model.value.val].user_provide === false) {
+    result += `${t(`nuitka_info.${model.value.i18n}.elements.${model.value.val}.desc`)}`;
+  } else {
+    result += `${t(`nuitka_elements.user_provide`)}`;
+  }
+  return result;
+});
 
 /**
  * 删除单个元素
@@ -107,19 +131,30 @@ function on_adding() {
 }
 
 function on_confirm() {
-  if (option_name.value.trim() !== "") {
-    console.log(`add option: ${option_name.value}`);
-    model.value.elements[option_name.value] = {
-      ...new_option.multi_elements(
-          "",
-          {
-            original: option_name.value,
-          },
-          true,
-          true,
-      ),
-    };
+  if (option_name.value.trim() === "") {
+    return;
   }
+  //todo 其他的判断检测 是否和命令重复
+  if (option_name.value in model.value.elements) {
+    ElMessage({
+      type: "warning",
+      message: t("message.have_been_created"),
+      showClose: true,
+      duration: constants.message_duration,
+    });
+    return;
+  }
+  console.log(`add option: ${option_name.value}`);
+  model.value.elements[option_name.value] = {
+    ...new_option.multi_elements(
+        "",
+        {
+          original: option_name.value,
+        },
+        true,
+        true,
+    ),
+  };
   on_cancel();
 }
 
@@ -128,8 +163,39 @@ function on_cancel() {
   is_adding.value = false;
 }
 
+///////////////////////////
+const is_equal = computed(() => model.value.val === model.value.default);
+const result = computed(() => {
+  return {
+    cli: `${model.value.command.original}="${model.value.elements[model.value.val].command.original}"`,
+    pyproject: null,
+  };
+});
+watch(() => [result, is_equal], ([new_result, new_is_equal]) => {
+  if (new_is_equal.value) {
+    delete use_command.output.value[props.key_name];
+    delete use_command.storage_config.value[props.key_name];
+  } else {
+    use_command.output.value[props.key_name] = new_result.value;
+    use_command.storage_config.value[props.key_name] = model.value.val;
+  }
+}, {
+  immediate: true,
+  deep: true,
+});
+// 组件销毁则必须移除
+onBeforeUnmount(() => {
+  delete use_command.output.value[props.key_name];
+});
+///////////////////////////
+//在禁用时，将值设置为默认值
+watch(() => model.value.enabled, (new_enabled) => {
+  if (!new_enabled) {
+    model.value.val = model.value.default;
+  }
+});
 </script>
-<!--todo 完成多个可用控件-->
+
 <template>
   <el-tooltip :show-after="constants.element_show_after_time" placement="top">
     <template #content>
@@ -145,8 +211,8 @@ function on_cancel() {
       <el-select
           v-model="model.val"
           :disabled="!model.enabled"
-          filterable
-          :placeholder="$t('nuitka_elements.select_placeholder')">
+          :placeholder="$t('nuitka_elements.select_placeholder')"
+          filterable>
         <template v-for="(value,key) in model.elements" :key="key">
           <el-tooltip :show-after="constants.element_show_after_time" placement="left-start">
             <template #content>
@@ -176,7 +242,7 @@ function on_cancel() {
           </el-tooltip>
         </template>
         <template #footer>
-          <el-button v-if="!is_adding" text bg size="small" @click="on_adding">
+          <el-button v-if="!is_adding" bg size="small" text @click="on_adding">
             {{ $t("nuitka_elements.add_option") }}
           </el-button>
           <template v-else>
@@ -186,7 +252,7 @@ function on_cancel() {
                 size="small"
                 style="width: 100%;margin-bottom: 8px;"
             />
-            <el-button type="primary" size="small" @click="on_confirm">
+            <el-button size="small" type="primary" @click="on_confirm">
               {{ $t("message.OK") }}
             </el-button>
             <el-button size="small" @click="on_cancel">{{ $t("message.cancel") }}</el-button>
@@ -196,7 +262,14 @@ function on_cancel() {
     </element-card>
 
   </el-tooltip>
-
+  <Teleport to="#cli_output">
+    <cli-command-card
+        :command="result.cli"
+        :desc="output_desc"
+        :name="t(`nuitka_info.${model.i18n}.name`)"
+        :show="!is_equal"
+    ></cli-command-card>
+  </Teleport>
 </template>
 
 <style lang="scss" scoped>

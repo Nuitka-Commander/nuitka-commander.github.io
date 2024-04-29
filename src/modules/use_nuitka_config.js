@@ -42,15 +42,13 @@ export async function load_new_config() {
     const new_version = user_options.value.nuitka_version;
     set_loading(true);
     const response = await import(`@/nuitka_config_files/configs/${supported_nuitka_version.versions[new_version]}.js`);
-
-    console.log(response);
-    console.log(user_options.value.language.toString());
+    console.log(`Loading new language: ${user_options.value.language.toString()}`);
     await use_command.update_config(response.default);
     set_loading(false);
     support_language = response.default.support_language;
     await load_config_language(user_options.value.language);
 
-    console.log("finish loading");
+
 }
 
 /**]
