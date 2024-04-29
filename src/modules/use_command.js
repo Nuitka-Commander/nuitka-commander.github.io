@@ -63,7 +63,7 @@ class CommandStatus {
         } catch (e) {
             console.log(`读取配置失败\nversion:${user_options.value.nuitka_version}\n`, e);
         }
-
+        // todo 先进行一次遍历 完成bind
         // 预处理配置+加载存储配置
         Object.keys(config).forEach(top_key => {
             if (top_key === "support_language") {
@@ -113,6 +113,7 @@ class CommandStatus {
 
     }
 
+// todo 工厂对象格式 要一个对象，里面存放的是一个数组，表示path，使用的时候直接读取到的就是指针。
 }
 
 export const use_command = new CommandStatus();
