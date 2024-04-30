@@ -3,19 +3,17 @@
  * @Author: erduotong
  * @Date: 2023-12-05 22:28:39
  */
-import {new_option} from "@/vals/templates.js";
+import {add_option} from "@/vals/templates.js";
 import {nuitka_element_status} from "@/vals/enums.js";
 
-
-// noinspection JSUnusedGlobalSymbols
-export default {
+const config = {
     support_language: {
         //国际标识符 位于transitions中的路径
         "zh-CN": "zh_cn",
     },
     basic: { //顶级元素
         some_content: {//二级元素
-            ...new_option.bool(
+            ...add_option.bool(
                 "content0",
                 {original: "--play-genshin"},
                 true,
@@ -23,62 +21,62 @@ export default {
         },
 
         content_opt_test: {
-            ...new_option.single_option(
+            ...add_option.single_option(
                 "content_single_test",
                 {original: "--python-flag"},
                 true,
                 {
-                    python: new_option.multi_elements("python", {original: "no_str"}, true),
-                    go: new_option.multi_elements("go", {original: "go"}, true),
-                    genshin_impact: new_option.multi_elements("genshin_impact", {original: "genshin_impact"}, true),
-                    kotlin: new_option.multi_elements("kotlin", {original: "kotlin"}, true),
+                    python: add_option.multi_elements("python", {original: "no_str"}, true),
+                    go: add_option.multi_elements("go", {original: "go"}, true),
+                    genshin_impact: add_option.multi_elements("genshin_impact", {original: "genshin_impact"}, true),
+                    kotlin: add_option.multi_elements("kotlin", {original: "kotlin"}, true),
                 },
                 "python",
             ),
-            default: "python",
+
         },
 
         content_mult_test: {
 
-            ...new_option.defined_multi(
+            ...add_option.defined_multi(
                 "content_mult_test",
                 {original: "--star-rail"},
                 true,
                 {
-                    python: new_option.multi_elements("python", {original: "python"}, true),
-                    go: new_option.multi_elements("go", {original: "go"}, true),
-                    genshin_impact: new_option.multi_elements("genshin_impact", {original: "genshin_impact"}, true),
-                    kotlin: new_option.multi_elements("kotlin", {original: "kotlin"}, true),
+                    python: add_option.multi_elements("python", {original: "python"}, true),
+                    go: add_option.multi_elements("go", {original: "go"}, true),
+                    genshin_impact: add_option.multi_elements("genshin_impact", {original: "genshin_impact"}, true),
+                    kotlin: add_option.multi_elements("kotlin", {original: "kotlin"}, true),
                 },
                 ["python", "go"],
                 nuitka_element_status.use_select,
             ),
         },
         single_mutable: {
-            ...new_option.definable_single(
+            ...add_option.definable_single(
                 "content_mult_test",
                 {original: "--star-rail-p"},
                 true,
                 {
-                    python: new_option.multi_elements("python", {original: "python"}, true),
-                    go: new_option.multi_elements("go", {original: "go"}, true),
-                    genshin_impact: new_option.multi_elements("genshin_impact", {original: "genshin_impact"}, true),
-                    kotlin: new_option.multi_elements("kotlin", {original: "kotlin"}, true),
+                    python: add_option.multi_elements("python", {original: "python"}, true),
+                    go: add_option.multi_elements("go", {original: "go"}, true),
+                    genshin_impact: add_option.multi_elements("genshin_impact", {original: "genshin_impact"}, true),
+                    kotlin: add_option.multi_elements("kotlin", {original: "kotlin"}, true),
                 },
                 "python",
                 nuitka_element_status.use_select,
             ),
         },
         multi_test: {
-            ...new_option.definable_multi(
+            ...add_option.definable_multi(
                 "content_mult_test",
                 {original: "--tar-rail"},
                 true,
                 {
-                    python: new_option.multi_elements("python", {original: "python"}, true),
-                    go: new_option.multi_elements("go", {original: "go"}, true),
-                    genshin_impact: new_option.multi_elements("genshin_impact", {original: "genshin_impact"}, true),
-                    kotlin: new_option.multi_elements("kotlin", {original: "kotlin"}, true),
+                    python: add_option.multi_elements("python", {original: "python"}, true),
+                    go: add_option.multi_elements("go", {original: "go"}, true),
+                    genshin_impact: add_option.multi_elements("genshin_impact", {original: "genshin_impact"}, true),
+                    kotlin: add_option.multi_elements("kotlin", {original: "kotlin"}, true),
                 },
                 ["python", "go"],
                 nuitka_element_status.use_select,
@@ -91,3 +89,5 @@ export default {
 };
 
 
+// noinspection JSUnusedGlobalSymbols
+export default config;

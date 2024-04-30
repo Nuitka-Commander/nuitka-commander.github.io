@@ -11,7 +11,7 @@ import {Delete} from "@element-plus/icons-vue";
 import {ElInput, ElMessage, ElMessageBox} from "element-plus";
 import {useI18n} from "vue-i18n";
 import {computed, onBeforeUnmount, ref, watch} from "vue";
-import {new_option} from "@/vals/templates.js";
+import {add_option} from "@/vals/templates.js";
 import {use_command} from "@/modules/use_command.js";
 import CliCommandCard from "@/components/command_cards/cliCommandCard.vue";
 
@@ -146,7 +146,7 @@ function on_confirm() {
   }
   console.log(`add option: ${option_name.value}`);
   model.value.elements[option_name.value] = {
-    ...new_option.multi_elements(
+    ...add_option.multi_elements(
         "",
         {
           original: option_name.value,

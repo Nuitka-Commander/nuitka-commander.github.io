@@ -9,7 +9,7 @@ import {nuitka_element_status, nuitka_element_type} from "./enums.js"; //这里�
 /**
  * @Description 生成一个新的元素，请使用...来将生成后的对象扩展到你的对象中
  */
-export const new_option = {
+export const add_option = {
     /**
      * @Description 生成一个Bool元素
      * @param i18n {string}
@@ -139,4 +139,22 @@ export const new_option = {
             val: [],
         };
     },
+};
+export const watcher_key = "watch_function_closer";
+/**
+ * @Description 添加监听器
+ * @param watchers watch函数的关闭函数
+ * @return {Object} 需要watcher_key的值作为key，key:value的格式
+ */
+export const add_watcher = (...watchers) => {
+    const result = [];
+    watchers.forEach(watcher => {
+        if (!(typeof watcher === "function")) {
+            console.error($`${watcher} 必须是一个监听函数`);
+            return;
+        }
+        result.push(watcher);
+
+    });
+    return {[watcher_key]: result};
 };
