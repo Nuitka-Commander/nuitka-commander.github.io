@@ -69,7 +69,9 @@ class CommandStatus {
             if (top_key === "support_language") {
                 return; //跳过循环 不进行处理
             }
+
             const top_value = config[top_key];
+
             Object.keys(top_value).forEach(second_key => {
                 const second_value = top_value[second_key];
 
@@ -80,7 +82,7 @@ class CommandStatus {
                     second_value.val = second_value.default;
                 }
                 // 检查是否有存储值
-                if (local_config[second_key] !== undefined) {
+                if (local_config?.[second_key] !== undefined) {
                     second_value.val = local_config[second_key];
                 }
                 // 添加到原始配置中

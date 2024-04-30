@@ -28,9 +28,7 @@ export function init_nuitka_config() {
     if (!key_defined) {
         user_options.value.nuitka_version = supported_nuitka_version.latest_key;
     }
-    load_new_config().then().catch(r => {
-        console.error(`Failed to load config file: \n${r}`);
-    }); //加载一次先
+    load_new_config().then()
 }
 
 
