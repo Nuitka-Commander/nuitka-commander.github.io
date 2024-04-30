@@ -142,19 +142,21 @@ export const add_option = {
 };
 export const watcher_key = "watch_function_closer";
 /**
- * @Description 添加监听器
- * @param watchers watch函数的关闭函数
- * @return {Object} 需要watcher_key的值作为key，key:value的格式
+ * 为指定对象添加监听器列表
+ * @param target 目标对象
+ * @param watchers watch函数的stop函数
  */
-export const add_watcher = (...watchers) => {
+export const add_watcher = (target, ...watchers) => {
     const result = [];
+    if (target[watcher_key]) {
+        console.warn(`${target}内已存在${watcher_key}!`);
+    }
     watchers.forEach(watcher => {
         if (!(typeof watcher === "function")) {
-            console.error($`${watcher} 必须是一个监听函数`);
+            console.error(`target: ${target} ${watcher} 必须是一个监听函数`);
             return;
         }
         result.push(watcher);
-
     });
-    return {[watcher_key]: result};
+    target[watcher_key] = result;
 };
