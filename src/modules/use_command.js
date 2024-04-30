@@ -8,6 +8,7 @@ import {local_nuitka_version_config} from "@/modules/use_local_forage.js";
 import {user_options} from "@/vals/stores/user_options.js";
 import {debounce_func} from "@/modules/untils.js";
 import {debug} from "@/modules/debug.js";
+import {watcher_key} from "@/vals/templates.js";
 
 
 class CommandStatus {
@@ -66,7 +67,7 @@ class CommandStatus {
         // todo 先进行一次遍历 完成bind
         // 预处理配置+加载存储配置
         Object.keys(config).forEach(top_key => {
-            if (top_key === "support_language") {
+            if (top_key === "support_language" || top_key === watcher_key) {
                 return; //跳过循环 不进行处理
             }
 
