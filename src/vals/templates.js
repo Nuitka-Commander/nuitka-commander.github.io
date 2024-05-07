@@ -80,8 +80,7 @@ export const add_option = {
      * @return {{val: *[], component: nuitka_element_status.use_select | nuitka_element_status.use_transfer,
      * default: [string], elements:object, type: string, i18n:string, command:{original:string}, enabled:boolean}}
      */
-    defined_multi: (i18n, command, enabled, elements, default_value,
-                    component) => {
+    defined_multi: (i18n, command, enabled, elements, default_value, component) => {
         return {
             type: nuitka_element_type.Defined_multiple,
             i18n: i18n,
@@ -140,23 +139,27 @@ export const add_option = {
         };
     },
 };
+/**
+ * 配置文件中的所有待绑定watcher使用的统一key-name
+ * @type {string}
+ */
 export const watcher_key = "watch_function_closer";
 /**
- * 为指定对象添加监听器列表
- * @param target 目标对象
- * @param watchers watch函数的stop函数
+ * 生成一个watcher的对象
+ * @param source {object}
+ * @param callback {function} 一个回调函数，可以访问source中的每个key，在source中key对应的对象发生变化后被调用
+ * @returns {{callback :function, source:object}}
  */
-export const add_watcher = (target, ...watchers) => {
-    const result = [];
-    if (target[watcher_key]) {
-        console.warn(`${target}内已存在${watcher_key}!`);
+export const add_watcher = (source, callback) => {
+    //先进行检查
+    if (typeof source !== "object") {
+        console.error(`source必须为一个对象，而不是${source} : ${typeof source}`);
     }
-    watchers.forEach(watcher => {
-        if (!(typeof watcher === "function")) {
-            console.error(`target: ${target} ${watcher} 必须是一个监听函数`);
-            return;
-        }
-        result.push(watcher);
-    });
-    target[watcher_key] = result;
+    if (typeof callback !== "function") {
+        console.error(`callback必须为一个函数，而不是${callback} : ${typeof callback}`);
+    }
+    return {
+        source: source,
+        callback: callback,
+    };
 };
