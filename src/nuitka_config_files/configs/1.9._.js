@@ -3,7 +3,7 @@
  * @Author: erduotong
  * @Date: 2023-12-05 22:28:39
  */
-import {add_option, watcher_key} from "@/vals/templates.js";
+import {add_option, add_watcher, watcher_key} from "@/vals/templates.js";
 import {nuitka_element_status} from "@/vals/enums.js";
 
 const config = {
@@ -89,7 +89,8 @@ const config = {
 
     page2: {},
 };
-config[watcher_key] = []
+//先预处理一次，然后将所有的path预处理出来 最后再进行监听器的添加
+config[watcher_key] = [];
 
 // noinspection JSUnusedGlobalSymbols
 export default config;

@@ -64,7 +64,10 @@ class CommandStatus {
         } catch (e) {
             console.log(`读取配置失败\nversion:${user_options.value.nuitka_version}\n`, e);
         }
-        // todo 先进行一次遍历 完成bind
+        //第一次预处理，为config中添加path，并处理一下bind
+        Object.keys(config).forEach(key1 => {
+
+        });
         // 预处理配置+加载存储配置
         Object.keys(config).forEach(top_key => {
             if (top_key === "support_language" || top_key === watcher_key) {
@@ -91,7 +94,6 @@ class CommandStatus {
                 this.original_status[top_key][second_value.type] = this.original_status[top_key][second_value.type] || {};
                 this.original_status[top_key][second_value.type][second_key] = {
                     ...second_value,
-                    path: [top_key, second_value.type, second_key],
                     id: id,
                 };
                 id++;

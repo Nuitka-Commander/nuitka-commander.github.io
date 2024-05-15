@@ -49,7 +49,7 @@ export async function load_new_config() {
 
 }
 
-/**]
+/**
  * 从本地加载翻译文件到i18n中
  * @param language {string} 语言标识符
  * @return {Promise<void>}
