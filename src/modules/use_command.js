@@ -66,8 +66,23 @@ class CommandStatus {
         }
         //第一次预处理，为config中添加path，并处理一下bind
         Object.keys(config).forEach(key1 => {
-
+            if (key1 === "support_language" || key1 === watcher_key) {
+                return;
+            }
+            const value1 = config[key1];
+            Object.keys(value1).forEach(key2 => {
+                const value2 = value1[key2];
+                value2["path"] = [key1, value2.type, key2];
+            });
         });
+        //遍历list 给监听器换一下path
+        for (let i of config[watcher_key]) {
+            Object.keys(i.source).forEach(key => {
+                //把绑定的值换成path，等下重新绑
+                i.source[key] = i.source[key].path;
+            });
+        }
+
         // 预处理配置+加载存储配置
         Object.keys(config).forEach(top_key => {
             if (top_key === "support_language" || top_key === watcher_key) {

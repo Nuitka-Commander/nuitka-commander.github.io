@@ -90,7 +90,11 @@ const config = {
     page2: {},
 };
 //先预处理一次，然后将所有的path预处理出来 最后再进行监听器的添加
-config[watcher_key] = [];
+config[watcher_key] = [add_watcher({
+    s: config.basic.content_mult_test,
+}, (config) => {
+
+})];
 
 // noinspection JSUnusedGlobalSymbols
 export default config;
