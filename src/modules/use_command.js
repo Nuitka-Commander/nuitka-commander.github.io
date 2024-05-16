@@ -31,10 +31,10 @@ class CommandStatus {
      */
     storage_config = ref({});
     /**
-     *
-     * @type {undefined | Function}
+     * 监听器的停止函数
+     * @type {Array<Function>}
      */
-    storage_watcher = undefined;
+    watchers = []; //
 
     constructor() {
         //未改变的配置 用于重置
@@ -50,12 +50,12 @@ class CommandStatus {
      */
     async update_config(config) {
         debug.check_nuitka_config(config);//检查配置文件是否符合格式
-        this.output.value = {};//清空 防止重复
-        //自增id 排序用 这个id绝对不会重复
         let id = 0;
-        //清除监听
-        if (this.storage_watcher !== undefined) { //简单处理一下 防止内存泄露
-            this.storage_watcher();
+
+        // clear
+        this.output.value = {};
+        for (let i of this.watchers) { //关闭监听器
+            i();
         }
         // 获取已有配置
         let local_config = {};
@@ -64,8 +64,9 @@ class CommandStatus {
         } catch (e) {
             console.log(`读取配置失败\nversion:${user_options.value.nuitka_version}\n`, e);
         }
-        //第一次预处理，为config中添加path，并处理一下bind
-        Object.keys(config).forEach(key1 => {
+
+        // 预处理
+        Object.keys(config).forEach(key1 => {    //第一次预处理，为config中添加path，并处理一下bind
             if (key1 === "support_language" || key1 === watcher_key) {
                 return;
             }
@@ -75,16 +76,15 @@ class CommandStatus {
                 value2["path"] = [key1, value2.type, key2];
             });
         });
-        //遍历list 给监听器换一下path
-        for (let i of config[watcher_key]) {
+
+        for (let i of config[watcher_key]) {         //遍历list 给监听器换一下path
             Object.keys(i.source).forEach(key => {
                 //把绑定的值换成path，等下重新绑
                 i.source[key] = i.source[key].path;
             });
         }
 
-        // 预处理配置+加载存储配置
-        Object.keys(config).forEach(top_key => {
+        Object.keys(config).forEach(top_key => {         // 预处理配置2+加载存储配置
             if (top_key === "support_language" || top_key === watcher_key) {
                 return; //跳过循环 不进行处理
             }
@@ -117,9 +117,9 @@ class CommandStatus {
             });
         });
 
+        // 监听器绑定
 
-        //监听一下
-        this.storage_watcher = watch(
+        this.watchers.push(watch( //存储监听器 + 防抖函数
             () => this.storage_config.value,
             debounce_func((new_val) => {
                 const new_config = JSON.stringify(new_val);
@@ -127,13 +127,19 @@ class CommandStatus {
             }, 500), {
                 deep: true,
                 immediate: true,
-            });
+            }));
+
+        for (let watcher of config[watcher_key]) {
+            const source = watcher.source;
+            const callback = watcher.callback;
+            //先把path格式转回引用 再创建一个watch函数
+        }
 
         this.status.value = this.original_status;
 
     }
 
-// todo 工厂对象格式 要一个对象，里面存放的是一个数组，表示path，使用的时候直接读取到的就是指针。
+
 }
 
 export const use_command = new CommandStatus();
