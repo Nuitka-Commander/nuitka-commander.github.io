@@ -120,8 +120,7 @@ class CommandStatus {
         // 监听器绑定
 
         this.watchers.push(watch( //存储监听器 + 防抖函数
-            () => this.storage_config.value,
-            debounce_func((new_val) => {
+            () => this.storage_config.value, debounce_func((new_val) => {
                 const new_config = JSON.stringify(new_val);
                 local_nuitka_version_config.update_config(user_options.value.nuitka_version, new_config);
             }, 500), {
@@ -129,13 +128,28 @@ class CommandStatus {
                 immediate: true,
             }));
 
-        for (let watcher of config[watcher_key]) {
+        this.status.value = this.original_status;
+
+        for (let watcher of config[watcher_key]) { //path转引用
             const source = watcher.source;
-            const callback = watcher.callback;
-            //先把path格式转回引用 再创建一个watch函数
+            Object.keys(source).forEach(key => {
+                const path = source[key];
+                source[key] = this.status.value[path[0]][path[1]][path[2]];
+            });
         }
 
-        this.status.value = this.original_status;
+
+        // 绑定监听器
+        for (let watcher of config[watcher_key]) {
+            const callback = watcher.callback;
+            //创建一个watch函数，监听source中的每个key:value中引用的对象，并且将source传递给callback
+            this.watchers.push(watch(() => watcher.source, (new_val) => {
+                callback(new_val); //调用回调函数
+            }, {
+                deep: true,
+                immediate: true,
+            }));
+        }
 
     }
 

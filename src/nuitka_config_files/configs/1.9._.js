@@ -89,11 +89,11 @@ const config = {
 
     page2: {},
 };
-//基本就这个格式
+//基本就这个格式 回调函数接受一个参数
 config[watcher_key] = [add_watcher({
     s: config.basic.content_mult_test,
 }, (config) => {
-
+    console.log(config, "callback");
 })];
 
 // noinspection JSUnusedGlobalSymbols
