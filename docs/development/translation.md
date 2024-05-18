@@ -55,6 +55,7 @@
 
 ## 配置文件翻译
 
+首先，请查看下列列表，查看该翻译是否已经被支持。如果已经支持，请直接对其进行修改，否则
 <details>
 <summary>点击展开已翻译列表</summary>
 <div id="nuitka_commander_translation_config"> 
