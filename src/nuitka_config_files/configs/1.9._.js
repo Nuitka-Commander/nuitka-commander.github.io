@@ -8,7 +8,7 @@ import {nuitka_element_status} from "@/vals/enums.js";
 
 const config = {
     support_language: {
-        //国际标识符 位于transitions中的路径
+
         "zh-CN": "zh_cn",
     },
     basic: {

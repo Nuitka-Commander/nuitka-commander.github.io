@@ -30,3 +30,20 @@ export default config;
 ```
 
 这样，所需的文件就已经创建完成了。
+
+### 编辑
+
+#### support_language
+
+`support_language`是一个对象，用于存放支持的语言。
+他的格式是: `语言标识符: 路径名`  
+例如:
+
+```js
+export default {
+    support_language: {
+        "en": "en",
+        "zh-CN": "zh_cn",
+    }
+};
+```
