@@ -10,7 +10,7 @@
 ### 新建
 
 首先，请打开`src/nuitka_config_files/configs`文件夹，如果要适配的版本已经存在，请直接对其进行修改。  
-否则，你可以创建一个新的js文件，命名格式为`版本号.js`，例如`1.9._.js`。  
+否则，你可以创建一个新的js文件，命名格式为`版本号.js`，例如`2.1._.js`。  
 随后，请在[supported_nuitka_version.js](../../src/nuitka_config_files/supported_nuitka_version.js)内的`version`
 内添加该版本的支持。  
 格式为`version: path` 例如: `1.9.*: 1.9._`。 **无需补充.js后缀**，

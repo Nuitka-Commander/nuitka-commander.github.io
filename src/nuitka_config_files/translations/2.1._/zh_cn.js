@@ -1,10 +1,4 @@
 // noinspection JSUnusedGlobalSymbols
-/**
- * @Description 存储为nuitka特定版本提供的翻译
- * @Author: erduotong
- * @Date: 2024-01-22 18:13:55
- * @version: 1.9.*
- */
 export default {
     //title类请在此处翻译
     title: {
