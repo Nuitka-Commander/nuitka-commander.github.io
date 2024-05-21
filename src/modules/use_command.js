@@ -66,6 +66,10 @@ class CommandStatus {
         }
 
         // 预处理
+        if (config[watcher_key] === undefined || config[watcher_key] === null) {
+            console.error("配置文件中未找到", watcher_key, "字段");
+            config[watcher_key] = []; //跑起来再说
+        }
         Object.keys(config).forEach(key1 => {    //第一次预处理，为config中添加path，并处理一下bind
             if (key1 === "support_language" || key1 === watcher_key) {
                 return;
