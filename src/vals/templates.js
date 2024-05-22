@@ -80,7 +80,7 @@ export const add_option = {
      * @return {{val: *[], component: nuitka_element_status.use_select | nuitka_element_status.use_transfer,
      * default: [string], elements:object, type: string, i18n:string, command:{original:string}, enabled:boolean}}
      */
-    defined_multi: (i18n, command, enabled, elements, default_value, component) => {
+    defined_multi: (i18n, command, enabled, elements, default_value, component = nuitka_element_status.use_default) => {
         return {
             type: nuitka_element_type.Defined_multiple,
             i18n: i18n,
