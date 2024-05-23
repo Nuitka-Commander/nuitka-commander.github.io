@@ -35,6 +35,7 @@ import CliCommandCard from "@/components/command_cards/cliCommandCard.vue";
  *      user_provide: boolean,
  *    }
  *  }
+ *  input_type: string,
  * }>}
  */
 const model = defineModel();
@@ -155,6 +156,7 @@ function on_confirm() {
         true,
     ),
   };
+  //todo 这边得考虑依赖注入？反正得加一个文件选取的功能
   on_cancel();
 }
 
