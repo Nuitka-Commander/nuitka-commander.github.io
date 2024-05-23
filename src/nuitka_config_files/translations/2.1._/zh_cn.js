@@ -55,5 +55,9 @@ export default {
             },
         },
     },
+    python_debug: {
+        name: "Python调试",
+        desc: "是否使用调试版本。默认使用你运行Nuitka的版本，其很可能是一个非调试版本。仅用于调试和测试目的。",
+    },
 
 };

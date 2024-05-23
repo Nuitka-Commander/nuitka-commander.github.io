@@ -91,6 +91,14 @@ const config = {
                 },
                 [],
             ),
+            python_debug: add_option.bool(
+                "python_debug",
+                {
+                    original: "--python-debug",
+                },
+                true,
+                false,
+            ),
         },
 
     }
