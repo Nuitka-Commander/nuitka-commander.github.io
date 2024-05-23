@@ -14,6 +14,7 @@ import {computed, onBeforeUnmount, ref, watch} from "vue";
 import {add_option} from "@/vals/templates.js";
 import {use_command} from "@/modules/use_command.js";
 import CliCommandCard from "@/components/command_cards/cliCommandCard.vue";
+import {nuitka_input_type} from "@/vals/enums.js";
 
 /**
  * @type {ModelRef<{
@@ -156,7 +157,6 @@ function on_confirm() {
         true,
     ),
   };
-  //todo 这边得考虑依赖注入？反正得加一个文件选取的功能
   on_cancel();
 }
 
@@ -248,16 +248,23 @@ watch(() => model.value.enabled, (new_enabled) => {
             {{ $t("nuitka_elements.add_option") }}
           </el-button>
           <template v-else>
-            <el-input
-                v-model="option_name"
-                :placeholder="t('nuitka_elements.input_an_option')"
-                size="small"
-                style="width: 100%;margin-bottom: 8px;"
-            />
-            <el-button size="small" type="primary" @click="on_confirm">
-              {{ $t("message.OK") }}
-            </el-button>
-            <el-button size="small" @click="on_cancel">{{ $t("message.cancel") }}</el-button>
+            <template v-if="model.input_type===nuitka_input_type.string">
+              <el-input
+                  v-model="option_name"
+                  :placeholder="t('nuitka_elements.input_an_option')"
+                  size="small"
+                  style="width: 100%;margin-bottom: 8px;"
+              />
+              <el-button size="small" type="primary" @click="on_confirm">
+                {{ $t("message.OK") }}
+              </el-button>
+              <el-button size="small" @click="on_cancel">{{ $t("message.cancel") }}</el-button>
+            </template>
+            <template v-if="nuitka_input_type===nuitka_input_type.path">
+
+            </template>
+
+
           </template>
         </template>
       </el-select>
