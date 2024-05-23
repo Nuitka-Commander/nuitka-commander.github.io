@@ -18,7 +18,6 @@ export const nuitka_element_status = Object.freeze({
     use_default: "default", //使用默认值
 });
 export const nuitka_input_type = Object.freeze({
-    number: "number", //数字
     string: "string", //字符串
     path: "path", //路径
 });
