@@ -202,12 +202,16 @@ watch(() => model.value.enabled, (new_enabled) => {
     model.value.val = model.value.default;
   }
 });
-
+watch(() => model.value.val, (new_val) => {
+  if (new_val === undefined) {
+    model.value.val = "";
+  }
+});
 </script>
 
 <template>
-  <el-button @click="console.log(model.val)">1</el-button>
-  <el-tooltip :show-after="constants.element_show_after_time" placement="top">
+
+<el-tooltip :show-after="constants.element_show_after_time" placement="top">
     <template #content>
       <div class="use_original_text">
         {{ $t(`nuitka_info.${model.i18n}.desc`) }}
