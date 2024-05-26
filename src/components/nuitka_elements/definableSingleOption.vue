@@ -58,8 +58,8 @@ const t = useI18n().t;
 const output_desc = computed(() => {
   let result = `${t(`nuitka_info.${model.value.i18n}.desc`)}\n\n` +
       `${t(`nuitka_elements.option_desc`)}:\n\n` +
-      `${model.value.elements[model.value.val].command.original}:  `;
-  if (model.value.elements[model.value.val].user_provide === false) {
+      `${model.value.elements[model.value.val]?.command.original}:  `;
+  if (model.value.elements[model.value.val]?.user_provide === false) {
     result += `${t(`nuitka_info.${model.value.i18n}.elements.${model.value.val}.desc`)}`;
   } else {
     result += `${t(`nuitka_elements.user_provide`)}`;
@@ -175,7 +175,7 @@ function on_cancel() {
 const is_equal = computed(() => model.value.val === model.value.default);
 const result = computed(() => {
   return {
-    cli: `${model.value.command.original}="${model.value.elements[model.value.val].command.original}"`,
+    cli: `${model.value.command.original}="${model.value.elements[model.value.val]?.command.original}"`,
     pyproject: null,
   };
 });
@@ -223,7 +223,8 @@ watch(() => model.value.enabled, (new_enabled) => {
           :disabled="!model.enabled"
           :placeholder="$t('nuitka_elements.select_placeholder')"
           :clearable="model.clearable"
-          filterable>
+          filterable
+      >
         <template v-for="(value,key) in model.elements" :key="key">
           <el-tooltip :show-after="constants.element_show_after_time" placement="left-start">
             <template #content>
@@ -243,6 +244,7 @@ watch(() => model.value.enabled, (new_enabled) => {
                 :disabled="!value.enabled"
                 :label="get_option_label(key, value)"
                 :value="key"
+
             >
               {{ get_option_label(key, value) }}
               <!--如果他是用户定义的，那么就有个删除符号-->
@@ -269,23 +271,23 @@ watch(() => model.value.enabled, (new_enabled) => {
               </el-button>
               <el-button size="small" @click="on_cancel">{{ $t("message.cancel") }}</el-button>
             </template>
-            <template v-if="nuitka_input_type===nuitka_input_type.path">
-              <el-upload
-                  v-model:file-list="file_list"
-                  :auto-upload="false"
-                  drag
-                  multiple
-              >
-                <el-icon>
-                  <upload-filled></upload-filled>
-                </el-icon>
-                <div class="el-upload__text">
-                  {{ `${t(`message.drop_file`)} ${t(`message.or`)} ` }} <em>{{ t(`message.click_select_file`) }}</em>
-                </div>
+            <!--<template v-if="nuitka_input_type===nuitka_input_type.path">-->
+            <!--  <el-upload-->
+            <!--      v-model:file-list=""-->
+            <!--      :auto-upload="false"-->
+            <!--      drag-->
+            <!--      multiple-->
+            <!--  >-->
+            <!--    <el-icon>-->
+            <!--      <upload-filled></upload-filled>-->
+            <!--    </el-icon>-->
+            <!--    <div class="el-upload__text">-->
+            <!--      {{ `${t(`message.drop_file`)} ${t(`message.or`)} ` }} <em>{{ t(`message.click_select_file`) }}</em>-->
+            <!--    </div>-->
 
 
-              </el-upload>
-            </template>
+            <!--  </el-upload>-->
+            <!--</template>-->
 
 
           </template>

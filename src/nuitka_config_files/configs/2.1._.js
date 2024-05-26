@@ -114,7 +114,7 @@ const config = {
                         },
                         true),
                 },
-                "u",
+                "",
                 true,
             ),
         },
