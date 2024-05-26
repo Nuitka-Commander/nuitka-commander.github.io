@@ -101,12 +101,13 @@ export const add_option = {
      * @param enabled {boolean}
      * @param elements {object} 元素列表，key为一个string,value是一个对象，需要使用multi_elements生成 其中user_provide允许为true
      * @param default_value {string} 默认值 填写elements中的键值
+     * @param clearable {boolean} 是否可以为空
      * @param input_type 指定输入框的类型 不指定则自动判断
      * @param component 指定使用组件的类型 不指定则自动判断
      * @return {{val: StringConstructor, component, default: string, elements: Object, type: string, i18n: string,
      * command: {original: string}, enabled: boolean}}
      */
-    definable_single: (i18n, command, enabled, elements, default_value,
+    definable_single: (i18n, command, enabled, elements, default_value, clearable = false,
                        input_type = nuitka_input_type.string, component = nuitka_element_status.use_default) => {
         return {
             type: nuitka_element_type.Definable_single,
@@ -114,6 +115,7 @@ export const add_option = {
             command: command,
             enabled: enabled,
             elements: elements,
+            clearable: clearable,
             input_type: input_type,
             component: component,
             default: default_value,

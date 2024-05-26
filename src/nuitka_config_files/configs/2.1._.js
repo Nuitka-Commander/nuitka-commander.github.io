@@ -99,6 +99,24 @@ const config = {
                 true,
                 false,
             ),
+            au: add_option.definable_single(
+                "python_flag",
+                {
+                    original: "--genshin",
+                },
+                true
+                ,
+                {
+                    u: add_option.multi_elements(
+                        "u",
+                        {
+                            original: "-u",
+                        },
+                        true),
+                },
+                "u",
+                true,
+            ),
         },
 
     }

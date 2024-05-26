@@ -26,6 +26,7 @@ import {nuitka_input_type} from "@/vals/enums.js";
  *    original:string,
  *  }
  *  enabled: boolean,
+ *  clearable: boolean,
  *  elements: {
  *    [key: string]: {
  *      i18n: string, // 如果是用户定义的，那么该属性不存在
@@ -50,6 +51,10 @@ const props = defineProps({
   },
 });
 const t = useI18n().t;
+/**
+ * el-upload所需的文件列表
+ */
+
 const output_desc = computed(() => {
   let result = `${t(`nuitka_info.${model.value.i18n}.desc`)}\n\n` +
       `${t(`nuitka_elements.option_desc`)}:\n\n` +
@@ -165,6 +170,7 @@ function on_cancel() {
   is_adding.value = false;
 }
 
+
 ///////////////////////////
 const is_equal = computed(() => model.value.val === model.value.default);
 const result = computed(() => {
@@ -196,9 +202,11 @@ watch(() => model.value.enabled, (new_enabled) => {
     model.value.val = model.value.default;
   }
 });
+
 </script>
 
 <template>
+  <el-button @click="console.log(model.val)">1</el-button>
   <el-tooltip :show-after="constants.element_show_after_time" placement="top">
     <template #content>
       <div class="use_original_text">
@@ -214,6 +222,7 @@ watch(() => model.value.enabled, (new_enabled) => {
           v-model="model.val"
           :disabled="!model.enabled"
           :placeholder="$t('nuitka_elements.select_placeholder')"
+          :clearable="model.clearable"
           filterable>
         <template v-for="(value,key) in model.elements" :key="key">
           <el-tooltip :show-after="constants.element_show_after_time" placement="left-start">
@@ -261,7 +270,21 @@ watch(() => model.value.enabled, (new_enabled) => {
               <el-button size="small" @click="on_cancel">{{ $t("message.cancel") }}</el-button>
             </template>
             <template v-if="nuitka_input_type===nuitka_input_type.path">
+              <el-upload
+                  v-model:file-list="file_list"
+                  :auto-upload="false"
+                  drag
+                  multiple
+              >
+                <el-icon>
+                  <upload-filled></upload-filled>
+                </el-icon>
+                <div class="el-upload__text">
+                  {{ `${t(`message.drop_file`)} ${t(`message.or`)} ` }} <em>{{ t(`message.click_select_file`) }}</em>
+                </div>
 
+
+              </el-upload>
             </template>
 
 

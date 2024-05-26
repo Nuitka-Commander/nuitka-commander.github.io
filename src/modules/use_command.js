@@ -133,7 +133,7 @@ class CommandStatus {
             }));
 
         this.status.value = this.original_status;
-
+        console.log(this.status.value);
         for (let watcher of config[watcher_key]) { //path转引用
             const source = watcher.source;
             Object.keys(source).forEach(key => {
