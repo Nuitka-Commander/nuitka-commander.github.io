@@ -38,7 +38,6 @@ const output = computed(() => {
       <el-tab-pane>
         <template #label>CLI</template>
         <div id="cli_output_area">
-          <!--todo 完成复制模块-->
           <span class="copy_button">
             <el-button round @click="on_copy('cli')">
                <el-icon><CopyDocument /></el-icon>
