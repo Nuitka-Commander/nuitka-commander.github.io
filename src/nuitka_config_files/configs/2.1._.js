@@ -4,6 +4,7 @@
  * @Date: 2023-12-05 22:28:39
  */
 import {add_option, watcher_key} from "@/vals/templates.js";
+import {nuitka_input_type} from "@/vals/enums.js";
 
 const config = {
         support_language: {
@@ -99,23 +100,16 @@ const config = {
                 true,
                 false,
             ),
-            au: add_option.definable_single(
-                "python_flag",
+            python_for_scons: add_option.definable_single(
+                "python_for_scons",
                 {
-                    original: "--genshin",
+                    original: "--python-for-scons",
                 },
-                true
-                ,
-                {
-                    u: add_option.multi_elements(
-                        "u",
-                        {
-                            original: "-u",
-                        },
-                        true),
-                },
-                "",
                 true,
+                {},
+                "", // 空值就是一个空字符串
+                true,
+                nuitka_input_type.path,
             ),
         },
 
