@@ -7,7 +7,7 @@
 import * as constants from "@/vals/constants.json";
 import ElementCard from "@/components/untils/elementCard.vue";
 import {user_options} from "@/vals/stores/user_options.js";
-import {Delete} from "@element-plus/icons-vue";
+import {Delete, UploadFilled} from "@element-plus/icons-vue";
 import {ElInput, ElMessage, ElMessageBox} from "element-plus";
 import {useI18n} from "vue-i18n";
 import {computed, onBeforeUnmount, ref, watch} from "vue";
@@ -54,7 +54,7 @@ const t = useI18n().t;
 /**
  * el-upload所需的文件列表
  */
-
+const file_list = ref([]);
 const output_desc = computed(() => {
   let result = `${t(`nuitka_info.${model.value.i18n}.desc`)}\n\n` +
       `${t(`nuitka_elements.option_desc`)}:\n\n` +
@@ -211,7 +211,7 @@ watch(() => model.value.val, (new_val) => {
 
 <template>
 
-<el-tooltip :show-after="constants.element_show_after_time" placement="top">
+  <el-tooltip :show-after="constants.element_show_after_time" placement="top">
     <template #content>
       <div class="use_original_text">
         {{ $t(`nuitka_info.${model.i18n}.desc`) }}
@@ -275,23 +275,21 @@ watch(() => model.value.val, (new_val) => {
               </el-button>
               <el-button size="small" @click="on_cancel">{{ $t("message.cancel") }}</el-button>
             </template>
-            <!--<template v-if="nuitka_input_type===nuitka_input_type.path">-->
-            <!--  <el-upload-->
-            <!--      v-model:file-list=""-->
-            <!--      :auto-upload="false"-->
-            <!--      drag-->
-            <!--      multiple-->
-            <!--  >-->
-            <!--    <el-icon>-->
-            <!--      <upload-filled></upload-filled>-->
-            <!--    </el-icon>-->
-            <!--    <div class="el-upload__text">-->
-            <!--      {{ `${t(`message.drop_file`)} ${t(`message.or`)} ` }} <em>{{ t(`message.click_select_file`) }}</em>-->
-            <!--    </div>-->
-
-
-            <!--  </el-upload>-->
-            <!--</template>-->
+            <template v-else-if="model.input_type===nuitka_input_type.path">
+              <el-upload
+                  v-model:file-list="file_list"
+                  :auto-upload="false"
+                  drag
+                  multiple
+              >
+                <el-icon size="30">
+                  <upload-filled></upload-filled>
+                </el-icon>
+                <div class="el-upload__text">
+                  {{ `${t(`message.drop_file`)} ${t(`message.or`)} ` }} <em>{{ t(`message.click_select_file`) }}</em>
+                </div>
+              </el-upload>
+            </template>
 
 
           </template>
