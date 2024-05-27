@@ -9,6 +9,7 @@ import {user_options} from "@/vals/stores/user_options.js";
 import {debounce_func} from "@/modules/untils.js";
 import {debug} from "@/modules/debug.js";
 import {watcher_key} from "@/vals/templates.js";
+import {nuitka_element_type} from "@/vals/enums.js";
 
 
 class CommandStatus {
@@ -107,6 +108,7 @@ class CommandStatus {
                 // 检查是否有存储值
                 if (local_config?.[second_key] !== undefined) {
                     second_value.val = local_config[second_key];
+                    // todo 这边考虑把User provide的内容也存储进去
                 }
                 // 添加到原始配置中
                 this.original_status[top_key] = this.original_status[top_key] || {};
