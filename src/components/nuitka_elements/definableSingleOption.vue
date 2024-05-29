@@ -8,7 +8,7 @@ import * as constants from "@/vals/constants.json";
 import ElementCard from "@/components/untils/elementCard.vue";
 import {user_options} from "@/vals/stores/user_options.js";
 import {Delete, UploadFilled} from "@element-plus/icons-vue";
-import {ElInput, ElMessage, ElMessageBox} from "element-plus";
+import {ElInput, ElMessage, ElMessageBox, genFileId} from "element-plus";
 import {useI18n} from "vue-i18n";
 import {computed, onBeforeUnmount, ref, watch} from "vue";
 import {add_option} from "@/vals/templates.js";
@@ -170,7 +170,18 @@ function on_cancel() {
   is_adding.value = false;
 }
 
+// path相关处理
+const handle_exceed = (files) => {
+  file_list.value = [];
+  const file = files[0];
+  file.uid = genFileId();
+  file_list.value.push(file);
+};
 
+const path_on_cancel = () => {
+  file_list.value = [];
+  on_cancel();
+};
 ///////////////////////////
 const is_equal = computed(() => model.value.val === model.value.default);
 const result = computed(() => {
@@ -281,6 +292,8 @@ watch(() => model.value.val, (new_val) => {
                   :auto-upload="false"
                   drag
                   multiple
+                  :limit="1"
+                  :on-exceed=" handle_exceed"
               >
                 <el-icon size="30">
                   <upload-filled></upload-filled>
@@ -289,6 +302,10 @@ watch(() => model.value.val, (new_val) => {
                   {{ `${t(`message.drop_file`)} ${t(`message.or`)} ` }} <em>{{ t(`message.click_select_file`) }}</em>
                 </div>
               </el-upload>
+              <el-button size="small" type="primary" @click="on_confirm">
+                {{ $t("message.OK") }}
+              </el-button>
+              <el-button size="small" @click="path_on_cancel">{{ $t("message.cancel") }}</el-button>
             </template>
 
 
