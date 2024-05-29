@@ -7,14 +7,14 @@
 import * as constants from "@/vals/constants.json";
 import ElementCard from "@/components/untils/elementCard.vue";
 import {user_options} from "@/vals/stores/user_options.js";
-import {Delete, UploadFilled} from "@element-plus/icons-vue";
-import {ElInput, ElMessage, ElMessageBox, genFileId} from "element-plus";
+import {Delete} from "@element-plus/icons-vue";
+import {ElInput, ElMessage, ElMessageBox} from "element-plus";
 import {useI18n} from "vue-i18n";
 import {computed, onBeforeUnmount, ref, watch} from "vue";
 import {add_option} from "@/vals/templates.js";
 import {use_command} from "@/modules/use_command.js";
 import CliCommandCard from "@/components/command_cards/cliCommandCard.vue";
-import {nuitka_input_type} from "@/vals/enums.js";
+
 
 /**
  * @type {ModelRef<{
@@ -54,7 +54,7 @@ const t = useI18n().t;
 /**
  * el-upload所需的文件列表
  */
-const file_list = ref([]);
+
 const output_desc = computed(() => {
   let result = `${t(`nuitka_info.${model.value.i18n}.desc`)}\n\n` +
       `${t(`nuitka_elements.option_desc`)}:\n\n` +
@@ -170,18 +170,7 @@ function on_cancel() {
   is_adding.value = false;
 }
 
-// path相关处理
-const handle_exceed = (files) => {
-  file_list.value = [];
-  const file = files[0];
-  file.uid = genFileId();
-  file_list.value.push(file);
-};
 
-const path_on_cancel = () => {
-  file_list.value = [];
-  on_cancel();
-};
 ///////////////////////////
 const is_equal = computed(() => model.value.val === model.value.default);
 const result = computed(() => {
@@ -274,8 +263,8 @@ watch(() => model.value.val, (new_val) => {
             {{ $t("nuitka_elements.add_option") }}
           </el-button>
           <template v-else>
-            <template v-if="model.input_type===nuitka_input_type.string">
-              <el-input
+
+          <el-input
                   v-model="option_name"
                   :placeholder="t('nuitka_elements.input_an_option')"
                   size="small"
@@ -285,29 +274,6 @@ watch(() => model.value.val, (new_val) => {
                 {{ $t("message.OK") }}
               </el-button>
               <el-button size="small" @click="on_cancel">{{ $t("message.cancel") }}</el-button>
-            </template>
-            <template v-else-if="model.input_type===nuitka_input_type.path">
-              <el-upload
-                  v-model:file-list="file_list"
-                  :auto-upload="false"
-                  drag
-                  multiple
-                  :limit="1"
-                  :on-exceed=" handle_exceed"
-              >
-                <el-icon size="30">
-                  <upload-filled></upload-filled>
-                </el-icon>
-                <div class="el-upload__text">
-                  {{ `${t(`message.drop_file`)} ${t(`message.or`)} ` }} <em>{{ t(`message.click_select_file`) }}</em>
-                </div>
-              </el-upload>
-              <el-button size="small" type="primary" @click="on_confirm">
-                {{ $t("message.OK") }}
-              </el-button>
-              <el-button size="small" @click="path_on_cancel">{{ $t("message.cancel") }}</el-button>
-            </template>
-
 
           </template>
         </template>

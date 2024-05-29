@@ -4,7 +4,7 @@
  * @Date: 2023-12-05 22:28:39
  */
 import {add_option, watcher_key} from "@/vals/templates.js";
-import {nuitka_input_type} from "@/vals/enums.js";
+
 
 const config = {
         support_language: {
@@ -109,7 +109,6 @@ const config = {
                 {},
                 "", // 空值就是一个空字符串
                 true,
-                nuitka_input_type.path,
             ),
         },
 

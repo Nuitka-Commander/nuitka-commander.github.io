@@ -3,7 +3,7 @@
  * @Author: erduotong
  * @Date: 2023-12-11 22:10:51
  */
-import {nuitka_element_status, nuitka_element_type, nuitka_input_type} from "./enums.js"; //这里不能改成@开头的路径
+import {nuitka_element_status, nuitka_element_type} from "./enums.js"; //这里不能改成@开头的路径
 
 
 /**
@@ -102,13 +102,13 @@ export const add_option = {
      * @param elements {object} 元素列表，key为一个string,value是一个对象，需要使用multi_elements生成 其中user_provide允许为true
      * @param default_value {string} 默认值 填写elements中的键值
      * @param clearable {boolean} 是否可以为空
-     * @param input_type 指定输入框的类型 不指定则自动判断
+
      * @param component 指定使用组件的类型 不指定则自动判断
      * @return {{val: StringConstructor, component, default: string, elements: Object, type: string, i18n: string,
      * command: {original: string}, enabled: boolean}}
      */
     definable_single: (i18n, command, enabled, elements, default_value, clearable = false,
-                       input_type = nuitka_input_type.string, component = nuitka_element_status.use_default) => {
+                       component = nuitka_element_status.use_default) => {
         return {
             type: nuitka_element_type.Definable_single,
             i18n: i18n,
@@ -116,7 +116,6 @@ export const add_option = {
             enabled: enabled,
             elements: elements,
             clearable: clearable,
-            input_type: input_type,
             component: component,
             default: default_value,
             val: String,
@@ -129,19 +128,17 @@ export const add_option = {
      * @param enabled {boolean}
      * @param elements {object} 元素列表，key为一个string,value是一个对象，需要使用multi_elements生成 其中user_provide允许为true
      * @param default_value {string[]} 默认值 填写elements中的键值
-     * @param input_type 指定输入框的类型
      * @param component 指定使用组件的类型 不指定则自动判断
      * @return {{val: *[], component, default: string[], elements : object, type: string, i18n: string, command: {original: string}, enabled : boolean}}
      */
     definable_multi: (i18n, command, enabled, elements, default_value,
-                      input_type = nuitka_input_type.string, component = nuitka_element_status.use_default) => {
+                      component = nuitka_element_status.use_default) => {
         return {
             type: nuitka_element_type.Definable_multiple_option,
             i18n: i18n,
             command: command,
             enabled: enabled,
             elements: elements,
-            input_type: input_type,
             component: component,
             default: default_value,
             val: [],

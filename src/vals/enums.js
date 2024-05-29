@@ -17,7 +17,3 @@ export const nuitka_element_status = Object.freeze({
     use_transfer: "use_transfer", //使用穿梭框组件
     use_default: "default", //使用默认值
 });
-export const nuitka_input_type = Object.freeze({
-    string: "string", //字符串
-    path: "path", //路径
-});
