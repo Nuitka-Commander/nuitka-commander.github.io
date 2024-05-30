@@ -107,8 +107,26 @@ const config = {
                 },
                 true,
                 {},
-                "", // 空值就是一个空字符串
+                "", // 空值就是一个空字符串 todo
                 true,
+            ),
+            main: add_option.definable_multi(
+                "main",
+                {
+                    original: "--main",
+                },
+                true,
+                {
+                    main: add_option.multi_elements(
+                        "",
+                        {
+                            original: "main.py",
+                        },
+                        true,
+                        true,
+                    ),
+                },
+                ["main"],
             ),
         },
 
