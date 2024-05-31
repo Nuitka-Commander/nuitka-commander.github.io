@@ -74,6 +74,9 @@ export default {
         cancel_del: "已取消删除",
         del_success: "删除成功",
         have_been_created: "该选项已存在!",
+        drop_file: "将文件拖拽到此处",
+        or: "或",
+        click_select_file: "选择一个文件",
     },
 
 

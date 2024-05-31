@@ -11,7 +11,6 @@
  * @return {Boolean}
  */
 export const is_array_equivalent = (arr1, arr2) => {
-    //todo 完成这个比较函数
     const temp = {};
     if (arr1.length !== arr2.length) {
         return false;

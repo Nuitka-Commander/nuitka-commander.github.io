@@ -18,8 +18,6 @@ const command = use_command;
 
 <template>
   <div>
-    <el-button @click="console.log(use_command.storage_config.value);console.log(use_command.output.value)">debug
-    </el-button>
     <el-tabs stretch tab-position="left" type="card">
       <template v-for="(value1,key1) in command.status.value" :key="key1">
         <!--做出分页-->

@@ -35,7 +35,7 @@ import {useI18n} from "vue-i18n";
  *  val: string[],
  *  enabled: boolean,
  *  default: string[],
- *
+ *  input_type: string,
  * }>}
  */
 const model = defineModel();

@@ -8,6 +8,8 @@ import {local_nuitka_version_config} from "@/modules/use_local_forage.js";
 import {user_options} from "@/vals/stores/user_options.js";
 import {debounce_func} from "@/modules/untils.js";
 import {debug} from "@/modules/debug.js";
+import {watcher_key} from "@/vals/templates.js";
+import {nuitka_element_type} from "@/vals/enums.js";
 
 
 class CommandStatus {
@@ -30,10 +32,10 @@ class CommandStatus {
      */
     storage_config = ref({});
     /**
-     *
-     * @type {undefined | Function}
+     * 监听器的停止函数
+     * @type {Array<Function>}
      */
-    storage_watcher = undefined;
+    watchers = []; //
 
     constructor() {
         //未改变的配置 用于重置
@@ -49,12 +51,12 @@ class CommandStatus {
      */
     async update_config(config) {
         debug.check_nuitka_config(config);//检查配置文件是否符合格式
-        this.output.value = {};//清空 防止重复
-        //自增id 排序用 这个id绝对不会重复
         let id = 0;
-        //清除监听
-        if (this.storage_watcher !== undefined) { //简单处理一下 防止内存泄露
-            this.storage_watcher();
+
+        // clear
+        this.output.value = {};
+        for (let i of this.watchers) { //关闭监听器
+            i();
         }
         // 获取已有配置
         let local_config = {};
@@ -63,13 +65,37 @@ class CommandStatus {
         } catch (e) {
             console.log(`读取配置失败\nversion:${user_options.value.nuitka_version}\n`, e);
         }
-        // todo 先进行一次遍历 完成bind
-        // 预处理配置+加载存储配置
-        Object.keys(config).forEach(top_key => {
-            if (top_key === "support_language") {
+
+        // 预处理
+        if (config[watcher_key] === undefined || config[watcher_key] === null) {
+            console.error("配置文件中未找到", watcher_key, "字段");
+            config[watcher_key] = []; //跑起来再说
+        }
+        Object.keys(config).forEach(key1 => {    //第一次预处理，为config中添加path，并处理一下bind
+            if (key1 === "support_language" || key1 === watcher_key) {
+                return;
+            }
+            const value1 = config[key1];
+            Object.keys(value1).forEach(key2 => {
+                const value2 = value1[key2];
+                value2["path"] = [key1, value2.type, key2];
+            });
+        });
+
+        for (let i of config[watcher_key]) {         //遍历list 给监听器换一下path
+            Object.keys(i.source).forEach(key => {
+                //把绑定的值换成path，等下重新绑
+                i.source[key] = i.source[key].path;
+            });
+        }
+
+        Object.keys(config).forEach(top_key => {         // 预处理配置2+加载存储配置
+            if (top_key === "support_language" || top_key === watcher_key) {
                 return; //跳过循环 不进行处理
             }
+
             const top_value = config[top_key];
+
             Object.keys(top_value).forEach(second_key => {
                 const second_value = top_value[second_key];
 
@@ -80,15 +106,15 @@ class CommandStatus {
                     second_value.val = second_value.default;
                 }
                 // 检查是否有存储值
-                if (local_config[second_key] !== undefined) {
+                if (local_config?.[second_key] !== undefined) {
                     second_value.val = local_config[second_key];
+                    // todo 这边考虑把User provide的内容也存储进去
                 }
                 // 添加到原始配置中
                 this.original_status[top_key] = this.original_status[top_key] || {};
                 this.original_status[top_key][second_value.type] = this.original_status[top_key][second_value.type] || {};
                 this.original_status[top_key][second_value.type][second_key] = {
                     ...second_value,
-                    path: [top_key, second_value.type, second_key],
                     id: id,
                 };
                 id++;
@@ -97,23 +123,43 @@ class CommandStatus {
             });
         });
 
+        // 监听器绑定
 
-        //监听一下
-        this.storage_watcher = watch(
-            () => this.storage_config.value,
-            debounce_func((new_val) => {
+        this.watchers.push(watch( //存储监听器 + 防抖函数
+            () => this.storage_config.value, debounce_func((new_val) => {
                 const new_config = JSON.stringify(new_val);
                 local_nuitka_version_config.update_config(user_options.value.nuitka_version, new_config);
             }, 500), {
                 deep: true,
                 immediate: true,
-            });
+            }));
 
         this.status.value = this.original_status;
+        console.log(this.status.value);
+        for (let watcher of config[watcher_key]) { //path转引用
+            const source = watcher.source;
+            Object.keys(source).forEach(key => {
+                const path = source[key];
+                source[key] = this.status.value[path[0]][path[1]][path[2]];
+            });
+        }
+
+
+        // 绑定监听器
+        for (let watcher of config[watcher_key]) {
+            const callback = watcher.callback;
+            //创建一个watch函数，监听source中的每个key:value中引用的对象，并且将source传递给callback
+            this.watchers.push(watch(() => watcher.source, (new_val) => {
+                callback(new_val); //调用回调函数
+            }, {
+                deep: true,
+                immediate: true,
+            }));
+        }
 
     }
 
-// todo 工厂对象格式 要一个对象，里面存放的是一个数组，表示path，使用的时候直接读取到的就是指针。
+
 }
 
 export const use_command = new CommandStatus();

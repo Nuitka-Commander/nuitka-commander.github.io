@@ -77,9 +77,10 @@ const license_info_visible = ref(false);
           <li>
             <el-link :href="constants.base_url + 'releases/latest'">{{ $t("website_info.changelog") }}</el-link>
           </li>
-          <!--todo-->
           <li>
-            <el-link href="">{{ $t("website_info.local_use") }}</el-link>
+            <el-link href="https://github.com/nuitka-commander/nuitka-commander.github.io/releases/latest">
+              {{ $t("website_info.local_use") }}
+            </el-link>
           </li>
         </ul>
       </div>
