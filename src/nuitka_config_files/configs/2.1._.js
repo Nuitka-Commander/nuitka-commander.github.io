@@ -129,6 +129,35 @@ const config = {
                 ["main"],
             ),
         },
+    control_the_inclusion_of_modules_and_packages_in_result: {
+        include_package: add_option.definable_multi(
+            "include_package",
+            {
+                original: "--include-package",
+            },
+            true,
+            {},
+            [],
+        ),
+        include_module: add_option.definable_multi(
+            "include_module",
+            {
+                original: "--include-module",
+            },
+            true,
+            {},
+            [],
+        ),
+        include_plugin_directory: add_option.definable_multi(
+            "include_plugin_directory",
+            {
+                original: "--include-plugin-directory",
+            },
+            true,
+            {},
+            [],
+        ),
+    },
 
     }
 ;
