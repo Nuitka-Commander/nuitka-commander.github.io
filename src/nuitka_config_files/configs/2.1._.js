@@ -157,6 +157,23 @@ const config = {
             {},
             [],
         ),
+        include_plugin_files: add_option.definable_multi(
+            "include_plugin_files",
+            {
+                original: "--include-plugin-files",
+            },
+            true,
+            {},
+            [],
+        ),
+        prefer_source_code: add_option.bool(
+            "prefer_source_code",
+            {
+                original: "--prefer-source-code",
+            },
+            true,
+            false,
+        ),
     },
 
     }
