@@ -175,6 +175,50 @@ const config = {
             false,
         ),
     },
+    control_the_following_into_imported_modules: {
+        follow_imports: add_option.bool(
+            "follow_imports",
+            {
+                original: "--follow-imports",
+            },
+            true,
+            false,
+        ),
+        follow_import_to: add_option.definable_multi(
+            "follow_import_to",
+            {
+                original: "--follow-import-to",
+            },
+            true,
+            {},
+            [],
+        ),
+        nofollow_import_to: add_option.definable_multi(
+            "nofollow_import_to",
+            {
+                original: "--no-follow-import-to",
+            },
+            true,
+            {},
+            [],
+        ),
+        nofollow_imports: add_option.bool(
+            "nofollow_imports",
+            {
+                original: "--nofollow-imports",
+            },
+            true,
+            false,
+        ),
+        follow_stdlib: add_option.bool(
+            "follow_stdlib",
+            {
+                original: "--follow-stdlib",
+            },
+            true,
+            false,
+        ),
+    },
 
     }
 ;
