@@ -54,7 +54,7 @@ export const add_option = {
      * @param command {{original:string}}
      * @param enabled {boolean}
      * @param elements {object} 元素列表，key为一个string,value是一个对象，需要使用multi_elements生成
-     * @param default_value {string} 默认值 填写elements中的键值
+     * @param default_value {string} 默认值
      * @return {{val: StringConstructor, default:string, elements:object, type: string, i18n:string,
      * command:{original:string}, enabled:boolean}}
      */
@@ -75,7 +75,7 @@ export const add_option = {
      * @param command {{original:string}}
      * @param enabled {boolean}
      * @param elements {object} 元素列表，key为一个string,value是一个对象，需要使用multi_elements生成
-     * @param default_value {string[]} 默认值 填写elements中的键值
+     * @param default_value {string[]} 默认值 填写elements中的键值组成的数组 如果为空的话请填写空数组[]
      * @param component {nuitka_element_status.use_select | nuitka_element_status.use_transfer} 指定使用组件的类型 use_default为自动判断
      * @return {{val: *[], component: nuitka_element_status.use_select | nuitka_element_status.use_transfer,
      * default: [string], elements:object, type: string, i18n:string, command:{original:string}, enabled:boolean}}
@@ -100,9 +100,8 @@ export const add_option = {
      * @param command {{original:string}}
      * @param enabled {boolean}
      * @param elements {object} 元素列表，key为一个string,value是一个对象，需要使用multi_elements生成 其中user_provide允许为true
-     * @param default_value {string} 默认值 填写elements中的键值
+     * @param default_value {string} 默认值 填写elements中的键值 如果为空的话请填写空字符串""
      * @param clearable {boolean} 是否可以为空
-
      * @param component 指定使用组件的类型 不指定则自动判断
      * @return {{val: StringConstructor, component, default: string, elements: Object, type: string, i18n: string,
      * command: {original: string}, enabled: boolean}}
@@ -127,7 +126,7 @@ export const add_option = {
      * @param command {{original:string}}
      * @param enabled {boolean}
      * @param elements {object} 元素列表，key为一个string,value是一个对象，需要使用multi_elements生成 其中user_provide允许为true
-     * @param default_value {string[]} 默认值 填写elements中的键值
+     * @param default_value {string[]} 默认值 填写elements中的键值组成的数组 如果为空的话请填写空数组[]
      * @param component 指定使用组件的类型 不指定则自动判断
      * @return {{val: *[], component, default: string[], elements : object, type: string, i18n: string, command: {original: string}, enabled : boolean}}
      */

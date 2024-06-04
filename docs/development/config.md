@@ -47,3 +47,52 @@ export default {
     }
 };
 ```
+
+详细的翻译内容请查看[翻译相关](./translation.md)，在此不再赘述。
+
+#### 选项
+
+Nuitka的文档格式分为两层，第一层为内部选项的内容概括，第二层为具体的选项。  
+因此，你需要分为两种选项。  
+一个合理的示例是:
+
+```js
+export const config = {
+    support_language: {
+        "en": "en",
+        "zh-CN": "zh_cn",
+    },
+    basic: {
+        option_test: add_option.bool(
+            "option_test",
+            {
+                original: "option_test",
+            },
+            true,
+            false,
+        ),
+    },
+};
+```
+
+下面是逐行的解释:
+
+##### basic
+
+选项的第一层，表示Nuitka的第一层概括选项，其中名字则表示在对应翻译文件夹中`title`
+中的key值，直接对应翻译，请查看[翻译相关](./translation.md)。    
+option_test: 选项第二层，表示一个具体的选项，键名无特殊要求，但是推荐为选项名，例如nuitka中的`--output-dir`，去掉前置的`--`
+并将`-`替换为`_`，  
+即为`output_dir`。  
+接下来,add_option是一个对象，其中有多个成员函数，每个函数添加一种类型的选项。其中都位于[templates](../../src/vals/templates.js)
+中，  
+下列也有每种选项所需的类型。
+
+| 选项类型             | 对应的选项特征                                                        |
+|------------------|----------------------------------------------------------------|
+| bool             | 仅有开/关两种状态的选项                                                   |
+| single_option    | 有多种可选项，且可选项已被Nuitka定义，无法由用户定义，且只能选择其中一个                        |
+| defined_multi    | 有多种可选项，且可选项已被Nuitka定义，无法由用户定义，能选择其中任意多个                        |
+| definable_single | 有多种可选项或无可选项，且可选项可能已经被Nuitka定义，可以由用户定义，且只能选择其中一个                |
+| definable_multi  | 有多种可选项或无可选项，且可选项可能已经被Nuitka定义，可以由用户定义，可以选择其中的任意多个              |
+| multi_elements   | 一个元素，只能用于除bool类型外所有类型的elements对象中作为key:value中的value，作为一个可供选择的值 |
