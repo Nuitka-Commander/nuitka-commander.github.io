@@ -5,6 +5,7 @@ export default {
         basic: "基本设置",
         control_the_inclusion_of_modules_and_packages_in_result: "控制结果中包含的模块和包",
         control_the_following_into_imported_modules: "控制导入模块",
+        onefile_options: "单文件选项",
     }, // basic
     module: {
         name: "模块模式",
@@ -111,5 +112,28 @@ export default {
         desc: "也深入到从标准库导入的模块，这将大大增加编译时间，而且目前也没有很好的测试，有时候也可能不会工作。默认关闭。",
     },
 
-
+    onefile_tempdir_spec: {
+        name: "单文件临时目录位置",
+        desc: "在单文件模式下，使用此作为解压的文件夹 \n" +
+            "使用例如像'{CACHE_DIR}/{COMPANY}/{PRODUCT}/{VERSION}'这样的字符串是一个很好的静态缓存路径，并且它将不会被删除。",
+        elements: {
+            user_tempdir: {
+                name: "用户临时目录",
+                desc: "使用用户的临时目录",
+            },
+        },
+    },
+    onefile_child_grace_time: {
+        name: "单文件子进程宽限时间",
+        desc: "当停止子进程时，例如由于CTRL-C或关闭等，Python代码会得到一个\"KeyboardInterrupt\"，它可能会处理例如刷新数据等事件。\n" +
+            "这是以硬方式杀死子进程之前的时间量。单位是毫秒，默认为5000。",
+    },
+    onefile_no_compression: {
+        name: "无压缩单文件",
+        desc: "在创建单文件时，禁用有效载荷的压缩。这主要是出于调试目的，或者为了节省时间。默认关闭",
+    },
+    onefile_as_archive: {
+        name: "作为存档的单文件",
+        desc: "在创建onefile的时候，使用一个可以被\"nuitka-onefile-unpack\"解压的存档格式，而不是一个只有onefile程序本身才能解压的流。",
+    },
 };

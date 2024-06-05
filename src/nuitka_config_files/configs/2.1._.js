@@ -219,7 +219,59 @@ const config = {
             false,
         ),
     },
-
+    onefile_options: {
+        onefile_tempdir_spec: add_option.definable_single(
+            "onefile_tempdir_spec",
+            {
+                original: "--onefile-tempdir-spec",
+            },
+            true,
+            {
+                user_tempdir: add_option.multi_elements(
+                    "user_tempdir",
+                    {
+                        original: "{TEMP}/onefile_{PID}_{TIME}",
+                    },
+                    true,
+                ),
+            },
+            "user_tempdir",
+        ),
+        onefile_child_grace_time: add_option.definable_single(
+            "onefile_child_grace_time",
+            {
+                original: "--onefile-child-grace-time",
+            },
+            true,
+            {
+                time: add_option.multi_elements(
+                    "",
+                    {
+                        original: "5000",
+                    },
+                    true,
+                    true,
+                ),
+            },
+            "time",
+        ),
+        onefile_no_compression: add_option.bool(
+            "onefile_no_compression",
+            {
+                original: "--onefile-no-compression",
+            },
+            true,
+            false,
+        ),
+        onefile_as_archive: add_option.bool(
+            "onefile_as_archive",
+            {
+                original: "--onefile-as-archive",
+            },
+            true,
+            false,
+        ),
+    },
     }
 ;
 //基本就这个格式 回调函数接受一个参数
