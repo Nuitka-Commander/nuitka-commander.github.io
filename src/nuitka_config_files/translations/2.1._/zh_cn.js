@@ -6,6 +6,7 @@ export default {
         control_the_inclusion_of_modules_and_packages_in_result: "控制结果中包含的模块和包",
         control_the_following_into_imported_modules: "控制导入模块",
         onefile_options: "单文件选项",
+        data_files: "数据文件",
     }, // basic
     module: {
         name: "模块模式",
@@ -135,5 +136,13 @@ export default {
     onefile_as_archive: {
         name: "作为存档的单文件",
         desc: "在创建onefile的时候，使用一个可以被\"nuitka-onefile-unpack\"解压的存档格式，而不是一个只有onefile程序本身才能解压的流。",
+    },
+    include_package_data: {
+        name: "包含包数据",
+        desc: "包括给定包的数据文件。DLL和扩展模块不是数据文件，也不会像这样被包含。可以使用下面指示的文件名模式。\n" +
+            "默认情况下，不包括包的数据文件，但包配置可以执行此操作。这只会包括非DLL和非拓展模块，即实际存在的数据文件。\n" +
+            "在\":\"后面，还可以给出文件名模式，只选择匹配的文件。例子: \"--include-package-data=package_name\" (所有文件)\n" +
+            "--include-package-data=package_name=*.txt\" (只有某种类型) \"--include-package-data=package_name=some_filename.dat (具体文件)\n" +
+            "默认为空。",
     },
 };
