@@ -282,6 +282,51 @@ const config = {
             {},
             [],
         ),
+        include_data_files: add_option.definable_multi(
+            "include_data_files",
+            {
+                original: "--include-data-files",
+            },
+            true,
+            {},
+            [],
+        ),
+        include_data_dir: add_option.definable_multi(
+            "include_data_dir",
+            {
+                original: "--include-data-dir",
+            },
+            true,
+            {},
+            [],
+        ),
+        noinclude_data_files: add_option.definable_multi(
+            "noinclude_data_files",
+            {
+                original: "--noinclude-data-files",
+            },
+            true,
+            {},
+            [],
+        ),
+        include_onefile_external_data: add_option.definable_multi(
+            "include_onefile_external_data",
+            {
+                original: "--include-onefile-external-data",
+            },
+            true,
+            {},
+            [],
+        ),
+        list_package_data: add_option.definable_multi(
+            "list_package_data",
+            {
+                original: "--list-package-data",
+            },
+            true,
+            {},
+            [],
+        ),
     },
 };
 //基本就这个格式 回调函数接受一个参数

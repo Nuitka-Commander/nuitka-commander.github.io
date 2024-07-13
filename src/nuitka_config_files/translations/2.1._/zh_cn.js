@@ -145,4 +145,35 @@ export default {
             "--include-package-data=package_name=*.txt\" (只有某种类型) \"--include-package-data=package_name=some_filename.dat (具体文件)\n" +
             "默认为空。",
     },
+    include_data_files: {
+        name: "包含数据文件",
+        desc: "通过分配的文件名包含数据文件。有很多允许的形式。\n" +
+            "使用–include-data-files=/path/to/file/.txt=folder_name/some.txt’，它将复制一个文件，如果是十多个文件，将会报错。\n" +
+            "使用’–include-data-files=/path/to/files/.txt=folder_name/‘将把所有匹配的文件放入该文件夹。\n" +
+            "对于递归复制，有一种带有三个值的形式:’–include-data-files=/path/to/scan=folder_name=**/*.txt’，这将保留目录的文件结构。\n" +
+            "默认为空。",
+    },
+    include_data_dir: {
+        name: "包含数据目录",
+        desc: "将整个目录的数据文件包含在分发中。这是递归的。\n" +
+            "如果你想要非递归包含，请查看'--include-data-files'与模式。\n" +
+            "例如,’–include-data-dir=/path/some_dir=data/some_dir’，用于整个目录的普通复制。\n" +
+            "所有的非代码文件都会被包含，并且你也可以使用'--noinclude-data-files'选项来删除它们。\n" +
+            "默认为空",
+    },
+    noinclude_data_files: {
+        name: "不包含数据文件",
+        desc: "不包含与给定文件名形式匹配的数据文件。这是针对目标文件名而非源路径的。\n" +
+            "因此，要从'package_name'的包数据中忽略一个文件模式，应该匹配为\"package_name/*.txt\",\n" +
+            "或者是对整个目录而简单地使用\"package_name\"。默认为空",
+    },
+    include_onefile_external_data: {
+        name: "包含单文件外部数据",
+        desc: "将指定的数据文件模式包含在单文件二进制文件的外部而不是内部。仅在'--onefile'编译情况下该选项才有意义。\n" +
+            "首先，必须以某种方式指定文件以某种方式为已包含，然后这个选项将引用目标路径。默认为空。",
+    },
+    list_package_data: {
+        name: "列出包数据",
+        desc: "输出给定包名称找到的数据文件。默认不执行",
+    },
 };
