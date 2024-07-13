@@ -8,7 +8,10 @@ import {add_option, watcher_key} from "@/vals/templates.js";
 
 const config = {
     support_language: {
-        "zh-CN": "zh_cn",
+        "zh-CN": {
+            name: "简体中文",
+            path: "zh_cn",
+        },
     },
     basic: {
         module_: add_option.bool(

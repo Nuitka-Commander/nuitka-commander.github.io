@@ -69,7 +69,7 @@ import OutputPage from "@/components/outputPage.vue";
   </main>
 
   <!---->
-  <footer>
+  <footer id="website_footer">
     <website-footer></website-footer>
   </footer>
 
@@ -84,5 +84,13 @@ main {
   margin-left: 20px;
 
 }
+
+#website_footer {
+  position: fixed;
+  z-index: 1000;
+  bottom: 50px;
+  width: 100%;
+}
+
 
 </style>

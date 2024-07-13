@@ -14,6 +14,7 @@ const localstorage_name = "_Nuitka_Commander_user_options";
 export const user_options = ref({
     theme: "auto",
     language: "undefined",
+    nuitka_language: "undefined",
     is_full_mode: true,
     nuitka_version: supported_nuitka_version.versions[supported_nuitka_version.latest_key], //获取最新版
     show_original_command: false,
