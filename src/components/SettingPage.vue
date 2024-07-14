@@ -8,6 +8,7 @@ import {user_options} from "@/vals/stores/user_options.js";
 import {set_theme} from "@/modules/use_theme.js";
 import {set_i18n_language} from "@/assets/languages/i18n.js";
 import {supported_i18n} from "@/assets/languages/supported_i18n.js";
+import {current_version_support_language, load_config_language} from "@/modules/use_nuitka_config.js";
 //设置页面的显示与隐藏
 const settings_page_show = ref(false);
 //关闭设置页面 event:点击事件
@@ -60,10 +61,12 @@ const close_setting_page = (event) => {
         </div>
 
         <div class="setting_page_selects_fa">
+
           <h1>
             <img alt="language icon" src="@/assets/images/language.svg">
             {{ $t("setting.language") }}
           </h1>
+          <h3>界面语言</h3>
           <el-select v-model="user_options.language" filterable @change="set_i18n_language(user_options.language)">
             <el-option
                 v-for="(value, key) in supported_i18n"
@@ -72,7 +75,18 @@ const close_setting_page = (event) => {
                 :value="key">
             </el-option>
           </el-select>
+          <h3>命令语言</h3>
+          <el-select v-model="user_options.nuitka_language" filterable
+                     @change="load_config_language(user_options.nuitka_language)">
+            <el-option
+                v-for="(value,key ) in current_version_support_language"
+                :key="key"
+                :label="value.name"
+                :value="key"
+            ></el-option>
+          </el-select>
         </div>
+
         <!--todo localstorage-->
       </div>
 

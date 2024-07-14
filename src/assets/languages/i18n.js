@@ -74,6 +74,7 @@ export function init_i18n() {
     //如果最终仍未找到语言，则使用en作为默认值
     document.querySelector("html").setAttribute("lang", final_language);
     set_i18n_language(final_language);
+
 }
 
 /**

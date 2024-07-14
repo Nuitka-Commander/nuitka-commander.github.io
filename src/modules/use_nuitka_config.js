@@ -10,7 +10,7 @@ import {set_loading} from "@/vals/stores/is_loading.js";
 import {use_command} from "@/modules/use_command.js";
 import {i18n} from "@/assets/languages/i18n.js";
 
-let support_language = {};
+export let current_version_support_language = {};
 export let nuitka_info_loaded = false;
 
 /**
@@ -28,7 +28,8 @@ export function init_nuitka_config() {
     if (!key_defined) {
         user_options.value.nuitka_version = supported_nuitka_version.latest_key;
     }
-    load_new_config().then()
+
+    load_new_config().then();
 }
 
 
@@ -40,13 +41,11 @@ export async function load_new_config() {
     const new_version = user_options.value.nuitka_version;
     set_loading(true);
     const response = await import(`@/nuitka_config_files/configs/${supported_nuitka_version.versions[new_version]}.js`);
-    console.log(`Loading new language: ${user_options.value.language.toString()}`);
+    console.log(`Loading new language: ${user_options.value.nuitka_language.toString()}`);
     await use_command.update_config(response.default);
+    current_version_support_language = response.default.support_language;
+    await load_config_language(user_options.value.nuitka_language);
     set_loading(false);
-    support_language = response.default.support_language;
-    await load_config_language(user_options.value.language);
-
-
 }
 
 /**
@@ -55,16 +54,28 @@ export async function load_new_config() {
  * @return {Promise<void>}
  */
 export async function load_config_language(language) {
-    console.log(`loading language ${language}`);
-    if (support_language[language] === undefined) {
-        //看起来这个版本不支持当前的语言，告诉用户这个悲惨的事实 todo
+
+    if (current_version_support_language[language] === undefined) {
+        const first_key = Object.keys(current_version_support_language)[0];// 获得一个key保证可用
+        user_options.value.nuitka_language = current_version_support_language[first_key];
+        await set_language(first_key);
+        return;
     }
-    const translation = await import(`@/nuitka_config_files/translations/${supported_nuitka_version.versions[user_options.value.nuitka_version]}/${support_language[language]}.js`);
+    user_options.value.nuitka_language = language;
+    await set_language(language);
+
+
+}
+
+async function set_language(language) {
+    set_loading(true);
+    const translation = await import(`@/nuitka_config_files/translations/` +
+    `${supported_nuitka_version.versions[user_options.value.nuitka_version]}/${current_version_support_language[language].path}.js`);
     const message = i18n.global.getLocaleMessage(language);
     i18n.global.setLocaleMessage(language, {
         ...message,
         "nuitka_info": translation.default,
     });
     nuitka_info_loaded = true;
-
+    set_loading(false);
 }
