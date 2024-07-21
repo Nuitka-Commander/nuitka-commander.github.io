@@ -9,6 +9,7 @@ import {user_options} from "@/vals/stores/user_options.js";
 import {set_loading} from "@/vals/stores/is_loading.js";
 import {use_command} from "@/modules/use_command.js";
 import {i18n} from "@/assets/languages/i18n.js";
+import {ElMessage} from "element-plus";
 
 export let current_version_support_language = {};
 export let nuitka_info_loaded = false;
@@ -59,6 +60,10 @@ export async function load_config_language(language) {
         const first_key = Object.keys(current_version_support_language)[0];// 获得一个key保证可用
         user_options.value.nuitka_language = current_version_support_language[first_key];
         await set_language(first_key);
+        ElMessage({
+            message: i18n.global.t("setting.nuitka_language_no_support").toString(),
+            type: "warning",
+        })
         return;
     }
     user_options.value.nuitka_language = language;
@@ -72,7 +77,8 @@ async function set_language(language) {
     const translation = await import(`@/nuitka_config_files/translations/` +
     `${supported_nuitka_version.versions[user_options.value.nuitka_version]}/${current_version_support_language[language].path}.js`);
     const message = i18n.global.getLocaleMessage(language);
-    i18n.global.setLocaleMessage(language, {
+    // 这边因为是从网页读取的，所以要用网页语言信息
+    i18n.global.setLocaleMessage(user_options.value.language, {
         ...message,
         "nuitka_info": translation.default,
     });
