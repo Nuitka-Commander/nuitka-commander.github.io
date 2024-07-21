@@ -35,6 +35,7 @@ import CliCommandCard from "@/components/command_cards/cliCommandCard.vue";
  *      }
  *      enabled:boolean,
  *      user_provide: boolean,
+ *      user_provide: boolean,
  *    }
  *  }
  * }>}
@@ -165,7 +166,24 @@ function on_cancel() {
 }
 
 ///////////////////////////
-const is_equal = computed(() => is_array_equivalent(model.value.val, model.value.default));
+const user_provides_options = computed(() => {
+  //遍历所有的选项，将用户提供的选项过滤出来，返回一个对象
+  let result = {};
+  for (const key in model.value.elements) {
+    if (model.value.elements[key].user_provide) {
+      result[key] = model.value.elements[key];
+    }
+  }
+
+  return result;
+})
+const is_equal = computed(() => { //同时检查值是否相等以及是否有用户提供的选项 保证记录
+
+  if (Object.keys(user_provides_options.value).length > 0) {
+    return false; // Return false if there are user provided options
+  }
+  return is_array_equivalent(model.value.val, model.value.default);
+});
 const result = computed(() => {
   //cli输出
   let cli = `${model.value.command.original}=`;
@@ -181,13 +199,17 @@ const result = computed(() => {
     pyproject: null,
   };
 });
+
 watch(() => [result, is_equal], ([new_result, new_is_equal]) => {
   if (new_is_equal.value) {
     delete use_command.output.value[props.key_name];
     delete use_command.storage_config.value[props.key_name];
   } else {
     use_command.output.value[props.key_name] = new_result.value;
-    use_command.storage_config.value[props.key_name] = model.value.val;
+    use_command.storage_config.value[props.key_name] = {
+      value: model.value.val,
+      user_provides_choices: user_provides_options.value,
+    }; //json的值
   }
 }, {
   immediate: true,
