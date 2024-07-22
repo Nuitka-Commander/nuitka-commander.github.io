@@ -32,20 +32,20 @@ export default {
         desc: "使用的Python标志。默认是你用来运行Nuitka的标志。这些选项也存在于标准Python可执行文件中。目前支持的选项有：\"-S\"（别名\"no_site\"），\"static_hashes\"（不使用哈希随机化），\"no_warnings\"（不给出Python运行时警告），\"-O\"（别名\"no_asserts\"），\"no_docstrings\"（不使用文档字符串），\"-u\"（别名\"unbuffered\"），\"isolated\"（不加载外部代码）和\"-m\"（包模式，编译为\"package.__main__\"）。默认空。",
         elements: {
             no_site: {
-                name: "无站点",
-                desc: "不加载站点模块。"
+                name: "不包含site-packages目录",
+                desc: "不应该包含python的site-packages目录,也就是不包含任何python环境的第三方库"
             },
             static_hashes: {
                 name: "静态哈希",
                 desc: "不使用哈希随机化。"
             },
             no_warnings: {
-                name: "无警告",
-                desc: "不给出Python运行时警告。"
+                name: "关闭警告",
+                desc: "不给出Python运行时的警告",
             },
             no_asserts: {
-                name: "无断言",
-                desc: "不使用断言。"
+                name: "无断言(错误检查)",
+                desc: "不使用断言,不包含任何调试/错误检查(assert)语句"
             },
             no_docstrings: {
                 name: "无文档字符串",
@@ -136,8 +136,8 @@ export default {
 
 
     follow_import_to: {
-        name: "跟随导入到特定模块或包",
-        desc: "如果使用，跟随到该模块，或者如果是包，跟随到整个包。可以多次指定。默认空。",
+        name: "导入到特定模块或包",
+        desc: "如果使用，导入该模块，或者如果是包，导入整个包。可以多次指定。默认空。",
         elements: {
             module: {
                 name: "模块或包",
@@ -147,8 +147,8 @@ export default {
     },
 
     nofollow_import_to: {
-        name: "不跟随导入到特定模块或包",
-        desc: "即使使用，也不跟随到该模块名称，或者如果是包名称，也不跟随到整个包。这可以包含模式，例如 \"*.tests\"。可以多次指定。默认空。",
+        name: "不导入到特定模块或包",
+        desc: "即使使用，也不导入该模块名称，或者如果是包名称，则不导入整个包。支持使用通配符，例如 \"*.tests\"。可以多次指定。默认空。",
         elements: {
             module: {
                 name: "模块或包",
@@ -158,7 +158,7 @@ export default {
     },
 
     nofollow_imports: {
-        name: "不跟随任何导入模块",
+        name: "不导入任何模块",
         desc: "完全不递归进入任何导入的模块，覆盖所有其他包含选项，并且不适用于独立模式。默认关闭。",
     },
 
@@ -217,7 +217,8 @@ export default {
 
     include_data_files: {
         name: "包含数据文件",
-        desc: "通过文件名包含数据文件到分发中。有多种允许的形式。例如：'--include-data-files=/path/to/file/*.txt=folder_name/some.txt' 将复制单个文件并抱怨是否是多个。默认不包含。",
+        desc: "通过文件名包含数据文件到分发中。有多种允许的形式。例如：'--include-data-files=/path/to/file/*.txt=folder_name/some.txt' 将复制单个文件，如果是多个文件就会报错。默认不包含。" +
+        "使用’–include-data-files=/path/to/files/.txt=folder_name/‘将把所有匹配的文件放入该文件夹。对于递归复制，有一种带有三个值的形式:’–include-data-files=/path/to/scan=folder_name=**/*.txt’，这将保留目录的文件结构。默认为空。",
         elements: {
             file_pattern: {
                 name: "文件模式",
@@ -228,7 +229,7 @@ export default {
 
     include_data_dir: {
         name: "包含数据目录",
-        desc: "从完整目录中包含数据文件到分发中。这是递归的。例如：'--include-data-dir=/path/some_dir=data/some_dir' 将整个目录进行普通复制。默认不包含。",
+        desc: "将整个目录的数据文件包含在分发中。这个过程是递归进行的。例如：'--include-data-dir=/path/some_dir=data/some_dir' 将整个目录进行普通复制。默认不包含。",
         elements: {
             directory: {
                 name: "目录",
@@ -242,8 +243,8 @@ export default {
         desc: "不包含匹配给定文件名模式的数据文件。这是针对目标文件名，而不是源路径。例如：'package_name/*.txt' 将忽略包数据中的文件模式。默认不包含。",
         elements: {
             pattern: {
-                name: "模式",
-                desc: "指定模式以不包含数据文件。",
+                name: "匹配模式",
+                desc: "指定匹配模式以不包含数据文件。",
             },
         },
     },
