@@ -55,6 +55,7 @@ const output_desc = computed(() => {
 ///////////////////////////
 const is_equal = computed(() => model.value.val === model.value.default);
 const result = computed(() => {
+  console.log("123", model.value.elements[model.value.val]);
   return {
     cli: `${model.value.command.original}="${model.value.elements[model.value.val].command.original}"`,
     pyproject: null,

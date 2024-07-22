@@ -405,9 +405,27 @@ const config = {
             },
             true,
             {
-                yes: "yes",
-                no: "no",
-                auto: "auto",
+                yes: add_option.multi_elements(
+                    "yes",
+                    {
+                        original: "yes",
+                    },
+                    true,
+                ),
+                no: add_option.multi_elements(
+                    "no",
+                    {
+                        original: "no",
+                    },
+                    true,
+                ),
+                auto: add_option.multi_elements(
+                    "auto",
+                    {
+                        original: "auto",
+                    },
+                    true,
+                ),
             },
             "auto"
         ),
@@ -420,9 +438,27 @@ const config = {
             },
             true,
             {
-                yes: "yes",
-                no: "no",
-                auto: "auto",
+                yes: add_option.multi_elements(
+                    "yes",
+                    {
+                        original: "yes",
+                    },
+                    true,
+                ),
+                no: add_option.multi_elements(
+                    "no",
+                    {
+                        original: "no",
+                    },
+                    true,
+                ),
+                auto: add_option.multi_elements(
+                    "auto",
+                    {
+                        original: "auto",
+                    },
+                    true,
+                ),
             },
             "auto"
         ),
@@ -435,8 +471,20 @@ const config = {
             },
             true,
             {
-                auto: "auto",
-                none: "none",
+                none: add_option.multi_elements(
+                    "none",
+                    {
+                        original: "none",
+                    },
+                    true,
+                ),
+                auto: add_option.multi_elements(
+                    "auto",
+                    {
+                        original: "auto",
+                    },
+                    true,
+                ),
             },
             "auto"
         )
@@ -575,8 +623,411 @@ const config = {
             },
             ["all"],
         )
+    },
+    binary_version_information:{
+        company_name: add_option.definable_single(
+            "company_name",
+            {
+                original: "--company-name",
+            },
+            true,
+            {
+                default: add_option.multi_elements(
+                    "default",
+                    {
+                        original: "",
+                    },
+                    true,
+                    true,
+                ),
+            },
+            "default",
+        ),
+        product_name: add_option.definable_single(
+            "product_name",
+            {
+                original: "--product-name",
+            },
+            true,
+            {
+                default: add_option.multi_elements(
+                    "default",
+                    {
+                        original: "",
+                    },
+                    true,
+                    true,
+                ),
+            },
+            "default",
+        ),
+        file_version: add_option.definable_single(
+            "file_version",
+            {
+                original: "--file-version",
+            },
+            true,
+            {
+                default: add_option.multi_elements(
+                    "default",
+                    {
+                        original: "",
+                    },
+                    true,
+                    true,
+                ),
+            },
+            "default",
+        ),
+        product_version: add_option.definable_single(
+            "product_version",
+            {
+                original: "--product-version",
+            },
+            true,
+            {
+                default: add_option.multi_elements(
+                    "default",
+                    {
+                        original: "",
+                    },
+                    true,
+                    true,
+                ),
+            },
+            "default",
+        ),
+        file_description: add_option.definable_single(
+            "file_description",
+            {
+                original: "--file-description",
+            },
+            true,
+            {
+                default: add_option.multi_elements(
+                    "default",
+                    {
+                        original: "",
+                    },
+                    true,
+                    true,
+                ),
+            },
+            "default",
+        ),
+        copyright: add_option.definable_single(
+            "copyright",
+            {
+                original: "--copyright",
+            },
+            true,
+            {
+                default: add_option.multi_elements(
+                    "default",
+                    {
+                        original: "",
+                    },
+                    true,
+                    true,
+                ),
+            },
+            "default",
+        ),
+        trademarks: add_option.definable_single(
+            "trademarks",
+            {
+                original: "--trademarks",
+            },
+            true,
+            {
+                default: add_option.multi_elements(
+                    "default",
+                    {
+                        original: "",
+                    },
+                    true,
+                    true,
+                ),
+            },
+            "default",
+        ),
+    },
+    tracing_features:{
+        report_filename: add_option.definable_single(
+            "report_filename",
+            {
+                original: "--report",
+            },
+            true,
+            {
+                default: add_option.multi_elements(
+                    "default",
+                    {
+                        original: "report.xml",
+                    },
+                    true,
+                    true,
+                ),
+            },
+            "default",
+        ),
+        report_diffable: add_option.bool(
+            "report_diffable",
+            {
+                original: "--report-diffable",
+            },
+            true,
+            false,
+        ),
+        report_user_provided: add_option.definable_multi(
+            "report_user_provided",
+            {
+                original: "--report-user-provided",
+            },
+            true,
+            {
+                user_provided: add_option.multi_elements(
+                    "user_provided",
+                    {
+                        original: "key=value",
+                    },
+                    true,
+                    true,
+                ),
+            },
+            [],
+        ),
+        report_template: add_option.definable_multi(
+            "report_template",
+            {
+                original: "--report-template",
+            },
+            true,
+            {
+                template: add_option.multi_elements(
+                    "template",
+                    {
+                        original: "template.rst.j2:output.rst",
+                    },
+                    true,
+                    true,
+                ),
+            },
+            [],
+        ),
+        quiet: add_option.bool(
+            "quiet",
+            {
+                original: "--quiet",
+            },
+            true,
+            false,
+        ),
+        show_scons: add_option.bool(
+            "show_scons",
+            {
+                original: "--show-scons",
+            },
+            true,
+            false,
+        ),
+        no_progressbar: add_option.bool(
+            "no_progressbar",
+            {
+                original: "--no-progressbar",
+            },
+            true,
+            false,
+        ),
+        show_progress: add_option.bool(
+            "show_progress",
+            {
+                original: "--show-progress",
+            },
+            true,
+            false,
+        ),
+        show_memory: add_option.bool(
+            "show_memory",
+            {
+                original: "--show-memory",
+            },
+            true,
+            false,
+        ),
+        show_modules: add_option.bool(
+            "show_modules",
+            {
+                original: "--show-modules",
+            },
+            true,
+            false,
+        ),
+        show_modules_output: add_option.definable_single(
+            "show_modules_output",
+            {
+                original: "--show-modules-output",
+            },
+            true,
+            {
+                default: add_option.multi_elements(
+                    "default",
+                    {
+                        original: "stdout",
+                    },
+                    true,
+                    true,
+                ),
+            },
+            "default",
+        ),
+        verbose: add_option.bool(
+            "verbose",
+            {
+                original: "--verbose",
+            },
+            true,
+            false,
+        ),
+        verbose_output: add_option.definable_single(
+            "verbose_output",
+            {
+                original: "--verbose-output",
+            },
+            true,
+            {
+                default: add_option.multi_elements(
+                    "default",
+                    {
+                        original: "stdout",
+                    },
+                    true,
+                    true,
+                ),
+            },
+            "default",
+        ),
+    },
+    windows_specific_controls:{
+        windows_console_mode: add_option.single_option(
+            "windows_console_mode",
+            {
+                original: "--windows-console-mode",
+            },
+            true,
+            {
+                force: add_option.multi_elements(
+                    "force",
+                    {
+                        original: "force",
+                    },
+                    true,
+                ),
+                disable: add_option.multi_elements(
+                    "disable",
+                    {
+                        original: "disable",
+                    },
+                    true,
+                ),
+                attach: add_option.multi_elements(
+                    "attach",
+                    {
+                        original: "attach",
+                    },
+                    true,
+                ),
+            },
+            "force"
+        ),
+        windows_icon_from_ico: add_option.definable_multi(
+            "windows_icon_from_ico",
+            {
+                original: "--windows-icon-from-ico",
+            },
+            true,
+            {
+                icon: add_option.multi_elements(
+                    "icon",
+                    {
+                        original: "icon_path",
+                    },
+                    true,
+                    true,
+                ),
+            },
+            [],
+        ),
+        windows_icon_from_exe: add_option.definable_single(
+            "windows_icon_from_exe",
+            {
+                original: "--windows-icon-from-exe",
+            },
+            true,
+            {
+                exe_icon: add_option.multi_elements(
+                    "exe_icon",
+                    {
+                        original: "icon_exe_path",
+                    },
+                    true,
+                ),
+            },
+            "exe_icon",
+        ),
+        onefile_windows_splash_screen_image: add_option.definable_single(
+            "onefile_windows_splash_screen_image",
+            {
+                original: "--onefile-windows-splash-screen-image",
+            },
+            true,
+            {
+                splash_image: add_option.multi_elements(
+                    "splash_image",
+                    {
+                        original: "splash_screen_image",
+                    },
+                    true,
+                ),
+            },
+            "splash_image",
+        ),
+        windows_uac_admin: add_option.bool(
+            "windows_uac_admin",
+            {
+                original: "--windows-uac-admin",
+            },
+            true,
+            false
+        ),
+        windows_uac_uiaccess: add_option.bool(
+            "windows_uac_uiaccess",
+            {
+                original: "--windows-uac-uiaccess",
+            },
+            true,
+            false
+        ),
+    },
+    linux_specific_controls: {
+        linux_icon: add_option.definable_single(
+            "linux_icon",
+            {
+                original: "--linux-icon",
+            },
+            true,
+            {
+                python_icon: add_option.multi_elements(
+                    "python_icon",
+                    {
+                        original: "Python icon if available",
+                    },
+                    true,
+                ),
+            },
+            "python_icon",
+        )
     }
-
 };
 //基本就这个格式 回调函数接受一个参数
 // config[watcher_key] = [add_watcher({

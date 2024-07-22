@@ -10,6 +10,10 @@ export default {
         backend_C_compiler_choice: "后端C编译器选择",
         plugin_control:"插件控制",
         plugin_options_of_spacy: "spacy插件选项",
+        binary_version_information: "二进制版本信息",
+        tracing_features: "跟踪功能",
+        windows_specific_controls: "针对 Windows 系统的设置",
+        linux_specific_controls: "针对 Linux 系统的设置",
     }, // basic
     module: {
         name: "模块模式",
@@ -331,6 +335,182 @@ export default {
             all: {
                 name: "所有模型",
                 desc: "包含所有下载的Spacy语言模型。",
+            },
+        },
+    },
+    company_name: {
+        name: "公司名称",
+        desc: "用于版本信息中的公司名称。默认不使用。",
+    },
+    product_name: {
+        name: "产品名称",
+        desc: "用于版本信息中的产品名称。默认使用二进制文件的基本文件名。",
+    },
+    file_version: {
+        name: "文件版本",
+        desc: "用于版本信息中的文件版本。必须是一个最多包含4个数字的序列，例如1.0或1.0.0.0，不允许更多的数字，不允许字符串。默认不使用。",
+    },
+    product_version: {
+        name: "产品版本",
+        desc: "用于版本信息中的产品版本。规则与文件版本相同。默认不使用。",
+    },
+    file_description: {
+        name: "文件描述",
+        desc: "用于版本信息中的文件描述。目前仅限Windows。默认使用二进制文件名。",
+    },
+    copyright: {
+        name: "版权信息",
+        desc: "用于版本信息中的版权信息。目前仅限Windows和macOS。默认不使用。",
+    },
+    trademarks: {
+        name: "商标信息",
+        desc: "用于版本信息中的商标信息。目前仅限Windows和macOS。默认不使用。",
+    },
+    report_filename: {
+        name: "报告文件名",
+        desc: "在 XML 输出文件中报告模块、数据文件、编译、插件等详细信息。这对于问题报告也非常有用。这些报告可以用于通过 '--create-environment-from-report' 轻松重新创建环境，但包含大量信息。默认关闭。",
+        elements: {
+            default: {
+                name: "默认报告文件",
+                desc: "使用默认的报告文件名。"
+            }
+        }
+    },
+    report_diffable: {
+        name: "差异报告",
+        desc: "以可差异化的形式报告数据，即不包含随运行而变化的计时或内存使用值。默认关闭。"
+    },
+    report_user_provided: {
+        name: "用户提供的数据报告",
+        desc: "报告您提供的数据。这可以多次给出，并且可以是 'key=value' 形式的任何内容，其中 key 应该是一个标识符，例如使用 '--report-user-provided=pipenv-lock-hash=64a5e4' 来跟踪某些输入值。默认是空的。",
+        elements: {
+            user_provided: {
+                name: "用户提供的数据",
+                desc: "允许用户提供自定义的键值对数据。"
+            }
+        }
+    },
+    report_template: {
+        name: "报告模板",
+        desc: "通过模板报告。提供模板和输出文件名 'template.rst.j2:output.rst'。对于内置模板，请查看用户手册以了解这些模板是什么。可以多次给出。默认是空的。",
+        elements: {
+            template: {
+                name: "模板",
+                desc: "允许用户提供自定义的报告模板。"
+            }
+        }
+    },
+    quiet: {
+        name: "静默模式",
+        desc: "禁用所有信息输出，但显示警告。默认关闭。"
+    },
+    show_scons: {
+        name: "显示 Scons 信息",
+        desc: "以详细信息运行 C 构建后端 Scons，显示执行的命令、检测到的编译器。默认关闭。"
+    },
+    no_progressbar: {
+        name: "禁用进度条",
+        desc: "禁用进度条。默认关闭。"
+    },
+    show_progress: {
+        name: "显示进度",
+        desc: "提供进度信息和统计信息。禁用正常进度条。默认关闭。"
+    },
+    show_memory: {
+        name: "显示内存信息",
+        desc: "提供内存信息和统计信息。默认关闭。"
+    },
+    show_modules: {
+        name: "显示模块信息",
+        desc: "提供包含的模块和 DLL 的信息。建议使用 '--report' 文件代替。默认关闭。"
+    },
+    show_modules_output: {
+        name: "模块信息输出路径",
+        desc: "输出 '--show-modules' 的位置，应为文件名。默认是标准输出。",
+        elements: {
+            default: {
+                name: "默认输出",
+                desc: "使用默认的标准输出。"
+            }
+        }
+    },
+    verbose: {
+        name: "详细输出",
+        desc: "输出所采取操作的详细信息，特别是在优化中。可能会变得很多。默认关闭。"
+    },
+    verbose_output: {
+        name: "详细输出路径",
+        desc: "输出 '--verbose' 的位置，应为文件名。默认是标准输出。",
+        elements: {
+            default: {
+                name: "默认输出",
+                desc: "使用默认的标准输出。"
+            }
+        }
+    },
+    windows_console_mode: {
+        name: "控制台模式",
+        desc: "选择要使用的控制台模式。默认模式是 'force'，除非程序是从控制台启动的，否则会创建一个控制台窗口。使用 'disable' 则完全不创建或使用控制台。使用 'attach' 将使用现有的控制台进行输出。默认值为 'force'。",
+        elements: {
+            force: {
+                name: "强制",
+                desc: "强制创建控制台窗口。",
+            },
+            disable: {
+                name: "禁用",
+                desc: "禁用控制台窗口。",
+            },
+            attach: {
+                name: "附加",
+                desc: "附加到现有控制台。",
+            },
+        },
+    },
+    windows_icon_from_ico: {
+        name: "添加可执行文件图标",
+        desc: "添加可执行文件图标。可以多次指定不同的分辨率或包含多个图标的文件。在后一种情况下，您还可以使用 #<n> 指定特定的图标，其中 n 是从 1 开始的整数索引，指定要包含的特定图标，并忽略所有其他图标。",
+        elements: {
+            icon: {
+                name: "图标路径",
+                desc: "图标文件路径。",
+            },
+        },
+    },
+    windows_icon_from_exe: {
+        name: "从现有可执行文件复制图标",
+        desc: "从现有可执行文件复制图标（仅限 Windows）。",
+        elements: {
+            exe_icon: {
+                name: "可执行文件路径",
+                desc: "包含图标的可执行文件路径。",
+            },
+        },
+    },
+    onefile_windows_splash_screen_image: {
+        name: "单文件模式下的启动画面图像",
+        desc: "在编译为 Windows 单文件模式时，显示此图像作为启动画面。默认关闭。",
+        elements: {
+            splash_image: {
+                name: "启动画面图像路径",
+                desc: "启动画面图像文件路径。",
+            },
+        },
+    },
+    windows_uac_admin: {
+        name: "请求管理员权限",
+        desc: "请求 Windows 用户控制，以在执行时授予管理员权限（仅限 Windows）。默认关闭。",
+    },
+    windows_uac_uiaccess: {
+        name: "请求用户界面访问权限",
+        desc: "请求 Windows 用户控制，以强制仅从少数文件夹运行，远程桌面访问（仅限 Windows）。默认关闭。",
+    },
+    linux_icon: {
+        name: "Linux 可执行文件图标",
+        desc: "为单文件二进制文件添加可执行图标。只能指定一次。默认使用 Python 图标（如果可用）。",
+        elements: {
+            python_icon: {
+                name: "Python 图标",
+                desc: "使用 Python 图标（如果可用）。",
             },
         },
     }
