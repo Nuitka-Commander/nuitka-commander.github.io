@@ -20,7 +20,7 @@ let loading_tot = 0;
  * @param state {boolean} 要切换的状态
  */
 export function set_loading(state) {
-    console.log(state);
+
     if (state === true) {
         loading_tot++;
     } else {

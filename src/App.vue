@@ -82,13 +82,13 @@ main {
   margin-top: 20px;
   margin-right: 20px;
   margin-left: 20px;
-
+  flex: 1;
 }
 
 #website_footer {
-  position: fixed;
+
   z-index: 1000;
-  bottom: 50px;
+
   width: 100%;
 }
 

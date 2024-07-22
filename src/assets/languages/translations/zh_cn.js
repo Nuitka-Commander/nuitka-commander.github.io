@@ -31,7 +31,7 @@ export default {
             theme: "主题",
         },
         language: "语言",
-
+        nuitka_language_no_support: "当前Nuitka版本暂不支持该语言",
 
     },
     nav_bar: { //导航栏

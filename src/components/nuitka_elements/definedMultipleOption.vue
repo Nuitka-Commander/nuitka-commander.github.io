@@ -30,6 +30,7 @@ import {useI18n} from "vue-i18n";
  *        original: string,
  *      }
  *      enabled: boolean,
+ *      user_provide: boolean,
  *    }
  *  }
  *  val: string[],
