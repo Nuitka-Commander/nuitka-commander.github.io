@@ -116,10 +116,3 @@ async function load_locale_messages(locale) {
 
 }
 
-/**
- * @Description 设置i18n的可用状态
- * @param status {boolean} true:加载完成 false:未加载完成
- */
-export function set_i18n_available(status) {
-    is_language_load = status;
-}

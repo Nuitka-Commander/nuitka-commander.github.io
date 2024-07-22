@@ -19,7 +19,8 @@ const command = use_command;
 <template>
   <div>
     <el-tabs stretch tab-position="left" type="card">
-      <template v-for="(value1,key1) in command.status.value" :key="key1">
+
+    <template v-for="(value1,key1) in command.status.value" :key="key1">
         <!--做出分页-->
         <el-tab-pane>
           <template #label>
