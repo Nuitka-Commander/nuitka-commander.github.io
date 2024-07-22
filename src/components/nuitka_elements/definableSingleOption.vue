@@ -172,20 +172,42 @@ function on_cancel() {
 
 
 ///////////////////////////
-const is_equal = computed(() => model.value.val === model.value.default);
+const user_provides_options = computed(() => {
+  //遍历所有的选项，将用户提供的选项过滤出来，返回一个对象
+  let result = {};
+  for (const key in model.value.elements) {
+    if (model.value.elements[key].user_provide) {
+      result[key] = model.value.elements[key];
+    }
+  }
+
+  return result;
+})
+const is_equal = computed(() => {
+
+  if (Object.keys(user_provides_options.value).length > 0) {
+    return false; // Return false if there are user provided options
+  }
+  return model.value.val === model.value.default
+});
+
 const result = computed(() => {
   return {
     cli: `${model.value.command.original}="${model.value.elements[model.value.val]?.command.original}"`,
     pyproject: null,
   };
 });
+
 watch(() => [result, is_equal], ([new_result, new_is_equal]) => {
   if (new_is_equal.value) {
     delete use_command.output.value[props.key_name];
     delete use_command.storage_config.value[props.key_name];
   } else {
     use_command.output.value[props.key_name] = new_result.value;
-    use_command.storage_config.value[props.key_name] = model.value.val;
+    use_command.storage_config.value[props.key_name] = {
+      value: model.value.val,
+      user_provides_choices: user_provides_options.value,
+    }; //json的值
   }
 }, {
   immediate: true,
@@ -264,16 +286,16 @@ watch(() => model.value.val, (new_val) => {
           </el-button>
           <template v-else>
 
-          <el-input
-                  v-model="option_name"
-                  :placeholder="t('nuitka_elements.input_an_option')"
-                  size="small"
-                  style="width: 100%;margin-bottom: 8px;"
-              />
-              <el-button size="small" type="primary" @click="on_confirm">
-                {{ $t("message.OK") }}
-              </el-button>
-              <el-button size="small" @click="on_cancel">{{ $t("message.cancel") }}</el-button>
+            <el-input
+                v-model="option_name"
+                :placeholder="t('nuitka_elements.input_an_option')"
+                size="small"
+                style="width: 100%;margin-bottom: 8px;"
+            />
+            <el-button size="small" type="primary" @click="on_confirm">
+              {{ $t("message.OK") }}
+            </el-button>
+            <el-button size="small" @click="on_cancel">{{ $t("message.cancel") }}</el-button>
 
           </template>
         </template>

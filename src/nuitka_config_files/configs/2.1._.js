@@ -110,7 +110,7 @@ const config = {
             },
             true,
             {},
-            "", // 空值就是一个空字符串 todo
+            "",
             true,
         ),
         main: add_option.definable_multi(
