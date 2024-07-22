@@ -1,0 +1,49 @@
+{
+  "Backend C compiler choice": {
+    "chinese": "后端 C 编译器选择",
+    "content": {
+      "--clang": {
+        "raw_parameter": "--clang",
+        "chinese_parameter": "强制使用clang",
+        "raw_introduction": "Enforce the use of clang. On Windows this requires a working Visual Studio\nversion to piggy back on. Defaults to off.",
+        "chinese_introduction": "强制使用 clang 编译。在 Windows 系统上，这需要一个正常运行的 Visual Studio 版本来支持。默认关闭。"
+      },
+      "--mingw64": {
+        "raw_parameter": "--mingw64",
+        "chinese_parameter": "强制使用mingw64",
+        "raw_introduction": "Enforce the use of MinGW64 on Windows. Defaults to off unless MSYS2 with MinGW\nPython is used.",
+        "chinese_introduction": "强制在 Windows 上使用 MinGW64。默认为关闭，除非使用 MSYS2 和 MinGW Python。"
+      },
+      "--msvc=MSVC_VERSION": {
+        "raw_parameter": "--msvc=MSVC_VERSION",
+        "chinese_parameter": "使用msvc=msvc版本",
+        "raw_introduction": "Enforce the use of specific MSVC version on Windows. Allowed values are e.g.\n\"14.3\" (MSVC 2022) and other MSVC version numbers, specify \"list\" for a list of\ninstalled compilers, or use \"latest\".  Defaults to latest MSVC being used if\ninstalled, otherwise MinGW64 is used.",
+        "chinese_introduction": "强制在Windows上使用特定的MSVC版本。允许的值有\"14.3\" (MSVC 2022)和其他MSVC版本号。\n使用 \"list \"以获得已安装编译器的列表，或使用 \"latest\"。默认在有的情况下使用最新的MSVC。否则使用MinGW64。"
+      },
+      "--jobs=N": {
+        "raw_parameter": "--jobs=N",
+        "chinese_parameter": "并行编译任务数=N",
+        "raw_introduction": "Specify the allowed number of parallel C compiler jobs. Defaults to the system\nCPU count.",
+        "chinese_introduction": "指定允许使用的并行C编译器任务数。默认为系统CPU数。"
+      },
+      "--lto=choice": {
+        "raw_parameter": "--lto=choice",
+        "chinese_parameter": "链接时间优化=选择",
+        "raw_introduction": "Use link time optimizations (MSVC, gcc, clang). Allowed values are \"yes\", \"no\",\nand \"auto\" (when it's known to work). Defaults to \"auto\".",
+        "chinese_introduction": "使用链接时间优化（MSVC、gcc、clang）允许的值有 \"yes\"（是）、\"no\"（否）和 \"auto\"（自动）(已知可用)。默认为 \"auto\"。"
+      },
+      "--static-libpython=choice": {
+        "raw_parameter": "--static-libpython=choice",
+        "chinese_parameter": "使用Python的静态链接库=选择",
+        "raw_introduction": "Use static link library of Python. Allowed values are \"yes\", \"no\", and \"auto\"\n(when it's known to work). Defaults to \"auto\".",
+        "chinese_introduction": "使用Python的静态链接库。允许的值有 \"yes\"（是）、\"no\"（否）和 \"auto\"（自动）(已知可用)。默认为 \"auto\"。"
+      },
+      "--cf-protection=PROTECTION_MODE": {
+        "raw_parameter": "--cf-protection=PROTECTION_MODE",
+        "chinese_parameter": "CF保护=保护模式",
+        "raw_introduction": "This option is gcc specific. For the gcc compiler, select the \"cf-protection\"\nmode. Default \"auto\" is to use the gcc default value, but you can override it,\ne.g. to disable it with \"none\" value. Refer to gcc documentation for\n\"-fcf-protection\" for the details.",
+        "chinese_introduction": "这个选项是特定于gcc的。为gcc编译器选择\"cf-protection\"(cf保护)模式。默认值\"auto\"是使用gcc的默认值，但你可以覆盖它，\n例如，使用\"none\"值来禁用它。有关\"-fcf-protection\"的详细信息，请参阅gcc文档"
+      }
+    }
+  }
+}

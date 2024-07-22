@@ -1,0 +1,79 @@
+{
+  "Debug features": {
+    "chinese": "调试功能",
+    "content": {
+      "--debug": {
+        "raw_parameter": "--debug",
+        "chinese_parameter": "调试",
+        "raw_introduction": "Executing all self checks possible to find errors in Nuitka, do not use for\nproduction. Defaults to off.",
+        "chinese_introduction": "执行所有可能的自身检查以发现Nuitka中的错误，请不要用与生产中。\n默认关闭。"
+      },
+      "--unstripped": {
+        "raw_parameter": "--unstripped",
+        "chinese_parameter": "不去除调试信息",
+        "raw_introduction": "Keep debug info in the resulting object file for better debugger interaction.\nDefaults to off.",
+        "chinese_introduction": "在生成的对象文件中保留调试信息，以便更好的和调试器交互。默认关闭。"
+      },
+      "--profile": {
+        "raw_parameter": "--profile",
+        "chinese_parameter": "耗时分析",
+        "raw_introduction": "Enable vmprof based profiling of time spent. Not working currently. Defaults to\noff.",
+        "chinese_introduction": "启用基于vmprof的耗时分析。目前无法使用。默认关闭。"
+      },
+      "--internal-graph": {
+        "raw_parameter": "--internal-graph",
+        "chinese_parameter": "内部图",
+        "raw_introduction": "Create graph of optimization process internals, do not use for whole programs,\nbut only for small test cases. Defaults to off.",
+        "chinese_introduction": "创建优化过程内部的图，不要用于整个程序，请只用于小的测试用例。默认关闭。"
+      },
+      "--trace-execution": {
+        "raw_parameter": "--trace-execution",
+        "chinese_parameter": "跟踪执行",
+        "raw_introduction": "Traced execution output, output the line of code before executing it. Defaults\nto off.",
+        "chinese_introduction": "跟踪执行并输出。在执行代码之前输出代码行。默认关闭。"
+      },
+      "--recompile-c-only": {
+        "raw_parameter": "--recompile-c-only",
+        "chinese_parameter": "仅重新编译C",
+        "raw_introduction": "This is not incremental compilation, but for Nuitka development only. Takes\nexisting files and simply compile them as C again. Allows compiling edited C\nfiles for quick debugging changes to the generated source, e.g. to see if code\nis passed by, values output, etc, Defaults to off. Depends on compiling Python\nsource to determine which files it should look at.",
+        "chinese_introduction": "这不是增量编译，仅用于 Nuitka 开发。将现有文件重新编译为C。允许编译编辑过的C文件，以便对生成源代码的修改进行快速调试。\n例如查看代码是否通过，值的输出等。默认关闭。它要查看的文件取决于编译Python源代码。"
+      },
+      "--xml=XML_FILENAME": {
+        "raw_parameter": "--xml=XML_FILENAME",
+        "chinese_parameter": "xml=xml文件名",
+        "raw_introduction": "Write the internal program structure, result of optimization in XML form to\ngiven filename.",
+        "chinese_introduction": "将内部程序结构和优化结果以XML形式写入给定的文件名。"
+      },
+      "--no-deployment-flag=FLAG": {
+        "raw_parameter": "--no-deployment-flag=FLAG",
+        "chinese_parameter": "禁用发布模式标识=标识",
+        "raw_introduction": "Keep deployment mode, but disable selectively parts of it. Errors from\ndeployment mode will output these identifiers. Default empty.",
+        "chinese_introduction": "保持发布模式。但是选择性的禁用其中的某些功能。发布模式的错误将输出这些标识符。默认为空。"
+      },
+      "--experimental=FLAG": {
+        "raw_parameter": "--experimental=FLAG",
+        "chinese_parameter": "实验性=标识符",
+        "raw_introduction": "Use features declared as 'experimental'. May have no effect if no experimental\nfeatures are present in the code. Uses secret tags (check source) per\nexperimented feature.",
+        "chinese_introduction": "使用声明为\"实验性\"的功能。如果代码中没有实验性功能，则可能不会产生任何影响。\n使用每个实验功能的秘密标签(检查源代码)。"
+      },
+      "--low-memory": {
+        "raw_parameter": "--low-memory",
+        "chinese_parameter": "低内存模式",
+        "raw_introduction": "Attempt to use less memory, by forking less C compilation jobs and using\noptions that use less memory. For use on embedded machines. Use this in case of\nout of memory problems. Defaults to off.",
+        "chinese_introduction": "尝试使用更少的内存，方法是减少C编译任务的分叉并使用更少内存的选项。用于嵌入式机器。在出现内存不足的问题时使用。默认为关闭。"
+      },
+      "--create-environment-from-report=CREATE_ENVIRONMENT_FROM_REPORT": {
+        "raw_parameter": "--create-environment-from-report=CREATE_ENVIRONMENT_FROM_REPORT",
+        "chinese_parameter": "从报告中创建环境=报告",
+        "raw_introduction": "Create a new virtualenv in that non-existing path from the report file given\nwith e.g. '--report=compilation-report.xml'. Default not done.",
+        "chinese_introduction": "根据给出的报告文件在不存在的路径中创建一个新的虚拟环境，例如'--report=compilation-report.xml'。默认不执行。"
+      },
+      "--generate-c-only": {
+        "raw_parameter": "--generate-c-only",
+        "chinese_parameter": "只生成C文件",
+        "raw_introduction": "Generate only C source code, and do not compile it to binary or module. This is\nfor debugging and code coverage analysis that doesn't waste CPU. Defaults to\noff. Do not think you can use this directly.",
+        "chinese_introduction": "只生成C源代码，不编译为二进制文件或者模块。这是用于调试和代码覆盖分析的，不会浪费CPU。默认关闭。\n不要认为你可以直接使用这个。"
+      }
+    }
+  }
+}

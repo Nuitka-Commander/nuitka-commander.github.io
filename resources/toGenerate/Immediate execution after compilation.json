@@ -1,0 +1,25 @@
+{
+  "Immediate execution after compilation": {
+    "chinese": "编译后立刻执行",
+    "content": {
+      "--run": {
+        "raw_parameter": "--run",
+        "chinese_parameter": "运行",
+        "raw_introduction": "Execute immediately the created binary (or import the compiled module).\nDefaults to off.",
+        "chinese_introduction": "立即执行创建的二进制文件(或导入已编译的模块)。默认关闭。"
+      },
+      "--debugger": {
+        "raw_parameter": "--debugger",
+        "chinese_parameter": "调试器",
+        "raw_introduction": "Execute inside a debugger, e.g. \"gdb\" or \"lldb\" to automatically get a stack\ntrace. Defaults to off.",
+        "chinese_introduction": "在调试器中执行，例如“gdb”或“lldb”以自动获取堆栈跟踪。默认关闭。"
+      },
+      "--execute-with-pythonpath": {
+        "raw_parameter": "--execute-with-pythonpath",
+        "chinese_parameter": "使用pythonpath(python路径)执行",
+        "raw_introduction": "When immediately executing the created binary or module using '--run', don't\nreset 'PYTHONPATH' environment. When all modules are successfully included, you\nought to not need PYTHONPATH anymore, and definitely not for standalone mode.",
+        "chinese_introduction": "当使用'--run'立刻执行创建的二进制文件或模块时，不要重置'PYTHONPATH'环境。当所有模块都成功包含时，您应该不再需要PYTHONPATH。\n对于独立模式(standalone)来说，绝对不需要PYTHONPATH。"
+      }
+    }
+  }
+}

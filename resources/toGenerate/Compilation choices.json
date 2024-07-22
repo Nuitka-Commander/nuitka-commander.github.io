@@ -1,0 +1,31 @@
+{
+  "Compilation choices": {
+    "chinese": "编译选项",
+    "content": {
+      "--user-package-configuration-file=YAML_FILENAME": {
+        "raw_parameter": "--user-package-configuration-file=YAML_FILENAME",
+        "chinese_parameter": "用户包配置文件=YAML文件名",
+        "raw_introduction": "User provided Yaml file with package configuration. You can include DLLs,\nremove bloat, add hidden dependencies. Check the Nuitka Package Configuration\nManual for a complete description of the format to use. Can be given multiple\ntimes. Defaults to empty.",
+        "chinese_introduction": "用户提供包含包配置的Yaml文件. 您可以包括DLL文件,删除冗余，添加隐藏的依赖项。请查阅Nuitka包配置手册，\n以获取完整的格式使用说明。可以多次给出。默认为空。"
+      },
+      "--full-compat": {
+        "raw_parameter": "--full-compat",
+        "chinese_parameter": "完全兼容",
+        "raw_introduction": "Enforce absolute compatibility with CPython. Do not even allow minor deviations\nfrom CPython behavior, e.g. not having better tracebacks or exception messages\nwhich are not really incompatible, but only different or worse. This is intended\nfor tests only and should *not* be used.",
+        "chinese_introduction": "确保和CPython绝对兼容。甚至不允许与CPython行为的轻微偏差，例如没有更好的跟踪回溯(trackback)或异常消息。\n这些行为并不是真正的不兼容，而只是不同或者更糟糕而已。这仅用于测试，不应该使用。"
+      },
+      "--file-reference-choice=MODE": {
+        "raw_parameter": "--file-reference-choice=MODE",
+        "chinese_parameter": "中文参数名:\n文件引用选择=模式\n\n原始简介:",
+        "raw_introduction": "Select what value \"__file__\" is going to be. With \"runtime\" (default for\nstandalone binary mode and module mode), the created binaries and modules, use\nthe location of themselves to deduct the value of \"__file__\". Included packages\npretend to be in directories below that location. This allows you to include\ndata files in deployments. If you merely seek acceleration, it's better for you\nto use the \"original\" value, where the source files location will be used. With\n\"frozen\" a notation \"<frozen module_name>\" is used. For compatibility reasons,\nthe \"__file__\" value will always have \".py\" suffix independent of what it really\nis.",
+        "chinese_introduction": "选择\"__file__\"的值。创建的二进制文件和模块\"执行时\"（即独立二进制文件和摸块模式的默认值)使用自己\n的位置来扣除\"__file__\"的值。包含的软件包假装在该位置下方的目录中。这样就可以在部署中包含数据文件。\n如果只是为了加速，最好使用\"原始(original)\"值，其中将使用源文件位置。也就是使用源文件的位置。使用\"frozen\"的时候，\n会使用\"<frozen module_name>\"符号。出于兼容性的原因，\"__file__\"值将始终具有\".py\"后缀，而与它的实际值无关。"
+      },
+      "--module-name-choice=MODE": {
+        "raw_parameter": "--module-name-choice=MODE",
+        "chinese_parameter": "模块名称选择=模式",
+        "raw_introduction": "Select what value \"__name__\" and \"__package__\" are going to be. With \"runtime\"\n(default for module mode), the created module uses the parent package to deduce\nthe value of \"__package__\", to be fully compatible. The value \"original\"\n(default for other modes) allows for more static optimization to happen, but is\nincompatible for modules that normally can be loaded into any package.",
+        "chinese_introduction": "选择\"__name__\"和\"__package__\"的值。使用\"执行时(runtime)\"（模块模式的默认值）创建的模块使用软件包\n来推断\"__package__\"的值，以实现完全兼容。\"原始(original)\"值（其他模式的默认值）允许进行更多的静态优化，但对那些通常\n可以加载到任意软件包的模块来说是不兼容的。"
+      }
+    }
+  }
+}

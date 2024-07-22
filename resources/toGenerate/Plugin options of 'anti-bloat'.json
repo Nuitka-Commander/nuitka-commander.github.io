@@ -1,0 +1,61 @@
+{
+  "Plugin options of 'anti-bloat'": {
+    "chinese": "'反膨胀'插件选项",
+    "content": {
+      "--show-anti-bloat-changes": {
+        "raw_parameter": "--show-anti-bloat-changes",
+        "chinese_parameter": "显示反膨胀更改",
+        "raw_introduction": "Annotate what changes are by the plugin done.",
+        "chinese_introduction": "注释插件所做的更改。"
+      },
+      "--noinclude-setuptools-mode=NOINCLUDE_SETUPTOOLS_MODE": {
+        "raw_parameter": "--noinclude-setuptools-mode=NOINCLUDE_SETUPTOOLS_MODE",
+        "chinese_parameter": "不包含setuptools模式=不包含setuptools模式",
+        "raw_introduction": "What to do if a 'setuptools' or import is encountered. This package can be big\nwith dependencies, and should definitely be avoided. Also handles\n'setuptools_scm'.",
+        "chinese_introduction": "遇到\"setuptools\"或\"setuptools_scm\"导入时的处理方式。这个包可能会有很多依赖而变得很大，应该尽量避免使用。"
+      },
+      "--noinclude-pytest-mode=NOINCLUDE_PYTEST_MODE": {
+        "raw_parameter": "--noinclude-pytest-mode=NOINCLUDE_PYTEST_MODE",
+        "chinese_parameter": "不包含pytest模式=不包含pytest模式",
+        "raw_introduction": "What to do if a 'pytest' import is encountered. This package can be big with\ndependencies, and should definitely be avoided. Also handles 'nose' imports.",
+        "chinese_introduction": "遇到\"pytest\"或\"nose\"导入时的处理方式。这个包可能会有很多依赖而变得很大，应该尽量避免使用。"
+      },
+      "--noinclude-unittest-mode=NOINCLUDE_UNITTEST_MODE": {
+        "raw_parameter": "--noinclude-unittest-mode=NOINCLUDE_UNITTEST_MODE",
+        "chinese_parameter": "不包含单元测试模式=不包含unittest模式",
+        "raw_introduction": "What to do if a unittest import is encountered. This package can be big with\ndependencies, and should definitely be avoided.",
+        "chinese_introduction": "遇到\"unittest(单元测试)\"导入时的处理方式。这个包可能会有很多依赖而变得很大，应该尽量避免使用。"
+      },
+      "--noinclude-IPython-mode=NOINCLUDE_IPYTHON_MODE": {
+        "raw_parameter": "--noinclude-IPython-mode=NOINCLUDE_IPYTHON_MODE",
+        "chinese_parameter": "不包含IPython模式=不包含IPython模式",
+        "raw_introduction": "What to do if a IPython import is encountered. This package can be big with\ndependencies, and should definitely be avoided.",
+        "chinese_introduction": "遇到\"IPython\"导入时的处理方式。这个包可能会有很多依赖而变得很大，应该尽量避免使用。"
+      },
+      "--noinclude-dask-mode=NOINCLUDE_DASK_MODE": {
+        "raw_parameter": "--noinclude-dask-mode=NOINCLUDE_DASK_MODE",
+        "chinese_parameter": "不包含dask模式=不包含dask模式",
+        "raw_introduction": "What to do if a 'dask' import is encountered. This package can be big with\ndependencies, and should definitely be avoided.",
+        "chinese_introduction": "遇到\"dask\"导入时的处理方式。这个包可能会有很多依赖而变得很大，应该尽量避免使用。"
+      },
+      "--noinclude-numba-mode=NOINCLUDE_NUMBA_MODE": {
+        "raw_parameter": "--noinclude-numba-mode=NOINCLUDE_NUMBA_MODE",
+        "chinese_parameter": "不包含numba模式=不包含numba模式",
+        "raw_introduction": "What to do if a 'numba' import is encountered. This package can be big with\ndependencies, and is currently not working for standalone. This package is big\nwith dependencies, and should definitely be avoided.",
+        "chinese_introduction": "遇到\"numba\"导入时的处理方式。这个包可能会有很多依赖而变得很大，目前在独立模式下还不能正常工作。\n这个包可能会有很多依赖而变得很大，应该尽量避免使用。"
+      },
+      "--noinclude-default-mode=NOINCLUDE_DEFAULT_MODE": {
+        "raw_parameter": "--noinclude-default-mode=NOINCLUDE_DEFAULT_MODE",
+        "chinese_parameter": "不包含的默认模式=不包含的默认模式",
+        "raw_introduction": "This actually provides the default \"warning\" value for above options, and can\nbe used to turn all of these on.",
+        "chinese_introduction": "这实际上为上面的选项提供了默认的\"警告(warning)\"值，并且可以用来打开上述所有选项。"
+      },
+      "--noinclude-custom-mode=CUSTOM_CHOICES": {
+        "raw_parameter": "--noinclude-custom-mode=CUSTOM_CHOICES",
+        "chinese_parameter": "不包含自定义模式=自定义选项",
+        "raw_introduction": "What to do if a specific import is encountered. Format is module name, which\ncan and should be a top level package and then one choice, \"error\", \"warning\",\n\"nofollow\", e.g. PyQt5:error.",
+        "chinese_introduction": "遇到特定导入时的处理方式。格式为模块名称，可以并且应该是一个顶级包，接着是一个选项，\"error\", \"warning\", \"nofollow\"，\n例如PyQt5:error。"
+      }
+    }
+  }
+}

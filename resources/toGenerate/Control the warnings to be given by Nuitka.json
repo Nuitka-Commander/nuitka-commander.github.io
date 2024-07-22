@@ -1,0 +1,31 @@
+{
+  "Control the warnings to be given by Nuitka": {
+    "chinese": "控制Nuitka发出的警告",
+    "content": {
+      "--warn-implicit-exceptions": {
+        "raw_parameter": "--warn-implicit-exceptions",
+        "chinese_parameter": "警告隐式异常",
+        "raw_introduction": "Enable warnings for implicit exceptions detected at compile time.",
+        "chinese_introduction": "启用对在编译时检测到的隐式异常的警告。"
+      },
+      "--warn-unusual-code": {
+        "raw_parameter": "--warn-unusual-code",
+        "chinese_parameter": "警告不寻常的代码",
+        "raw_introduction": "Enable warnings for unusual code detected at compile time.",
+        "chinese_introduction": "启用对在编译时对检测到的不寻常代码的警告。"
+      },
+      "--assume-yes-for-downloads": {
+        "raw_parameter": "--assume-yes-for-downloads",
+        "chinese_parameter": "假设允许下载",
+        "raw_introduction": "Allow Nuitka to download external code if necessary, e.g. dependency walker,\nccache, and even gcc on Windows. To disable, redirect input from nul device,\ne.g. \"</dev/null\" or \"<NUL:\". Default is to prompt.",
+        "chinese_introduction": "在需要时允许Nuitka下载外部代码。例如依赖项walker,ccache,甚至Windows上的gcc。要禁用，请从nul设备重定向输入。\n例如\"</dev/null\"或\"<NUL:\"。默认下载时提示。"
+      },
+      "--nowarn-mnemonic=MNEMONIC": {
+        "raw_parameter": "--nowarn-mnemonic=MNEMONIC",
+        "chinese_parameter": "不警告助记符=助记符",
+        "raw_introduction": "Disable warning for a given mnemonic. These are given to make sure you are\naware of certain topics, and typically point to the Nuitka website. The mnemonic\nis the part of the URL at the end, without the HTML suffix. Can be given\nmultiple times and accepts shell pattern. Default empty.",
+        "chinese_introduction": "禁用给定助记符的警告。这些是为了确保你知道某些主题，并且通常指向Nuitka网站。助记符是URL末尾的部分，没有HTML后缀。可以多次给出并接受shell模式。默认为空。"
+      }
+    }
+  }
+}

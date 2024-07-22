@@ -1,0 +1,49 @@
+{
+  "Plugin control": {
+    "chinese": "插件控制",
+    "content": {
+      "--enable-plugins=PLUGIN_NAME": {
+        "raw_parameter": "--enable-plugins=PLUGIN_NAME",
+        "chinese_parameter": "启用插件=插件名称",
+        "raw_introduction": "Enabled plugins. Must be plug-in names. Use '--plugin-list' to query the full\nlist and exit. Default empty.",
+        "chinese_introduction": "启用插件。必须为插件名称。使用'--plugin-list'查询完整列表并退出。默认为空。"
+      },
+      "--disable-plugins=PLUGIN_NAME": {
+        "raw_parameter": "--disable-plugins=PLUGIN_NAME",
+        "chinese_parameter": "禁用插件=插件名称",
+        "raw_introduction": "Disabled plugins. Must be plug-in names. Use '--plugin-list' to query the full\nlist and exit. Most standard plugins are not a good idea to disable. Default\nempty.",
+        "chinese_introduction": "禁用插件。必须为插件名称。使用'--plugin-list'查询完整列表并退出。大多数情况下禁用标准插件并不是一个好主意。默认为空。"
+      },
+      "--plugin-no-detection": {
+        "raw_parameter": "--plugin-no-detection",
+        "chinese_parameter": "禁止插件检测",
+        "raw_introduction": "Plugins can detect if they might be used, and the you can disable the warning\nvia \"--disable-plugin=plugin-that-warned\", or you can use this option to\ndisable the mechanism entirely, which also speeds up compilation slightly of\ncourse as this detection code is run in vain once you are certain of which\nplugins to use. Defaults to off.",
+        "chinese_introduction": "插件可以检测它们是否可能被使用，您可以通过\"--disable-plugin=plugin-that-warned\"禁用警告，\n或者你可以使用这个选项来完全禁用该机制，当然，这也会稍微加快编译速度，因为一旦你确定了要使用的插件，\n这个检测代码就会白白运行。默认关闭。"
+      },
+      "--plugin-list": {
+        "raw_parameter": "--plugin-list",
+        "chinese_parameter": "插件列表",
+        "raw_introduction": "Show list of all available plugins and exit. Defaults to off.",
+        "chinese_introduction": "显示所有可用插件的列表并退出。默认关闭。"
+      },
+      "--user-plugin=PATH": {
+        "raw_parameter": "--user-plugin=PATH",
+        "chinese_parameter": "用户插件=路径",
+        "raw_introduction": "The file name of user plugin. Can be given multiple times. Default empty.",
+        "chinese_introduction": "用户插件的文件名。可以多次给出。默认为空。"
+      },
+      "--module-parameter=MODULE_PARAMETERS": {
+        "raw_parameter": "--module-parameter=MODULE_PARAMETERS",
+        "chinese_parameter": "模块参数=模块参数",
+        "raw_introduction": "Provide a module parameter. You are asked by some packages to provide extra\ndecisions. Format is currently --module-parameter=module.name-option- name=value\nDefault empty.",
+        "chinese_introduction": "提供一个模块参数。一些包要求你提供额外的决策。当前格式是 --module-parameter=module.name-option-name=value\n(模块参数=模块.名称-选项-名称=值)。默认为空。"
+      },
+      "--show-source-changes=SHOW_SOURCE_CHANGES": {
+        "raw_parameter": "--show-source-changes=SHOW_SOURCE_CHANGES",
+        "chinese_parameter": "显示源代码更改",
+        "raw_introduction": "Show source changes to original Python file content before compilation. Mostly\nintended for developing plugins and Nuitka package configuration. Use e.g. '--\nshow-source-changes=numpy.**' to see all changes below a given namespace or use\n'*' to see everything which can get a lot. Default empty.",
+        "chinese_introduction": "在编译之前显示对原Python文件内容的源代码更改。主要用于开发插件和配置Nuitka包。例如使用'-show-source-changes=numpy.**'\n可以查看给定命名空间下所有的更改，或者使用'*'来查看所有可能的大量更改。默认为空"
+      }
+    }
+  }
+}
