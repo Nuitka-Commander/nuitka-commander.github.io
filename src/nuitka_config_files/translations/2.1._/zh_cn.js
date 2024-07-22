@@ -7,6 +7,13 @@ export default {
         control_the_following_into_imported_modules: "控制导入模块",
         onefile_options: "单文件选项",
         data_files: "数据文件",
+        backend_C_compiler_choice: "后端C编译器选择",
+        plugin_control:"插件控制",
+        plugin_options_of_spacy: "spacy插件选项",
+        binary_version_information: "二进制版本信息",
+        tracing_features: "跟踪功能",
+        windows_specific_controls: "针对 Windows 系统的设置",
+        linux_specific_controls: "针对 Linux 系统的设置",
     }, // basic
     module: {
         name: "模块模式",
@@ -176,4 +183,335 @@ export default {
         name: "列出包数据",
         desc: "输出给定包名称找到的数据文件。默认不执行",
     },
+    clang: {
+        name: "强制使用Clang",
+        desc: "强制使用Clang。在Windows上，这需要一个可以依赖的工作Visual Studio版本。默认关闭。",
+    },
+    mingw64: {
+        name: "使用 MinGW64",
+        desc: "在 Windows 上强制使用 MinGW64。默认情况下为关闭，除非使用带有 MinGW Python 的 MSYS2。",
+    },
+    // --msvc=MSVC_VERSION
+    msvc: {
+        name: "使用特定 MSVC 版本",
+        desc: "在 Windows 上强制使用特定的 MSVC 版本。允许的值例如有 \"14.3\" (MSVC 2022) 和其他 MSVC 版本号，指定 \"list\" 以获取已安装编译器列表，或使用 \"latest\"。默认情况下，如果已安装，则使用最新的 MSVC，否则使用 MinGW64。",
+        elements: {
+            list: {
+                name: "列出已安装的编译器",
+                desc: "列出所有已安装的 MSVC 编译器。",
+            },
+            latest: {
+                name: "使用最新版本",
+                desc: "使用最新的 MSVC 编译器。",
+            },
+        },
+    },
+    // --jobs=N
+    jobs: {
+        name: "并行 C 编译器任务数",
+        desc: "指定允许的并行 C 编译器任务数。负值表示系统 CPU 减去给定值。默认情况下，除非激活低内存模式，否则默认为系统 CPU 计数。",
+        elements: {
+            system_cpu_count: {
+                name: "系统 CPU 计数",
+                desc: "使用系统的 CPU 计数作为并行任务数。",
+            },
+        },
+    },
+    // --lto=choice
+    lto: {
+        name: "使用链接时优化",
+        desc: "使用链接时优化 (MSVC, gcc, clang)。允许的值有 \"yes\", \"no\", 和 \"auto\" (当已知可以工作时)。默认值为 \"auto\"。",
+        elements: {
+            yes: {
+                name: "启用",
+                desc: "启用链接时优化。",
+            },
+            no: {
+                name: "禁用",
+                desc: "禁用链接时优化。",
+            },
+            auto: {
+                name: "自动",
+                desc: "自动选择是否启用链接时优化。",
+            },
+        },
+    },
+    // --static-libpython=choice
+    static_libpython: {
+        name: "使用静态链接 Python 库",
+        desc: "使用 Python 的静态链接库。允许的值有 \"yes\", \"no\", 和 \"auto\" (当已知可以工作时)。默认值为 \"auto\"。",
+        elements: {
+            yes: {
+                name: "启用",
+                desc: "启用静态链接 Python 库。",
+            },
+            no: {
+                name: "禁用",
+                desc: "禁用静态链接 Python 库。",
+            },
+            auto: {
+                name: "自动",
+                desc: "自动选择是否启用静态链接 Python 库。",
+            },
+        },
+    },
+    // --cf-protection=PROTECTION_MODE
+    cf_protection: {
+        name: "控制流保护模式",
+        desc: "此选项特定于 gcc 编译器。对于 gcc 编译器，选择 \"cf-protection\" 模式。默认 \"auto\" 是使用 gcc 默认值，但可以覆盖它，例如通过 \"none\" 值禁用它。请参阅 gcc 文档中的 \"-fcf-protection\" 以获取详细信息。",
+        elements: {
+            auto: {
+                name: "自动",
+                desc: "自动选择控制流保护模式。",
+            },
+            none: {
+                name: "无",
+                desc: "禁用控制流保护。",
+            },
+        },
+    },
+    enable_plugins: {
+        name: "启用插件",
+        desc: "启用指定的插件。必须使用插件名称。使用 '--plugin-list' 查询完整的插件列表并退出。默认空。",
+        elements: {
+            plugin_name: {
+                name: "插件名称",
+                desc: "要启用的插件名称。"
+            }
+        }
+    },
+    disable_plugins: {
+        name: "禁用插件",
+        desc: "禁用指定的插件。必须使用插件名称。使用 '--plugin-list' 查询完整的插件列表并退出。大多数标准插件不建议禁用。默认空。",
+        elements: {
+            plugin_name: {
+                name: "插件名称",
+                desc: "要禁用的插件名称。"
+            }
+        }
+    },
+    user_plugin: {
+        name: "用户插件",
+        desc: "用户插件的文件路径。可以多次指定。默认空。",
+        elements: {
+            path: {
+                name: "路径",
+                desc: "用户插件的文件路径。"
+            }
+        }
+    },
+    plugin_list: {
+        name: "插件列表",
+        desc: "显示所有可用插件的列表并退出。默认关闭。"
+    },
+    plugin_no_detection: {
+        name: "禁用插件检测",
+        desc: "插件可以检测它们是否可能被使用，你可以通过 '--disable-plugin=plugin-that-warned' 禁用警告，或者使用此选项完全禁用检测机制，这也会稍微加快编译速度。默认关闭。"
+    },
+    module_parameter: {
+        name: "模块参数",
+        desc: "提供模块参数。某些包会要求你提供额外的决策。格式为 --module-parameter=module.name-option-name=value。默认空。",
+        elements: {
+            module_parameters: {
+                name: "模块参数",
+                desc: "要提供的模块参数。"
+            }
+        }
+    },
+    show_source_changes: {
+        name: "显示源代码变化",
+        desc: "在编译前显示对原始Python文件内容的更改。主要用于开发插件和Nuitka包配置。例如使用 '--show-source-changes=numpy.**' 查看某个命名空间下的所有更改，或使用 '*' 查看所有更改。默认空。",
+        elements: {
+            show_source_changes: {
+                name: "显示源代码变化",
+                desc: "要显示的源代码变化。"
+            }
+        }
+    },
+    spacy_language_model: {
+        name: "Spacy语言模型",
+        desc: "要使用的Spacy语言模型。可以多次指定。使用'all'包含所有下载的模型。",
+        elements: {
+            all: {
+                name: "所有模型",
+                desc: "包含所有下载的Spacy语言模型。",
+            },
+        },
+    },
+    company_name: {
+        name: "公司名称",
+        desc: "用于版本信息中的公司名称。默认不使用。",
+    },
+    product_name: {
+        name: "产品名称",
+        desc: "用于版本信息中的产品名称。默认使用二进制文件的基本文件名。",
+    },
+    file_version: {
+        name: "文件版本",
+        desc: "用于版本信息中的文件版本。必须是一个最多包含4个数字的序列，例如1.0或1.0.0.0，不允许更多的数字，不允许字符串。默认不使用。",
+    },
+    product_version: {
+        name: "产品版本",
+        desc: "用于版本信息中的产品版本。规则与文件版本相同。默认不使用。",
+    },
+    file_description: {
+        name: "文件描述",
+        desc: "用于版本信息中的文件描述。目前仅限Windows。默认使用二进制文件名。",
+    },
+    copyright: {
+        name: "版权信息",
+        desc: "用于版本信息中的版权信息。目前仅限Windows和macOS。默认不使用。",
+    },
+    trademarks: {
+        name: "商标信息",
+        desc: "用于版本信息中的商标信息。目前仅限Windows和macOS。默认不使用。",
+    },
+    report_filename: {
+        name: "报告文件名",
+        desc: "在 XML 输出文件中报告模块、数据文件、编译、插件等详细信息。这对于问题报告也非常有用。这些报告可以用于通过 '--create-environment-from-report' 轻松重新创建环境，但包含大量信息。默认关闭。",
+        elements: {
+            default: {
+                name: "默认报告文件",
+                desc: "使用默认的报告文件名。"
+            }
+        }
+    },
+    report_diffable: {
+        name: "差异报告",
+        desc: "以可差异化的形式报告数据，即不包含随运行而变化的计时或内存使用值。默认关闭。"
+    },
+    report_user_provided: {
+        name: "用户提供的数据报告",
+        desc: "报告您提供的数据。这可以多次给出，并且可以是 'key=value' 形式的任何内容，其中 key 应该是一个标识符，例如使用 '--report-user-provided=pipenv-lock-hash=64a5e4' 来跟踪某些输入值。默认是空的。",
+        elements: {
+            user_provided: {
+                name: "用户提供的数据",
+                desc: "允许用户提供自定义的键值对数据。"
+            }
+        }
+    },
+    report_template: {
+        name: "报告模板",
+        desc: "通过模板报告。提供模板和输出文件名 'template.rst.j2:output.rst'。对于内置模板，请查看用户手册以了解这些模板是什么。可以多次给出。默认是空的。",
+        elements: {
+            template: {
+                name: "模板",
+                desc: "允许用户提供自定义的报告模板。"
+            }
+        }
+    },
+    quiet: {
+        name: "静默模式",
+        desc: "禁用所有信息输出，但显示警告。默认关闭。"
+    },
+    show_scons: {
+        name: "显示 Scons 信息",
+        desc: "以详细信息运行 C 构建后端 Scons，显示执行的命令、检测到的编译器。默认关闭。"
+    },
+    no_progressbar: {
+        name: "禁用进度条",
+        desc: "禁用进度条。默认关闭。"
+    },
+    show_progress: {
+        name: "显示进度",
+        desc: "提供进度信息和统计信息。禁用正常进度条。默认关闭。"
+    },
+    show_memory: {
+        name: "显示内存信息",
+        desc: "提供内存信息和统计信息。默认关闭。"
+    },
+    show_modules: {
+        name: "显示模块信息",
+        desc: "提供包含的模块和 DLL 的信息。建议使用 '--report' 文件代替。默认关闭。"
+    },
+    show_modules_output: {
+        name: "模块信息输出路径",
+        desc: "输出 '--show-modules' 的位置，应为文件名。默认是标准输出。",
+        elements: {
+            default: {
+                name: "默认输出",
+                desc: "使用默认的标准输出。"
+            }
+        }
+    },
+    verbose: {
+        name: "详细输出",
+        desc: "输出所采取操作的详细信息，特别是在优化中。可能会变得很多。默认关闭。"
+    },
+    verbose_output: {
+        name: "详细输出路径",
+        desc: "输出 '--verbose' 的位置，应为文件名。默认是标准输出。",
+        elements: {
+            default: {
+                name: "默认输出",
+                desc: "使用默认的标准输出。"
+            }
+        }
+    },
+    windows_console_mode: {
+        name: "控制台模式",
+        desc: "选择要使用的控制台模式。默认模式是 'force'，除非程序是从控制台启动的，否则会创建一个控制台窗口。使用 'disable' 则完全不创建或使用控制台。使用 'attach' 将使用现有的控制台进行输出。默认值为 'force'。",
+        elements: {
+            force: {
+                name: "强制",
+                desc: "强制创建控制台窗口。",
+            },
+            disable: {
+                name: "禁用",
+                desc: "禁用控制台窗口。",
+            },
+            attach: {
+                name: "附加",
+                desc: "附加到现有控制台。",
+            },
+        },
+    },
+    windows_icon_from_ico: {
+        name: "添加可执行文件图标",
+        desc: "添加可执行文件图标。可以多次指定不同的分辨率或包含多个图标的文件。在后一种情况下，您还可以使用 #<n> 指定特定的图标，其中 n 是从 1 开始的整数索引，指定要包含的特定图标，并忽略所有其他图标。",
+        elements: {
+            icon: {
+                name: "图标路径",
+                desc: "图标文件路径。",
+            },
+        },
+    },
+    windows_icon_from_exe: {
+        name: "从现有可执行文件复制图标",
+        desc: "从现有可执行文件复制图标（仅限 Windows）。",
+        elements: {
+            exe_icon: {
+                name: "可执行文件路径",
+                desc: "包含图标的可执行文件路径。",
+            },
+        },
+    },
+    onefile_windows_splash_screen_image: {
+        name: "单文件模式下的启动画面图像",
+        desc: "在编译为 Windows 单文件模式时，显示此图像作为启动画面。默认关闭。",
+        elements: {
+            splash_image: {
+                name: "启动画面图像路径",
+                desc: "启动画面图像文件路径。",
+            },
+        },
+    },
+    windows_uac_admin: {
+        name: "请求管理员权限",
+        desc: "请求 Windows 用户控制，以在执行时授予管理员权限（仅限 Windows）。默认关闭。",
+    },
+    windows_uac_uiaccess: {
+        name: "请求用户界面访问权限",
+        desc: "请求 Windows 用户控制，以强制仅从少数文件夹运行，远程桌面访问（仅限 Windows）。默认关闭。",
+    },
+    linux_icon: {
+        name: "Linux 可执行文件图标",
+        desc: "为单文件二进制文件添加可执行图标。只能指定一次。默认使用 Python 图标（如果可用）。",
+        elements: {
+            python_icon: {
+                name: "Python 图标",
+                desc: "使用 Python 图标（如果可用）。",
+            },
+        },
+    }
 };
