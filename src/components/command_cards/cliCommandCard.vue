@@ -1,5 +1,5 @@
 <script setup>
-import * as constants from "@/vals/constants.json";
+import * as constants from "@/values/constants.json";
 
 /**
  * @Description 一个元素卡片，用于渲染其中的一段命令

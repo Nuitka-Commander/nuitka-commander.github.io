@@ -5,8 +5,8 @@
  * @Date: 2024-01-29 17:21:48
  */
 import ElementCard from "@/components/untils/elementCard.vue";
-import * as constants from "@/vals/constants.json";
-import {user_options} from "@/vals/stores/user_options.js";
+import * as constants from "@/values/constants.json";
+import {user_options} from "@/values/stores/user_options.js";
 import {computed, defineModel, onBeforeUnmount, watch} from "vue";
 import {use_command} from "@/modules/use_command.js";
 import CliCommandCard from "@/components/command_cards/cliCommandCard.vue";

@@ -11,7 +11,7 @@ import * as yaml from "js-yaml";
 
 const URL = "https://api.github.com/repos/nuitka-commander/nuitka-commander/releases/latest";
 const __dirname = dirname(fileURLToPath(import.meta.url));
-const constants_path = path.join(__dirname, "../../../src/vals/constants.json");
+const constants_path = path.join(__dirname, "../../../src/values/constants.json");
 fetch(URL)
     .then(response => response.json())
     .then(data => {

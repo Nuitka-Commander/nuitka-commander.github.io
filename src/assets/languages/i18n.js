@@ -4,11 +4,11 @@
  * @Date: 2023-11-26 10:49:04
  */
 import {createI18n} from "vue-i18n";
-import {user_options} from "@/vals/stores/user_options.js";
+import {user_options} from "@/values/stores/user_options.js";
 import {supported_i18n} from "@/assets/languages/supported_i18n.js";
-import {set_loading} from "@/vals/stores/is_loading.js";
+import {set_loading} from "@/values/stores/is_loading.js";
 import {load_config_language, nuitka_info_loaded} from "@/modules/use_nuitka_config.js";
-import * as constants from "@/vals/constants.json";
+import * as constants from "@/values/constants.json";
 
 /**
  * @Description 是否语言加载完成

@@ -5,8 +5,8 @@
  */
 
 import supported_nuitka_version from "@/nuitka_config_files/supported_nuitka_version.js";
-import {user_options} from "@/vals/stores/user_options.js";
-import {set_loading} from "@/vals/stores/is_loading.js";
+import {user_options} from "@/values/stores/user_options.js";
+import {set_loading} from "@/values/stores/is_loading.js";
 import {use_command} from "@/modules/use_command.js";
 import {i18n} from "@/assets/languages/i18n.js";
 import {ElMessage} from "element-plus";

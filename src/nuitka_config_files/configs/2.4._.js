@@ -3,7 +3,7 @@
  * @Author: ovo-Tim
  * @Date: 2024-7-22
  */
-import {add_option, watcher_key} from "@/vals/templates.js";
+import {add_option, watcher_key} from "@/values/templates.js";
 
 const config = {
     support_language: {

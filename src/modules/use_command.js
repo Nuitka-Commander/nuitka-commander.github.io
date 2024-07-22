@@ -5,11 +5,11 @@
  */
 import {ref, watch} from "vue";
 import {local_nuitka_version_config} from "@/modules/use_local_forage.js";
-import {user_options} from "@/vals/stores/user_options.js";
+import {user_options} from "@/values/stores/user_options.js";
 import {debounce_func} from "@/modules/untils.js";
 import {debug} from "@/modules/debug.js";
-import {watcher_key} from "@/vals/templates.js";
-import {nuitka_element_type} from "@/vals/enums.js";
+import {watcher_key} from "@/values/templates.js";
+import {nuitka_element_type} from "@/values/enums.js";
 
 
 class CommandStatus {

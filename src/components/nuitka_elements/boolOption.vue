@@ -4,9 +4,9 @@
  * @Author: erduotong
  * @Date: 2023-12-08 22:16:35
  */
-import {user_options} from "@/vals/stores/user_options.js";
+import {user_options} from "@/values/stores/user_options.js";
 import ElementCard from "@/components/untils/elementCard.vue";
-import * as constants from "@/vals/constants.json";
+import * as constants from "@/values/constants.json";
 import CliCommandCard from "@/components/command_cards/cliCommandCard.vue";
 import {useI18n} from "vue-i18n";
 import {computed, defineModel, onBeforeUnmount, watch} from "vue";
