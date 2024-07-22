@@ -107,8 +107,18 @@ class CommandStatus {
                 }
                 // 检查是否有存储值
                 if (local_config?.[second_key] !== undefined) {
-                    second_value.val = local_config[second_key];
-                    // todo 这边考虑把User provide的内容也存储进去
+                    //正常的情况，不包含用户提供的选项
+                    if (second_value.type !== nuitka_element_type.Definable_multiple_option
+                        && second_value.type !== nuitka_element_type.Definable_single) {
+                        second_value.val = local_config[second_key];
+                    } else {
+                        const local_val = local_config[second_key];
+                        second_value.val = local_val.value
+                        second_value.elements = {
+                            ...second_value.elements,
+                            ...local_val.user_provides_choices,
+                        }
+                    }
                 }
                 // 添加到原始配置中
                 this.original_status[top_key] = this.original_status[top_key] || {};

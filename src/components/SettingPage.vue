@@ -87,7 +87,6 @@ const close_setting_page = (event) => {
           </el-select>
         </div>
 
-        <!--todo localstorage-->
       </div>
 
     </transition>
