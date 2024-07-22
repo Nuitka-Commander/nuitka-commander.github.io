@@ -7,6 +7,9 @@ export default {
         control_the_following_into_imported_modules: "控制导入模块",
         onefile_options: "单文件选项",
         data_files: "数据文件",
+        backend_C_compiler_choice: "后端C编译器选择",
+        plugin_control:"插件控制",
+        plugin_options_of_spacy: "spacy插件选项",
     }, // basic
     module: {
         name: "模块模式",
@@ -176,4 +179,159 @@ export default {
         name: "列出包数据",
         desc: "输出给定包名称找到的数据文件。默认不执行",
     },
+    clang: {
+        name: "强制使用Clang",
+        desc: "强制使用Clang。在Windows上，这需要一个可以依赖的工作Visual Studio版本。默认关闭。",
+    },
+    mingw64: {
+        name: "使用 MinGW64",
+        desc: "在 Windows 上强制使用 MinGW64。默认情况下为关闭，除非使用带有 MinGW Python 的 MSYS2。",
+    },
+    // --msvc=MSVC_VERSION
+    msvc: {
+        name: "使用特定 MSVC 版本",
+        desc: "在 Windows 上强制使用特定的 MSVC 版本。允许的值例如有 \"14.3\" (MSVC 2022) 和其他 MSVC 版本号，指定 \"list\" 以获取已安装编译器列表，或使用 \"latest\"。默认情况下，如果已安装，则使用最新的 MSVC，否则使用 MinGW64。",
+        elements: {
+            list: {
+                name: "列出已安装的编译器",
+                desc: "列出所有已安装的 MSVC 编译器。",
+            },
+            latest: {
+                name: "使用最新版本",
+                desc: "使用最新的 MSVC 编译器。",
+            },
+        },
+    },
+    // --jobs=N
+    jobs: {
+        name: "并行 C 编译器任务数",
+        desc: "指定允许的并行 C 编译器任务数。负值表示系统 CPU 减去给定值。默认情况下，除非激活低内存模式，否则默认为系统 CPU 计数。",
+        elements: {
+            system_cpu_count: {
+                name: "系统 CPU 计数",
+                desc: "使用系统的 CPU 计数作为并行任务数。",
+            },
+        },
+    },
+    // --lto=choice
+    lto: {
+        name: "使用链接时优化",
+        desc: "使用链接时优化 (MSVC, gcc, clang)。允许的值有 \"yes\", \"no\", 和 \"auto\" (当已知可以工作时)。默认值为 \"auto\"。",
+        elements: {
+            yes: {
+                name: "启用",
+                desc: "启用链接时优化。",
+            },
+            no: {
+                name: "禁用",
+                desc: "禁用链接时优化。",
+            },
+            auto: {
+                name: "自动",
+                desc: "自动选择是否启用链接时优化。",
+            },
+        },
+    },
+    // --static-libpython=choice
+    static_libpython: {
+        name: "使用静态链接 Python 库",
+        desc: "使用 Python 的静态链接库。允许的值有 \"yes\", \"no\", 和 \"auto\" (当已知可以工作时)。默认值为 \"auto\"。",
+        elements: {
+            yes: {
+                name: "启用",
+                desc: "启用静态链接 Python 库。",
+            },
+            no: {
+                name: "禁用",
+                desc: "禁用静态链接 Python 库。",
+            },
+            auto: {
+                name: "自动",
+                desc: "自动选择是否启用静态链接 Python 库。",
+            },
+        },
+    },
+    // --cf-protection=PROTECTION_MODE
+    cf_protection: {
+        name: "控制流保护模式",
+        desc: "此选项特定于 gcc 编译器。对于 gcc 编译器，选择 \"cf-protection\" 模式。默认 \"auto\" 是使用 gcc 默认值，但可以覆盖它，例如通过 \"none\" 值禁用它。请参阅 gcc 文档中的 \"-fcf-protection\" 以获取详细信息。",
+        elements: {
+            auto: {
+                name: "自动",
+                desc: "自动选择控制流保护模式。",
+            },
+            none: {
+                name: "无",
+                desc: "禁用控制流保护。",
+            },
+        },
+    },
+    enable_plugins: {
+        name: "启用插件",
+        desc: "启用指定的插件。必须使用插件名称。使用 '--plugin-list' 查询完整的插件列表并退出。默认空。",
+        elements: {
+            plugin_name: {
+                name: "插件名称",
+                desc: "要启用的插件名称。"
+            }
+        }
+    },
+    disable_plugins: {
+        name: "禁用插件",
+        desc: "禁用指定的插件。必须使用插件名称。使用 '--plugin-list' 查询完整的插件列表并退出。大多数标准插件不建议禁用。默认空。",
+        elements: {
+            plugin_name: {
+                name: "插件名称",
+                desc: "要禁用的插件名称。"
+            }
+        }
+    },
+    user_plugin: {
+        name: "用户插件",
+        desc: "用户插件的文件路径。可以多次指定。默认空。",
+        elements: {
+            path: {
+                name: "路径",
+                desc: "用户插件的文件路径。"
+            }
+        }
+    },
+    plugin_list: {
+        name: "插件列表",
+        desc: "显示所有可用插件的列表并退出。默认关闭。"
+    },
+    plugin_no_detection: {
+        name: "禁用插件检测",
+        desc: "插件可以检测它们是否可能被使用，你可以通过 '--disable-plugin=plugin-that-warned' 禁用警告，或者使用此选项完全禁用检测机制，这也会稍微加快编译速度。默认关闭。"
+    },
+    module_parameter: {
+        name: "模块参数",
+        desc: "提供模块参数。某些包会要求你提供额外的决策。格式为 --module-parameter=module.name-option-name=value。默认空。",
+        elements: {
+            module_parameters: {
+                name: "模块参数",
+                desc: "要提供的模块参数。"
+            }
+        }
+    },
+    show_source_changes: {
+        name: "显示源代码变化",
+        desc: "在编译前显示对原始Python文件内容的更改。主要用于开发插件和Nuitka包配置。例如使用 '--show-source-changes=numpy.**' 查看某个命名空间下的所有更改，或使用 '*' 查看所有更改。默认空。",
+        elements: {
+            show_source_changes: {
+                name: "显示源代码变化",
+                desc: "要显示的源代码变化。"
+            }
+        }
+    },
+    spacy_language_model: {
+        name: "Spacy语言模型",
+        desc: "要使用的Spacy语言模型。可以多次指定。使用'all'包含所有下载的模型。",
+        elements: {
+            all: {
+                name: "所有模型",
+                desc: "包含所有下载的Spacy语言模型。",
+            },
+        },
+    }
 };

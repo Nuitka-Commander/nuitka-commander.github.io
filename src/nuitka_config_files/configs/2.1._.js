@@ -331,6 +331,252 @@ const config = {
             [],
         ),
     },
+    backend_C_compiler_choice:{
+        clang: add_option.bool(
+            "clang",
+            {
+                original: "--clang",
+            },
+            true,
+            false
+        ),
+        // --mingw64
+        mingw64: add_option.bool(
+            "mingw64",
+            {
+                original: "--mingw64",
+            },
+            true,
+            false
+        ),
+
+        // --msvc=MSVC_VERSION
+        msvc: add_option.definable_single(
+            "msvc",
+            {
+                original: "--msvc",
+            },
+            true,
+            {
+                list: add_option.multi_elements(
+                    "list",
+                    {
+                        original: "list",
+                    },
+                    true,
+                ),
+                latest: add_option.multi_elements(
+                    "latest",
+                    {
+                        original: "latest",
+                    },
+                    true,
+                ),
+            },
+            "latest",
+            false
+        ),
+
+        // --jobs=N
+        jobs: add_option.definable_single(
+            "jobs",
+            {
+                original: "--jobs",
+            },
+            true,
+            {
+                system_cpu_count: add_option.multi_elements(
+                    "system_cpu_count",
+                    {
+                        original: "system_cpu_count",
+                    },
+                    true,
+                ),
+            },
+            "system_cpu_count",
+            false
+        ),
+
+        // --lto=choice
+        lto: add_option.single_option(
+            "lto",
+            {
+                original: "--lto",
+            },
+            true,
+            {
+                yes: "yes",
+                no: "no",
+                auto: "auto",
+            },
+            "auto"
+        ),
+
+        // --static-libpython=choice
+        static_libpython: add_option.single_option(
+            "static_libpython",
+            {
+                original: "--static-libpython",
+            },
+            true,
+            {
+                yes: "yes",
+                no: "no",
+                auto: "auto",
+            },
+            "auto"
+        ),
+
+        // --cf-protection=PROTECTION_MODE
+        cf_protection: add_option.single_option(
+            "cf_protection",
+            {
+                original: "--cf-protection",
+            },
+            true,
+            {
+                auto: "auto",
+                none: "none",
+            },
+            "auto"
+        )
+    },
+    plugin_control:{
+        enable_plugins: add_option.definable_multi(
+            "enable_plugins",
+            {
+                original: "--enable-plugins",
+            },
+            true,
+            {
+                plugin_name: add_option.multi_elements(
+                    "plugin_name",
+                    {
+                        original: "PLUGIN_NAME",
+                    },
+                    true,
+                    true
+                ),
+            },
+            [],
+        ),
+
+        disable_plugins: add_option.definable_multi(
+            "disable_plugins",
+            {
+                original: "--disable-plugins",
+            },
+            true,
+            {
+                plugin_name: add_option.multi_elements(
+                    "plugin_name",
+                    {
+                        original: "PLUGIN_NAME",
+                    },
+                    true,
+                    true
+                ),
+            },
+            [],
+        ),
+
+        user_plugin: add_option.definable_multi(
+            "user_plugin",
+            {
+                original: "--user-plugin",
+            },
+            true,
+            {
+                path: add_option.multi_elements(
+                    "path",
+                    {
+                        original: "PATH",
+                    },
+                    true,
+                    true
+                ),
+            },
+            [],
+        ),
+
+        plugin_list: add_option.bool(
+            "plugin_list",
+            {
+                original: "--plugin-list",
+            },
+            true,
+            false
+        ),
+
+        plugin_no_detection: add_option.bool(
+            "plugin_no_detection",
+            {
+                original: "--plugin-no-detection",
+            },
+            true,
+            false
+        ),
+
+        module_parameter: add_option.definable_multi(
+            "module_parameter",
+            {
+                original: "--module-parameter",
+            },
+            true,
+            {
+                module_parameters: add_option.multi_elements(
+                    "module_parameters",
+                    {
+                        original: "MODULE_PARAMETERS",
+                    },
+                    true,
+                    true
+                ),
+            },
+            [],
+        ),
+
+        show_source_changes: add_option.definable_single(
+            "show_source_changes",
+            {
+                original: "--show-source-changes",
+            },
+            true,
+            {
+                show_source_changes: add_option.multi_elements(
+                    "show_source_changes",
+                    {
+                        original: "SHOW_SOURCE_CHANGES",
+                    },
+                    true,
+                    true
+                ),
+            },
+            "",
+            true
+        ),
+    },
+    plugin_options_of_spacy:{
+        spacy_language_model: add_option.definable_multi(
+            "spacy_language_model",
+            {
+                original: "--spacy-language-model",
+            },
+            true,
+            {
+                all: add_option.multi_elements(
+                    "all",
+                    {
+                        original: "all",
+                    },
+                    true,
+                    true
+                ),
+            },
+            ["all"],
+        )
+    }
+
 };
 //基本就这个格式 回调函数接受一个参数
 // config[watcher_key] = [add_watcher({
