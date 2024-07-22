@@ -51,7 +51,6 @@ class CommandStatus {
      */
     async update_config(config) {
         debug.check_nuitka_config(config);//检查配置文件是否符合格式
-
         // clear
         let id = 0;
         this.original_status = {};
@@ -129,8 +128,6 @@ class CommandStatus {
                     id: id,
                 };
                 id++;
-                // 删除 type
-                delete second_value.type;
             });
         });
 
