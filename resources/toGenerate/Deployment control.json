@@ -1,0 +1,19 @@
+{
+  "Deployment control": {
+    "chinese": "",
+    "content": {
+      "--deployment": {
+        "raw_parameter": "--deployment",
+        "chinese_parameter": "部署",
+        "raw_introduction": "Disable code aimed at making finding compatibility issues easier. This will\ne.g. prevent execution with \"-c\" argument, which is often used by code that\nattempts run a module, and causes a program to start itself over and over\npotentially. Disable once you deploy to end users, for finding typical issues,\nthis is very helpful during development. Default off.",
+        "chinese_introduction": "禁用旨在让查找兼容性问题更容易的代码。例如，这将阻止使用'-c'参数的执行，这个参数一般被尝试运行\n模块的代码使用，并且可能导致程序反复自启动。一旦你向最终用户部署，就禁用它，对于查找典型问题，\n这在开发过程中非常有帮助。默认关闭。"
+      },
+      "--no-deployment-flag=FLAG": {
+        "raw_parameter": "--no-deployment-flag=FLAG",
+        "chinese_parameter": "无部署标志=标志",
+        "raw_introduction": "Keep deployment mode, but disable selectively parts of it. Errors from\ndeployment mode will output these identifiers. Default empty.",
+        "chinese_introduction": "保持部署模式，但是选择性地禁用部分功能。部署模式的错误将会输出这些标识符。默认为空"
+      }
+    }
+  }
+}

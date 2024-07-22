@@ -1,0 +1,85 @@
+{
+  "Tracing features": {
+    "chinese": "跟踪功能",
+    "content": {
+      "--report=REPORT_FILENAME": {
+        "raw_parameter": "--report=REPORT_FILENAME",
+        "chinese_parameter": "报告=报告文件名",
+        "raw_introduction": "Report module, data files, compilation, plugin, etc. details in an XML output\nfile. This is also super useful for issue reporting. These reports can e.g. be\nused to re-create the environment easily using it with\n'--create-environment-from-report', but contain a lot of information. Default is\noff.",
+        "chinese_introduction": "在XML输出文件中报告模块、数据文件、编译、插件等详细信息。这对于报告问题也非常有用。\n例如，这些报告可以用于使用’–create-environment-from-report’轻松重建环境，但报告包含大量信息。默认关闭。"
+      },
+      "--report-diffable": {
+        "raw_parameter": "--report-diffable",
+        "chinese_parameter": "报告差异",
+        "raw_introduction": "Report data in diffable form, i.e. no timing or memory usage values that vary\nfrom run to run. Default is off.",
+        "chinese_introduction": "以可比较的方式报告数据，即没有随着运行而变化的时间或内存使用值。默认关闭。"
+      },
+      "--report-user-provided=KEY_VALUE": {
+        "raw_parameter": "--report-user-provided=KEY_VALUE",
+        "chinese_parameter": "报告用户所提供值=键值",
+        "raw_introduction": "Report data from you. This can be given multiple times and be anything in\n'key=value' form, where key should be an identifier, e.g. use '--report-user-\nprovided=pipenv-lock-hash=64a5e4' to track some input values. Default is empty.",
+        "chinese_introduction": "报告来自您的数据。这可以多次给出，并且可以是任何形式的\"key=value\"，其中key应该是一个标识符，\n例如使用\"--report-user-provided=pipenv-lock-hash=64a5e4\"来跟踪一些输入值。默认为空。"
+      },
+      "--report-template=REPORT_DESC": {
+        "raw_parameter": "--report-template=REPORT_DESC",
+        "chinese_parameter": "报告模板=报告描述",
+        "raw_introduction": "Report via template. Provide template and output filename\n\"template.rst.j2:output.rst\". For built-in templates, check the User Manual for\nwhat these are. Can be given multiple times. Default is empty.",
+        "chinese_introduction": "通过模板报告。需要提供模板和输出文件名\"template.rst.j2:output.rst\"。对于内置模板，请查看用户手册。\n可以多次给出。默认为空。"
+      },
+      "--quiet": {
+        "raw_parameter": "--quiet",
+        "chinese_parameter": "静默模式",
+        "raw_introduction": "Disable all information outputs, but show warnings. Defaults to off.",
+        "chinese_introduction": "禁止所有信息输出，但显示警告。默认关闭。"
+      },
+      "--show-scons": {
+        "raw_parameter": "--show-scons",
+        "chinese_parameter": "显示scons",
+        "raw_introduction": "Run the C building backend Scons with verbose information, showing the executed\ncommands, detected compilers. Defaults to off.",
+        "chinese_introduction": "运行C构建后端Scons，显示执行的命令、检测到的编译器的详细信息。默认关闭。"
+      },
+      "--no-progressbar": {
+        "raw_parameter": "--no-progressbar",
+        "chinese_parameter": "无进度条",
+        "raw_introduction": "Disable progress bars. Defaults to off.",
+        "chinese_introduction": "禁用进度条。默认关闭。"
+      },
+      "--show-progress": {
+        "raw_parameter": "--show-progress",
+        "chinese_parameter": "显示进度",
+        "raw_introduction": "Obsolete: Provide progress information and statistics. Disables normal progress\nbar. Defaults to off.",
+        "chinese_introduction": "过时: 提供进度信息和统计信息。禁用正常的进度条。默认关闭。"
+      },
+      "--show-memory": {
+        "raw_parameter": "--show-memory",
+        "chinese_parameter": "显示内存",
+        "raw_introduction": "Provide memory information and statistics. Defaults to off.",
+        "chinese_introduction": "提供内存信息和统计信息。默认关闭。"
+      },
+      "--show-modules": {
+        "raw_parameter": "--show-modules",
+        "chinese_parameter": "显示模块",
+        "raw_introduction": "Provide information for included modules and DLLs Obsolete: You should use\n'--report' file instead. Defaults to off.",
+        "chinese_introduction": "过时: 您应该使用'--report'文件替代。提供包含的模块和DLL的信息。默认关闭。"
+      },
+      "--show-modules-output=PATH": {
+        "raw_parameter": "--show-modules-output=PATH",
+        "chinese_parameter": "显示模块输出=路径",
+        "raw_introduction": "Where to output '--show-modules', should be a filename. Default is standard\noutput.",
+        "chinese_introduction": "用于设定输出'--show-modules'的位置，应该是一个文件名。默认为标准输出。"
+      },
+      "--verbose": {
+        "raw_parameter": "--verbose",
+        "chinese_parameter": "详细模式",
+        "raw_introduction": "Output details of actions taken, esp. in optimizations. Can become a lot.\nDefaults to off.",
+        "chinese_introduction": "输出采取的操作的详细信息，尤其是在优化过程中可能会大量输出。默认关闭。"
+      },
+      "--verbose-output=PATH": {
+        "raw_parameter": "--verbose-output=PATH",
+        "chinese_parameter": "详细模式输出=路径",
+        "raw_introduction": "Where to output from '--verbose', should be a filename. Default is standard\noutput.",
+        "chinese_introduction": "用于设定输出'--verbose'的位置，应该是一个文件名。默认为标准输出。"
+      }
+    }
+  }
+}

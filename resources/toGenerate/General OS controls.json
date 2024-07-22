@@ -1,0 +1,31 @@
+{
+  "General OS controls": {
+    "chinese": "通用操作系统控制",
+    "content": {
+      "--disable-console": {
+        "raw_parameter": "--disable-console",
+        "chinese_parameter": "禁用控制台",
+        "raw_introduction": "When compiling for Windows or macOS, disable the console window and create a\nGUI application. Defaults to off.",
+        "chinese_introduction": "在为Windows或macOS编译时，禁用控制台窗口并创建为一个GUI应用程序。默认关闭。"
+      },
+      "--enable-console": {
+        "raw_parameter": "--enable-console",
+        "chinese_parameter": "启用控制台",
+        "raw_introduction": "When compiling for Windows or macOS, enable the console window and create a\nconsole application. This disables hints from certain modules, e.g. \"PySide\"\nthat suggest to disable it. Defaults to true.",
+        "chinese_introduction": "在为Windows或macOS编译时，启用控制台窗口并创建一个控制台应用程序。\n这将禁用来自某些模块的提示，例如\"PySide\"会建议禁用它。默认启用。"
+      },
+      "--force-stdout-spec=FORCE_STDOUT_SPEC": {
+        "raw_parameter": "--force-stdout-spec=FORCE_STDOUT_SPEC",
+        "chinese_parameter": "强制标准输出规范=强制标准输出规范",
+        "raw_introduction": "Force standard output of the program to go to this location. Useful for\nprograms with disabled console and programs using the Windows Services Plugin of\nNuitka commercial. Defaults to not active, use e.g. '{PROGRAM_BASE}.out.txt',\ni.e. file near your program, check User Manual for full list of available\nvalues.",
+        "chinese_introduction": "强制程序的标准输出输出到这个位置。对于禁用控制台的程序和使用Nuitka商业版的Windows服务插件的程序非常有用。默认不激活，\n例如使用'{PROGRAM_BASE}.out.txt'，也就是程序目录附近的文件，查看用户手册以获取可用值的完整列表。"
+      },
+      "--force-stderr-spec=FORCE_STDERR_SPEC": {
+        "raw_parameter": "--force-stderr-spec=FORCE_STDERR_SPEC",
+        "chinese_parameter": "强制标准错误规范=强制标准错误规范",
+        "raw_introduction": "Force standard error of the program to go to this location. Useful for programs\nwith disabled console and programs using the Windows Services Plugin of Nuitka\ncommercial. Defaults to not active, use e.g. '{PROGRAM_BASE}.err.txt', i.e. file\nnear your program, check User Manual for full list of available values.",
+        "chinese_introduction": "强制程序的标准错误输出到这个位置。对于禁用控制台的程序和使用Nuitka商业版的Windows服务插件的程序非常有用。默认不激活，\n例如使用'{PROGRAM_BASE}.err.txt'，也就是程序目录附近的文件，查看用户手册以获取可用值的完整列表。"
+      }
+    }
+  }
+}

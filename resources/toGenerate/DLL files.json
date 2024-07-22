@@ -1,0 +1,19 @@
+{
+  "DLL files": {
+    "chinese": "DLL(动态链接库)文件",
+    "content": {
+      "--noinclude-dlls=PATTERN": {
+        "raw_parameter": "--noinclude-dlls=PATTERN",
+        "chinese_parameter": "不包含动态链接库们=模式",
+        "raw_introduction": "Do not include DLL files matching the filename pattern given. This is against\nthe target filename, not source paths. So ignore a DLL \"someDLL\" contained in\nthe package \"package_name\" it should be matched as \"package_name/someDLL.*\".\nDefault empty.",
+        "chinese_introduction": "不要包括与给定文件名模式匹配的DLL文件。这是针对目标文件名，而不是源路径。\n因此，要忽略包含在“package_name”包中的DLL“someDLL”，应将其匹配为“package_name/someDLL.*”。\n默认为空。"
+      },
+      "--list-package-dlls=LIST_PACKAGE_DLLS": {
+        "raw_parameter": "--list-package-dlls=LIST_PACKAGE_DLLS",
+        "chinese_parameter": "列出包动态链接库们=包名",
+        "raw_introduction": "Output the DLLs found for a given package name. Default not done.",
+        "chinese_introduction": "为给定的包名找到DLLs并输出。默认不执行。"
+      }
+    }
+  }
+}

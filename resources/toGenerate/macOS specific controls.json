@@ -1,0 +1,67 @@
+{
+  "macOS specific controls": {
+    "chinese": "MacOS特定控制",
+    "content": {
+      "--macos-create-app-bundle": {
+        "raw_parameter": "--macos-create-app-bundle",
+        "chinese_parameter": "macOS创建应用程序包",
+        "raw_introduction": "When compiling for macOS, create a bundle rather than a plain binary\napplication. This is the only way to unlock the disabling of console, get high\nDPI graphics, etc. and implies standalone mode. Defaults to off.",
+        "chinese_introduction": "在为macOS编译时，创建一个包而不是一个普通的二进制应用程序。这是禁用控制台、获取高DPI图形等的唯一方式，并且将开启独立模式。默认为关闭。"
+      },
+      "--macos-target-arch=MACOS_TARGET_ARCH": {
+        "raw_parameter": "--macos-target-arch=MACOS_TARGET_ARCH",
+        "chinese_parameter": "macOS目标架构=macOS目标架构",
+        "raw_introduction": "What architectures is this to supposed to run on. Default and limit is what the\nrunning Python allows for. Default is \"native\" which is the architecture the\nPython is run with.",
+        "chinese_introduction": "这个程序应该在什么架构上运行。默认值和限制是运行Python允许的。默认值为\"native\"，这是Python运行的架构。"
+      },
+      "--macos-app-icon=ICON_PATH": {
+        "raw_parameter": "--macos-app-icon=ICON_PATH",
+        "chinese_parameter": "macOS应用程序图标=图标路径",
+        "raw_introduction": "Add icon for the application bundle to use. Can be given only one time.\nDefaults to Python icon if available.",
+        "chinese_introduction": "添加应用程序捆绑包要使用的图标。只能给出一次。如果可用，默认为Python图标。"
+      },
+      "--macos-signed-app-name=MACOS_SIGNED_APP_NAME": {
+        "raw_parameter": "--macos-signed-app-name=MACOS_SIGNED_APP_NAME",
+        "chinese_parameter": "macOS签名应用程序名称=macOS签名应用程序名称",
+        "raw_introduction": "Name of the application to use for macOS signing. Follow\n\"com.YourCompany.AppName\" naming results for best results, as these have to be\nglobally unique, and will potentially grant protected API accesses.",
+        "chinese_introduction": "用于macOS签名的应用程序名称。为了获得最佳结果，请遵循\"com.YourCompany.AppName\"的命名格式，\n因为这些名称必须是全局唯一的，并且可能会授予受保护的API访问权限。"
+      },
+      "--macos-app-name=MACOS_APP_NAME": {
+        "raw_parameter": "--macos-app-name=MACOS_APP_NAME",
+        "chinese_parameter": "macOS应用程序名称=macOS应用程序名称",
+        "raw_introduction": "Name of the product to use in macOS bundle information. Defaults to base\nfilename of the binary.",
+        "chinese_introduction": "要在macOS捆绑包信息中使用的产品名称。默认为二进制文件的基本文件名。"
+      },
+      "--macos-app-mode=MODE": {
+        "raw_parameter": "--macos-app-mode=MODE",
+        "chinese_parameter": "macOS应用程序模式=模式",
+        "raw_introduction": "Mode of application for the application bundle. When launching a Window, and\nappearing in Docker is desired, default value \"gui\" is a good fit. Without a\nWindow ever, the application is a \"background\" application. For UI elements that\nget to display later, \"ui-element\" is in-between. The application will not\nappear in dock, but get full access to desktop when it does open a Window later.",
+        "chinese_introduction": "应用程序捆绑包的应用程序模式。当你启动一个窗口，并且希望出现在Docker中时，默认值\"gui\"是一个很好的选择。\n如果没有窗口，应用程序会是一个\"background\"应用程序。对于稍后显示的UI元素，\"ui-element\"介于两者之间。\n应用程序不会出现在dock中，但是当它稍后打开一个窗口时，它将获得对桌面的完全访问权限。"
+      },
+      "--macos-sign-identity=MACOS_APP_VERSION": {
+        "raw_parameter": "--macos-sign-identity=MACOS_APP_VERSION",
+        "chinese_parameter": "macOS签名标识=macOS应用程序版本",
+        "raw_introduction": "When signing on macOS, by default an ad-hoc identify will be used, but with\nthis option your get to specify another identity to use. The signing of code is\nnow mandatory on macOS and cannot be disabled. Use \"auto\" to detect your only\nidentity installed. Default \"ad- hoc\" if not given.",
+        "chinese_introduction": "当在macOS上签名时，默认情况下会使用一个临时标识，但是使用这个选项时，您可以指定另一个要使用的标识。\n现在，在macOS上签名代码是强制性的，不能被禁用。使用\"auto\"来检测你唯一的已安装表示。\n如果没有给出，默认为\"ad-hoc\"。"
+      },
+      "--macos-sign-notarization": {
+        "raw_parameter": "--macos-sign-notarization",
+        "chinese_parameter": "macOS签名公证",
+        "raw_introduction": "When signing for notarization, using a proper TeamID identity from Apple, use\nthe required runtime signing option, such that it can be accepted.",
+        "chinese_introduction": "当进行用于公证的签名时，使用来自Apple的正确的TeamID标识，使用所需的运行时签名选项，以便它可以被接受。"
+      },
+      "--macos-app-version=MACOS_APP_VERSION": {
+        "raw_parameter": "--macos-app-version=MACOS_APP_VERSION",
+        "chinese_parameter": "macOS应用程序版本=macOS应用程序版本",
+        "raw_introduction": "Product version to use in macOS bundle information. Defaults to \"1.0\" if not\ngiven.",
+        "chinese_introduction": "要在macOS捆绑包信息中使用的产品版本。如果没有给出，则默认为\"1.0\"。"
+      },
+      "--macos-app-protected-resource=RESOURCE_DESC": {
+        "raw_parameter": "--macos-app-protected-resource=RESOURCE_DESC",
+        "chinese_parameter": "macOS应用程序受保护资源=资源描述",
+        "raw_introduction": "Request an entitlement for access to a macOS protected resources, e.g.\n\"NSMicrophoneUsageDescription:Microphone access for recording audio.\" requests\naccess to the microphone and provides an informative text for the user, why that\nis needed. Before the colon, is an OS identifier for an access right, then the\ninformative text. Legal values can be found on https://developer.apple.com/doc\numentation/bundleresources/information_property_list/protected_resources and\nthe option can be specified multiple times. Default empty.",
+        "chinese_introduction": "请求访问macOS受保护的资源的权限，例如\"NSMicrophoneUsageDescription:Microphone access for recording audio.\"请求访问麦克风，\n并为用户提供一个信息文本，说明为什么需要这样做。在冒号之前，是一个访问权限的操作系统标识符，然后是信息文本。\n可以在https://developer.apple.com/documentation/bundleresources/information_property_list/protected_resources中找到合法的值，\n该选项可以多次指定。默认为空。"
+      }
+    }
+  }
+}

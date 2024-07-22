@@ -1,0 +1,31 @@
+{
+  "Output choices": {
+    "chinese": "输出选择",
+    "content": {
+      "--output-filename=FILENAME": {
+        "raw_parameter": "--output-filename=FILENAME",
+        "chinese_parameter": "输出文件名=文件名",
+        "raw_introduction": "Specify how the executable should be named. For extension modules there is no\nchoice, also not for standalone mode and using it will be an error. This may\ninclude path information that needs to exist though. Defaults to\n'<program_name>.exe' on this platform.",
+        "chinese_introduction": "指定可执行文件的名称。拓展模块和独立模式没有这个选项，使用时会报错。这可能需要包含存在的路径信息。\n默认为当前平台上的\"<program_name>.exe\""
+      },
+      "--output-dir=DIRECTORY": {
+        "raw_parameter": "--output-dir=DIRECTORY",
+        "chinese_parameter": "输出目录=目录",
+        "raw_introduction": "Specify where intermediate and final output files should be put. The DIRECTORY\nwill be populated with build folder, dist folder, binaries, etc. Defaults to\ncurrent directory.",
+        "chinese_introduction": "指定存放中间文件和最终输出文件的位置。选定目录将存放构建文件夹，发行文件夹，二进制文件等。默认为当前目录。"
+      },
+      "--remove-output": {
+        "raw_parameter": "--remove-output",
+        "chinese_parameter": "删除构建文件夹",
+        "raw_introduction": "Removes the build directory after producing the module or exe file. Defaults to\noff.",
+        "chinese_introduction": "生成exe或者模块文件后删除构建文件夹。默认关闭。"
+      },
+      "--no-pyi-file": {
+        "raw_parameter": "--no-pyi-file",
+        "chinese_parameter": "不创建pyi文件",
+        "raw_introduction": "Do not create a \".pyi\" file for extension modules created by Nuitka. This is\nused to detect implicit imports. Defaults to off.",
+        "chinese_introduction": "不要为Nuitka创建拓展模块而创建\".pyi\"文件用于检测隐式导入。默认关闭。"
+      }
+    }
+  }
+}

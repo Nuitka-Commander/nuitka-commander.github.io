@@ -1,0 +1,13 @@
+{
+  "Linux specific controls": {
+    "chinese": "Linux特定控制",
+    "content": {
+      "--linux-icon=ICON_PATH": {
+        "raw_parameter": "--linux-icon=ICON_PATH",
+        "chinese_parameter": "Linux图标=图标路径",
+        "raw_introduction": "Add executable icon for onefile binary to use. Can be given only one time.\nDefaults to Python icon if available.",
+        "chinese_introduction": "为单文件二进制可执行文件添加图标。只能给出一次。如果可用，默认为Python图标。"
+      }
+    }
+  }
+}

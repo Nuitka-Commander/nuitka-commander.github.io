@@ -1,0 +1,37 @@
+{
+  "Windows specific controls": {
+    "chinese": "Windows特定控制",
+    "content": {
+      "--windows-icon-from-ico=ICON_PATH": {
+        "raw_parameter": "--windows-icon-from-ico=ICON_PATH",
+        "chinese_parameter": "windows图标(ico文件)=图标路径",
+        "raw_introduction": "Add executable icon. Can be given multiple times for different resolutions or\nfiles with multiple icons inside. In the later case, you may also suffix with\n#<n> where n is an integer index starting from 1, specifying a specific icon to\nbe included, and all others to be ignored.",
+        "chinese_introduction": "添加可执行文件的图标。可以多次给出不同分辨率或者包含多个图标的文件。在选择包含多个图标的文件时，\n您也可以使用#<n>后缀来指定要包含的特定图标并忽略其他所有的图标，其中n是从1开始的整数索引"
+      },
+      "--windows-icon-from-exe=ICON_EXE_PATH": {
+        "raw_parameter": "--windows-icon-from-exe=ICON_EXE_PATH",
+        "chinese_parameter": "windows图标(exe文件)=图标exe路径",
+        "raw_introduction": "Copy executable icons from this existing executable (Windows only).",
+        "chinese_introduction": "复制来自该可执行文件的图标(仅限Windows)。"
+      },
+      "--onefile-windows-splash-screen-image=SPLASH_SCREEN_IMAGE": {
+        "raw_parameter": "--onefile-windows-splash-screen-image=SPLASH_SCREEN_IMAGE",
+        "chinese_parameter": "单文件Windows启动画面图像=启动画面图像",
+        "raw_introduction": "When compiling for Windows and onefile, show this while loading the\napplication. Defaults to off.",
+        "chinese_introduction": "当编译为Windows下的单文件时，在加载应用程序时显示这个图像。默认关闭。"
+      },
+      "--windows-uac-admin": {
+        "raw_parameter": "--windows-uac-admin",
+        "chinese_parameter": "请求Windows用户控制(UAC)管理员权限",
+        "raw_introduction": "Request Windows User Control, to grant admin rights on execution. (Windows\nonly). Defaults to off.",
+        "chinese_introduction": "向Windows用户控制(UAC)请求在执行时授予管理员权限。(仅限Windows)。默认关闭。"
+      },
+      "--windows-uac-uiaccess": {
+        "raw_parameter": "--windows-uac-uiaccess",
+        "chinese_parameter": "请求Windows用户控制（UAC）UI访问权限",
+        "raw_introduction": "Request Windows User Control, to enforce running from a few folders only,\nremote desktop access. (Windows only). Defaults to off.",
+        "chinese_introduction": "请求Windows用户控制权限(UAC)，用于强制在特定的几个文件夹中运行和远程桌面访问。(仅限Windows)。默认关闭。"
+      }
+    }
+  }
+}

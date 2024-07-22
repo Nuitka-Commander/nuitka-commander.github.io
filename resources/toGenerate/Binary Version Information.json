@@ -1,0 +1,49 @@
+{
+  "Binary Version Information": {
+    "chinese": "二进制版本信息",
+    "content": {
+      "--company-name=COMPANY_NAME": {
+        "raw_parameter": "--company-name=COMPANY_NAME",
+        "chinese_parameter": "公司名称=公司名称",
+        "raw_introduction": "Name of the company to use in version information. Defaults to unused.",
+        "chinese_introduction": "要在版本信息中使用的公司名称。默认为无。"
+      },
+      "--product-name=PRODUCT_NAME": {
+        "raw_parameter": "--product-name=PRODUCT_NAME",
+        "chinese_parameter": "产品名称=产品名称",
+        "raw_introduction": "Name of the product to use in version information. Defaults to base filename of\nthe binary.",
+        "chinese_introduction": "要在版本信息中使用的产品名称。默认为二进制文件的基本文件名。"
+      },
+      "--file-version=FILE_VERSION": {
+        "raw_parameter": "--file-version=FILE_VERSION",
+        "chinese_parameter": "文件版本=文件版本",
+        "raw_introduction": "File version to use in version information. Must be a sequence of up to 4\nnumbers, e.g. 1.0 or 1.0.0.0, no more digits are allowed, no strings are\nallowed. Defaults to unused.",
+        "chinese_introduction": "要在版本信息中使用的文件版本。必须为一个最多4个数字的序列，例如1.0或1.0.0.0,不允许使用更多的数字或者使用字符串。默认为无。"
+      },
+      "--product-version=PRODUCT_VERSION": {
+        "raw_parameter": "--product-version=PRODUCT_VERSION",
+        "chinese_parameter": "产品版本=产品版本",
+        "raw_introduction": "Product version to use in version information. Same rules as for file version.\nDefaults to unused.",
+        "chinese_introduction": "要在版本信息中使用的产品版本。必须为一个最多4个数字的序列，例如1.0或1.0.0.0, 不允许使用更多的数字或者使用字符串。默认为无。"
+      },
+      "--file-description=FILE_DESCRIPTION": {
+        "raw_parameter": "--file-description=FILE_DESCRIPTION",
+        "chinese_parameter": "文件描述=文件描述",
+        "raw_introduction": "Description of the file used in version information. Windows only at this time.\nDefaults to binary filename.",
+        "chinese_introduction": "要在版本信息中使用的文件描述。目前仅限Windows。默认为二进制文件的文件名。"
+      },
+      "--copyright=COPYRIGHT_TEXT": {
+        "raw_parameter": "--copyright=COPYRIGHT_TEXT",
+        "chinese_parameter": "版权=版权文本",
+        "raw_introduction": "Copyright used in version information. Windows/macOS only at this time.\nDefaults to not present.",
+        "chinese_introduction": "在版本信息中使用的版权信息。目前仅限Windows/macOS可用。默认不显示。"
+      },
+      "--trademarks=TRADEMARK_TEXT": {
+        "raw_parameter": "--trademarks=TRADEMARK_TEXT",
+        "chinese_parameter": "商标=商标文本",
+        "raw_introduction": "Trademark used in version information. Windows/macOS only at this time.\nDefaults to not present.",
+        "chinese_introduction": "要在版本信息中使用的商标。目前仅限Windows/macOS可用。默认不显示。"
+      }
+    }
+  }
+}

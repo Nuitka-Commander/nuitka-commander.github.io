@@ -1,0 +1,725 @@
+{
+  "version": "Nuitka 2.1.2",
+  "source": "Options:\n  --help                show this help message and exit\n  --version             Show version information and important details for bug\n                        reports, then exit. Defaults to off.\n  --module              Create an importable binary extension module\n                        executable instead of a program. Defaults to off.\n  --standalone          Enable standalone mode for output. This allows you to\n                        transfer the created binary to other machines without\n                        it using an existing Python installation. This also\n                        means it will become big. It implies these option: \"--\n                        follow-imports\" and \"--python-flag=no_site\". Defaults\n                        to off.\n  --onefile             On top of standalone mode, enable onefile mode. This\n                        means not a folder, but a compressed executable is\n                        created and used. Defaults to off.\n  --python-flag=FLAG    Python flags to use. Default is what you are using to\n                        run Nuitka, this enforces a specific mode. These are\n                        options that also exist to standard Python executable.\n                        Currently supported: \"-S\" (alias \"no_site\"),\n                        \"static_hashes\" (do not use hash randomization),\n                        \"no_warnings\" (do not give Python run time warnings),\n                        \"-O\" (alias \"no_asserts\"), \"no_docstrings\" (do not use\n                        doc strings), \"-u\" (alias \"unbuffered\"), \"isolated\"\n                        (do not load outside code) and \"-m\" (package mode,\n                        compile as \"package.__main__\"). Default empty.\n  --python-debug        Use debug version or not. Default uses what you are\n                        using to run Nuitka, most likely a non-debug version.\n                        Only for debugging and testing purposes.\n  --python-for-scons=PATH\n                        When compiling with Python 3.4 provide the path of a\n                        Python binary to use for Scons. Otherwise Nuitka can\n                        use what you run Nuitka with, or find Python\n                        installation, e.g. from Windows registry. On Windows,\n                        a Python 3.5 or higher is needed. On non-Windows, a\n                        Python 2.6 or 2.7 will do as well.\n  --main=PATH           If specified once, this takes the place of the\n                        positional argument, i.e. the filename to compile.\n                        When given multiple times, it enables \"multidist\" (see\n                        User Manual) it allows you to create binaries that\n                        depending on file name or invocation name.\n\n  Control the inclusion of modules and packages in result:\n    --include-package=PACKAGE\n                        Include a whole package. Give as a Python namespace,\n                        e.g. \"some_package.sub_package\" and Nuitka will then\n                        find it and include it and all the modules found below\n                        that disk location in the binary or extension module\n                        it creates, and make it available for import by the\n                        code. To avoid unwanted sub packages, e.g. tests you\n                        can e.g. do this \"--nofollow-import-to=*.tests\".\n                        Default empty.\n    --include-module=MODULE\n                        Include a single module. Give as a Python namespace,\n                        e.g. \"some_package.some_module\" and Nuitka will then\n                        find it and include it in the binary or extension\n                        module it creates, and make it available for import by\n                        the code. Default empty.\n    --include-plugin-directory=MODULE/PACKAGE\n                        Include also the code found in that directory,\n                        considering as if they are each given as a main file.\n                        Overrides all other inclusion options. You ought to\n                        prefer other inclusion options, that go by names,\n                        rather than filenames, those find things through being\n                        in \"sys.path\". This option is for very special use\n                        cases only. Can be given multiple times. Default\n                        empty.\n    --include-plugin-files=PATTERN\n                        Include into files matching the PATTERN. Overrides all\n                        other follow options. Can be given multiple times.\n                        Default empty.\n    --prefer-source-code\n                        For already compiled extension modules, where there is\n                        both a source file and an extension module, normally\n                        the extension module is used, but it should be better\n                        to compile the module from available source code for\n                        best performance. If not desired, there is --no-\n                        prefer-source-code to disable warnings about it.\n                        Default off.\n\n  Control the following into imported modules:\n    --follow-imports    Descend into all imported modules. Defaults to on in\n                        standalone mode, otherwise off.\n    --follow-import-to=MODULE/PACKAGE\n                        Follow to that module if used, or if a package, to the\n                        whole package. Can be given multiple times. Default\n                        empty.\n    --nofollow-import-to=MODULE/PACKAGE\n                        Do not follow to that module name even if used, or if\n                        a package name, to the whole package in any case,\n                        overrides all other options. Can be given multiple\n                        times. Default empty.\n    --nofollow-imports  Do not descend into any imported modules at all,\n                        overrides all other inclusion options and not usable\n                        for standalone mode. Defaults to off.\n    --follow-stdlib     Also descend into imported modules from standard\n                        library. This will increase the compilation time by a\n                        lot and is also not well tested at this time and\n                        sometimes won't work. Defaults to off.\n\n  Onefile options:\n    --onefile-tempdir-spec=ONEFILE_TEMPDIR_SPEC\n                        Use this as a folder to unpack to in onefile mode.\n                        Defaults to '{TEMP}/onefile_{PID}_{TIME}', i.e. user\n                        temporary directory and being non-static it's removed.\n                        Use e.g. a string like\n                        '{CACHE_DIR}/{COMPANY}/{PRODUCT}/{VERSION}' which is a\n                        good static cache path, this will then not be removed.\n    --onefile-child-grace-time=GRACE_TIME_MS\n                        When stopping the child, e.g. due to CTRL-C or\n                        shutdown, etc. the Python code gets a\n                        \"KeyboardInterrupt\", that it may handle e.g. to flush\n                        data. This is the amount of time in ms, before the\n                        child it killed in the hard way. Unit is ms, and\n                        default 5000.\n    --onefile-no-compression\n                        When creating the onefile, disable compression of the\n                        payload. This is mostly for debug purposes, or to save\n                        time. Default is off.\n    --onefile-as-archive\n                        When creating the onefile, use an archive format, that\n                        can be unpacked with \"nuitka-onefile-unpack\" rather\n                        than a stream that only the onefile program itself\n                        unpacks. Default is off.\n\n  Data files:\n    --include-package-data=PACKAGE\n                        Include data files for the given package name. DLLs\n                        and extension modules are not data files and never\n                        included like this. Can use patterns the filenames as\n                        indicated below. Data files of packages are not\n                        included by default, but package configuration can do\n                        it. This will only include non-DLL, non-extension\n                        modules, i.e. actual data files. After a \":\"\n                        optionally a filename pattern can be given as well,\n                        selecting only matching files. Examples: \"--include-\n                        package-data=package_name\" (all files) \"--include-\n                        package-data=package_name=*.txt\" (only certain type) \"\n                        --include-package-data=package_name=some_filename.dat\n                        (concrete file) Default empty.\n    --include-data-files=DESC\n                        Include data files by filenames in the distribution.\n                        There are many allowed forms. With '--include-data-\n                        files=/path/to/file/*.txt=folder_name/some.txt' it\n                        will copy a single file and complain if it's multiple.\n                        With '--include-data-\n                        files=/path/to/files/*.txt=folder_name/' it will put\n                        all matching files into that folder. For recursive\n                        copy there is a form with 3 values that '--include-\n                        data-files=/path/to/scan=folder_name=**/*.txt' that\n                        will preserve directory structure. Default empty.\n    --include-data-dir=DIRECTORY\n                        Include data files from complete directory in the\n                        distribution. This is recursive. Check '--include-\n                        data-files' with patterns if you want non-recursive\n                        inclusion. An example would be '--include-data-\n                        dir=/path/some_dir=data/some_dir' for plain copy, of\n                        the whole directory. All non-code files are copied, if\n                        you want to use '--noinclude-data-files' option to\n                        remove them. Default empty.\n    --noinclude-data-files=PATTERN\n                        Do not include data files matching the filename\n                        pattern given. This is against the target filename,\n                        not source paths. So to ignore a file pattern from\n                        package data for 'package_name' should be matched as\n                        'package_name/*.txt'. Or for the whole directory\n                        simply use 'package_name'. Default empty.\n    --include-onefile-external-data=PATTERN\n                        Include the specified data file patterns outside of\n                        the onefile binary, rather than on the inside. Makes\n                        only sense in case of '--onefile' compilation. First\n                        files have to be specified as included somehow, then\n                        this refers to target paths. Default empty.\n    --list-package-data=LIST_PACKAGE_DATA\n                        Output the data files found for a given package name.\n                        Default not done.\n\n  Metadata support:\n    --include-distribution-metadata=DISTRIBUTION\n                        Include metadata information for the given\n                        distribution name. Some packages check metadata for\n                        presence, version, entry points, etc. and without this\n                        option given, it only works when it's recognized at\n                        compile time which is not always happening. This of\n                        course only makes sense for packages that are included\n                        in the compilation. Default empty.\n\n  DLL files:\n    --noinclude-dlls=PATTERN\n                        Do not include DLL files matching the filename pattern\n                        given. This is against the target filename, not source\n                        paths. So ignore a DLL 'someDLL' contained in the\n                        package 'package_name' it should be matched as\n                        'package_name/someDLL.*'. Default empty.\n    --list-package-dlls=LIST_PACKAGE_DLLS\n                        Output the DLLs found for a given package name.\n                        Default not done.\n\n  Control the warnings to be given by Nuitka:\n    --warn-implicit-exceptions\n                        Enable warnings for implicit exceptions detected at\n                        compile time.\n    --warn-unusual-code\n                        Enable warnings for unusual code detected at compile\n                        time.\n    --assume-yes-for-downloads\n                        Allow Nuitka to download external code if necessary,\n                        e.g. dependency walker, ccache, and even gcc on\n                        Windows. To disable, redirect input from nul device,\n                        e.g. \"</dev/null\" or \"<NUL:\". Default is to prompt.\n    --nowarn-mnemonic=MNEMONIC\n                        Disable warning for a given mnemonic. These are given\n                        to make sure you are aware of certain topics, and\n                        typically point to the Nuitka website. The mnemonic is\n                        the part of the URL at the end, without the HTML\n                        suffix. Can be given multiple times and accepts shell\n                        pattern. Default empty.\n\n  Immediate execution after compilation:\n    --run               Execute immediately the created binary (or import the\n                        compiled module). Defaults to off.\n    --debugger          Execute inside a debugger, e.g. \"gdb\" or \"lldb\" to\n                        automatically get a stack trace. Defaults to off.\n    --execute-with-pythonpath\n                        When immediately executing the created binary or\n                        module using '--run', don't reset 'PYTHONPATH'\n                        environment. When all modules are successfully\n                        included, you ought to not need PYTHONPATH anymore,\n                        and definitely not for standalone mode.\n\n  Compilation choices:\n    --user-package-configuration-file=YAML_FILENAME\n                        User provided Yaml file with package configuration.\n                        You can include DLLs, remove bloat, add hidden\n                        dependencies. Check the Nuitka Package Configuration\n                        Manual for a complete description of the format to\n                        use. Can be given multiple times. Defaults to empty.\n    --full-compat       Enforce absolute compatibility with CPython. Do not\n                        even allow minor deviations from CPython behavior,\n                        e.g. not having better tracebacks or exception\n                        messages which are not really incompatible, but only\n                        different or worse. This is intended for tests only\n                        and should *not* be used.\n    --file-reference-choice=MODE\n                        Select what value \"__file__\" is going to be. With\n                        \"runtime\" (default for standalone binary mode and\n                        module mode), the created binaries and modules, use\n                        the location of themselves to deduct the value of\n                        \"__file__\". Included packages pretend to be in\n                        directories below that location. This allows you to\n                        include data files in deployments. If you merely seek\n                        acceleration, it's better for you to use the\n                        \"original\" value, where the source files location will\n                        be used. With \"frozen\" a notation \"<frozen\n                        module_name>\" is used. For compatibility reasons, the\n                        \"__file__\" value will always have \".py\" suffix\n                        independent of what it really is.\n    --module-name-choice=MODE\n                        Select what value \"__name__\" and \"__package__\" are\n                        going to be. With \"runtime\" (default for module mode),\n                        the created module uses the parent package to deduce\n                        the value of \"__package__\", to be fully compatible.\n                        The value \"original\" (default for other modes) allows\n                        for more static optimization to happen, but is\n                        incompatible for modules that normally can be loaded\n                        into any package.\n\n  Output choices:\n    --output-filename=FILENAME\n                        Specify how the executable should be named. For\n                        extension modules there is no choice, also not for\n                        standalone mode and using it will be an error. This\n                        may include path information that needs to exist\n                        though. Defaults to '<program_name>.exe' on this\n                        platform.\n    --output-dir=DIRECTORY\n                        Specify where intermediate and final output files\n                        should be put. The DIRECTORY will be populated with\n                        build folder, dist folder, binaries, etc. Defaults to\n                        current directory.\n    --remove-output     Removes the build directory after producing the module\n                        or exe file. Defaults to off.\n    --no-pyi-file       Do not create a '.pyi' file for extension modules\n                        created by Nuitka. This is used to detect implicit\n                        imports. Defaults to off.\n\n  Deployment control:\n    --deployment        Disable code aimed at making finding compatibility\n                        issues easier. This will e.g. prevent execution with\n                        \"-c\" argument, which is often used by code that\n                        attempts run a module, and causes a program to start\n                        itself over and over potentially. Disable once you\n                        deploy to end users, for finding typical issues, this\n                        is very helpful during development. Default off.\n    --no-deployment-flag=FLAG\n                        Keep deployment mode, but disable selectively parts of\n                        it. Errors from deployment mode will output these\n                        identifiers. Default empty.\n\n  Debug features:\n    --debug             Executing all self checks possible to find errors in\n                        Nuitka, do not use for production. Defaults to off.\n    --unstripped        Keep debug info in the resulting object file for\n                        better debugger interaction. Defaults to off.\n    --profile           Enable vmprof based profiling of time spent. Not\n                        working currently. Defaults to off.\n    --internal-graph    Create graph of optimization process internals, do not\n                        use for whole programs, but only for small test cases.\n                        Defaults to off.\n    --trace-execution   Traced execution output, output the line of code\n                        before executing it. Defaults to off.\n    --recompile-c-only  This is not incremental compilation, but for Nuitka\n                        development only. Takes existing files and simply\n                        compile them as C again. Allows compiling edited C\n                        files for quick debugging changes to the generated\n                        source, e.g. to see if code is passed by, values\n                        output, etc, Defaults to off. Depends on compiling\n                        Python source to determine which files it should look\n                        at.\n    --xml=XML_FILENAME  Write the internal program structure, result of\n                        optimization in XML form to given filename.\n    --experimental=FLAG\n                        Use features declared as 'experimental'. May have no\n                        effect if no experimental features are present in the\n                        code. Uses secret tags (check source) per experimented\n                        feature.\n    --low-memory        Attempt to use less memory, by forking less C\n                        compilation jobs and using options that use less\n                        memory. For use on embedded machines. Use this in case\n                        of out of memory problems. Defaults to off.\n    --create-environment-from-report=CREATE_ENVIRONMENT_FROM_REPORT\n                        Create a new virtualenv in that non-existing path from\n                        the report file given with e.g. '--report=compilation-\n                        report.xml'. Default not done.\n    --generate-c-only   Generate only C source code, and do not compile it to\n                        binary or module. This is for debugging and code\n                        coverage analysis that doesn't waste CPU. Defaults to\n                        off. Do not think you can use this directly.\n\n  Backend C compiler choice:\n    --clang             Enforce the use of clang. On Windows this requires a\n                        working Visual Studio version to piggy back on.\n                        Defaults to off.\n    --mingw64           Enforce the use of MinGW64 on Windows. Defaults to off\n                        unless MSYS2 with MinGW Python is used.\n    --msvc=MSVC_VERSION\n                        Enforce the use of specific MSVC version on Windows.\n                        Allowed values are e.g. \"14.3\" (MSVC 2022) and other\n                        MSVC version numbers, specify \"list\" for a list of\n                        installed compilers, or use \"latest\".  Defaults to\n                        latest MSVC being used if installed, otherwise MinGW64\n                        is used.\n    --jobs=N            Specify the allowed number of parallel C compiler\n                        jobs. Defaults to the system CPU count.\n    --lto=choice        Use link time optimizations (MSVC, gcc, clang).\n                        Allowed values are \"yes\", \"no\", and \"auto\" (when it's\n                        known to work). Defaults to \"auto\".\n    --static-libpython=choice\n                        Use static link library of Python. Allowed values are\n                        \"yes\", \"no\", and \"auto\" (when it's known to work).\n                        Defaults to \"auto\".\n    --cf-protection=PROTECTION_MODE\n                        This option is gcc specific. For the gcc compiler,\n                        select the \"cf-protection\" mode. Default \"auto\" is to\n                        use the gcc default value, but you can override it,\n                        e.g. to disable it with \"none\" value. Refer to gcc\n                        documentation for \"-fcf-protection\" for the details.\n\n  Cache Control:\n    --disable-cache=DISABLED_CACHES\n                        Disable selected caches, specify \"all\" for all cached.\n                        Currently allowed values are:\n                        \"all\",\"ccache\",\"bytecode\",\"compression\",\"dll-\n                        dependencies\". can be given multiple times or with\n                        comma separated values. Default none.\n    --clean-cache=CLEAN_CACHES\n                        Clean the given caches before executing, specify \"all\"\n                        for all cached. Currently allowed values are:\n                        \"all\",\"ccache\",\"bytecode\",\"compression\",\"dll-\n                        dependencies\". can be given multiple times or with\n                        comma separated values. Default none.\n    --disable-bytecode-cache\n                        Do not reuse dependency analysis results for modules,\n                        esp. from standard library, that are included as\n                        bytecode. Same as --disable-cache=bytecode.\n    --disable-ccache    Do not attempt to use ccache (gcc, clang, etc.) or\n                        clcache (MSVC, clangcl). Same as --disable-\n                        cache=ccache.\n    --disable-dll-dependency-cache\n                        Disable the dependency walker cache. Will result in\n                        much longer times to create the distribution folder,\n                        but might be used in case the cache is suspect to\n                        cause errors. Same as --disable-cache=dll-\n                        dependencies.\n    --force-dll-dependency-cache-update\n                        For an update of the dependency walker cache. Will\n                        result in much longer times to create the distribution\n                        folder, but might be used in case the cache is suspect\n                        to cause errors or known to need an update.\n\n  PGO compilation choices:\n    --pgo               Enables C level profile guided optimization (PGO), by\n                        executing a dedicated build first for a profiling run,\n                        and then using the result to feedback into the C\n                        compilation. Note: This is experimental and not\n                        working with standalone modes of Nuitka yet. Defaults\n                        to off.\n    --pgo-args=PGO_ARGS\n                        Arguments to be passed in case of profile guided\n                        optimization. These are passed to the special built\n                        executable during the PGO profiling run. Default\n                        empty.\n    --pgo-executable=PGO_EXECUTABLE\n                        Command to execute when collecting profile\n                        information. Use this only, if you need to launch it\n                        through a script that prepares it to run. Default use\n                        created program.\n\n  Tracing features:\n    --report=REPORT_FILENAME\n                        Report module, data files, compilation, plugin, etc.\n                        details in an XML output file. This is also super\n                        useful for issue reporting. These reports can e.g. be\n                        used to re-create the environment easily using it with\n                        '--create-environment-from-report', but contain a lot\n                        of information. Default is off.\n    --report-diffable   Report data in diffable form, i.e. no timing or memory\n                        usage values that vary from run to run. Default is\n                        off.\n    --report-user-provided=KEY_VALUE\n                        Report data from you. This can be given multiple times\n                        and be anything in 'key=value' form, where key should\n                        be an identifier, e.g. use '--report-user-\n                        provided=pipenv-lock-hash=64a5e4' to track some input\n                        values. Default is empty.\n    --report-template=REPORT_DESC\n                        Report via template. Provide template and output\n                        filename 'template.rst.j2:output.rst'. For built-in\n                        templates, check the User Manual for what these are.\n                        Can be given multiple times. Default is empty.\n    --quiet             Disable all information outputs, but show warnings.\n                        Defaults to off.\n    --show-scons        Run the C building backend Scons with verbose\n                        information, showing the executed commands, detected\n                        compilers. Defaults to off.\n    --no-progressbar    Disable progress bars. Defaults to off.\n    --show-progress     Obsolete: Provide progress information and statistics.\n                        Disables normal progress bar. Defaults to off.\n    --show-memory       Provide memory information and statistics. Defaults to\n                        off.\n    --show-modules      Provide information for included modules and DLLs\n                        Obsolete: You should use '--report' file instead.\n                        Defaults to off.\n    --show-modules-output=PATH\n                        Where to output '--show-modules', should be a\n                        filename. Default is standard output.\n    --verbose           Output details of actions taken, esp. in\n                        optimizations. Can become a lot. Defaults to off.\n    --verbose-output=PATH\n                        Where to output from '--verbose', should be a\n                        filename. Default is standard output.\n\n  General OS controls:\n    --disable-console   When compiling for Windows or macOS, disable the\n                        console window and create a GUI application. Defaults\n                        to off.\n    --enable-console    When compiling for Windows or macOS, enable the\n                        console window and create a console application. This\n                        disables hints from certain modules, e.g. \"PySide\"\n                        that suggest to disable it. Defaults to true.\n    --force-stdout-spec=FORCE_STDOUT_SPEC\n                        Force standard output of the program to go to this\n                        location. Useful for programs with disabled console\n                        and programs using the Windows Services Plugin of\n                        Nuitka commercial. Defaults to not active, use e.g.\n                        '{PROGRAM_BASE}.out.txt', i.e. file near your program,\n                        check User Manual for full list of available values.\n    --force-stderr-spec=FORCE_STDERR_SPEC\n                        Force standard error of the program to go to this\n                        location. Useful for programs with disabled console\n                        and programs using the Windows Services Plugin of\n                        Nuitka commercial. Defaults to not active, use e.g.\n                        '{PROGRAM_BASE}.err.txt', i.e. file near your program,\n                        check User Manual for full list of available values.\n\n  Windows specific controls:\n    --windows-icon-from-ico=ICON_PATH\n                        Add executable icon. Can be given multiple times for\n                        different resolutions or files with multiple icons\n                        inside. In the later case, you may also suffix with\n                        #<n> where n is an integer index starting from 1,\n                        specifying a specific icon to be included, and all\n                        others to be ignored.\n    --windows-icon-from-exe=ICON_EXE_PATH\n                        Copy executable icons from this existing executable\n                        (Windows only).\n    --onefile-windows-splash-screen-image=SPLASH_SCREEN_IMAGE\n                        When compiling for Windows and onefile, show this\n                        while loading the application. Defaults to off.\n    --windows-uac-admin\n                        Request Windows User Control, to grant admin rights on\n                        execution. (Windows only). Defaults to off.\n    --windows-uac-uiaccess\n                        Request Windows User Control, to enforce running from\n                        a few folders only, remote desktop access. (Windows\n                        only). Defaults to off.\n\n  macOS specific controls:\n    --macos-create-app-bundle\n                        When compiling for macOS, create a bundle rather than\n                        a plain binary application. This is the only way to\n                        unlock the disabling of console, get high DPI\n                        graphics, etc. and implies standalone mode. Defaults\n                        to off.\n    --macos-target-arch=MACOS_TARGET_ARCH\n                        What architectures is this to supposed to run on.\n                        Default and limit is what the running Python allows\n                        for. Default is \"native\" which is the architecture the\n                        Python is run with.\n    --macos-app-icon=ICON_PATH\n                        Add icon for the application bundle to use. Can be\n                        given only one time. Defaults to Python icon if\n                        available.\n    --macos-signed-app-name=MACOS_SIGNED_APP_NAME\n                        Name of the application to use for macOS signing.\n                        Follow \"com.YourCompany.AppName\" naming results for\n                        best results, as these have to be globally unique, and\n                        will potentially grant protected API accesses.\n    --macos-app-name=MACOS_APP_NAME\n                        Name of the product to use in macOS bundle\n                        information. Defaults to base filename of the binary.\n    --macos-app-mode=MODE\n                        Mode of application for the application bundle. When\n                        launching a Window, and appearing in Docker is\n                        desired, default value \"gui\" is a good fit. Without a\n                        Window ever, the application is a \"background\"\n                        application. For UI elements that get to display\n                        later, \"ui-element\" is in-between. The application\n                        will not appear in dock, but get full access to\n                        desktop when it does open a Window later.\n    --macos-sign-identity=MACOS_APP_VERSION\n                        When signing on macOS, by default an ad-hoc identify\n                        will be used, but with this option your get to specify\n                        another identity to use. The signing of code is now\n                        mandatory on macOS and cannot be disabled. Use \"auto\"\n                        to detect your only identity installed. Default \"ad-\n                        hoc\" if not given.\n    --macos-sign-notarization\n                        When signing for notarization, using a proper TeamID\n                        identity from Apple, use the required runtime signing\n                        option, such that it can be accepted.\n    --macos-app-version=MACOS_APP_VERSION\n                        Product version to use in macOS bundle information.\n                        Defaults to \"1.0\" if not given.\n    --macos-app-protected-resource=RESOURCE_DESC\n                        Request an entitlement for access to a macOS protected\n                        resources, e.g.\n                        \"NSMicrophoneUsageDescription:Microphone access for\n                        recording audio.\" requests access to the microphone\n                        and provides an informative text for the user, why\n                        that is needed. Before the colon, is an OS identifier\n                        for an access right, then the informative text. Legal\n                        values can be found on https://developer.apple.com/doc\n                        umentation/bundleresources/information_property_list/p\n                        rotected_resources and the option can be specified\n                        multiple times. Default empty.\n\n  Linux specific controls:\n    --linux-icon=ICON_PATH\n                        Add executable icon for onefile binary to use. Can be\n                        given only one time. Defaults to Python icon if\n                        available.\n\n  Binary Version Information:\n    --company-name=COMPANY_NAME\n                        Name of the company to use in version information.\n                        Defaults to unused.\n    --product-name=PRODUCT_NAME\n                        Name of the product to use in version information.\n                        Defaults to base filename of the binary.\n    --file-version=FILE_VERSION\n                        File version to use in version information. Must be a\n                        sequence of up to 4 numbers, e.g. 1.0 or 1.0.0.0, no\n                        more digits are allowed, no strings are allowed.\n                        Defaults to unused.\n    --product-version=PRODUCT_VERSION\n                        Product version to use in version information. Same\n                        rules as for file version. Defaults to unused.\n    --file-description=FILE_DESCRIPTION\n                        Description of the file used in version information.\n                        Windows only at this time. Defaults to binary\n                        filename.\n    --copyright=COPYRIGHT_TEXT\n                        Copyright used in version information. Windows/macOS\n                        only at this time. Defaults to not present.\n    --trademarks=TRADEMARK_TEXT\n                        Trademark used in version information. Windows/macOS\n                        only at this time. Defaults to not present.\n\n  Plugin control:\n    --enable-plugins=PLUGIN_NAME\n                        Enabled plugins. Must be plug-in names. Use '--plugin-\n                        list' to query the full list and exit. Default empty.\n    --disable-plugins=PLUGIN_NAME\n                        Disabled plugins. Must be plug-in names. Use '--\n                        plugin-list' to query the full list and exit. Most\n                        standard plugins are not a good idea to disable.\n                        Default empty.\n    --plugin-no-detection\n                        Plugins can detect if they might be used, and the you\n                        can disable the warning via \"--disable-plugin=plugin-\n                        that-warned\", or you can use this option to disable\n                        the mechanism entirely, which also speeds up\n                        compilation slightly of course as this detection code\n                        is run in vain once you are certain of which plugins\n                        to use. Defaults to off.\n    --plugin-list       Show list of all available plugins and exit. Defaults\n                        to off.\n    --user-plugin=PATH  The file name of user plugin. Can be given multiple\n                        times. Default empty.\n    --module-parameter=MODULE_PARAMETERS\n                        Provide a module parameter. You are asked by some\n                        packages to provide extra decisions. Format is\n                        currently --module-parameter=module.name-option-\n                        name=value Default empty.\n    --show-source-changes=SHOW_SOURCE_CHANGES\n                        Show source changes to original Python file content\n                        before compilation. Mostly intended for developing\n                        plugins and Nuitka package configuration. Use e.g. '--\n                        show-source-changes=numpy.**' to see all changes below\n                        a given namespace or use '*' to see everything which\n                        can get a lot. Default empty.\n\n  Plugin options of 'anti-bloat':\n    --show-anti-bloat-changes\n                        Annotate what changes are by the plugin done.\n    --noinclude-setuptools-mode=NOINCLUDE_SETUPTOOLS_MODE\n                        What to do if a 'setuptools' or import is encountered.\n                        This package can be big with dependencies, and should\n                        definitely be avoided. Also handles 'setuptools_scm'.\n    --noinclude-pytest-mode=NOINCLUDE_PYTEST_MODE\n                        What to do if a 'pytest' import is encountered. This\n                        package can be big with dependencies, and should\n                        definitely be avoided. Also handles 'nose' imports.\n    --noinclude-unittest-mode=NOINCLUDE_UNITTEST_MODE\n                        What to do if a unittest import is encountered. This\n                        package can be big with dependencies, and should\n                        definitely be avoided.\n    --noinclude-IPython-mode=NOINCLUDE_IPYTHON_MODE\n                        What to do if a IPython import is encountered. This\n                        package can be big with dependencies, and should\n                        definitely be avoided.\n    --noinclude-dask-mode=NOINCLUDE_DASK_MODE\n                        What to do if a 'dask' import is encountered. This\n                        package can be big with dependencies, and should\n                        definitely be avoided.\n    --noinclude-numba-mode=NOINCLUDE_NUMBA_MODE\n                        What to do if a 'numba' import is encountered. This\n                        package can be big with dependencies, and is currently\n                        not working for standalone. This package is big with\n                        dependencies, and should definitely be avoided.\n    --noinclude-default-mode=NOINCLUDE_DEFAULT_MODE\n                        This actually provides the default \"warning\" value for\n                        above options, and can be used to turn all of these\n                        on.\n    --noinclude-custom-mode=CUSTOM_CHOICES\n                        What to do if a specific import is encountered. Format\n                        is module name, which can and should be a top level\n                        package and then one choice, \"error\", \"warning\",\n                        \"nofollow\", e.g. PyQt5:error.",
+  "Options": {
+    "Metadata support": {
+      "chinese": "元数据支持",
+      "content": {
+        "--include-distribution-metadata=DISTRIBUTION": {
+          "raw_parameter": "--include-distribution-metadata=DISTRIBUTION",
+          "chinese_parameter": "包含元数据分发分发",
+          "raw_introduction": "Include metadata information for the given distribution name. Some packages\ncheck metadata for presence, version, entry points, etc. and without this option\ngiven, it only works when it's recognized at compile time which is not always\nhappening. This of course only makes sense for packages that are included in the\ncompilation. Default empty.",
+          "chinese_introduction": "未给定的分发名称包含元数据信息。有些包会检查元数据的存在、版本、入口点灯，而如果没有给出这些选项，它只能在编译时被识别才会工作，这并不总是会发生。\n当然，这只对包含在编译中的包有意义。默认为空。"
+        }
+      }
+    },
+    "DLL files": {
+      "chinese": "DLL(动态链接库)文件",
+      "content": {
+        "--noinclude-dlls=PATTERN": {
+          "raw_parameter": "--noinclude-dlls=PATTERN",
+          "chinese_parameter": "不包含动态链接库们=模式",
+          "raw_introduction": "Do not include DLL files matching the filename pattern given. This is against\nthe target filename, not source paths. So ignore a DLL \"someDLL\" contained in\nthe package \"package_name\" it should be matched as \"package_name/someDLL.*\".\nDefault empty.",
+          "chinese_introduction": "不要包括与给定文件名模式匹配的DLL文件。这是针对目标文件名，而不是源路径。\n因此，要忽略包含在“package_name”包中的DLL“someDLL”，应将其匹配为“package_name/someDLL.*”。\n默认为空。"
+        },
+        "--list-package-dlls=LIST_PACKAGE_DLLS": {
+          "raw_parameter": "--list-package-dlls=LIST_PACKAGE_DLLS",
+          "chinese_parameter": "列出包动态链接库们=包名",
+          "raw_introduction": "Output the DLLs found for a given package name. Default not done.",
+          "chinese_introduction": "为给定的包名找到DLLs并输出。默认不执行。"
+        }
+      }
+    },
+    "Control the warnings to be given by Nuitka": {
+      "chinese": "控制Nuitka发出的警告",
+      "content": {
+        "--warn-implicit-exceptions": {
+          "raw_parameter": "--warn-implicit-exceptions",
+          "chinese_parameter": "警告隐式异常",
+          "raw_introduction": "Enable warnings for implicit exceptions detected at compile time.",
+          "chinese_introduction": "启用对在编译时检测到的隐式异常的警告。"
+        },
+        "--warn-unusual-code": {
+          "raw_parameter": "--warn-unusual-code",
+          "chinese_parameter": "警告不寻常的代码",
+          "raw_introduction": "Enable warnings for unusual code detected at compile time.",
+          "chinese_introduction": "启用对在编译时对检测到的不寻常代码的警告。"
+        },
+        "--assume-yes-for-downloads": {
+          "raw_parameter": "--assume-yes-for-downloads",
+          "chinese_parameter": "假设允许下载",
+          "raw_introduction": "Allow Nuitka to download external code if necessary, e.g. dependency walker,\nccache, and even gcc on Windows. To disable, redirect input from nul device,\ne.g. \"</dev/null\" or \"<NUL:\". Default is to prompt.",
+          "chinese_introduction": "在需要时允许Nuitka下载外部代码。例如依赖项walker,ccache,甚至Windows上的gcc。要禁用，请从nul设备重定向输入。\n例如\"</dev/null\"或\"<NUL:\"。默认下载时提示。"
+        },
+        "--nowarn-mnemonic=MNEMONIC": {
+          "raw_parameter": "--nowarn-mnemonic=MNEMONIC",
+          "chinese_parameter": "不警告助记符=助记符",
+          "raw_introduction": "Disable warning for a given mnemonic. These are given to make sure you are\naware of certain topics, and typically point to the Nuitka website. The mnemonic\nis the part of the URL at the end, without the HTML suffix. Can be given\nmultiple times and accepts shell pattern. Default empty.",
+          "chinese_introduction": "禁用给定助记符的警告。这些是为了确保你知道某些主题，并且通常指向Nuitka网站。助记符是URL末尾的部分，没有HTML后缀。可以多次给出并接受shell模式。默认为空。"
+        }
+      }
+    },
+    "Immediate execution after compilation": {
+      "chinese": "编译后立刻执行",
+      "content": {
+        "--run": {
+          "raw_parameter": "--run",
+          "chinese_parameter": "运行",
+          "raw_introduction": "Execute immediately the created binary (or import the compiled module).\nDefaults to off.",
+          "chinese_introduction": "立即执行创建的二进制文件(或导入已编译的模块)。默认关闭。"
+        },
+        "--debugger": {
+          "raw_parameter": "--debugger",
+          "chinese_parameter": "调试器",
+          "raw_introduction": "Execute inside a debugger, e.g. \"gdb\" or \"lldb\" to automatically get a stack\ntrace. Defaults to off.",
+          "chinese_introduction": "在调试器中执行，例如“gdb”或“lldb”以自动获取堆栈跟踪。默认关闭。"
+        },
+        "--execute-with-pythonpath": {
+          "raw_parameter": "--execute-with-pythonpath",
+          "chinese_parameter": "使用pythonpath(python路径)执行",
+          "raw_introduction": "When immediately executing the created binary or module using '--run', don't\nreset 'PYTHONPATH' environment. When all modules are successfully included, you\nought to not need PYTHONPATH anymore, and definitely not for standalone mode.",
+          "chinese_introduction": "当使用'--run'立刻执行创建的二进制文件或模块时，不要重置'PYTHONPATH'环境。当所有模块都成功包含时，您应该不再需要PYTHONPATH。\n对于独立模式(standalone)来说，绝对不需要PYTHONPATH。"
+        }
+      }
+    },
+    "Compilation choices": {
+      "chinese": "编译选项",
+      "content": {
+        "--user-package-configuration-file=YAML_FILENAME": {
+          "raw_parameter": "--user-package-configuration-file=YAML_FILENAME",
+          "chinese_parameter": "用户包配置文件=YAML文件名",
+          "raw_introduction": "User provided Yaml file with package configuration. You can include DLLs,\nremove bloat, add hidden dependencies. Check the Nuitka Package Configuration\nManual for a complete description of the format to use. Can be given multiple\ntimes. Defaults to empty.",
+          "chinese_introduction": "用户提供包含包配置的Yaml文件. 您可以包括DLL文件,删除冗余，添加隐藏的依赖项。请查阅Nuitka包配置手册，\n以获取完整的格式使用说明。可以多次给出。默认为空。"
+        },
+        "--full-compat": {
+          "raw_parameter": "--full-compat",
+          "chinese_parameter": "完全兼容",
+          "raw_introduction": "Enforce absolute compatibility with CPython. Do not even allow minor deviations\nfrom CPython behavior, e.g. not having better tracebacks or exception messages\nwhich are not really incompatible, but only different or worse. This is intended\nfor tests only and should *not* be used.",
+          "chinese_introduction": "确保和CPython绝对兼容。甚至不允许与CPython行为的轻微偏差，例如没有更好的跟踪回溯(trackback)或异常消息。\n这些行为并不是真正的不兼容，而只是不同或者更糟糕而已。这仅用于测试，不应该使用。"
+        },
+        "--file-reference-choice=MODE": {
+          "raw_parameter": "--file-reference-choice=MODE",
+          "chinese_parameter": "中文参数名:\n文件引用选择=模式\n\n原始简介:",
+          "raw_introduction": "Select what value \"__file__\" is going to be. With \"runtime\" (default for\nstandalone binary mode and module mode), the created binaries and modules, use\nthe location of themselves to deduct the value of \"__file__\". Included packages\npretend to be in directories below that location. This allows you to include\ndata files in deployments. If you merely seek acceleration, it's better for you\nto use the \"original\" value, where the source files location will be used. With\n\"frozen\" a notation \"<frozen module_name>\" is used. For compatibility reasons,\nthe \"__file__\" value will always have \".py\" suffix independent of what it really\nis.",
+          "chinese_introduction": "选择\"__file__\"的值。创建的二进制文件和模块\"执行时\"（即独立二进制文件和摸块模式的默认值)使用自己\n的位置来扣除\"__file__\"的值。包含的软件包假装在该位置下方的目录中。这样就可以在部署中包含数据文件。\n如果只是为了加速，最好使用\"原始(original)\"值，其中将使用源文件位置。也就是使用源文件的位置。使用\"frozen\"的时候，\n会使用\"<frozen module_name>\"符号。出于兼容性的原因，\"__file__\"值将始终具有\".py\"后缀，而与它的实际值无关。"
+        },
+        "--module-name-choice=MODE": {
+          "raw_parameter": "--module-name-choice=MODE",
+          "chinese_parameter": "模块名称选择=模式",
+          "raw_introduction": "Select what value \"__name__\" and \"__package__\" are going to be. With \"runtime\"\n(default for module mode), the created module uses the parent package to deduce\nthe value of \"__package__\", to be fully compatible. The value \"original\"\n(default for other modes) allows for more static optimization to happen, but is\nincompatible for modules that normally can be loaded into any package.",
+          "chinese_introduction": "选择\"__name__\"和\"__package__\"的值。使用\"执行时(runtime)\"（模块模式的默认值）创建的模块使用软件包\n来推断\"__package__\"的值，以实现完全兼容。\"原始(original)\"值（其他模式的默认值）允许进行更多的静态优化，但对那些通常\n可以加载到任意软件包的模块来说是不兼容的。"
+        }
+      }
+    },
+    "Output choices": {
+      "chinese": "输出选择",
+      "content": {
+        "--output-filename=FILENAME": {
+          "raw_parameter": "--output-filename=FILENAME",
+          "chinese_parameter": "输出文件名=文件名",
+          "raw_introduction": "Specify how the executable should be named. For extension modules there is no\nchoice, also not for standalone mode and using it will be an error. This may\ninclude path information that needs to exist though. Defaults to\n'<program_name>.exe' on this platform.",
+          "chinese_introduction": "指定可执行文件的名称。拓展模块和独立模式没有这个选项，使用时会报错。这可能需要包含存在的路径信息。\n默认为当前平台上的\"<program_name>.exe\""
+        },
+        "--output-dir=DIRECTORY": {
+          "raw_parameter": "--output-dir=DIRECTORY",
+          "chinese_parameter": "输出目录=目录",
+          "raw_introduction": "Specify where intermediate and final output files should be put. The DIRECTORY\nwill be populated with build folder, dist folder, binaries, etc. Defaults to\ncurrent directory.",
+          "chinese_introduction": "指定存放中间文件和最终输出文件的位置。选定目录将存放构建文件夹，发行文件夹，二进制文件等。默认为当前目录。"
+        },
+        "--remove-output": {
+          "raw_parameter": "--remove-output",
+          "chinese_parameter": "删除构建文件夹",
+          "raw_introduction": "Removes the build directory after producing the module or exe file. Defaults to\noff.",
+          "chinese_introduction": "生成exe或者模块文件后删除构建文件夹。默认关闭。"
+        },
+        "--no-pyi-file": {
+          "raw_parameter": "--no-pyi-file",
+          "chinese_parameter": "不创建pyi文件",
+          "raw_introduction": "Do not create a \".pyi\" file for extension modules created by Nuitka. This is\nused to detect implicit imports. Defaults to off.",
+          "chinese_introduction": "不要为Nuitka创建拓展模块而创建\".pyi\"文件用于检测隐式导入。默认关闭。"
+        }
+      }
+    },
+    "Deployment control": {
+      "chinese": "",
+      "content": {
+        "--deployment": {
+          "raw_parameter": "--deployment",
+          "chinese_parameter": "部署",
+          "raw_introduction": "Disable code aimed at making finding compatibility issues easier. This will\ne.g. prevent execution with \"-c\" argument, which is often used by code that\nattempts run a module, and causes a program to start itself over and over\npotentially. Disable once you deploy to end users, for finding typical issues,\nthis is very helpful during development. Default off.",
+          "chinese_introduction": "禁用旨在让查找兼容性问题更容易的代码。例如，这将阻止使用'-c'参数的执行，这个参数一般被尝试运行\n模块的代码使用，并且可能导致程序反复自启动。一旦你向最终用户部署，就禁用它，对于查找典型问题，\n这在开发过程中非常有帮助。默认关闭。"
+        },
+        "--no-deployment-flag=FLAG": {
+          "raw_parameter": "--no-deployment-flag=FLAG",
+          "chinese_parameter": "无部署标志=标志",
+          "raw_introduction": "Keep deployment mode, but disable selectively parts of it. Errors from\ndeployment mode will output these identifiers. Default empty.",
+          "chinese_introduction": "保持部署模式，但是选择性地禁用部分功能。部署模式的错误将会输出这些标识符。默认为空"
+        }
+      }
+    },
+    "Debug features": {
+      "chinese": "调试功能",
+      "content": {
+        "--debug": {
+          "raw_parameter": "--debug",
+          "chinese_parameter": "调试",
+          "raw_introduction": "Executing all self checks possible to find errors in Nuitka, do not use for\nproduction. Defaults to off.",
+          "chinese_introduction": "执行所有可能的自身检查以发现Nuitka中的错误，请不要用与生产中。\n默认关闭。"
+        },
+        "--unstripped": {
+          "raw_parameter": "--unstripped",
+          "chinese_parameter": "不去除调试信息",
+          "raw_introduction": "Keep debug info in the resulting object file for better debugger interaction.\nDefaults to off.",
+          "chinese_introduction": "在生成的对象文件中保留调试信息，以便更好的和调试器交互。默认关闭。"
+        },
+        "--profile": {
+          "raw_parameter": "--profile",
+          "chinese_parameter": "耗时分析",
+          "raw_introduction": "Enable vmprof based profiling of time spent. Not working currently. Defaults to\noff.",
+          "chinese_introduction": "启用基于vmprof的耗时分析。目前无法使用。默认关闭。"
+        },
+        "--internal-graph": {
+          "raw_parameter": "--internal-graph",
+          "chinese_parameter": "内部图",
+          "raw_introduction": "Create graph of optimization process internals, do not use for whole programs,\nbut only for small test cases. Defaults to off.",
+          "chinese_introduction": "创建优化过程内部的图，不要用于整个程序，请只用于小的测试用例。默认关闭。"
+        },
+        "--trace-execution": {
+          "raw_parameter": "--trace-execution",
+          "chinese_parameter": "跟踪执行",
+          "raw_introduction": "Traced execution output, output the line of code before executing it. Defaults\nto off.",
+          "chinese_introduction": "跟踪执行并输出。在执行代码之前输出代码行。默认关闭。"
+        },
+        "--recompile-c-only": {
+          "raw_parameter": "--recompile-c-only",
+          "chinese_parameter": "仅重新编译C",
+          "raw_introduction": "This is not incremental compilation, but for Nuitka development only. Takes\nexisting files and simply compile them as C again. Allows compiling edited C\nfiles for quick debugging changes to the generated source, e.g. to see if code\nis passed by, values output, etc, Defaults to off. Depends on compiling Python\nsource to determine which files it should look at.",
+          "chinese_introduction": "这不是增量编译，仅用于 Nuitka 开发。将现有文件重新编译为C。允许编译编辑过的C文件，以便对生成源代码的修改进行快速调试。\n例如查看代码是否通过，值的输出等。默认关闭。它要查看的文件取决于编译Python源代码。"
+        },
+        "--xml=XML_FILENAME": {
+          "raw_parameter": "--xml=XML_FILENAME",
+          "chinese_parameter": "xml=xml文件名",
+          "raw_introduction": "Write the internal program structure, result of optimization in XML form to\ngiven filename.",
+          "chinese_introduction": "将内部程序结构和优化结果以XML形式写入给定的文件名。"
+        },
+        "--no-deployment-flag=FLAG": {
+          "raw_parameter": "--no-deployment-flag=FLAG",
+          "chinese_parameter": "禁用发布模式标识=标识",
+          "raw_introduction": "Keep deployment mode, but disable selectively parts of it. Errors from\ndeployment mode will output these identifiers. Default empty.",
+          "chinese_introduction": "保持发布模式。但是选择性的禁用其中的某些功能。发布模式的错误将输出这些标识符。默认为空。"
+        },
+        "--experimental=FLAG": {
+          "raw_parameter": "--experimental=FLAG",
+          "chinese_parameter": "实验性=标识符",
+          "raw_introduction": "Use features declared as 'experimental'. May have no effect if no experimental\nfeatures are present in the code. Uses secret tags (check source) per\nexperimented feature.",
+          "chinese_introduction": "使用声明为\"实验性\"的功能。如果代码中没有实验性功能，则可能不会产生任何影响。\n使用每个实验功能的秘密标签(检查源代码)。"
+        },
+        "--low-memory": {
+          "raw_parameter": "--low-memory",
+          "chinese_parameter": "低内存模式",
+          "raw_introduction": "Attempt to use less memory, by forking less C compilation jobs and using\noptions that use less memory. For use on embedded machines. Use this in case of\nout of memory problems. Defaults to off.",
+          "chinese_introduction": "尝试使用更少的内存，方法是减少C编译任务的分叉并使用更少内存的选项。用于嵌入式机器。在出现内存不足的问题时使用。默认为关闭。"
+        },
+        "--create-environment-from-report=CREATE_ENVIRONMENT_FROM_REPORT": {
+          "raw_parameter": "--create-environment-from-report=CREATE_ENVIRONMENT_FROM_REPORT",
+          "chinese_parameter": "从报告中创建环境=报告",
+          "raw_introduction": "Create a new virtualenv in that non-existing path from the report file given\nwith e.g. '--report=compilation-report.xml'. Default not done.",
+          "chinese_introduction": "根据给出的报告文件在不存在的路径中创建一个新的虚拟环境，例如'--report=compilation-report.xml'。默认不执行。"
+        },
+        "--generate-c-only": {
+          "raw_parameter": "--generate-c-only",
+          "chinese_parameter": "只生成C文件",
+          "raw_introduction": "Generate only C source code, and do not compile it to binary or module. This is\nfor debugging and code coverage analysis that doesn't waste CPU. Defaults to\noff. Do not think you can use this directly.",
+          "chinese_introduction": "只生成C源代码，不编译为二进制文件或者模块。这是用于调试和代码覆盖分析的，不会浪费CPU。默认关闭。\n不要认为你可以直接使用这个。"
+        }
+      }
+    },
+    "Backend C compiler choice": {
+      "chinese": "后端 C 编译器选择",
+      "content": {
+        "--clang": {
+          "raw_parameter": "--clang",
+          "chinese_parameter": "强制使用clang",
+          "raw_introduction": "Enforce the use of clang. On Windows this requires a working Visual Studio\nversion to piggy back on. Defaults to off.",
+          "chinese_introduction": "强制使用 clang 编译。在 Windows 系统上，这需要一个正常运行的 Visual Studio 版本来支持。默认关闭。"
+        },
+        "--mingw64": {
+          "raw_parameter": "--mingw64",
+          "chinese_parameter": "强制使用mingw64",
+          "raw_introduction": "Enforce the use of MinGW64 on Windows. Defaults to off unless MSYS2 with MinGW\nPython is used.",
+          "chinese_introduction": "强制在 Windows 上使用 MinGW64。默认为关闭，除非使用 MSYS2 和 MinGW Python。"
+        },
+        "--msvc=MSVC_VERSION": {
+          "raw_parameter": "--msvc=MSVC_VERSION",
+          "chinese_parameter": "使用msvc=msvc版本",
+          "raw_introduction": "Enforce the use of specific MSVC version on Windows. Allowed values are e.g.\n\"14.3\" (MSVC 2022) and other MSVC version numbers, specify \"list\" for a list of\ninstalled compilers, or use \"latest\".  Defaults to latest MSVC being used if\ninstalled, otherwise MinGW64 is used.",
+          "chinese_introduction": "强制在Windows上使用特定的MSVC版本。允许的值有\"14.3\" (MSVC 2022)和其他MSVC版本号。\n使用 \"list \"以获得已安装编译器的列表，或使用 \"latest\"。默认在有的情况下使用最新的MSVC。否则使用MinGW64。"
+        },
+        "--jobs=N": {
+          "raw_parameter": "--jobs=N",
+          "chinese_parameter": "并行编译任务数=N",
+          "raw_introduction": "Specify the allowed number of parallel C compiler jobs. Defaults to the system\nCPU count.",
+          "chinese_introduction": "指定允许使用的并行C编译器任务数。默认为系统CPU数。"
+        },
+        "--lto=choice": {
+          "raw_parameter": "--lto=choice",
+          "chinese_parameter": "链接时间优化=选择",
+          "raw_introduction": "Use link time optimizations (MSVC, gcc, clang). Allowed values are \"yes\", \"no\",\nand \"auto\" (when it's known to work). Defaults to \"auto\".",
+          "chinese_introduction": "使用链接时间优化（MSVC、gcc、clang）允许的值有 \"yes\"（是）、\"no\"（否）和 \"auto\"（自动）(已知可用)。默认为 \"auto\"。"
+        },
+        "--static-libpython=choice": {
+          "raw_parameter": "--static-libpython=choice",
+          "chinese_parameter": "使用Python的静态链接库=选择",
+          "raw_introduction": "Use static link library of Python. Allowed values are \"yes\", \"no\", and \"auto\"\n(when it's known to work). Defaults to \"auto\".",
+          "chinese_introduction": "使用Python的静态链接库。允许的值有 \"yes\"（是）、\"no\"（否）和 \"auto\"（自动）(已知可用)。默认为 \"auto\"。"
+        },
+        "--cf-protection=PROTECTION_MODE": {
+          "raw_parameter": "--cf-protection=PROTECTION_MODE",
+          "chinese_parameter": "CF保护=保护模式",
+          "raw_introduction": "This option is gcc specific. For the gcc compiler, select the \"cf-protection\"\nmode. Default \"auto\" is to use the gcc default value, but you can override it,\ne.g. to disable it with \"none\" value. Refer to gcc documentation for\n\"-fcf-protection\" for the details.",
+          "chinese_introduction": "这个选项是特定于gcc的。为gcc编译器选择\"cf-protection\"(cf保护)模式。默认值\"auto\"是使用gcc的默认值，但你可以覆盖它，\n例如，使用\"none\"值来禁用它。有关\"-fcf-protection\"的详细信息，请参阅gcc文档"
+        }
+      }
+    },
+    "Cache Control": {
+      "chinese": "缓存控制",
+      "content": {
+        "--disable-cache=DISABLED_CACHES": {
+          "raw_parameter": "--disable-cache=DISABLED_CACHES",
+          "chinese_parameter": "禁用缓存=已禁用缓存",
+          "raw_introduction": "Disable selected caches, specify \"all\" for all cached. Currently allowed values\nare: \"all\",\"ccache\",\"bytecode\",\"compression\",\"dll-dependencies\". can be given multiple times\nor with comma separated values. Default none.",
+          "chinese_introduction": "禁用选定的缓存，设置\"all\"则为所有缓存。当前允许的值有：\"all(全部)\",\"ccache\",\"bytecode(字节码)\",\n\"compression(压缩)\",\"dll-dependencies(dll依赖项)\"。\n可以多次给出或使用逗号分隔给定的值。默认为无。"
+        },
+        "--clean-cache=CLEAN_CACHES": {
+          "raw_parameter": "--clean-cache=CLEAN_CACHES",
+          "chinese_parameter": "清理缓存=要清理的缓存",
+          "raw_introduction": "Clean the given caches before executing, specify \"all\" for all cached.\nCurrently allowed values are: \"all\",\"ccache\",\"bytecode\",\"compression\",\"dll-dependencies\". can\nbe given multiple times or with comma separated values. Default none.",
+          "chinese_introduction": "在执行前清理给定缓存，设置\"all\"则为所有缓存。当前允许的值有：\n\"all(全部)\",\"ccache\",\"bytecode(字节码)\",\"compression(压缩)\",\"dll-dependencies(dll依赖项)\"。\n可以多次给出或使用逗号分隔给定的值。默认为无。"
+        },
+        "--disable-bytecode-cache": {
+          "raw_parameter": "--disable-bytecode-cache",
+          "chinese_parameter": "禁用字节码缓存",
+          "raw_introduction": "Do not reuse dependency analysis results for modules, esp. from standard\nlibrary, that are included as bytecode. Same as --disable-cache=bytecode.",
+          "chinese_introduction": "不要重复使用模块的依赖分析结果，尤其是来自标准库的模块，这些模块会被包含为字节码。与--disable-cache=bytecode效果相同。"
+        },
+        "--disable-ccache": {
+          "raw_parameter": "--disable-ccache",
+          "chinese_parameter": "禁用ccache",
+          "raw_introduction": "Do not attempt to use ccache (gcc, clang, etc.) or clcache (MSVC, clangcl).\nSame as --disable-cache=ccache.",
+          "chinese_introduction": "不要尝试使用ccache(gcc,clang等)或clcache(MSVC,clangcl)。与--disable-cache=ccache效果相同。"
+        },
+        "--disable-dll-dependency-cache": {
+          "raw_parameter": "--disable-dll-dependency-cache",
+          "chinese_parameter": "禁用dll依赖项缓存",
+          "raw_introduction": "Disable the dependency walker cache. Will result in much longer times to create\nthe distribution folder, but might be used in case the cache is suspect to cause\nerrors. Same as --disable-cache=dll-dependencies.",
+          "chinese_introduction": "禁用依赖项分析器缓存。这将导致创建分发文件夹的时间大大延长，但如果怀疑缓存会导致错误，则可以使用它。\n与--disable-cache=dll-dependencies效果相同。"
+        },
+        "--force-dll-dependency-cache-update": {
+          "raw_parameter": "--force-dll-dependency-cache-update",
+          "chinese_parameter": "强制dll依赖项缓存更新",
+          "raw_introduction": "For an update of the dependency walker cache. Will result in much longer times\nto create the distribution folder, but might be used in case the cache is\nsuspect to cause errors or known to need an update.",
+          "chinese_introduction": "用于更新依赖分析器缓存。这将导致创建分发文件夹的时间大大延长，但如果怀疑缓存会导致错误或缓存需要更新，则可以使用它。"
+        }
+      }
+    },
+    "PGO compilation choices": {
+      "chinese": "PGO(配置文件引导优化)编译选项",
+      "content": {
+        "--pgo": {
+          "raw_parameter": "--pgo",
+          "chinese_parameter": "配置文件引导优化",
+          "raw_introduction": "Enables C level profile guided optimization (PGO), by executing a dedicated\nbuild first for a profiling run, and then using the result to feedback into the\nC compilation. Note: This is experimental and not working with standalone modes\nof Nuitka yet. Defaults to off.",
+          "chinese_introduction": "通过先进行分析，然后使用结果来反馈到C编译中，启用C级别的配置文件引导优化（PGO）。\n注意：这是实验性的，还不能与Nuitka的独立模式一起使用。默认关闭。"
+        },
+        "--pgo-args=PGO_ARGS": {
+          "raw_parameter": "--pgo-args=PGO_ARGS",
+          "chinese_parameter": "配置文件引导优化参数=配置文件引导优化参数",
+          "raw_introduction": "Arguments to be passed in case of profile guided optimization. These are passed\nto the special built executable during the PGO profiling run. Default empty.",
+          "chinese_introduction": "在进行配置文件引导优化(PGO)时传递的参数。这些参数在配置文件引导优化(PGO)分析运行期间传递给被特殊的构建可执行文件。默认为空。"
+        },
+        "--pgo-executable=PGO_EXECUTABLE": {
+          "raw_parameter": "--pgo-executable=PGO_EXECUTABLE",
+          "chinese_parameter": "配置文件引导优化可执行文件=配置文件引导优化可执行文件",
+          "raw_introduction": "Command to execute when collecting profile information. Use this only, if you\nneed to launch it through a script that prepares it to run. Default use created\nprogram.",
+          "chinese_introduction": "收集配置文件信息时要执行的命令。只有在需要通过准备运行的脚本来启动它时才使用它。默认使用创建的程序。"
+        }
+      }
+    },
+    "Tracing features": {
+      "chinese": "跟踪功能",
+      "content": {
+        "--report=REPORT_FILENAME": {
+          "raw_parameter": "--report=REPORT_FILENAME",
+          "chinese_parameter": "报告=报告文件名",
+          "raw_introduction": "Report module, data files, compilation, plugin, etc. details in an XML output\nfile. This is also super useful for issue reporting. These reports can e.g. be\nused to re-create the environment easily using it with\n'--create-environment-from-report', but contain a lot of information. Default is\noff.",
+          "chinese_introduction": "在XML输出文件中报告模块、数据文件、编译、插件等详细信息。这对于报告问题也非常有用。\n例如，这些报告可以用于使用’–create-environment-from-report’轻松重建环境，但报告包含大量信息。默认关闭。"
+        },
+        "--report-diffable": {
+          "raw_parameter": "--report-diffable",
+          "chinese_parameter": "报告差异",
+          "raw_introduction": "Report data in diffable form, i.e. no timing or memory usage values that vary\nfrom run to run. Default is off.",
+          "chinese_introduction": "以可比较的方式报告数据，即没有随着运行而变化的时间或内存使用值。默认关闭。"
+        },
+        "--report-user-provided=KEY_VALUE": {
+          "raw_parameter": "--report-user-provided=KEY_VALUE",
+          "chinese_parameter": "报告用户所提供值=键值",
+          "raw_introduction": "Report data from you. This can be given multiple times and be anything in\n'key=value' form, where key should be an identifier, e.g. use '--report-user-\nprovided=pipenv-lock-hash=64a5e4' to track some input values. Default is empty.",
+          "chinese_introduction": "报告来自您的数据。这可以多次给出，并且可以是任何形式的\"key=value\"，其中key应该是一个标识符，\n例如使用\"--report-user-provided=pipenv-lock-hash=64a5e4\"来跟踪一些输入值。默认为空。"
+        },
+        "--report-template=REPORT_DESC": {
+          "raw_parameter": "--report-template=REPORT_DESC",
+          "chinese_parameter": "报告模板=报告描述",
+          "raw_introduction": "Report via template. Provide template and output filename\n\"template.rst.j2:output.rst\". For built-in templates, check the User Manual for\nwhat these are. Can be given multiple times. Default is empty.",
+          "chinese_introduction": "通过模板报告。需要提供模板和输出文件名\"template.rst.j2:output.rst\"。对于内置模板，请查看用户手册。\n可以多次给出。默认为空。"
+        },
+        "--quiet": {
+          "raw_parameter": "--quiet",
+          "chinese_parameter": "静默模式",
+          "raw_introduction": "Disable all information outputs, but show warnings. Defaults to off.",
+          "chinese_introduction": "禁止所有信息输出，但显示警告。默认关闭。"
+        },
+        "--show-scons": {
+          "raw_parameter": "--show-scons",
+          "chinese_parameter": "显示scons",
+          "raw_introduction": "Run the C building backend Scons with verbose information, showing the executed\ncommands, detected compilers. Defaults to off.",
+          "chinese_introduction": "运行C构建后端Scons，显示执行的命令、检测到的编译器的详细信息。默认关闭。"
+        },
+        "--no-progressbar": {
+          "raw_parameter": "--no-progressbar",
+          "chinese_parameter": "无进度条",
+          "raw_introduction": "Disable progress bars. Defaults to off.",
+          "chinese_introduction": "禁用进度条。默认关闭。"
+        },
+        "--show-progress": {
+          "raw_parameter": "--show-progress",
+          "chinese_parameter": "显示进度",
+          "raw_introduction": "Obsolete: Provide progress information and statistics. Disables normal progress\nbar. Defaults to off.",
+          "chinese_introduction": "过时: 提供进度信息和统计信息。禁用正常的进度条。默认关闭。"
+        },
+        "--show-memory": {
+          "raw_parameter": "--show-memory",
+          "chinese_parameter": "显示内存",
+          "raw_introduction": "Provide memory information and statistics. Defaults to off.",
+          "chinese_introduction": "提供内存信息和统计信息。默认关闭。"
+        },
+        "--show-modules": {
+          "raw_parameter": "--show-modules",
+          "chinese_parameter": "显示模块",
+          "raw_introduction": "Provide information for included modules and DLLs Obsolete: You should use\n'--report' file instead. Defaults to off.",
+          "chinese_introduction": "过时: 您应该使用'--report'文件替代。提供包含的模块和DLL的信息。默认关闭。"
+        },
+        "--show-modules-output=PATH": {
+          "raw_parameter": "--show-modules-output=PATH",
+          "chinese_parameter": "显示模块输出=路径",
+          "raw_introduction": "Where to output '--show-modules', should be a filename. Default is standard\noutput.",
+          "chinese_introduction": "用于设定输出'--show-modules'的位置，应该是一个文件名。默认为标准输出。"
+        },
+        "--verbose": {
+          "raw_parameter": "--verbose",
+          "chinese_parameter": "详细模式",
+          "raw_introduction": "Output details of actions taken, esp. in optimizations. Can become a lot.\nDefaults to off.",
+          "chinese_introduction": "输出采取的操作的详细信息，尤其是在优化过程中可能会大量输出。默认关闭。"
+        },
+        "--verbose-output=PATH": {
+          "raw_parameter": "--verbose-output=PATH",
+          "chinese_parameter": "详细模式输出=路径",
+          "raw_introduction": "Where to output from '--verbose', should be a filename. Default is standard\noutput.",
+          "chinese_introduction": "用于设定输出'--verbose'的位置，应该是一个文件名。默认为标准输出。"
+        }
+      }
+    },
+    "General OS controls": {
+      "chinese": "通用操作系统控制",
+      "content": {
+        "--disable-console": {
+          "raw_parameter": "--disable-console",
+          "chinese_parameter": "禁用控制台",
+          "raw_introduction": "When compiling for Windows or macOS, disable the console window and create a\nGUI application. Defaults to off.",
+          "chinese_introduction": "在为Windows或macOS编译时，禁用控制台窗口并创建为一个GUI应用程序。默认关闭。"
+        },
+        "--enable-console": {
+          "raw_parameter": "--enable-console",
+          "chinese_parameter": "启用控制台",
+          "raw_introduction": "When compiling for Windows or macOS, enable the console window and create a\nconsole application. This disables hints from certain modules, e.g. \"PySide\"\nthat suggest to disable it. Defaults to true.",
+          "chinese_introduction": "在为Windows或macOS编译时，启用控制台窗口并创建一个控制台应用程序。\n这将禁用来自某些模块的提示，例如\"PySide\"会建议禁用它。默认启用。"
+        },
+        "--force-stdout-spec=FORCE_STDOUT_SPEC": {
+          "raw_parameter": "--force-stdout-spec=FORCE_STDOUT_SPEC",
+          "chinese_parameter": "强制标准输出规范=强制标准输出规范",
+          "raw_introduction": "Force standard output of the program to go to this location. Useful for\nprograms with disabled console and programs using the Windows Services Plugin of\nNuitka commercial. Defaults to not active, use e.g. '{PROGRAM_BASE}.out.txt',\ni.e. file near your program, check User Manual for full list of available\nvalues.",
+          "chinese_introduction": "强制程序的标准输出输出到这个位置。对于禁用控制台的程序和使用Nuitka商业版的Windows服务插件的程序非常有用。默认不激活，\n例如使用'{PROGRAM_BASE}.out.txt'，也就是程序目录附近的文件，查看用户手册以获取可用值的完整列表。"
+        },
+        "--force-stderr-spec=FORCE_STDERR_SPEC": {
+          "raw_parameter": "--force-stderr-spec=FORCE_STDERR_SPEC",
+          "chinese_parameter": "强制标准错误规范=强制标准错误规范",
+          "raw_introduction": "Force standard error of the program to go to this location. Useful for programs\nwith disabled console and programs using the Windows Services Plugin of Nuitka\ncommercial. Defaults to not active, use e.g. '{PROGRAM_BASE}.err.txt', i.e. file\nnear your program, check User Manual for full list of available values.",
+          "chinese_introduction": "强制程序的标准错误输出到这个位置。对于禁用控制台的程序和使用Nuitka商业版的Windows服务插件的程序非常有用。默认不激活，\n例如使用'{PROGRAM_BASE}.err.txt'，也就是程序目录附近的文件，查看用户手册以获取可用值的完整列表。"
+        }
+      }
+    },
+    "Windows specific controls": {
+      "chinese": "Windows特定控制",
+      "content": {
+        "--windows-icon-from-ico=ICON_PATH": {
+          "raw_parameter": "--windows-icon-from-ico=ICON_PATH",
+          "chinese_parameter": "windows图标(ico文件)=图标路径",
+          "raw_introduction": "Add executable icon. Can be given multiple times for different resolutions or\nfiles with multiple icons inside. In the later case, you may also suffix with\n#<n> where n is an integer index starting from 1, specifying a specific icon to\nbe included, and all others to be ignored.",
+          "chinese_introduction": "添加可执行文件的图标。可以多次给出不同分辨率或者包含多个图标的文件。在选择包含多个图标的文件时，\n您也可以使用#<n>后缀来指定要包含的特定图标并忽略其他所有的图标，其中n是从1开始的整数索引"
+        },
+        "--windows-icon-from-exe=ICON_EXE_PATH": {
+          "raw_parameter": "--windows-icon-from-exe=ICON_EXE_PATH",
+          "chinese_parameter": "windows图标(exe文件)=图标exe路径",
+          "raw_introduction": "Copy executable icons from this existing executable (Windows only).",
+          "chinese_introduction": "复制来自该可执行文件的图标(仅限Windows)。"
+        },
+        "--onefile-windows-splash-screen-image=SPLASH_SCREEN_IMAGE": {
+          "raw_parameter": "--onefile-windows-splash-screen-image=SPLASH_SCREEN_IMAGE",
+          "chinese_parameter": "单文件Windows启动画面图像=启动画面图像",
+          "raw_introduction": "When compiling for Windows and onefile, show this while loading the\napplication. Defaults to off.",
+          "chinese_introduction": "当编译为Windows下的单文件时，在加载应用程序时显示这个图像。默认关闭。"
+        },
+        "--windows-uac-admin": {
+          "raw_parameter": "--windows-uac-admin",
+          "chinese_parameter": "请求Windows用户控制(UAC)管理员权限",
+          "raw_introduction": "Request Windows User Control, to grant admin rights on execution. (Windows\nonly). Defaults to off.",
+          "chinese_introduction": "向Windows用户控制(UAC)请求在执行时授予管理员权限。(仅限Windows)。默认关闭。"
+        },
+        "--windows-uac-uiaccess": {
+          "raw_parameter": "--windows-uac-uiaccess",
+          "chinese_parameter": "请求Windows用户控制（UAC）UI访问权限",
+          "raw_introduction": "Request Windows User Control, to enforce running from a few folders only,\nremote desktop access. (Windows only). Defaults to off.",
+          "chinese_introduction": "请求Windows用户控制权限(UAC)，用于强制在特定的几个文件夹中运行和远程桌面访问。(仅限Windows)。默认关闭。"
+        }
+      }
+    },
+    "macOS specific controls": {
+      "chinese": "MacOS特定控制",
+      "content": {
+        "--macos-create-app-bundle": {
+          "raw_parameter": "--macos-create-app-bundle",
+          "chinese_parameter": "macOS创建应用程序包",
+          "raw_introduction": "When compiling for macOS, create a bundle rather than a plain binary\napplication. This is the only way to unlock the disabling of console, get high\nDPI graphics, etc. and implies standalone mode. Defaults to off.",
+          "chinese_introduction": "在为macOS编译时，创建一个包而不是一个普通的二进制应用程序。这是禁用控制台、获取高DPI图形等的唯一方式，并且将开启独立模式。默认为关闭。"
+        },
+        "--macos-target-arch=MACOS_TARGET_ARCH": {
+          "raw_parameter": "--macos-target-arch=MACOS_TARGET_ARCH",
+          "chinese_parameter": "macOS目标架构=macOS目标架构",
+          "raw_introduction": "What architectures is this to supposed to run on. Default and limit is what the\nrunning Python allows for. Default is \"native\" which is the architecture the\nPython is run with.",
+          "chinese_introduction": "这个程序应该在什么架构上运行。默认值和限制是运行Python允许的。默认值为\"native\"，这是Python运行的架构。"
+        },
+        "--macos-app-icon=ICON_PATH": {
+          "raw_parameter": "--macos-app-icon=ICON_PATH",
+          "chinese_parameter": "macOS应用程序图标=图标路径",
+          "raw_introduction": "Add icon for the application bundle to use. Can be given only one time.\nDefaults to Python icon if available.",
+          "chinese_introduction": "添加应用程序捆绑包要使用的图标。只能给出一次。如果可用，默认为Python图标。"
+        },
+        "--macos-signed-app-name=MACOS_SIGNED_APP_NAME": {
+          "raw_parameter": "--macos-signed-app-name=MACOS_SIGNED_APP_NAME",
+          "chinese_parameter": "macOS签名应用程序名称=macOS签名应用程序名称",
+          "raw_introduction": "Name of the application to use for macOS signing. Follow\n\"com.YourCompany.AppName\" naming results for best results, as these have to be\nglobally unique, and will potentially grant protected API accesses.",
+          "chinese_introduction": "用于macOS签名的应用程序名称。为了获得最佳结果，请遵循\"com.YourCompany.AppName\"的命名格式，\n因为这些名称必须是全局唯一的，并且可能会授予受保护的API访问权限。"
+        },
+        "--macos-app-name=MACOS_APP_NAME": {
+          "raw_parameter": "--macos-app-name=MACOS_APP_NAME",
+          "chinese_parameter": "macOS应用程序名称=macOS应用程序名称",
+          "raw_introduction": "Name of the product to use in macOS bundle information. Defaults to base\nfilename of the binary.",
+          "chinese_introduction": "要在macOS捆绑包信息中使用的产品名称。默认为二进制文件的基本文件名。"
+        },
+        "--macos-app-mode=MODE": {
+          "raw_parameter": "--macos-app-mode=MODE",
+          "chinese_parameter": "macOS应用程序模式=模式",
+          "raw_introduction": "Mode of application for the application bundle. When launching a Window, and\nappearing in Docker is desired, default value \"gui\" is a good fit. Without a\nWindow ever, the application is a \"background\" application. For UI elements that\nget to display later, \"ui-element\" is in-between. The application will not\nappear in dock, but get full access to desktop when it does open a Window later.",
+          "chinese_introduction": "应用程序捆绑包的应用程序模式。当你启动一个窗口，并且希望出现在Docker中时，默认值\"gui\"是一个很好的选择。\n如果没有窗口，应用程序会是一个\"background\"应用程序。对于稍后显示的UI元素，\"ui-element\"介于两者之间。\n应用程序不会出现在dock中，但是当它稍后打开一个窗口时，它将获得对桌面的完全访问权限。"
+        },
+        "--macos-sign-identity=MACOS_APP_VERSION": {
+          "raw_parameter": "--macos-sign-identity=MACOS_APP_VERSION",
+          "chinese_parameter": "macOS签名标识=macOS应用程序版本",
+          "raw_introduction": "When signing on macOS, by default an ad-hoc identify will be used, but with\nthis option your get to specify another identity to use. The signing of code is\nnow mandatory on macOS and cannot be disabled. Use \"auto\" to detect your only\nidentity installed. Default \"ad- hoc\" if not given.",
+          "chinese_introduction": "当在macOS上签名时，默认情况下会使用一个临时标识，但是使用这个选项时，您可以指定另一个要使用的标识。\n现在，在macOS上签名代码是强制性的，不能被禁用。使用\"auto\"来检测你唯一的已安装表示。\n如果没有给出，默认为\"ad-hoc\"。"
+        },
+        "--macos-sign-notarization": {
+          "raw_parameter": "--macos-sign-notarization",
+          "chinese_parameter": "macOS签名公证",
+          "raw_introduction": "When signing for notarization, using a proper TeamID identity from Apple, use\nthe required runtime signing option, such that it can be accepted.",
+          "chinese_introduction": "当进行用于公证的签名时，使用来自Apple的正确的TeamID标识，使用所需的运行时签名选项，以便它可以被接受。"
+        },
+        "--macos-app-version=MACOS_APP_VERSION": {
+          "raw_parameter": "--macos-app-version=MACOS_APP_VERSION",
+          "chinese_parameter": "macOS应用程序版本=macOS应用程序版本",
+          "raw_introduction": "Product version to use in macOS bundle information. Defaults to \"1.0\" if not\ngiven.",
+          "chinese_introduction": "要在macOS捆绑包信息中使用的产品版本。如果没有给出，则默认为\"1.0\"。"
+        },
+        "--macos-app-protected-resource=RESOURCE_DESC": {
+          "raw_parameter": "--macos-app-protected-resource=RESOURCE_DESC",
+          "chinese_parameter": "macOS应用程序受保护资源=资源描述",
+          "raw_introduction": "Request an entitlement for access to a macOS protected resources, e.g.\n\"NSMicrophoneUsageDescription:Microphone access for recording audio.\" requests\naccess to the microphone and provides an informative text for the user, why that\nis needed. Before the colon, is an OS identifier for an access right, then the\ninformative text. Legal values can be found on https://developer.apple.com/doc\numentation/bundleresources/information_property_list/protected_resources and\nthe option can be specified multiple times. Default empty.",
+          "chinese_introduction": "请求访问macOS受保护的资源的权限，例如\"NSMicrophoneUsageDescription:Microphone access for recording audio.\"请求访问麦克风，\n并为用户提供一个信息文本，说明为什么需要这样做。在冒号之前，是一个访问权限的操作系统标识符，然后是信息文本。\n可以在https://developer.apple.com/documentation/bundleresources/information_property_list/protected_resources中找到合法的值，\n该选项可以多次指定。默认为空。"
+        }
+      }
+    },
+    "Linux specific controls": {
+      "chinese": "Linux特定控制",
+      "content": {
+        "--linux-icon=ICON_PATH": {
+          "raw_parameter": "--linux-icon=ICON_PATH",
+          "chinese_parameter": "Linux图标=图标路径",
+          "raw_introduction": "Add executable icon for onefile binary to use. Can be given only one time.\nDefaults to Python icon if available.",
+          "chinese_introduction": "为单文件二进制可执行文件添加图标。只能给出一次。如果可用，默认为Python图标。"
+        }
+      }
+    },
+    "Binary Version Information": {
+      "chinese": "二进制版本信息",
+      "content": {
+        "--company-name=COMPANY_NAME": {
+          "raw_parameter": "--company-name=COMPANY_NAME",
+          "chinese_parameter": "公司名称=公司名称",
+          "raw_introduction": "Name of the company to use in version information. Defaults to unused.",
+          "chinese_introduction": "要在版本信息中使用的公司名称。默认为无。"
+        },
+        "--product-name=PRODUCT_NAME": {
+          "raw_parameter": "--product-name=PRODUCT_NAME",
+          "chinese_parameter": "产品名称=产品名称",
+          "raw_introduction": "Name of the product to use in version information. Defaults to base filename of\nthe binary.",
+          "chinese_introduction": "要在版本信息中使用的产品名称。默认为二进制文件的基本文件名。"
+        },
+        "--file-version=FILE_VERSION": {
+          "raw_parameter": "--file-version=FILE_VERSION",
+          "chinese_parameter": "文件版本=文件版本",
+          "raw_introduction": "File version to use in version information. Must be a sequence of up to 4\nnumbers, e.g. 1.0 or 1.0.0.0, no more digits are allowed, no strings are\nallowed. Defaults to unused.",
+          "chinese_introduction": "要在版本信息中使用的文件版本。必须为一个最多4个数字的序列，例如1.0或1.0.0.0,不允许使用更多的数字或者使用字符串。默认为无。"
+        },
+        "--product-version=PRODUCT_VERSION": {
+          "raw_parameter": "--product-version=PRODUCT_VERSION",
+          "chinese_parameter": "产品版本=产品版本",
+          "raw_introduction": "Product version to use in version information. Same rules as for file version.\nDefaults to unused.",
+          "chinese_introduction": "要在版本信息中使用的产品版本。必须为一个最多4个数字的序列，例如1.0或1.0.0.0, 不允许使用更多的数字或者使用字符串。默认为无。"
+        },
+        "--file-description=FILE_DESCRIPTION": {
+          "raw_parameter": "--file-description=FILE_DESCRIPTION",
+          "chinese_parameter": "文件描述=文件描述",
+          "raw_introduction": "Description of the file used in version information. Windows only at this time.\nDefaults to binary filename.",
+          "chinese_introduction": "要在版本信息中使用的文件描述。目前仅限Windows。默认为二进制文件的文件名。"
+        },
+        "--copyright=COPYRIGHT_TEXT": {
+          "raw_parameter": "--copyright=COPYRIGHT_TEXT",
+          "chinese_parameter": "版权=版权文本",
+          "raw_introduction": "Copyright used in version information. Windows/macOS only at this time.\nDefaults to not present.",
+          "chinese_introduction": "在版本信息中使用的版权信息。目前仅限Windows/macOS可用。默认不显示。"
+        },
+        "--trademarks=TRADEMARK_TEXT": {
+          "raw_parameter": "--trademarks=TRADEMARK_TEXT",
+          "chinese_parameter": "商标=商标文本",
+          "raw_introduction": "Trademark used in version information. Windows/macOS only at this time.\nDefaults to not present.",
+          "chinese_introduction": "要在版本信息中使用的商标。目前仅限Windows/macOS可用。默认不显示。"
+        }
+      }
+    },
+    "Plugin control": {
+      "chinese": "插件控制",
+      "content": {
+        "--enable-plugins=PLUGIN_NAME": {
+          "raw_parameter": "--enable-plugins=PLUGIN_NAME",
+          "chinese_parameter": "启用插件=插件名称",
+          "raw_introduction": "Enabled plugins. Must be plug-in names. Use '--plugin-list' to query the full\nlist and exit. Default empty.",
+          "chinese_introduction": "启用插件。必须为插件名称。使用'--plugin-list'查询完整列表并退出。默认为空。"
+        },
+        "--disable-plugins=PLUGIN_NAME": {
+          "raw_parameter": "--disable-plugins=PLUGIN_NAME",
+          "chinese_parameter": "禁用插件=插件名称",
+          "raw_introduction": "Disabled plugins. Must be plug-in names. Use '--plugin-list' to query the full\nlist and exit. Most standard plugins are not a good idea to disable. Default\nempty.",
+          "chinese_introduction": "禁用插件。必须为插件名称。使用'--plugin-list'查询完整列表并退出。大多数情况下禁用标准插件并不是一个好主意。默认为空。"
+        },
+        "--plugin-no-detection": {
+          "raw_parameter": "--plugin-no-detection",
+          "chinese_parameter": "禁止插件检测",
+          "raw_introduction": "Plugins can detect if they might be used, and the you can disable the warning\nvia \"--disable-plugin=plugin-that-warned\", or you can use this option to\ndisable the mechanism entirely, which also speeds up compilation slightly of\ncourse as this detection code is run in vain once you are certain of which\nplugins to use. Defaults to off.",
+          "chinese_introduction": "插件可以检测它们是否可能被使用，您可以通过\"--disable-plugin=plugin-that-warned\"禁用警告，\n或者你可以使用这个选项来完全禁用该机制，当然，这也会稍微加快编译速度，因为一旦你确定了要使用的插件，\n这个检测代码就会白白运行。默认关闭。"
+        },
+        "--plugin-list": {
+          "raw_parameter": "--plugin-list",
+          "chinese_parameter": "插件列表",
+          "raw_introduction": "Show list of all available plugins and exit. Defaults to off.",
+          "chinese_introduction": "显示所有可用插件的列表并退出。默认关闭。"
+        },
+        "--user-plugin=PATH": {
+          "raw_parameter": "--user-plugin=PATH",
+          "chinese_parameter": "用户插件=路径",
+          "raw_introduction": "The file name of user plugin. Can be given multiple times. Default empty.",
+          "chinese_introduction": "用户插件的文件名。可以多次给出。默认为空。"
+        },
+        "--module-parameter=MODULE_PARAMETERS": {
+          "raw_parameter": "--module-parameter=MODULE_PARAMETERS",
+          "chinese_parameter": "模块参数=模块参数",
+          "raw_introduction": "Provide a module parameter. You are asked by some packages to provide extra\ndecisions. Format is currently --module-parameter=module.name-option- name=value\nDefault empty.",
+          "chinese_introduction": "提供一个模块参数。一些包要求你提供额外的决策。当前格式是 --module-parameter=module.name-option-name=value\n(模块参数=模块.名称-选项-名称=值)。默认为空。"
+        },
+        "--show-source-changes=SHOW_SOURCE_CHANGES": {
+          "raw_parameter": "--show-source-changes=SHOW_SOURCE_CHANGES",
+          "chinese_parameter": "显示源代码更改",
+          "raw_introduction": "Show source changes to original Python file content before compilation. Mostly\nintended for developing plugins and Nuitka package configuration. Use e.g. '--\nshow-source-changes=numpy.**' to see all changes below a given namespace or use\n'*' to see everything which can get a lot. Default empty.",
+          "chinese_introduction": "在编译之前显示对原Python文件内容的源代码更改。主要用于开发插件和配置Nuitka包。例如使用'-show-source-changes=numpy.**'\n可以查看给定命名空间下所有的更改，或者使用'*'来查看所有可能的大量更改。默认为空"
+        }
+      }
+    },
+    "Plugin options of 'anti-bloat'": {
+      "chinese": "'反膨胀'插件选项",
+      "content": {
+        "--show-anti-bloat-changes": {
+          "raw_parameter": "--show-anti-bloat-changes",
+          "chinese_parameter": "显示反膨胀更改",
+          "raw_introduction": "Annotate what changes are by the plugin done.",
+          "chinese_introduction": "注释插件所做的更改。"
+        },
+        "--noinclude-setuptools-mode=NOINCLUDE_SETUPTOOLS_MODE": {
+          "raw_parameter": "--noinclude-setuptools-mode=NOINCLUDE_SETUPTOOLS_MODE",
+          "chinese_parameter": "不包含setuptools模式=不包含setuptools模式",
+          "raw_introduction": "What to do if a 'setuptools' or import is encountered. This package can be big\nwith dependencies, and should definitely be avoided. Also handles\n'setuptools_scm'.",
+          "chinese_introduction": "遇到\"setuptools\"或\"setuptools_scm\"导入时的处理方式。这个包可能会有很多依赖而变得很大，应该尽量避免使用。"
+        },
+        "--noinclude-pytest-mode=NOINCLUDE_PYTEST_MODE": {
+          "raw_parameter": "--noinclude-pytest-mode=NOINCLUDE_PYTEST_MODE",
+          "chinese_parameter": "不包含pytest模式=不包含pytest模式",
+          "raw_introduction": "What to do if a 'pytest' import is encountered. This package can be big with\ndependencies, and should definitely be avoided. Also handles 'nose' imports.",
+          "chinese_introduction": "遇到\"pytest\"或\"nose\"导入时的处理方式。这个包可能会有很多依赖而变得很大，应该尽量避免使用。"
+        },
+        "--noinclude-unittest-mode=NOINCLUDE_UNITTEST_MODE": {
+          "raw_parameter": "--noinclude-unittest-mode=NOINCLUDE_UNITTEST_MODE",
+          "chinese_parameter": "不包含单元测试模式=不包含unittest模式",
+          "raw_introduction": "What to do if a unittest import is encountered. This package can be big with\ndependencies, and should definitely be avoided.",
+          "chinese_introduction": "遇到\"unittest(单元测试)\"导入时的处理方式。这个包可能会有很多依赖而变得很大，应该尽量避免使用。"
+        },
+        "--noinclude-IPython-mode=NOINCLUDE_IPYTHON_MODE": {
+          "raw_parameter": "--noinclude-IPython-mode=NOINCLUDE_IPYTHON_MODE",
+          "chinese_parameter": "不包含IPython模式=不包含IPython模式",
+          "raw_introduction": "What to do if a IPython import is encountered. This package can be big with\ndependencies, and should definitely be avoided.",
+          "chinese_introduction": "遇到\"IPython\"导入时的处理方式。这个包可能会有很多依赖而变得很大，应该尽量避免使用。"
+        },
+        "--noinclude-dask-mode=NOINCLUDE_DASK_MODE": {
+          "raw_parameter": "--noinclude-dask-mode=NOINCLUDE_DASK_MODE",
+          "chinese_parameter": "不包含dask模式=不包含dask模式",
+          "raw_introduction": "What to do if a 'dask' import is encountered. This package can be big with\ndependencies, and should definitely be avoided.",
+          "chinese_introduction": "遇到\"dask\"导入时的处理方式。这个包可能会有很多依赖而变得很大，应该尽量避免使用。"
+        },
+        "--noinclude-numba-mode=NOINCLUDE_NUMBA_MODE": {
+          "raw_parameter": "--noinclude-numba-mode=NOINCLUDE_NUMBA_MODE",
+          "chinese_parameter": "不包含numba模式=不包含numba模式",
+          "raw_introduction": "What to do if a 'numba' import is encountered. This package can be big with\ndependencies, and is currently not working for standalone. This package is big\nwith dependencies, and should definitely be avoided.",
+          "chinese_introduction": "遇到\"numba\"导入时的处理方式。这个包可能会有很多依赖而变得很大，目前在独立模式下还不能正常工作。\n这个包可能会有很多依赖而变得很大，应该尽量避免使用。"
+        },
+        "--noinclude-default-mode=NOINCLUDE_DEFAULT_MODE": {
+          "raw_parameter": "--noinclude-default-mode=NOINCLUDE_DEFAULT_MODE",
+          "chinese_parameter": "不包含的默认模式=不包含的默认模式",
+          "raw_introduction": "This actually provides the default \"warning\" value for above options, and can\nbe used to turn all of these on.",
+          "chinese_introduction": "这实际上为上面的选项提供了默认的\"警告(warning)\"值，并且可以用来打开上述所有选项。"
+        },
+        "--noinclude-custom-mode=CUSTOM_CHOICES": {
+          "raw_parameter": "--noinclude-custom-mode=CUSTOM_CHOICES",
+          "chinese_parameter": "不包含自定义模式=自定义选项",
+          "raw_introduction": "What to do if a specific import is encountered. Format is module name, which\ncan and should be a top level package and then one choice, \"error\", \"warning\",\n\"nofollow\", e.g. PyQt5:error.",
+          "chinese_introduction": "遇到特定导入时的处理方式。格式为模块名称，可以并且应该是一个顶级包，接着是一个选项，\"error\", \"warning\", \"nofollow\"，\n例如PyQt5:error。"
+        }
+      }
+    }
+  }
+}

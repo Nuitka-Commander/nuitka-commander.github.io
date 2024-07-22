@@ -1,0 +1,25 @@
+{
+  "PGO compilation choices": {
+    "chinese": "PGO(配置文件引导优化)编译选项",
+    "content": {
+      "--pgo": {
+        "raw_parameter": "--pgo",
+        "chinese_parameter": "配置文件引导优化",
+        "raw_introduction": "Enables C level profile guided optimization (PGO), by executing a dedicated\nbuild first for a profiling run, and then using the result to feedback into the\nC compilation. Note: This is experimental and not working with standalone modes\nof Nuitka yet. Defaults to off.",
+        "chinese_introduction": "通过先进行分析，然后使用结果来反馈到C编译中，启用C级别的配置文件引导优化（PGO）。\n注意：这是实验性的，还不能与Nuitka的独立模式一起使用。默认关闭。"
+      },
+      "--pgo-args=PGO_ARGS": {
+        "raw_parameter": "--pgo-args=PGO_ARGS",
+        "chinese_parameter": "配置文件引导优化参数=配置文件引导优化参数",
+        "raw_introduction": "Arguments to be passed in case of profile guided optimization. These are passed\nto the special built executable during the PGO profiling run. Default empty.",
+        "chinese_introduction": "在进行配置文件引导优化(PGO)时传递的参数。这些参数在配置文件引导优化(PGO)分析运行期间传递给被特殊的构建可执行文件。默认为空。"
+      },
+      "--pgo-executable=PGO_EXECUTABLE": {
+        "raw_parameter": "--pgo-executable=PGO_EXECUTABLE",
+        "chinese_parameter": "配置文件引导优化可执行文件=配置文件引导优化可执行文件",
+        "raw_introduction": "Command to execute when collecting profile information. Use this only, if you\nneed to launch it through a script that prepares it to run. Default use created\nprogram.",
+        "chinese_introduction": "收集配置文件信息时要执行的命令。只有在需要通过准备运行的脚本来启动它时才使用它。默认使用创建的程序。"
+      }
+    }
+  }
+}
