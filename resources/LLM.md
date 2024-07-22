@@ -1,4 +1,4 @@
-请你根据 nuitka help 信息(英文)，分开生成 nuitka commander 的配置文件和描述文件(中文)。注意所有 key 不要添加双引号
+请你根据 nuitka help 信息(英文)，分开生成 nuitka commander 的配置文件和描述文件(中文)。注意所有 key (包括描述文件) 不要添加双引号
 Bool 类型配置函数签名(生成一个Bool元素):
 (i18n: string, command: {
     original: string;
