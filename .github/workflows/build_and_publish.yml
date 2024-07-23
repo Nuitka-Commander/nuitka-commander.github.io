@@ -57,7 +57,7 @@ jobs:
           git config --global user.email "action_bot@github.com."
           git clone https://gitee.com/nuitka-commander/nuitka-commander.git
           rm index.html
-          rm -r assets/*
+          rm -r ./nuitka-commander/assets/*
           cp -r ./dist/* ./nuitka-commander/
           cd ./nuitka-commander
           git add .
@@ -71,7 +71,7 @@ jobs:
           gitee-password: ${{secrets.GITEE_PASSWORD}}
           gitee-repo: nuitka-commander/nuitka-commander
           branch: master
-      - name: 删除dist文件夹
+      - name: 删除无用文件夹
         run: |
           cd ${{ github.workspace }}
           rm -rf ./dist
