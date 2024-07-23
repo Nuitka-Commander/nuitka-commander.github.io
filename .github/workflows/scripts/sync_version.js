@@ -12,6 +12,7 @@ const URL = "https://api.github.com/repos/nuitka-commander/nuitka-commander/rele
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const constants_path = path.join(__dirname, "../../../src/values/constants.json");
 const package_path = path.join(__dirname, "../../../package.json");
+const version_path = path.join(__dirname, "../../../.github/workflows/scripts/version")
 fetch(URL)
     .then(response => response.json())
     .then(data => {
@@ -32,6 +33,9 @@ fetch(URL)
         console.log(constants, "\n\n\n");
         console.log("rewriting...")
         fs.writeFileSync(constants_path, JSON.stringify(constants, null, 2), "utf-8");
+        console.log("Successful!")
+        console.log("writing version to version file...")
+        fs.writeFileSync(version_path, package_json.version, "utf-8");
         console.log("Successful!")
     })
     .catch(error => {

@@ -1,7 +1,9 @@
 # 版本号 请在发布版本后及时修改
-version: please_write_here
+
+version: 0.7.0
 added: #新增的功能
-  -
+
+- "Nuitka Commander核心功能"
 changed: #已更改的功能
   -
 deprecated: #已弃用的功能
