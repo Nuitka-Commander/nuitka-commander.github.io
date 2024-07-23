@@ -8,7 +8,11 @@ import {ref} from "vue";
 /**
  * 加载页面是否开启
  */
-export const is_loading = ref(false);
+export const loading = ref(false);
+/**
+ * Nuitka的配置文件首次加载是否完成
+ */
+export let nuitka_config_first_loaded = ref(false);
 /**
  * 所需加载的总数，若大于0则设为加载状态，否则关闭加载状态
  * @type {number}
@@ -26,6 +30,5 @@ export function set_loading(state) {
     } else {
         loading_tot--;
     }
-    is_loading.value = loading_tot > 0;
-
+    loading.value = loading_tot > 0;
 }
