@@ -30,8 +30,9 @@ jobs:
 
       - name: 更新制作人员列表
         run: node ${{ github.workspace }}/.github/workflows/scripts/update_authors.js
-      - name: 检查版本号冲突
-        run: node ${{ github.workspace }}/.github/workflows/scripts/check_version.js
+
+      - name: 检查版本并同步版本号
+        run: node ${{ github.workspace }}/.github/workflows/scripts/sync_version.js
       - name: 检查更新日志并转markdown
         run: |
           node ${{ github.workspace }}/.github/workflows/scripts/check_changelog.js
