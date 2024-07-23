@@ -5,7 +5,7 @@ import WebsiteFooter from "@/components/websiteFooter.vue";
 import NavBar from "@/components/navBar.vue";
 import {Edit, Share, Upload} from "@element-plus/icons-vue";
 import CommandEdit from "@/components/commandEdit.vue";
-import {user_options} from "@/vals/stores/user_options.js";
+import {user_options} from "@/values/stores/user_options.js";
 import OutputPage from "@/components/outputPage.vue";
 </script>
 

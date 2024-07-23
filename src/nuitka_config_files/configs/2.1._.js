@@ -3,7 +3,7 @@
  * @Author: erduotong
  * @Date: 2023-12-05 22:28:39
  */
-import {add_option, watcher_key} from "@/vals/templates.js";
+import {add_option, watcher_key} from "@/values/templates.js";
 
 
 const config = {

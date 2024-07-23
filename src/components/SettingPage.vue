@@ -4,7 +4,7 @@
  */
 import {ref} from "vue";
 import {Close, Setting} from "@element-plus/icons-vue";
-import {user_options} from "@/vals/stores/user_options.js";
+import {user_options} from "@/values/stores/user_options.js";
 import {set_theme} from "@/modules/use_theme.js";
 import {set_i18n_language} from "@/assets/languages/i18n.js";
 import {supported_i18n} from "@/assets/languages/supported_i18n.js";

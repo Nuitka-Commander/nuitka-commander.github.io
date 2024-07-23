@@ -4,12 +4,12 @@
  * @Author: erduotong
  * @Date: 2024-02-29 19:58:39
  */
-import * as constants from "@/vals/constants.json";
-import {user_options} from "@/vals/stores/user_options.js";
+import * as constants from "@/values/constants.json";
+import {user_options} from "@/values/stores/user_options.js";
 import ElementCard from "@/components/untils/elementCard.vue";
 import {ElInput, ElMessage, ElMessageBox} from "element-plus";
 import {computed, onBeforeUnmount, ref, watch} from "vue";
-import {add_option} from "@/vals/templates.js";
+import {add_option} from "@/values/templates.js";
 import {useI18n} from "vue-i18n";
 import {Delete} from "@element-plus/icons-vue";
 import {is_array_equivalent} from "@/modules/untils.js";

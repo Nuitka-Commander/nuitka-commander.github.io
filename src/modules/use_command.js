@@ -5,11 +5,11 @@
  */
 import {ref, watch} from "vue";
 import {local_nuitka_version_config} from "@/modules/use_local_forage.js";
-import {user_options} from "@/vals/stores/user_options.js";
+import {user_options} from "@/values/stores/user_options.js";
 import {debounce_func} from "@/modules/untils.js";
 import {debug} from "@/modules/debug.js";
-import {watcher_key} from "@/vals/templates.js";
-import {nuitka_element_type} from "@/vals/enums.js";
+import {watcher_key} from "@/values/templates.js";
+import {nuitka_element_type} from "@/values/enums.js";
 
 
 class CommandStatus {
@@ -51,9 +51,9 @@ class CommandStatus {
      */
     async update_config(config) {
         debug.check_nuitka_config(config);//检查配置文件是否符合格式
-        let id = 0;
-
         // clear
+        let id = 0;
+        this.original_status = {};
         this.output.value = {};
         for (let i of this.watchers) { //关闭监听器
             i();
@@ -128,8 +128,6 @@ class CommandStatus {
                     id: id,
                 };
                 id++;
-                // 删除 type
-                delete second_value.type;
             });
         });
 
@@ -144,7 +142,7 @@ class CommandStatus {
                 immediate: true,
             }));
 
-        this.status.value = this.original_status;
+        this.status.value = this.original_status; //深拷贝
         console.log(this.status.value);
         for (let watcher of config[watcher_key]) { //path转引用
             const source = watcher.source;

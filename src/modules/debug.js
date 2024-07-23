@@ -1,5 +1,5 @@
-import * as constants from "@/vals/constants.json";
-import {user_options} from "@/vals/stores/user_options.js";
+import * as constants from "@/values/constants.json";
+import {user_options} from "@/values/stores/user_options.js";
 
 class Debug {
     debug = constants.debug;

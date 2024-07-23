@@ -18,8 +18,8 @@
 接着，回到刚刚config内创建的文件中，填入下列内容:
 
 ```js
-import {add_option, add_watcher, watcher_key} from "@/vals/templates.js";
-import {nuitka_element_status} from "@/vals/enums.js";
+import {add_option, add_watcher, watcher_key} from "@/values/templates.js";
+import {nuitka_element_status} from "@/values/enums.js";
 
 const config = {
     support_language: {},
@@ -105,7 +105,7 @@ export const config = {
 
 并将`-`替换为`_`，  
 即为`output_dir`。  
-接下来,add_option是一个对象，其中有多个成员函数，每个函数添加一种类型的选项。其中都位于[templates](../../src/vals/templates.js)
+接下来,add_option是一个对象，其中有多个成员函数，每个函数添加一种类型的选项。其中都位于[templates](../../src/values/templates.js)
 中，  
 下列也有每种选项所需的类型，选项的具体写法请参照文档注释。
 

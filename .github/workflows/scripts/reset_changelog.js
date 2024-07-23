@@ -8,8 +8,8 @@ import {fileURLToPath} from "url";
 import fs from "fs";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
-const templatePath = path.join(__dirname, "../template/change_log.yaml");
-const docsPath = path.join(__dirname, "../../../docs/change_log.yaml");
+const templatePath = path.join(__dirname, "../template/CHANGELOG.md");
+const docsPath = path.join(__dirname, "../../../docs/CHANGELOG.md");
 
 // Read the template file
 fs.readFile(templatePath, "utf8", (err, data) => {

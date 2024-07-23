@@ -5,7 +5,7 @@
  * @Date: 2023-12-03 22:40:21
  */
 import SettingPage from "@/components/SettingPage.vue";
-import {user_options} from "@/vals/stores/user_options.js";
+import {user_options} from "@/values/stores/user_options.js";
 import {load_new_config} from "@/modules/use_nuitka_config.js";
 import supported_nuitka_version from "@/nuitka_config_files/supported_nuitka_version.js";
 </script>

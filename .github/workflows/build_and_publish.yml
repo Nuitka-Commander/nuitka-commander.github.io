@@ -30,11 +30,12 @@ jobs:
 
       - name: 更新制作人员列表
         run: node ${{ github.workspace }}/.github/workflows/scripts/update_authors.js
-      - name: 检查版本号冲突
-        run: node ${{ github.workspace }}/.github/workflows/scripts/check_version.js
+
+      - name: 检查版本并同步版本号
+        run: node ${{ github.workspace }}/.github/workflows/scripts/sync_version.js
       - name: 检查更新日志并转markdown
         run: |
-          node ${{ github.workspace }}/.github/workflows/scripts/check_changelog.js
+          node ${{ github.workspace }}/.github/workflows/scripts/update_changelog.js
       # 其他预处理以后要用的时候在上方添加
 
       - name: 为网站构建
@@ -80,21 +81,20 @@ jobs:
           pnpm run build:local_use
           mv ${{ github.workspace }}/dist/index.html ${{ github.workspace }}/dist/Nuitka-Commander.html
       - name: 读取版本号
-        id: read_version
+        id: read_version #此处刚需存储在scripts中的version文件
         run: |
           echo "VERSION=$(cat ${{ github.workspace }}/.github/workflows/scripts/version)" >> $GITHUB_ENV
       - name: 为Github发布release
-        run: |
+        run: | # 此处刚需存储在scripts中的CHANGELOG.md文件
           gh release create $VERSION ${{ github.workspace }}/dist/Nuitka-Commander.html -F ${{ github.workspace }}/.github/workflows/scripts/CHANGELOG.md --latest -t $VERSION
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      # 重置更新日志并发布邮件提醒
       - name: 重置更新日志并更新语言支持列表
         run: |
           node ${{ github.workspace }}/.github/workflows/scripts/update_language_supports_list.js
           node ${{ github.workspace }}/.github/workflows/scripts/reset_changelog.js
           git config --global user.name "github action"
           git config --global user.email "action_bot@github.com"
-          git add ./docs/change_log.yaml
+          git add ./docs/CHANGELOG.md
           git commit -m "Reset changelog & update language support list"
           git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/Nuitka-Commander/nuitka-commander.github.io.git

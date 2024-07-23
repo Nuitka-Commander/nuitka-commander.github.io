@@ -5,11 +5,12 @@
  */
 
 import supported_nuitka_version from "@/nuitka_config_files/supported_nuitka_version.js";
-import {user_options} from "@/vals/stores/user_options.js";
-import {set_loading} from "@/vals/stores/is_loading.js";
+import {user_options} from "@/values/stores/user_options.js";
+import {set_loading} from "@/values/stores/is_loading.js";
 import {use_command} from "@/modules/use_command.js";
 import {i18n} from "@/assets/languages/i18n.js";
 import {ElMessage} from "element-plus";
+import {nextTick} from "vue";
 
 export let current_version_support_language = {};
 export let nuitka_info_loaded = false;
@@ -43,9 +44,9 @@ export async function load_new_config() {
     set_loading(true);
     const response = await import(`@/nuitka_config_files/configs/${supported_nuitka_version.versions[new_version]}.js`);
     console.log(`Loading new language: ${user_options.value.nuitka_language.toString()}`);
-    await use_command.update_config(response.default);
     current_version_support_language = response.default.support_language;
     await load_config_language(user_options.value.nuitka_language);
+    await use_command.update_config(response.default);
     set_loading(false);
 }
 
@@ -74,6 +75,7 @@ export async function load_config_language(language) {
 
 async function set_language(language) {
     set_loading(true);
+    nuitka_info_loaded = false;
     const translation = await import(`@/nuitka_config_files/translations/` +
     `${supported_nuitka_version.versions[user_options.value.nuitka_version]}/${current_version_support_language[language].path}.js`);
     const message = i18n.global.getLocaleMessage(language);
@@ -82,6 +84,9 @@ async function set_language(language) {
         ...message,
         "nuitka_info": translation.default,
     });
+    await nextTick();
     nuitka_info_loaded = true;
+
+
     set_loading(false);
 }
