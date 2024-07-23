@@ -93,8 +93,10 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: 重置更新日志并更新语言支持列表
         run: |
+          cd ${{ github.workspace }}/.github/workflows/scripts
           node ${{ github.workspace }}/.github/workflows/scripts/update_language_supports_list.js
           node ${{ github.workspace }}/.github/workflows/scripts/reset_changelog.js
+          cd ${{ github.workspace }}
           git config --global user.name "github action"
           git config --global user.email "action_bot@github.com"
           git add ./docs/CHANGELOG.md
