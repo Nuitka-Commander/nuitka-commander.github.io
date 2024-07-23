@@ -19,7 +19,7 @@ const config = {
                 original: "--module",
             },
             true,
-            false
+            false,
         ),
 
         standalone: add_option.bool(
@@ -28,7 +28,7 @@ const config = {
                 original: "--standalone",
             },
             true,
-            false
+            false,
         ),
 
         onefile: add_option.bool(
@@ -37,7 +37,7 @@ const config = {
                 original: "--onefile",
             },
             true,
-            false
+            false,
         ),
 
         python_flag: add_option.definable_multi(
@@ -113,7 +113,7 @@ const config = {
                 original: "--python-debug",
             },
             true,
-            false
+            false,
         ),
 
         python_for_scons: add_option.definable_single(
@@ -154,7 +154,7 @@ const config = {
             ["main"],
         ),
     },
-    control_the_inclusion_of_modules_and_packages_in_result:{
+    control_the_inclusion_of_modules_and_packages_in_result: {
         include_package: add_option.definable_multi(
             "include_package",
             {
@@ -240,14 +240,14 @@ const config = {
             false,
         ),
     },
-    control_the_following_into_imported_modules:{
+    control_the_following_into_imported_modules: {
         follow_imports: add_option.bool(
             "follow_imports",
             {
                 original: "--follow-imports",
             },
             true,
-            true
+            true,
         ),
 
         follow_import_to: add_option.definable_multi(
@@ -294,7 +294,7 @@ const config = {
                 original: "--nofollow-imports",
             },
             true,
-            false
+            false,
         ),
 
         follow_stdlib: add_option.bool(
@@ -303,10 +303,10 @@ const config = {
                 original: "--follow-stdlib",
             },
             true,
-            false
+            false,
         ),
     },
-    onefile_options:{
+    onefile_options: {
         onefile_tempdir_spec: add_option.definable_single(
             "onefile_tempdir_spec",
             {
@@ -368,7 +368,7 @@ const config = {
             false,
         ),
     },
-    data_files:{
+    data_files: {
         include_package_data: add_option.definable_multi(
             "include_package_data",
             {
@@ -502,14 +502,14 @@ const config = {
             [],
         ),
     },
-    backend_C_compiler_choice:{
+    backend_C_compiler_choice: {
         clang: add_option.bool(
             "clang",
             {
                 original: "--clang",
             },
             true,
-            false
+            false,
         ),
 
         mingw64: add_option.bool(
@@ -518,7 +518,7 @@ const config = {
                 original: "--mingw64",
             },
             true,
-            false
+            false,
         ),
 
         msvc: add_option.definable_single(
@@ -534,7 +534,7 @@ const config = {
                         original: "14.3",
                     },
                     true,
-                    true
+                    true,
                 ),
                 list: add_option.multi_elements(
                     "list",
@@ -542,7 +542,7 @@ const config = {
                         original: "list",
                     },
                     true,
-                    true
+                    true,
                 ),
                 latest: add_option.multi_elements(
                     "latest",
@@ -550,10 +550,10 @@ const config = {
                         original: "latest",
                     },
                     true,
-                    true
+                    true,
                 ),
             },
-            "latest"
+            "latest",
         ),
 
         jobs: add_option.definable_single(
@@ -569,10 +569,10 @@ const config = {
                         original: "4",
                     },
                     true,
-                    true
+                    true,
                 ),
             },
-            "4"
+            "4",
         ),
 
         lto: add_option.single_option(
@@ -587,24 +587,24 @@ const config = {
                     {
                         original: "yes",
                     },
-                    true
+                    true,
                 ),
                 no: add_option.multi_elements(
                     "no",
                     {
                         original: "no",
                     },
-                    true
+                    true,
                 ),
                 auto: add_option.multi_elements(
                     "auto",
                     {
                         original: "auto",
                     },
-                    true
+                    true,
                 ),
             },
-            "auto"
+            "auto",
         ),
 
         static_libpython: add_option.single_option(
@@ -619,24 +619,24 @@ const config = {
                     {
                         original: "yes",
                     },
-                    true
+                    true,
                 ),
                 no: add_option.multi_elements(
                     "no",
                     {
                         original: "no",
                     },
-                    true
+                    true,
                 ),
                 auto: add_option.multi_elements(
                     "auto",
                     {
                         original: "auto",
                     },
-                    true
+                    true,
                 ),
             },
-            "auto"
+            "auto",
         ),
 
         cf_protection: add_option.single_option(
@@ -651,20 +651,20 @@ const config = {
                     {
                         original: "auto",
                     },
-                    true
+                    true,
                 ),
                 none: add_option.multi_elements(
                     "none",
                     {
                         original: "none",
                     },
-                    true
+                    true,
                 ),
             },
-            "auto"
+            "auto",
         ),
     },
-    plugin_control:{
+    plugin_control: {
         enable_plugins: add_option.definable_multi(
             "enable_plugins",
             {
@@ -778,7 +778,7 @@ const config = {
             [],
         ),
     },
-    plugin_options_of_spacy:{
+    plugin_options_of_spacy: {
         spacy_language_model: add_option.definable_multi(
             "spacy_language_model",
             {
@@ -798,7 +798,7 @@ const config = {
             ["all"],
         ),
     },
-    binary_version_information:{
+    binary_version_information: {
         company_name: add_option.definable_single(
             "company_name",
             {
@@ -816,7 +816,7 @@ const config = {
                 ),
             },
             "default",
-            true
+            true,
         ),
 
         product_name: add_option.definable_single(
@@ -836,7 +836,7 @@ const config = {
                 ),
             },
             "default",
-            true
+            true,
         ),
 
         file_version: add_option.definable_single(
@@ -856,7 +856,7 @@ const config = {
                 ),
             },
             "default",
-            true
+            true,
         ),
 
         product_version: add_option.definable_single(
@@ -876,7 +876,7 @@ const config = {
                 ),
             },
             "default",
-            true
+            true,
         ),
 
         file_description: add_option.definable_single(
@@ -896,7 +896,7 @@ const config = {
                 ),
             },
             "default",
-            true
+            true,
         ),
 
         copyright: add_option.definable_single(
@@ -916,7 +916,7 @@ const config = {
                 ),
             },
             "default",
-            true
+            true,
         ),
 
         trademarks: add_option.definable_single(
@@ -936,10 +936,10 @@ const config = {
                 ),
             },
             "default",
-            true
+            true,
         ),
     },
-    tracing_features:{
+    tracing_features: {
         report: add_option.definable_single(
             "report",
             {
@@ -971,16 +971,7 @@ const config = {
                 original: "--report-user-provided",
             },
             true,
-            {
-                key_value: add_option.multi_elements(
-                    "key_value",
-                    {
-                        original: "key=value",
-                    },
-                    true,
-                    true,
-                ),
-            },
+            {},
             [],
         ),
         report_template: add_option.definable_multi(
@@ -1092,7 +1083,7 @@ const config = {
             "path",
         ),
     },
-    windows_specific_controls:{
+    windows_specific_controls: {
         windows_console_mode: add_option.single_option(
             "windows_console_mode",
             {
@@ -1122,7 +1113,7 @@ const config = {
                     true,
                 ),
             },
-            "force"
+            "force",
         ),
         windows_icon_from_ico: add_option.definable_multi(
             "windows_icon_from_ico",
@@ -1193,7 +1184,7 @@ const config = {
             false,
         ),
     },
-    linux_specific_controls:{
+    linux_specific_controls: {
         linux_icon: add_option.definable_single(
             "linux_icon",
             {
@@ -1211,7 +1202,7 @@ const config = {
             },
             "icon_path",
         ),
-    }
+    },
 }
 
 config[watcher_key] = [];
