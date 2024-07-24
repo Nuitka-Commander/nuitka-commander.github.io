@@ -342,6 +342,26 @@ const config = {
             [],
         ),
     },
+    DLL_files: {
+        noinclude_dlls: add_option.definable_multi(
+            "noinclude_dlls",
+            {
+                original: "--noinclude-dlls",
+            },
+            true,
+            {},
+            [],
+        ),
+        list_package_dlls: add_option.definable_multi(
+            "list_package_dlls",
+            {
+                original: "--list-package-dlls",
+            },
+            true,
+            {},
+            [],
+        ),
+    },
 };
 //基本就这个格式 回调函数接受一个参数
 // config[watcher_key] = [add_watcher({
