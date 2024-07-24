@@ -9,6 +9,7 @@ export default {
         data_files: "数据文件",
         metadata_support: "元数据支持",
         DLL_files: "DLL(动态链接库)文件",
+        Linux_specific_controls: "Linux 特定控制",
     },
     // basic
     module: {
@@ -196,5 +197,10 @@ export default {
     list_package_dlls: {
         name: "列出包动态链接库(DLL)",
         desc: "为给定的包名找到DLLs并输出。默认不执行。",
+    },
+    // Linux specific controls(Linux 特定控制)
+    linux_icon: {
+        name: "Linux图标",
+        desc: "为单文件二进制可执行文件添加图标。只能给出一次。如果可用，默认为Python图标。",
     },
 };

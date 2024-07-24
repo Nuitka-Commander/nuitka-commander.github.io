@@ -362,6 +362,18 @@ const config = {
             [],
         ),
     },
+    Linux_specific_controls: {
+        linux_icon: add_option.definable_single(
+            "linux_icon",
+            {
+                original: "--linux-icon",
+            },
+            true,
+            {},
+            "",
+            true,
+        ),
+    },
 };
 //基本就这个格式 回调函数接受一个参数
 // config[watcher_key] = [add_watcher({
