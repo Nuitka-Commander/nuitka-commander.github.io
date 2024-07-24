@@ -331,6 +331,17 @@ const config = {
             [],
         ),
     },
+    metadata_support: {
+        include_distribution_metadata: add_option.definable_multi(
+            "include_distribution_metadata",
+            {
+                original: "--include-distribution-metadata",
+            },
+            true,
+            {},
+            [],
+        ),
+    },
 };
 //基本就这个格式 回调函数接受一个参数
 // config[watcher_key] = [add_watcher({

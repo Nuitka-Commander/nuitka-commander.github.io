@@ -7,7 +7,9 @@ export default {
         control_the_following_into_imported_modules: "控制导入模块",
         onefile_options: "单文件选项",
         data_files: "数据文件",
-    }, // basic
+        metadata_support: "元数据支持",
+    },
+    // basic
     module: {
         name: "模块模式",
         desc: "创建一个可导入的二进制拓展模块可执行文件，而不是程序。默认关闭。",
@@ -177,4 +179,11 @@ export default {
         name: "列出包数据",
         desc: "输出给定包名称找到的数据文件。默认不执行",
     },
+    //metadata support
+    include_distribution_metadata: {
+        name: "包含分发元数据",
+        desc: "为给定的分发名称包含元数据信息。有些包会检查元数据的存在、版本、入口点灯，而如果没有给出这些选项，它只能在编译时被识别才会工作，这并不总是会发生。\n" +
+            "当然，这只对包含在编译中的包有意义。默认为空。",
+    },
+
 };
