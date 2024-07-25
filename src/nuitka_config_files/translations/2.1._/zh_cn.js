@@ -12,6 +12,7 @@ export default {
         Linux_specific_controls: "Linux 特定控制",
         control_the_warnings_to_be_given_by_Nuitka: "控制 Nuitka 发出的警告",
         immediate_execution_after_compilation: "编译后立刻执行",
+        compilation_choices: "编译选项",
     },
     // basic
     module: {
@@ -231,6 +232,51 @@ export default {
         name: "使用Python路径执行",
         desc: "当使用'--run'立刻执行创建的二进制文件或模块时，不要重置'PYTHONPATH'环境。当所有模块都成功包含时，您应该不再需要PYTHONPATH。\n" +
             "对于独立模式(standalone)来说，绝对不需要PYTHONPATH。",
+    },
+    // Compilation choices(编译选项)
+    user_package_configuration_files: {
+        name: "用户包配置文件",
+        desc: "用户提供包含包配置的Yaml文件. 您可以包括DLL文件,删除冗余，添加隐藏的依赖项。请查阅Nuitka包配置手册，\n" +
+            "以获取完整的格式使用说明。可以多次给出。默认为空。",
+    },
+    full_compat: {
+        name: "完全兼容CPython",
+        desc: "确保和CPython绝对兼容。甚至不允许与CPython行为的轻微偏差，例如没有更好的跟踪回溯(trackback)或异常消息。\n" +
+            "这些行为并不是真正的不兼容，而只是不同或者更糟糕而已。这仅用于测试，不应该使用。",
+    },
+    file_reference_choice: {
+        name: "文件引用选择",
+        desc: "选择\"__file__\"的值。创建的二进制文件和模块\"执行时\"（即独立二进制文件和摸块模式的默认值)使用自己\n" +
+            "的位置来扣除\"__file__\"的值。包含的软件包假装在该位置下方的目录中。这样就可以在部署中包含数据文件。\n" +
+            "如果只是为了加速，最好使用\"原始(original)\"值，其中将使用源文件位置。也就是使用源文件的位置。使用\"frozen\"的时候，\n" +
+            "会使用\"<frozen module_name>\"符号。出于兼容性的原因，\"__file__\"值将始终具有\".py\"后缀，而与它的实际值无关。",
+        elements: {
+            original: {
+                name: "original",
+                desc: "使用源文件位置",
+            },
+            frozen: {
+                name: "frozen",
+                desc: "使用\"<frozen module_name>\"符号",
+            },
+        },
+    },
+    module_name_choice: {
+        name: "模块名称选择",
+        desc: "选择\"__name__\"和\"__package__\"的值。使用\"执行时(runtime)\"（模块模式的默认值）创建的模块使用软件包\n" +
+            "来推断\"__package__\"的值，以实现完全兼容。\"原始(original)\"值（其他模式的默认值）允许进行更多的静态优化，但对那些通常\n" +
+            "可以加载到任意软件包的模块来说是不兼容的。",
+        elements: {
+            original: {
+                name: "original",
+                desc: "允许进行更多的静态优化(其他模式的默认值)",
+            },
+            runtime: {
+                name: "runtime",
+                desc: "使用软件包来推断\"__package__\"的值，以实现完全兼容(模块模式的默认值)",
+            },
+
+        },
     },
     // Linux specific controls(Linux 特定控制)
     linux_icon: {

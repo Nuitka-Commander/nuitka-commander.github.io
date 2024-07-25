@@ -423,6 +423,73 @@ const config = {
             false,
         ),
     },
+    compilation_choices: {
+        user_package_configuration_files: add_option.definable_multi(
+            "user_package_configuration_files",
+            {
+                original: "--user-package-configuration-files",
+            },
+            true,
+            {},
+            [],
+        ),
+        full_compat: add_option.bool(
+            "full_compat",
+            {
+                original: "--full-compat",
+            },
+            true,
+            false,
+        ),
+        file_reference_choice: add_option.definable_multi(
+            "file_reference_choice",
+            {
+                original: "--file-reference-choice",
+            },
+            true,
+            {
+                original: add_option.multi_elements(
+                    "original",
+                    {
+                        original: "original",
+                    },
+                    true,
+                ),
+                frozen: add_option.multi_elements(
+                    "frozen",
+                    {
+                        original: "frozen",
+                    },
+                    true,
+                ),
+            },
+            [],
+        ),
+        module_name_choice: add_option.definable_multi(
+            "module_name_choice",
+            {
+                original: "--module-name-choice",
+            },
+            true,
+            {
+                original: add_option.multi_elements(
+                    "original",
+                    {
+                        original: "original",
+                    },
+                    true,
+                ),
+                runtime: add_option.multi_elements(
+                    "runtime",
+                    {
+                        original: "runtime",
+                    },
+                    true,
+                ),
+            },
+            [],
+        ),
+    },
     Linux_specific_controls: {
         linux_icon: add_option.definable_single(
             "linux_icon",
