@@ -397,6 +397,32 @@ const config = {
             [],
         ),
     },
+    immediate_execution_after_compilation: {
+        run: add_option.bool(
+            "run",
+            {
+                original: "--run",
+            },
+            true,
+            false,
+        ),
+        debugger: add_option.bool(
+            "debugger",
+            {
+                original: "--debugger",
+            },
+            true,
+            false,
+        ),
+        execute_with_pythonpath: add_option.bool(
+            "execute_with_pythonpath",
+            {
+                original: "--execute-with-pythonpath",
+            },
+            true,
+            false,
+        ),
+    },
     Linux_specific_controls: {
         linux_icon: add_option.definable_single(
             "linux_icon",

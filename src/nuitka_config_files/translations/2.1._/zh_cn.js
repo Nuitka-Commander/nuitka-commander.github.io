@@ -10,6 +10,8 @@ export default {
         metadata_support: "元数据支持",
         DLL_files: "DLL(动态链接库)文件",
         Linux_specific_controls: "Linux 特定控制",
+        control_the_warnings_to_be_given_by_Nuitka: "控制 Nuitka 发出的警告",
+        immediate_execution_after_compilation: "编译后立刻执行",
     },
     // basic
     module: {
@@ -215,6 +217,20 @@ export default {
     nowarn_mnemonic: {
         name: "不警告助记符",
         desc: "禁用给定助记符的警告。这些是为了确保你知道某些主题，并且通常指向Nuitka网站。助记符是URL末尾的部分，没有HTML后缀。可以多次给出并接受shell模式。默认为空。",
+    },
+    // Immediate execution after compilation(编译后立刻执行)
+    run: {
+        name: "立即执行",
+        desc: "立即执行创建的二进制文件(或导入已编译的模块)。默认关闭。",
+    },
+    debugger: {
+        name: "在调试器中运行",
+        desc: "在调试器中执行，例如“gdb”或“lldb”以自动获取堆栈跟踪。默认关闭。",
+    },
+    execute_with_pythonpath: {
+        name: "使用Python路径执行",
+        desc: "当使用'--run'立刻执行创建的二进制文件或模块时，不要重置'PYTHONPATH'环境。当所有模块都成功包含时，您应该不再需要PYTHONPATH。\n" +
+            "对于独立模式(standalone)来说，绝对不需要PYTHONPATH。",
     },
     // Linux specific controls(Linux 特定控制)
     linux_icon: {
