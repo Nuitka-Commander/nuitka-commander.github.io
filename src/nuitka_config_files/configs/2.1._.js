@@ -362,6 +362,41 @@ const config = {
             [],
         ),
     },
+    control_the_warnings_to_be_given_by_Nuitka: {
+        warn_implicit_exceptions: add_option.bool(
+            "warn_implicit_exceptions",
+            {
+                original: "--warn-implicit-exceptions",
+            },
+            true,
+            false,
+        ),
+        warn_unusual_code: add_option.bool(
+            "warn_unusual_code",
+            {
+                original: "--warn-unusual-code",
+            },
+            true,
+            false,
+        ),
+        assume_yes_for_downloads: add_option.bool(
+            "assume_yes_for_downloads",
+            {
+                original: "--assume-yes-for-downloads",
+            },
+            true,
+            false,
+        ),
+        nowarn_mnemonic: add_option.definable_multi(
+            "nowarn_mnemonic",
+            {
+                original: "--nowarn-mnemonic",
+            },
+            true,
+            {},
+            [],
+        ),
+    },
     Linux_specific_controls: {
         linux_icon: add_option.definable_single(
             "linux_icon",

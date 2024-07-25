@@ -198,6 +198,24 @@ export default {
         name: "列出包动态链接库(DLL)",
         desc: "为给定的包名找到DLLs并输出。默认不执行。",
     },
+    // Control the warnings to be given by Nuitka(控制 Nuitka 发出的警告)
+    warn_implicit_exceptions: {
+        name: "警告隐式异常",
+        desc: "启用对在编译时检测到的隐式异常的警告。",
+    },
+    warn_unusual_code: {
+        name: "警告不寻常代码",
+        desc: "启用对在编译时对检测到的不寻常代码的警告。",
+    },
+    assume_yes_for_downloads: {
+        name: "假设允许下载",
+        desc: "在需要时允许Nuitka下载外部代码。例如依赖项walker,ccache,甚至Windows上的gcc。要禁用，请从nul设备重定向输入。\n" +
+            "例如\"</dev/null\"或\"<NUL:\"。默认下载时提示。",
+    },
+    nowarn_mnemonic: {
+        name: "不警告助记符",
+        desc: "禁用给定助记符的警告。这些是为了确保你知道某些主题，并且通常指向Nuitka网站。助记符是URL末尾的部分，没有HTML后缀。可以多次给出并接受shell模式。默认为空。",
+    },
     // Linux specific controls(Linux 特定控制)
     linux_icon: {
         name: "Linux图标",
