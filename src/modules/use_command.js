@@ -55,6 +55,7 @@ class CommandStatus {
         let id = 0;
         this.original_status = {};
         this.output.value = {};
+        this.storage_config.value = {};
         for (let i of this.watchers) { //关闭监听器
             i();
         }

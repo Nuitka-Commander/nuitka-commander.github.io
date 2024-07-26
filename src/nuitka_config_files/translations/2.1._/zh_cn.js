@@ -7,7 +7,15 @@ export default {
         control_the_following_into_imported_modules: "控制导入模块",
         onefile_options: "单文件选项",
         data_files: "数据文件",
-    }, // basic
+        metadata_support: "元数据支持",
+        DLL_files: "DLL(动态链接库)文件",
+        Linux_specific_controls: "Linux 特定控制",
+        control_the_warnings_to_be_given_by_Nuitka: "控制 Nuitka 发出的警告",
+        immediate_execution_after_compilation: "编译后立刻执行",
+        compilation_choices: "编译选项",
+        output_choices: "输出选项",
+    },
+    // basic
     module: {
         name: "模块模式",
         desc: "创建一个可导入的二进制拓展模块可执行文件，而不是程序。默认关闭。",
@@ -176,5 +184,126 @@ export default {
     list_package_data: {
         name: "列出包数据",
         desc: "输出给定包名称找到的数据文件。默认不执行",
+    },
+    // Metadata support(元数据支持)
+    include_distribution_metadata: {
+        name: "包含分发元数据",
+        desc: "为给定的分发名称包含元数据信息。有些包会检查元数据的存在、版本、入口点灯，而如果没有给出这些选项，它只能在编译时被识别才会工作，这并不总是会发生。\n" +
+            "当然，这只对包含在编译中的包有意义。默认为空。",
+    },
+    // DLL files(DLL(动态链接库)文件)
+    noinclude_dlls: {
+        name: "不包含动态链接库(DLL)",
+        desc: "不要包括与给定文件名模式匹配的DLL文件。这是针对目标文件名，而不是源路径。\n" +
+            "因此，要忽略包含在“package_name”包中的DLL“someDLL”，应将其匹配为“package_name/someDLL.*”。\n" +
+            "默认为空。",
+    },
+    list_package_dlls: {
+        name: "列出包动态链接库(DLL)",
+        desc: "为给定的包名找到DLLs并输出。默认不执行。",
+    },
+    // Control the warnings to be given by Nuitka(控制 Nuitka 发出的警告)
+    warn_implicit_exceptions: {
+        name: "警告隐式异常",
+        desc: "启用对在编译时检测到的隐式异常的警告。",
+    },
+    warn_unusual_code: {
+        name: "警告不寻常代码",
+        desc: "启用对在编译时对检测到的不寻常代码的警告。",
+    },
+    assume_yes_for_downloads: {
+        name: "假设允许下载",
+        desc: "在需要时允许Nuitka下载外部代码。例如依赖项walker,ccache,甚至Windows上的gcc。要禁用，请从nul设备重定向输入。\n" +
+            "例如\"</dev/null\"或\"<NUL:\"。默认下载时提示。",
+    },
+    nowarn_mnemonic: {
+        name: "不警告助记符",
+        desc: "禁用给定助记符的警告。这些是为了确保你知道某些主题，并且通常指向Nuitka网站。助记符是URL末尾的部分，没有HTML后缀。可以多次给出并接受shell模式。默认为空。",
+    },
+    // Immediate execution after compilation(编译后立刻执行)
+    run: {
+        name: "立即执行",
+        desc: "立即执行创建的二进制文件(或导入已编译的模块)。默认关闭。",
+    },
+    debugger: {
+        name: "在调试器中运行",
+        desc: "在调试器中执行，例如“gdb”或“lldb”以自动获取堆栈跟踪。默认关闭。",
+    },
+    execute_with_pythonpath: {
+        name: "使用Python路径执行",
+        desc: "当使用'--run'立刻执行创建的二进制文件或模块时，不要重置'PYTHONPATH'环境。当所有模块都成功包含时，您应该不再需要PYTHONPATH。\n" +
+            "对于独立模式(standalone)来说，绝对不需要PYTHONPATH。",
+    },
+    // Compilation choices(编译选项)
+    user_package_configuration_files: {
+        name: "用户包配置文件",
+        desc: "用户提供包含包配置的Yaml文件. 您可以包括DLL文件,删除冗余，添加隐藏的依赖项。请查阅Nuitka包配置手册，\n" +
+            "以获取完整的格式使用说明。可以多次给出。默认为空。",
+    },
+    full_compat: {
+        name: "完全兼容CPython",
+        desc: "确保和CPython绝对兼容。甚至不允许与CPython行为的轻微偏差，例如没有更好的跟踪回溯(trackback)或异常消息。\n" +
+            "这些行为并不是真正的不兼容，而只是不同或者更糟糕而已。这仅用于测试，不应该使用。",
+    },
+    file_reference_choice: {
+        name: "文件引用选择",
+        desc: "选择\"__file__\"的值。创建的二进制文件和模块\"执行时\"（即独立二进制文件和摸块模式的默认值)使用自己\n" +
+            "的位置来扣除\"__file__\"的值。包含的软件包假装在该位置下方的目录中。这样就可以在部署中包含数据文件。\n" +
+            "如果只是为了加速，最好使用\"原始(original)\"值，其中将使用源文件位置。也就是使用源文件的位置。使用\"frozen\"的时候，\n" +
+            "会使用\"＜frozen module_name＞\"符号。出于兼容性的原因，\"__file__\"值将始终具有\".py\"后缀，而与它的实际值无关。",
+        elements: {
+            original: {
+                name: "original",
+                desc: "使用源文件位置",
+            },
+            frozen: {
+                name: "frozen",
+                desc: "使用\"<frozen module_name>\"符号",
+            },
+        },
+    },
+    module_name_choice: {
+        name: "模块名称选择",
+        desc: "选择\"__name__\"和\"__package__\"的值。使用\"执行时(runtime)\"（模块模式的默认值）创建的模块使用软件包\n" +
+            "来推断\"__package__\"的值，以实现完全兼容。\"原始(original)\"值（其他模式的默认值）允许进行更多的静态优化，但对那些通常\n" +
+            "可以加载到任意软件包的模块来说是不兼容的。",
+        elements: {
+            original: {
+                name: "original",
+                desc: "允许进行更多的静态优化(其他模式的默认值)",
+            },
+            runtime: {
+                name: "runtime",
+                desc: "使用软件包来推断\"__package__\"的值，以实现完全兼容(模块模式的默认值)",
+            },
+
+        },
+    },
+    // Output choices(输出选择)
+    output_filename: {
+        name: "输出文件名",
+        desc: "指定可执行文件的名称。拓展模块和独立模式没有这个选项，使用时会报错。这可能需要包含存在的路径信息。\n" +
+            "默认为当前平台上的\"＜program_name＞.exe\"",
+        elements: {
+            program_name: {
+                name: "程序名",
+                desc: "＜program_name＞",
+            },
+        },
+    },
+    output_dir: {
+        name: "输出目录",
+        desc: "指定存放中间文件和最终输出文件的位置。选定目录将存放构建文件夹，发行文件夹，二进制文件等。默认为当前目录。",
+        elements: {
+            current_directory: {
+                name: "当前目录",
+                desc: "当前目录",
+            },
+        },
+    },
+    // Linux specific controls(Linux 特定控制)
+    linux_icon: {
+        name: "Linux图标",
+        desc: "为单文件二进制可执行文件添加图标。只能给出一次。如果可用，默认为Python图标。",
     },
 };

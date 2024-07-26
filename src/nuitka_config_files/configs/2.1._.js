@@ -129,7 +129,7 @@ const config = {
                     true,
                 ),
             },
-            ["main"],
+            [],
         ),
     },
     control_the_inclusion_of_modules_and_packages_in_result: {
@@ -253,7 +253,7 @@ const config = {
                         original: "5000",
                     },
                     true,
-                    true,
+                    false,
                 ),
             },
             "time",
@@ -329,6 +329,215 @@ const config = {
             true,
             {},
             [],
+        ),
+    },
+    metadata_support: {
+        include_distribution_metadata: add_option.definable_multi(
+            "include_distribution_metadata",
+            {
+                original: "--include-distribution-metadata",
+            },
+            true,
+            {},
+            [],
+        ),
+    },
+    DLL_files: {
+        noinclude_dlls: add_option.definable_multi(
+            "noinclude_dlls",
+            {
+                original: "--noinclude-dlls",
+            },
+            true,
+            {},
+            [],
+        ),
+        list_package_dlls: add_option.definable_multi(
+            "list_package_dlls",
+            {
+                original: "--list-package-dlls",
+            },
+            true,
+            {},
+            [],
+        ),
+    },
+    control_the_warnings_to_be_given_by_Nuitka: {
+        warn_implicit_exceptions: add_option.bool(
+            "warn_implicit_exceptions",
+            {
+                original: "--warn-implicit-exceptions",
+            },
+            true,
+            false,
+        ),
+        warn_unusual_code: add_option.bool(
+            "warn_unusual_code",
+            {
+                original: "--warn-unusual-code",
+            },
+            true,
+            false,
+        ),
+        assume_yes_for_downloads: add_option.bool(
+            "assume_yes_for_downloads",
+            {
+                original: "--assume-yes-for-downloads",
+            },
+            true,
+            false,
+        ),
+        nowarn_mnemonic: add_option.definable_multi(
+            "nowarn_mnemonic",
+            {
+                original: "--nowarn-mnemonic",
+            },
+            true,
+            {},
+            [],
+        ),
+    },
+    immediate_execution_after_compilation: {
+        run: add_option.bool(
+            "run",
+            {
+                original: "--run",
+            },
+            true,
+            false,
+        ),
+        debugger: add_option.bool(
+            "debugger",
+            {
+                original: "--debugger",
+            },
+            true,
+            false,
+        ),
+        execute_with_pythonpath: add_option.bool(
+            "execute_with_pythonpath",
+            {
+                original: "--execute-with-pythonpath",
+            },
+            true,
+            false,
+        ),
+    },
+    compilation_choices: {
+        user_package_configuration_files: add_option.definable_multi(
+            "user_package_configuration_files",
+            {
+                original: "--user-package-configuration-files",
+            },
+            true,
+            {},
+            [],
+        ),
+        full_compat: add_option.bool(
+            "full_compat",
+            {
+                original: "--full-compat",
+            },
+            true,
+            false,
+        ),
+        file_reference_choice: add_option.definable_multi(
+            "file_reference_choice",
+            {
+                original: "--file-reference-choice",
+            },
+            true,
+            {
+                original: add_option.multi_elements(
+                    "original",
+                    {
+                        original: "original",
+                    },
+                    true,
+                ),
+                frozen: add_option.multi_elements(
+                    "frozen",
+                    {
+                        original: "frozen",
+                    },
+                    true,
+                ),
+            },
+            [],
+        ),
+        module_name_choice: add_option.definable_multi(
+            "module_name_choice",
+            {
+                original: "--module-name-choice",
+            },
+            true,
+            {
+                original: add_option.multi_elements(
+                    "original",
+                    {
+                        original: "original",
+                    },
+                    true,
+                ),
+                runtime: add_option.multi_elements(
+                    "runtime",
+                    {
+                        original: "runtime",
+                    },
+                    true,
+                ),
+            },
+            [],
+        ),
+    },
+    output_choices: {
+        output_filename: add_option.definable_single(
+            "output_filename",
+            {
+                original: "--output-filename",
+            },
+            true,
+            {
+                program_name: add_option.multi_elements(
+                    "program_name",
+                    {
+                        original: "<program_name>",
+                    },
+                    true,
+                ),
+            },
+            "program_name",
+            false,
+        ),
+        output_dir: add_option.definable_single(
+            "output_dir",
+            {
+                original: "--output-dir",
+            },
+            true,
+            {
+                current_directory: add_option.multi_elements(
+                    "current_directory",
+                    {
+                        original: "./",
+                    },
+                    true,
+                ),
+            },
+            "current_directory",
+            false,
+        ),
+    },
+    Linux_specific_controls: {
+        linux_icon: add_option.definable_single(
+            "linux_icon",
+            {
+                original: "--linux-icon",
+            },
+            true,
+            {},
+            "",
+            true,
         ),
     },
 };

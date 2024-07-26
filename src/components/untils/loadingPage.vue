@@ -4,12 +4,12 @@
  * @Author: erduotong
  * @Date: 2023-11-26 10:33:25
  */
-import {is_loading} from "@/values/stores/is_loading.js";
+import {loading} from "@/values/stores/loading.js";
 </script>
 <template>
   <!--怪方法 但是好用-->
   <el-text
-      v-loading.fullscreen.lock="is_loading"
+      v-loading.fullscreen.lock="loading"
       element-loading-background="var(--loading-page-bg-rgba)"
   >loading...
   </el-text>
