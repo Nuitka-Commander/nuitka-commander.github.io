@@ -13,6 +13,7 @@ export default {
         control_the_warnings_to_be_given_by_Nuitka: "控制 Nuitka 发出的警告",
         immediate_execution_after_compilation: "编译后立刻执行",
         compilation_choices: "编译选项",
+        output_choices: "输出选项",
     },
     // basic
     module: {
@@ -276,6 +277,28 @@ export default {
                 desc: "使用软件包来推断\"__package__\"的值，以实现完全兼容(模块模式的默认值)",
             },
 
+        },
+    },
+    // Output choices(输出选择)
+    output_filename: {
+        name: "输出文件名",
+        desc: "指定可执行文件的名称。拓展模块和独立模式没有这个选项，使用时会报错。这可能需要包含存在的路径信息。\n" +
+            "默认为当前平台上的\"<program_name>.exe\"",
+        elements: {
+            program_name: {
+                name: "程序名",
+                desc: "<program_name>",
+            },
+        },
+    },
+    output_dir: {
+        name: "输出目录",
+        desc: "指定存放中间文件和最终输出文件的位置。选定目录将存放构建文件夹，发行文件夹，二进制文件等。默认为当前目录。",
+        elements: {
+            current_directory: {
+                name: "当前目录",
+                desc: "当前目录",
+            },
         },
     },
     // Linux specific controls(Linux 特定控制)

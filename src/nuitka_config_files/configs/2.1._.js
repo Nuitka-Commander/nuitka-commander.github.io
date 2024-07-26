@@ -490,6 +490,44 @@ const config = {
             [],
         ),
     },
+    output_choices: {
+        output_filename: add_option.definable_single(
+            "output_filename",
+            {
+                original: "--output-filename",
+            },
+            true,
+            {
+                program_name: add_option.multi_elements(
+                    "program_name",
+                    {
+                        original: "<program_name>",
+                    },
+                    true,
+                ),
+            },
+            "program_name",
+            false,
+        ),
+        output_dir: add_option.definable_single(
+            "output_dir",
+            {
+                original: "--output-dir",
+            },
+            true,
+            {
+                current_directory: add_option.multi_elements(
+                    "current_directory",
+                    {
+                        original: "./",
+                    },
+                    true,
+                ),
+            },
+            "current_directory",
+            false,
+        ),
+    },
     Linux_specific_controls: {
         linux_icon: add_option.definable_single(
             "linux_icon",
