@@ -177,13 +177,10 @@ const user_provides_options = computed(() => {
 
   return result;
 })
-const is_equal = computed(() => { //同时检查值是否相等以及是否有用户提供的选项 保证记录
+// 检测当前是否有用户自定义的配置，是否要保存到Json种
+const need_json = computed(() => Object.keys(user_provides_options.value).length !== 0);
 
-  if (Object.keys(user_provides_options.value).length > 0) {
-    return false; // Return false if there are user provided options
-  }
-  return is_array_equivalent(model.value.val, model.value.default);
-});
+const is_equal = computed(() => is_array_equivalent(model.value.val, model.value.default));
 const result = computed(() => {
   //cli输出
   let cli = `${model.value.command.original}=`;
@@ -200,16 +197,22 @@ const result = computed(() => {
   };
 });
 
-watch(() => [result, is_equal], ([new_result, new_is_equal]) => {
+//检查是否要保存到storage_config中，以及是否要将该组件进行输出
+watch(() => [result, is_equal, need_json], ([new_result, new_is_equal, new_need_json]) => {
+  // 如果值与默认值不符的话就加入到输出中
   if (new_is_equal.value) {
     delete use_command.output.value[props.key_name];
-    delete use_command.storage_config.value[props.key_name];
   } else {
     use_command.output.value[props.key_name] = new_result.value;
+  }
+  // 如果有用户自定义的配置或者值和原来不一样的话，那么就保存到storage_config中
+  if (!new_is_equal.value || new_need_json.value) {
     use_command.storage_config.value[props.key_name] = {
       value: model.value.val,
       user_provides_choices: user_provides_options.value,
     }; //json的值
+  } else {
+    delete use_command.storage_config.value[props.key_name];
   }
 }, {
   immediate: true,

@@ -129,7 +129,7 @@ const config = {
                     true,
                 ),
             },
-            ["main"],
+            [],
         ),
     },
     control_the_inclusion_of_modules_and_packages_in_result: {

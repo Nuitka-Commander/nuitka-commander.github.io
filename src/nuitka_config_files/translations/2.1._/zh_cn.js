@@ -250,7 +250,7 @@ export default {
         desc: "选择\"__file__\"的值。创建的二进制文件和模块\"执行时\"（即独立二进制文件和摸块模式的默认值)使用自己\n" +
             "的位置来扣除\"__file__\"的值。包含的软件包假装在该位置下方的目录中。这样就可以在部署中包含数据文件。\n" +
             "如果只是为了加速，最好使用\"原始(original)\"值，其中将使用源文件位置。也就是使用源文件的位置。使用\"frozen\"的时候，\n" +
-            "会使用\"<frozen module_name>\"符号。出于兼容性的原因，\"__file__\"值将始终具有\".py\"后缀，而与它的实际值无关。",
+            "会使用\"＜frozen module_name＞\"符号。出于兼容性的原因，\"__file__\"值将始终具有\".py\"后缀，而与它的实际值无关。",
         elements: {
             original: {
                 name: "original",
@@ -283,11 +283,11 @@ export default {
     output_filename: {
         name: "输出文件名",
         desc: "指定可执行文件的名称。拓展模块和独立模式没有这个选项，使用时会报错。这可能需要包含存在的路径信息。\n" +
-            "默认为当前平台上的\"<program_name>.exe\"",
+            "默认为当前平台上的\"＜program_name＞.exe\"",
         elements: {
             program_name: {
                 name: "程序名",
-                desc: "<program_name>",
+                desc: "＜program_name＞",
             },
         },
     },
