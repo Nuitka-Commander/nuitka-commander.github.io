@@ -563,6 +563,100 @@ const config = {
             [],
         ),
     },
+    debug_features: {
+        debug: add_option.bool(
+            "debug",
+            {
+                original: "--debug",
+            },
+            true,
+            false,
+        ),
+        unstripped: add_option.bool(
+            "unstripped",
+            {
+                original: "--unstripped",
+            },
+            true,
+            false,
+        ),
+        profile: add_option.bool(
+            "profile",
+            {
+                original: "--profile",
+            },
+            true,
+            false,
+        ),
+        internal_graph: add_option.bool(
+            "internal_graph",
+            {
+                original: "--internal-graph",
+            },
+            true,
+            false,
+        ),
+        trace_execution: add_option.bool(
+            "trace_execution",
+            {
+                original: "--trace-execution",
+            },
+            true,
+            false,
+        ),
+        recompile_c_only: add_option.bool(
+            "recompile_c_only",
+            {
+                original: "--recompile-c-only",
+            },
+            true,
+            false,
+        ),
+        xml: add_option.definable_single(
+            "xml",
+            {
+                original: "--xml",
+            },
+            true,
+            {},
+            "",
+            true,
+        ),    //这边少了个选项 但是已经重复出现了
+        experimental: add_option.definable_multi(
+            "experimental",
+            {
+                original: "--experimental",
+            },
+            true,
+            {},
+            [],
+        ),
+        low_memory: add_option.bool(
+            "low_memory",
+            {
+                original: "--low-memory",
+            },
+            true,
+            false,
+        ),
+        create_environment_from_report: add_option.definable_multi(
+            "create_environment_from_report",
+            {
+                original: "--create-environment-from-report",
+            },
+            true,
+            {},
+            [],
+        ),
+        generate_c_only: add_option.bool(
+            "generate_c_only",
+            {
+                original: "--generate-c-only",
+            },
+            true,
+            false,
+        ),
+    },
     Linux_specific_controls: {
         linux_icon: add_option.definable_single(
             "linux_icon",

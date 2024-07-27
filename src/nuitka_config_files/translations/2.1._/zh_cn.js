@@ -15,6 +15,7 @@ export default {
         compilation_choices: "编译选项",
         output_choices: "输出选项",
         deployment_control: "部署控制",
+        debug_features: "调试功能",
     },
     // basic
     module: {
@@ -320,6 +321,55 @@ export default {
     no_deployment_flag: {
         name: "不使用部署标志",
         desc: "保持部署模式，但是选择性地禁用部分功能。部署模式的错误将会输出这些标识符。默认为空",
+    },
+    // Debug features(调试功能)
+    debug: {
+        name: "调试模式",
+        desc: "执行所有可能的自身检查以发现Nuitka中的错误，请不要用与生产中。\n" +
+            "默认关闭。",
+    },
+    unstripped: {
+        name: "不去除调试信息",
+        desc: "在生成的对象文件中保留调试信息，以便更好的和调试器交互。默认关闭。",
+    },
+    profile: {
+        name: "性能分析",
+        desc: "启用基于vmprof的耗时分析。目前无法使用。默认关闭。",
+    },
+    internal_graph: {
+        name: "内部图",
+        desc: "创建优化过程内部的图，不要用于整个程序，请只用于小的测试用例。默认关闭。",
+    },
+    trace_execution: {
+        name: "跟踪执行",
+        desc: "跟踪执行并输出。在执行代码之前输出代码行。默认关闭。",
+    },
+    recompile_c_only: {
+        name: "只重新编译C",
+        desc: "这不是增量编译，仅用于 Nuitka 开发。将现有文件重新编译为C。允许编译编辑过的C文件，以便对生成源代码的修改进行快速调试。\n" +
+            "例如查看代码是否通过，值的输出等。默认关闭。它要查看的文件取决于编译Python源代码。",
+    },
+    xml: {
+        name: "输出XML",
+        desc: "将内部程序结构和优化结果以XML形式写入给定的文件名。",
+    },
+    experimental: {
+        name: "实验性",
+        desc: "使用声明为\"实验性\"的功能。如果代码中没有实验性功能，则可能不会产生任何影响。\n" +
+            "使用每个实验功能的秘密标签(检查源代码)。",
+    },
+    low_memory: {
+        name: "低内存模式",
+        desc: "尝试使用更少的内存，方法是减少C编译任务的分叉并使用更少内存的选项。用于嵌入式机器。在出现内存不足的问题时使用。默认为关闭。",
+    },
+    create_environment_from_report: {
+        name: "从报告创建环境",
+        desc: "根据给出的报告文件在不存在的路径中创建一个新的虚拟环境，例如'--report=compilation-report.xml'。默认不执行。",
+    },
+    generate_c_only: {
+        name: "只生成C源代码",
+        desc: "只生成C源代码，不编译为二进制文件或者模块。这是用于调试和代码覆盖分析的，不会浪费CPU。默认关闭。\n" +
+            "不要认为你可以直接使用这个。",
     },
     // Linux specific controls(Linux 特定控制)
     linux_icon: {
