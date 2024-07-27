@@ -527,6 +527,22 @@ const config = {
             "current_directory",
             false,
         ),
+        remove_output: add_option.bool(
+            "remove_output",
+            {
+                original: "--remove-output",
+            },
+            true,
+            false,
+        ),
+        no_pyi_file: add_option.bool(
+            "no_pyi_file",
+            {
+                original: "--no-pyi-file",
+            },
+            true,
+            false,
+        ),
     },
     Linux_specific_controls: {
         linux_icon: add_option.definable_single(

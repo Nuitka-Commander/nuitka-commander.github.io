@@ -301,6 +301,14 @@ export default {
             },
         },
     },
+    remove_output: {
+        name: "删除构建文件夹",
+        desc: "生成exe或者模块文件后删除构建文件夹。默认关闭。",
+    },
+    no_pyi_file: {
+        name: "不生成pyi文件",
+        desc: "不要为Nuitka创建拓展模块而创建\".pyi\"文件用于检测隐式导入。默认关闭。",
+    },
     // Linux specific controls(Linux 特定控制)
     linux_icon: {
         name: "Linux图标",
