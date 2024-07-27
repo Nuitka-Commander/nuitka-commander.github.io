@@ -14,6 +14,7 @@ export default {
         immediate_execution_after_compilation: "编译后立刻执行",
         compilation_choices: "编译选项",
         output_choices: "输出选项",
+        deployment_control: "部署控制",
     },
     // basic
     module: {
@@ -308,6 +309,17 @@ export default {
     no_pyi_file: {
         name: "不生成pyi文件",
         desc: "不要为Nuitka创建拓展模块而创建\".pyi\"文件用于检测隐式导入。默认关闭。",
+    },
+    // Deployment control(部署控制)
+    deployment: {
+        name: "部署模式",
+        desc: "禁用旨在让查找兼容性问题更容易的代码。例如，这将阻止使用'-c'参数的执行，这个参数一般被尝试运行\n" +
+            "模块的代码使用，并且可能导致程序反复自启动。一旦你向最终用户部署，就禁用它，对于查找典型问题，\n" +
+            "这在开发过程中非常有帮助。默认关闭。",
+    },
+    no_deployment_flag: {
+        name: "不使用部署标志",
+        desc: "保持部署模式，但是选择性地禁用部分功能。部署模式的错误将会输出这些标识符。默认为空",
     },
     // Linux specific controls(Linux 特定控制)
     linux_icon: {

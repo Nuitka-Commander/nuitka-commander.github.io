@@ -544,6 +544,25 @@ const config = {
             false,
         ),
     },
+    deployment_control: {
+        deployment: add_option.bool(
+            "deployment",
+            {
+                original: "--deployment",
+            },
+            true,
+            false,
+        ),
+        no_deployment_flag: add_option.definable_multi(
+            "no_deployment_flag",
+            {
+                original: "--no-deployment-flag",
+            },
+            true,
+            {},
+            [],
+        ),
+    },
     Linux_specific_controls: {
         linux_icon: add_option.definable_single(
             "linux_icon",
