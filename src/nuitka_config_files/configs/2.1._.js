@@ -657,6 +657,131 @@ const config = {
             false,
         ),
     },
+    backend_c_compiler_choice: {
+        clang: add_option.bool(
+            "clang",
+            {
+                original: "--clang",
+            },
+            true,
+            false,
+        ),
+        mingw64: add_option.bool(
+            "mingw64",
+            {
+                original: "--mingw64",
+            },
+            true,
+            false,
+        ),
+        msvc: add_option.definable_single(
+            "msvc",
+            {
+                original: "--msvc",
+            },
+            true,
+            {
+                latest: add_option.multi_elements(
+                    "latest",
+                    {
+                        original: "latest",
+                    },
+                    true,
+                ),
+            },
+            "",
+            true,
+        ),
+        jobs: add_option.definable_single(
+            "jobs",
+            {
+                original: "--jobs",
+            },
+            true,
+            {},
+            "",
+            false,
+        ),
+        lto: add_option.single_option(
+            "lto",
+            {
+                original: "--lto",
+            },
+            true,
+            {
+                yes: add_option.multi_elements(
+                    "yes",
+                    {
+                        original: "yes",
+                    },
+                    true,
+                ),
+                no: add_option.multi_elements(
+                    "no",
+                    {
+                        original: "no",
+                    },
+                    true,
+                ),
+                auto: add_option.multi_elements(
+                    "auto",
+                    {
+                        original: "auto",
+                    },
+                    true,
+                ),
+            },
+            "auto",
+        ),
+        static_libpython: add_option.single_option(
+            "static_libpython",
+            {
+                original: "--static-libpython",
+            },
+            true,
+            {
+                yes: add_option.multi_elements(
+                    "yes",
+                    {
+                        original: "yes",
+                    },
+                    true,
+                ),
+                no: add_option.multi_elements(
+                    "no",
+                    {
+                        original: "no",
+                    },
+                    true,
+                ),
+                auto: add_option.multi_elements(
+                    "auto",
+                    {
+                        original: "auto",
+                    },
+                    true,
+                ),
+            },
+            "auto",
+        ),
+        cf_protection: add_option.definable_single(
+            "cf_protection",
+            {
+                original: "--cf-protection",
+            },
+            true,
+            {
+                auto: add_option.multi_elements(
+                    "auto",
+                    {
+                        original: "auto",
+                    },
+                    true,
+                ),
+            },
+            "auto",
+        ),
+    },
     Linux_specific_controls: {
         linux_icon: add_option.definable_single(
             "linux_icon",

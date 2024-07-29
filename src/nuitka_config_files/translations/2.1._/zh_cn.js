@@ -16,6 +16,7 @@ export default {
         output_choices: "输出选项",
         deployment_control: "部署控制",
         debug_features: "调试功能",
+        backend_c_compiler_choice: "后端C编译器选择",
     },
     // basic
     module: {
@@ -370,6 +371,77 @@ export default {
         name: "只生成C源代码",
         desc: "只生成C源代码，不编译为二进制文件或者模块。这是用于调试和代码覆盖分析的，不会浪费CPU。默认关闭。\n" +
             "不要认为你可以直接使用这个。",
+    },
+    // Backend C compiler choice(后端 C 编译器选择)
+    clang: {
+        name: "强制使用clang",
+        desc: "强制使用 clang 编译。在 Windows 系统上，这需要一个正常运行的 Visual Studio 版本来支持。默认关闭。",
+    },
+    mingw64: {
+        name: "强制使用mingw64",
+        desc: "强制在 Windows 上使用 MinGW64。默认为关闭，除非使用 MSYS2 和 MinGW Python。",
+    },
+    msvc: {
+        name: "使用MSVC版本",
+        desc: "强制在Windows上使用特定的MSVC版本。允许的值有\"14.3\" (MSVC 2022)和其他MSVC版本号。\n" +
+            "使用 \"list \"以获得已安装编译器的列表，或使用 \"latest\"。默认在有的情况下使用最新的MSVC。否则使用MinGW64。",
+        elements: {
+            latest: {
+                name: "最新版",
+                desc: "使用最新的MSVC版本",
+            },
+        },
+    },
+    jobs: {
+        name: "并行编译任务数",
+        desc: "指定允许使用的并行C编译器任务数。默认为系统CPU数。",
+    },
+    lto: {
+        name: "链接时间优化",
+        desc: "使用链接时间优化（MSVC、gcc、clang）允许的值有 \"yes\"（是）、\"no\"（否）和 \"auto\"（自动）(已知可用)。默认为 \"auto\"。",
+        elements: {
+            yes: {
+                name: "是",
+                desc: "使用链接时间优化",
+            },
+            no: {
+                name: "否",
+                desc: "不使用链接时间优化",
+            },
+            auto: {
+                name: "自动",
+                desc: "自动使用链接时间优化",
+            },
+        },
+    },
+    static_libpython: {
+        name: "使用Python的静态链接库",
+        desc: "使用Python的静态链接库。允许的值有 \"yes\"（是）、\"no\"（否）和 \"auto\"（自动）(已知可用)。默认为 \"auto\"。",
+        elements: {
+            yes: {
+                name: "是",
+                desc: "使用Python的静态链接库",
+            },
+            no: {
+                name: "否",
+                desc: "不使用Python的静态链接库",
+            },
+            auto: {
+                name: "自动",
+                desc: "自动使用Python的静态链接库",
+            },
+        },
+    },
+    cf_protection: {
+        name: "gcc编译器CF保护模式",
+        desc: "这个选项是特定于gcc的。为gcc编译器选择\"cf-protection\"(cf保护)模式。默认值\"auto\"是使用gcc的默认值，但你可以覆盖它，\n" +
+            "例如，使用\"none\"值来禁用它。有关\"-fcf-protection\"的详细信息，请参阅gcc文档",
+        elements: {
+            auto: {
+                name: "自动",
+                desc: "使用gcc的默认值",
+            },
+        },
     },
     // Linux specific controls(Linux 特定控制)
     linux_icon: {
