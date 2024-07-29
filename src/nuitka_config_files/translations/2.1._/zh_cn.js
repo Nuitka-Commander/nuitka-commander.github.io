@@ -17,6 +17,7 @@ export default {
         deployment_control: "部署控制",
         debug_features: "调试功能",
         backend_c_compiler_choice: "后端C编译器选择",
+        cache_control: "缓存控制",
     },
     // basic
     module: {
@@ -442,6 +443,81 @@ export default {
                 desc: "使用gcc的默认值",
             },
         },
+    },
+    // Cache Control(缓存控制)
+    disable_cache: {
+        name: "禁用缓存",
+        desc: "禁用选定的缓存，设置\"all\"则为所有缓存。当前允许的值有：\"all(全部)\",\"ccache\",\"bytecode(字节码)\",\n" +
+            "\"compression(压缩)\",\"dll-dependencies(dll依赖项)\"。\n" +
+            "可以多次给出或使用逗号分隔给定的值。默认为无。",
+        elements: {
+            all: {
+                name: "全部",
+                desc: "禁用所有缓存",
+            },
+            ccache: {
+                name: "ccache缓存",
+                desc: "不要尝试使用ccache(gcc,clang等)或clcache(MSVC,clangcl)。",
+            },
+            bytecode: {
+                name: "字节码缓存",
+                desc: "不要重复使用模块的依赖分析结果，尤其是来自标准库的模块，这些模块会被包含为字节码。",
+            },
+            compression: {
+                name: "压缩缓存",
+                desc: "禁用压缩缓存",
+            },
+            dll_dependencies: {
+                name: "dll依赖项缓存",
+                desc: "禁用依赖项分析器缓存。这将导致创建分发文件夹的时间大大延长，但如果怀疑缓存会导致错误，则可以使用它。",
+            },
+        },
+
+    },
+    clean_cache: {
+        name: "清理缓存",
+        desc: "在执行前清理给定缓存，设置\"all\"则为所有缓存。当前允许的值有：\n" +
+            "\"all(全部)\",\"ccache\",\"bytecode(字节码)\",\"compression(压缩)\",\"dll-dependencies(dll依赖项)\"。\n" +
+            "可以多次给出或使用逗号分隔给定的值。默认为无。",
+        elements: {
+            all: {
+                name: "全部",
+                desc: "清理所有缓存",
+            },
+            ccache: {
+                name: "ccache缓存",
+                desc: "清理ccache缓存",
+            },
+            bytecode: {
+                name: "字节码缓存",
+                desc: "清理字节码缓存",
+            },
+            compression: {
+                name: "压缩缓存",
+                desc: "清理压缩缓存",
+            },
+            dll_dependencies: {
+                name: "dll依赖项缓存",
+                desc: "清理dll依赖项缓存",
+            },
+        },
+    },
+    disable_bytecode_cache: {
+        name: "禁用字节码缓存",
+        desc: "不要重复使用模块的依赖分析结果，尤其是来自标准库的模块，这些模块会被包含为字节码。与--disable-cache=bytecode效果相同。",
+    },
+    disable_ccache: {
+        name: "禁用ccache",
+        desc: "不要尝试使用ccache(gcc,clang等)或clcache(MSVC,clangcl)。与--disable-cache=ccache效果相同。",
+    },
+    disable_dll_dependency_cache: {
+        name: "禁用dll依赖项缓存",
+        desc: "禁用依赖项分析器缓存。这将导致创建分发文件夹的时间大大延长，但如果怀疑缓存会导致错误，则可以使用它。\n" +
+            "与--disable-cache=dll-dependencies效果相同。",
+    },
+    force_dll_dependency_cache_update: {
+        name: "强制更新dll依赖项缓存",
+        desc: "用于更新依赖分析器缓存。这将导致创建分发文件夹的时间大大延长，但如果怀疑缓存会导致错误或缓存需要更新，则可以使用它。",
     },
     // Linux specific controls(Linux 特定控制)
     linux_icon: {

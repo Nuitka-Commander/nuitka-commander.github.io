@@ -782,6 +782,130 @@ const config = {
             "auto",
         ),
     },
+    cache_control: {
+        disable_cache: add_option.defined_multi(
+            "disable_cache",
+            {
+                original: "--disable-cache",
+            },
+            true,
+            {
+                all: add_option.multi_elements(
+                    "all",
+                    {
+                        original: "all",
+                    },
+                    true,
+                ),
+                ccache: add_option.multi_elements(
+                    "ccache",
+                    {
+                        original: "ccache",
+                    },
+                    true,
+                ),
+                bytecode: add_option.multi_elements(
+                    "bytecode",
+                    {
+                        original: "bytecode",
+                    },
+                    true,
+                ),
+                compression: add_option.multi_elements(
+                    "compression",
+                    {
+                        original: "compression",
+                    },
+                    true,
+                ),
+                dll_dependencies: add_option.multi_elements(
+                    "dll_dependencies",
+                    {
+                        original: "dll_dependencies",
+                    },
+                    true,
+                ),
+            },
+            [],
+        ),
+        clean_cache: add_option.defined_multi(
+            "clean_cache",
+            {
+                original: "--clean-cache",
+            },
+            true,
+            {
+                all: add_option.multi_elements(
+                    "all",
+                    {
+                        original: "all",
+                    },
+                    true,
+                ),
+                ccache: add_option.multi_elements(
+                    "ccache",
+                    {
+                        original: "ccache",
+                    },
+                    true,
+                ),
+                bytecode: add_option.multi_elements(
+                    "bytecode",
+                    {
+                        original: "bytecode",
+                    },
+                    true,
+                ),
+                compression: add_option.multi_elements(
+                    "compression",
+                    {
+                        original: "compression",
+                    },
+                    true,
+                ),
+                dll_dependencies: add_option.multi_elements(
+                    "dll_dependencies",
+                    {
+                        original: "dll_dependencies",
+                    },
+                    true,
+                ),
+            },
+            [],
+        ),
+        disable_bytecode_cache: add_option.bool(
+            "disable_bytecode_cache",
+            {
+                original: "--disable-bytecode-cache",
+            },
+            true,
+            false,
+        ),
+        disable_ccache: add_option.bool(
+            "disable_ccache",
+            {
+                original: "--disable-ccache",
+            },
+            true,
+            false,
+        ),
+        disable_dll_dependency_cache: add_option.bool(
+            "disable_dll_dependency_cache",
+            {
+                original: "--disable-dll-dependency-cache",
+            },
+            true,
+            false,
+        ),
+        force_dll_dependency_cache_update: add_option.bool(
+            "force_dll_dependency_cache_update",
+            {
+                original: "--force-dll-dependency-cache-update",
+            },
+            true,
+            false,
+        ),
+    },
     Linux_specific_controls: {
         linux_icon: add_option.definable_single(
             "linux_icon",
