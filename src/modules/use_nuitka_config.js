@@ -82,7 +82,7 @@ async function set_language(language) {
     nuitka_info_loaded = false;
     const translation = await import(`@/nuitka_config_files/translations/` +
     `${supported_nuitka_version.versions[user_options.value.nuitka_version]}/${current_version_support_language[language].path}.js`);
-    const message = i18n.global.getLocaleMessage(language);
+    const message = i18n.global.getLocaleMessage(user_options.value.language); //从用户那边读一下信息
     // 这边因为是从网页读取的，所以要用网页语言信息
     i18n.global.setLocaleMessage(user_options.value.language, {
         ...message,
