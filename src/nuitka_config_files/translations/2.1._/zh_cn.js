@@ -18,6 +18,7 @@ export default {
         debug_features: "调试功能",
         backend_c_compiler_choice: "后端C编译器选择",
         cache_control: "缓存控制",
+        PGO_compilation_choices: "PGO(配置文件引导优化)编译选项",
     },
     // basic
     module: {
@@ -518,6 +519,20 @@ export default {
     force_dll_dependency_cache_update: {
         name: "强制更新dll依赖项缓存",
         desc: "用于更新依赖分析器缓存。这将导致创建分发文件夹的时间大大延长，但如果怀疑缓存会导致错误或缓存需要更新，则可以使用它。",
+    },
+    // PGO compilation choices(PGO(配置文件引导优化)编译选项)
+    pgo: {
+        name: "配置文件引导优化",
+        desc: "通过先进行分析，然后使用结果来反馈到C编译中，启用C级别的配置文件引导优化（PGO）。\n" +
+            "注意：这是实验性的，还不能与Nuitka的独立模式一起使用。默认关闭。",
+    },
+    pgo_args: {
+        name: "配置文件引导优化参数",
+        desc: "在进行配置文件引导优化(PGO)时传递的参数。这些参数在配置文件引导优化(PGO)分析运行期间传递给被特殊的构建可执行文件。默认为空。",
+    },
+    pgo_executable: {
+        name: "配置文件引导优化可执行文件",
+        desc: "收集配置文件信息时要执行的命令。只有在需要通过准备运行的脚本来启动它时才使用它。默认使用创建的程序。",
     },
     // Linux specific controls(Linux 特定控制)
     linux_icon: {

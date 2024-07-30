@@ -906,6 +906,34 @@ const config = {
             false,
         ),
     },
+    PGO_compilation_choices: {
+        pgo: add_option.bool(
+            "pgo",
+            {
+                original: "--pgo",
+            },
+            true,
+            false,
+        ),
+        pgo_args: add_option.definable_multi(
+            "pgo_args",
+            {
+                original: "--pgo-args",
+            },
+            true,
+            {},
+            [],
+        ),
+        pgo_executable: add_option.definable_multi(
+            "pgo_executable",
+            {
+                original: "--pgo-executable",
+            },
+            true,
+            {},
+            [],
+        ),
+    },
     Linux_specific_controls: {
         linux_icon: add_option.definable_single(
             "linux_icon",
