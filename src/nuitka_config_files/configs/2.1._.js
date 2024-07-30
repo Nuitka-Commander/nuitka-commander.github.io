@@ -934,6 +934,121 @@ const config = {
             [],
         ),
     },
+    tracing_features: {
+        report: add_option.definable_single(
+            "report",
+            {
+                original: "--report",
+            },
+            true,
+            {},
+            "",
+            true,
+        ),
+        report_diffable: add_option.bool(
+            "report_diffable",
+            {
+                original: "--report-diffable",
+            },
+            true,
+            false,
+        ),
+        report_user_provided: add_option.definable_multi(
+            "report_user_provided",
+            {
+                original: "--report-user-provided",
+            },
+            true,
+            {},
+            [],
+        ),
+        report_template: add_option.definable_multi(
+            "report_template",
+            {
+                original: "--report-template",
+            },
+            true,
+            {}, //todo
+            [],
+        ),
+        quiet: add_option.bool(
+            "quiet",
+            {
+                original: "--quiet",
+            },
+            true,
+            false,
+        ),
+        show_scons: add_option.bool(
+            "show_scons",
+            {
+                original: "--show-scons",
+            },
+            true,
+            false,
+        ),
+        no_progressbar: add_option.bool(
+            "no_progressbar",
+            {
+                original: "--no-progressbar",
+            },
+            true,
+            false,
+        ),
+        show_progress: add_option.bool(
+            "show_progress",
+            {
+                original: "--show-progress",
+            },
+            true,
+            false,
+        ),
+        show_memory: add_option.bool(
+            "show_memory",
+            {
+                original: "--show-memory",
+            },
+            true,
+            false,
+        ),
+        show_modules: add_option.bool(
+            "show_modules",
+            {
+                original: "--show-modules",
+            },
+            true,
+            false,
+        ),
+        show_modules_output: add_option.definable_single(
+            "show_modules_output",
+            {
+                original: "--show-modules-output",
+            },
+            true,
+            {},
+            "",
+            true,
+        ),
+        verbose: add_option.bool(
+            "verbose",
+            {
+                original: "--verbose",
+            },
+            true,
+            false,
+        ),
+        verbose_output: add_option.definable_single(
+            "verbose_output",
+            {
+                original: "--verbose-output",
+            },
+            true,
+            {},
+            "",
+            true,
+        ),
+    },
+
     Linux_specific_controls: {
         linux_icon: add_option.definable_single(
             "linux_icon",

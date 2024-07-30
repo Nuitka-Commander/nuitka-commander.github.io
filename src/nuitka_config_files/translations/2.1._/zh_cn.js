@@ -19,6 +19,7 @@ export default {
         backend_c_compiler_choice: "后端C编译器选择",
         cache_control: "缓存控制",
         PGO_compilation_choices: "PGO(配置文件引导优化)编译选项",
+        tracing_features: "跟踪功能",
     },
     // basic
     module: {
@@ -533,6 +534,62 @@ export default {
     pgo_executable: {
         name: "配置文件引导优化可执行文件",
         desc: "收集配置文件信息时要执行的命令。只有在需要通过准备运行的脚本来启动它时才使用它。默认使用创建的程序。",
+    },
+    // Tracing features(跟踪功能)
+    report: {
+        name: "输出报告",
+        desc: "输入一个XML文件名，在XML输出文件中报告模块、数据文件、编译、插件等详细信息。这对于报告问题也非常有用。\n" +
+            "例如，这些报告可以用于使用’–create-environment-from-report’轻松重建环境，但报告包含大量信息。默认关闭。",
+    },
+    report_diffable: {
+        name: "报告差异",
+        desc: "以可比较的方式报告数据，即没有随着运行而变化的时间或内存使用值。默认关闭。",
+    },
+    report_user_provided: {
+        name: "报告用户提供值",
+        desc: "报告来自您的数据。这可以多次给出，并且可以是任何形式的\"key=value\"，其中key应该是一个标识符，\n" +
+            "例如使用\"--report-user-provided=pipenv-lock-hash=64a5e4\"来跟踪一些输入值。默认为空。",
+    },
+    report_template: {
+        name: "报告模板",
+        desc: "通过模板报告。需要提供模板和输出文件名\"template.rst.j2:output.rst\"。对于内置模板，请查看用户手册。\n" +
+            "可以多次给出。默认为空。",
+    },
+    quiet: {
+        name: "静默模式",
+        desc: "禁止所有信息输出，但显示警告。默认关闭。",
+    },
+    show_scons: {
+        name: "显示scons",
+        desc: "运行C构建后端Scons，显示执行的命令、检测到的编译器的详细信息。默认关闭。",
+    },
+    no_progressbar: {
+        name: "不显示进度条",
+        desc: "禁用进度条。默认关闭。",
+    },
+    show_progress: {
+        name: "显示进度",
+        desc: "过时: 提供进度信息和统计信息。禁用正常的进度条。默认关闭。",
+    },
+    show_memory: {
+        name: "显示内存",
+        desc: "显示内存使用情况。默认关闭。",
+    },
+    show_modules: {
+        name: "显示模块",
+        desc: "过时: 您应该使用'--report'文件替代。提供包含的模块和DLL的信息。默认关闭。",
+    },
+    show_modules_output: {
+        name: "显示模块输出路径",
+        desc: "用于设定输出'--show-modules'的位置，应该是一个文件名。默认为标准输出。",
+    },
+    verbose: {
+        name: "详细模式",
+        desc: "输出采取的操作的详细信息，尤其是在优化过程中可能会大量输出。默认关闭。",
+    },
+    verbose_output: {
+        name: "详细模式输出路径",
+        desc: "用于设定输出'--verbose'的位置，应该是一个文件名。默认为标准输出。",
     },
     // Linux specific controls(Linux 特定控制)
     linux_icon: {
