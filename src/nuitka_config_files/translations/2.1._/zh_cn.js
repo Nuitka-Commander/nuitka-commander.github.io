@@ -142,6 +142,10 @@ export default {
         name: "单文件子进程宽限时间",
         desc: "当停止子进程时，例如由于CTRL-C或关闭等，Python代码会得到一个\"KeyboardInterrupt\"，它可能会处理例如刷新数据等事件。\n" +
             "这是以硬方式杀死子进程之前的时间量。单位是毫秒，默认为5000。",
+        elements: {
+            name: "5000",
+            desc: "默认值，5000ms",
+        },
     },
     onefile_no_compression: {
         name: "无压缩单文件",
