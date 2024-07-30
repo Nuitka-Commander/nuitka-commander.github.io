@@ -253,7 +253,7 @@ const config = {
                         original: "5000",
                     },
                     true,
-                    false,
+                    true,
                 ),
             },
             "time",
