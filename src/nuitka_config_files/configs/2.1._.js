@@ -527,7 +527,528 @@ const config = {
             "current_directory",
             false,
         ),
+        remove_output: add_option.bool(
+            "remove_output",
+            {
+                original: "--remove-output",
+            },
+            true,
+            false,
+        ),
+        no_pyi_file: add_option.bool(
+            "no_pyi_file",
+            {
+                original: "--no-pyi-file",
+            },
+            true,
+            false,
+        ),
     },
+    deployment_control: {
+        deployment: add_option.bool(
+            "deployment",
+            {
+                original: "--deployment",
+            },
+            true,
+            false,
+        ),
+        no_deployment_flag: add_option.definable_multi(
+            "no_deployment_flag",
+            {
+                original: "--no-deployment-flag",
+            },
+            true,
+            {},
+            [],
+        ),
+    },
+    debug_features: {
+        debug: add_option.bool(
+            "debug",
+            {
+                original: "--debug",
+            },
+            true,
+            false,
+        ),
+        unstripped: add_option.bool(
+            "unstripped",
+            {
+                original: "--unstripped",
+            },
+            true,
+            false,
+        ),
+        profile: add_option.bool(
+            "profile",
+            {
+                original: "--profile",
+            },
+            true,
+            false,
+        ),
+        internal_graph: add_option.bool(
+            "internal_graph",
+            {
+                original: "--internal-graph",
+            },
+            true,
+            false,
+        ),
+        trace_execution: add_option.bool(
+            "trace_execution",
+            {
+                original: "--trace-execution",
+            },
+            true,
+            false,
+        ),
+        recompile_c_only: add_option.bool(
+            "recompile_c_only",
+            {
+                original: "--recompile-c-only",
+            },
+            true,
+            false,
+        ),
+        xml: add_option.definable_single(
+            "xml",
+            {
+                original: "--xml",
+            },
+            true,
+            {},
+            "",
+            true,
+        ),    //这边少了个选项 但是已经重复出现了
+        experimental: add_option.definable_multi(
+            "experimental",
+            {
+                original: "--experimental",
+            },
+            true,
+            {},
+            [],
+        ),
+        low_memory: add_option.bool(
+            "low_memory",
+            {
+                original: "--low-memory",
+            },
+            true,
+            false,
+        ),
+        create_environment_from_report: add_option.definable_multi(
+            "create_environment_from_report",
+            {
+                original: "--create-environment-from-report",
+            },
+            true,
+            {},
+            [],
+        ),
+        generate_c_only: add_option.bool(
+            "generate_c_only",
+            {
+                original: "--generate-c-only",
+            },
+            true,
+            false,
+        ),
+    },
+    backend_c_compiler_choice: {
+        clang: add_option.bool(
+            "clang",
+            {
+                original: "--clang",
+            },
+            true,
+            false,
+        ),
+        mingw64: add_option.bool(
+            "mingw64",
+            {
+                original: "--mingw64",
+            },
+            true,
+            false,
+        ),
+        msvc: add_option.definable_single(
+            "msvc",
+            {
+                original: "--msvc",
+            },
+            true,
+            {
+                latest: add_option.multi_elements(
+                    "latest",
+                    {
+                        original: "latest",
+                    },
+                    true,
+                ),
+            },
+            "",
+            true,
+        ),
+        jobs: add_option.definable_single(
+            "jobs",
+            {
+                original: "--jobs",
+            },
+            true,
+            {},
+            "",
+            false,
+        ),
+        lto: add_option.single_option(
+            "lto",
+            {
+                original: "--lto",
+            },
+            true,
+            {
+                yes: add_option.multi_elements(
+                    "yes",
+                    {
+                        original: "yes",
+                    },
+                    true,
+                ),
+                no: add_option.multi_elements(
+                    "no",
+                    {
+                        original: "no",
+                    },
+                    true,
+                ),
+                auto: add_option.multi_elements(
+                    "auto",
+                    {
+                        original: "auto",
+                    },
+                    true,
+                ),
+            },
+            "auto",
+        ),
+        static_libpython: add_option.single_option(
+            "static_libpython",
+            {
+                original: "--static-libpython",
+            },
+            true,
+            {
+                yes: add_option.multi_elements(
+                    "yes",
+                    {
+                        original: "yes",
+                    },
+                    true,
+                ),
+                no: add_option.multi_elements(
+                    "no",
+                    {
+                        original: "no",
+                    },
+                    true,
+                ),
+                auto: add_option.multi_elements(
+                    "auto",
+                    {
+                        original: "auto",
+                    },
+                    true,
+                ),
+            },
+            "auto",
+        ),
+        cf_protection: add_option.definable_single(
+            "cf_protection",
+            {
+                original: "--cf-protection",
+            },
+            true,
+            {
+                auto: add_option.multi_elements(
+                    "auto",
+                    {
+                        original: "auto",
+                    },
+                    true,
+                ),
+            },
+            "auto",
+        ),
+    },
+    cache_control: {
+        disable_cache: add_option.defined_multi(
+            "disable_cache",
+            {
+                original: "--disable-cache",
+            },
+            true,
+            {
+                all: add_option.multi_elements(
+                    "all",
+                    {
+                        original: "all",
+                    },
+                    true,
+                ),
+                ccache: add_option.multi_elements(
+                    "ccache",
+                    {
+                        original: "ccache",
+                    },
+                    true,
+                ),
+                bytecode: add_option.multi_elements(
+                    "bytecode",
+                    {
+                        original: "bytecode",
+                    },
+                    true,
+                ),
+                compression: add_option.multi_elements(
+                    "compression",
+                    {
+                        original: "compression",
+                    },
+                    true,
+                ),
+                dll_dependencies: add_option.multi_elements(
+                    "dll_dependencies",
+                    {
+                        original: "dll_dependencies",
+                    },
+                    true,
+                ),
+            },
+            [],
+        ),
+        clean_cache: add_option.defined_multi(
+            "clean_cache",
+            {
+                original: "--clean-cache",
+            },
+            true,
+            {
+                all: add_option.multi_elements(
+                    "all",
+                    {
+                        original: "all",
+                    },
+                    true,
+                ),
+                ccache: add_option.multi_elements(
+                    "ccache",
+                    {
+                        original: "ccache",
+                    },
+                    true,
+                ),
+                bytecode: add_option.multi_elements(
+                    "bytecode",
+                    {
+                        original: "bytecode",
+                    },
+                    true,
+                ),
+                compression: add_option.multi_elements(
+                    "compression",
+                    {
+                        original: "compression",
+                    },
+                    true,
+                ),
+                dll_dependencies: add_option.multi_elements(
+                    "dll_dependencies",
+                    {
+                        original: "dll_dependencies",
+                    },
+                    true,
+                ),
+            },
+            [],
+        ),
+        disable_bytecode_cache: add_option.bool(
+            "disable_bytecode_cache",
+            {
+                original: "--disable-bytecode-cache",
+            },
+            true,
+            false,
+        ),
+        disable_ccache: add_option.bool(
+            "disable_ccache",
+            {
+                original: "--disable-ccache",
+            },
+            true,
+            false,
+        ),
+        disable_dll_dependency_cache: add_option.bool(
+            "disable_dll_dependency_cache",
+            {
+                original: "--disable-dll-dependency-cache",
+            },
+            true,
+            false,
+        ),
+        force_dll_dependency_cache_update: add_option.bool(
+            "force_dll_dependency_cache_update",
+            {
+                original: "--force-dll-dependency-cache-update",
+            },
+            true,
+            false,
+        ),
+    },
+    PGO_compilation_choices: {
+        pgo: add_option.bool(
+            "pgo",
+            {
+                original: "--pgo",
+            },
+            true,
+            false,
+        ),
+        pgo_args: add_option.definable_multi(
+            "pgo_args",
+            {
+                original: "--pgo-args",
+            },
+            true,
+            {},
+            [],
+        ),
+        pgo_executable: add_option.definable_multi(
+            "pgo_executable",
+            {
+                original: "--pgo-executable",
+            },
+            true,
+            {},
+            [],
+        ),
+    },
+    tracing_features: {
+        report: add_option.definable_single(
+            "report",
+            {
+                original: "--report",
+            },
+            true,
+            {},
+            "",
+            true,
+        ),
+        report_diffable: add_option.bool(
+            "report_diffable",
+            {
+                original: "--report-diffable",
+            },
+            true,
+            false,
+        ),
+        report_user_provided: add_option.definable_multi(
+            "report_user_provided",
+            {
+                original: "--report-user-provided",
+            },
+            true,
+            {},
+            [],
+        ),
+        report_template: add_option.definable_multi(
+            "report_template",
+            {
+                original: "--report-template",
+            },
+            true,
+            {}, //todo
+            [],
+        ),
+        quiet: add_option.bool(
+            "quiet",
+            {
+                original: "--quiet",
+            },
+            true,
+            false,
+        ),
+        show_scons: add_option.bool(
+            "show_scons",
+            {
+                original: "--show-scons",
+            },
+            true,
+            false,
+        ),
+        no_progressbar: add_option.bool(
+            "no_progressbar",
+            {
+                original: "--no-progressbar",
+            },
+            true,
+            false,
+        ),
+        show_progress: add_option.bool(
+            "show_progress",
+            {
+                original: "--show-progress",
+            },
+            true,
+            false,
+        ),
+        show_memory: add_option.bool(
+            "show_memory",
+            {
+                original: "--show-memory",
+            },
+            true,
+            false,
+        ),
+        show_modules: add_option.bool(
+            "show_modules",
+            {
+                original: "--show-modules",
+            },
+            true,
+            false,
+        ),
+        show_modules_output: add_option.definable_single(
+            "show_modules_output",
+            {
+                original: "--show-modules-output",
+            },
+            true,
+            {},
+            "",
+            true,
+        ),
+        verbose: add_option.bool(
+            "verbose",
+            {
+                original: "--verbose",
+            },
+            true,
+            false,
+        ),
+        verbose_output: add_option.definable_single(
+            "verbose_output",
+            {
+                original: "--verbose-output",
+            },
+            true,
+            {},
+            "",
+            true,
+        ),
+    },
+
     Linux_specific_controls: {
         linux_icon: add_option.definable_single(
             "linux_icon",

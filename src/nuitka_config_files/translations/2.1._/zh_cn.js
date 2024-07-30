@@ -14,6 +14,12 @@ export default {
         immediate_execution_after_compilation: "编译后立刻执行",
         compilation_choices: "编译选项",
         output_choices: "输出选项",
+        deployment_control: "部署控制",
+        debug_features: "调试功能",
+        backend_c_compiler_choice: "后端C编译器选择",
+        cache_control: "缓存控制",
+        PGO_compilation_choices: "PGO(配置文件引导优化)编译选项",
+        tracing_features: "跟踪功能",
     },
     // basic
     module: {
@@ -300,6 +306,290 @@ export default {
                 desc: "当前目录",
             },
         },
+    },
+    remove_output: {
+        name: "删除构建文件夹",
+        desc: "生成exe或者模块文件后删除构建文件夹。默认关闭。",
+    },
+    no_pyi_file: {
+        name: "不生成pyi文件",
+        desc: "不要为Nuitka创建拓展模块而创建\".pyi\"文件用于检测隐式导入。默认关闭。",
+    },
+    // Deployment control(部署控制)
+    deployment: {
+        name: "部署模式",
+        desc: "禁用旨在让查找兼容性问题更容易的代码。例如，这将阻止使用'-c'参数的执行，这个参数一般被尝试运行\n" +
+            "模块的代码使用，并且可能导致程序反复自启动。一旦你向最终用户部署，就禁用它，对于查找典型问题，\n" +
+            "这在开发过程中非常有帮助。默认关闭。",
+    },
+    no_deployment_flag: {
+        name: "不使用部署标志",
+        desc: "保持部署模式，但是选择性地禁用部分功能。部署模式的错误将会输出这些标识符。默认为空",
+    },
+    // Debug features(调试功能)
+    debug: {
+        name: "调试模式",
+        desc: "执行所有可能的自身检查以发现Nuitka中的错误，请不要用与生产中。\n" +
+            "默认关闭。",
+    },
+    unstripped: {
+        name: "不去除调试信息",
+        desc: "在生成的对象文件中保留调试信息，以便更好的和调试器交互。默认关闭。",
+    },
+    profile: {
+        name: "性能分析",
+        desc: "启用基于vmprof的耗时分析。目前无法使用。默认关闭。",
+    },
+    internal_graph: {
+        name: "内部图",
+        desc: "创建优化过程内部的图，不要用于整个程序，请只用于小的测试用例。默认关闭。",
+    },
+    trace_execution: {
+        name: "跟踪执行",
+        desc: "跟踪执行并输出。在执行代码之前输出代码行。默认关闭。",
+    },
+    recompile_c_only: {
+        name: "只重新编译C",
+        desc: "这不是增量编译，仅用于 Nuitka 开发。将现有文件重新编译为C。允许编译编辑过的C文件，以便对生成源代码的修改进行快速调试。\n" +
+            "例如查看代码是否通过，值的输出等。默认关闭。它要查看的文件取决于编译Python源代码。",
+    },
+    xml: {
+        name: "输出XML",
+        desc: "将内部程序结构和优化结果以XML形式写入给定的文件名。",
+    },
+    experimental: {
+        name: "实验性",
+        desc: "使用声明为\"实验性\"的功能。如果代码中没有实验性功能，则可能不会产生任何影响。\n" +
+            "使用每个实验功能的秘密标签(检查源代码)。",
+    },
+    low_memory: {
+        name: "低内存模式",
+        desc: "尝试使用更少的内存，方法是减少C编译任务的分叉并使用更少内存的选项。用于嵌入式机器。在出现内存不足的问题时使用。默认为关闭。",
+    },
+    create_environment_from_report: {
+        name: "从报告创建环境",
+        desc: "根据给出的报告文件在不存在的路径中创建一个新的虚拟环境，例如'--report=compilation-report.xml'。默认不执行。",
+    },
+    generate_c_only: {
+        name: "只生成C源代码",
+        desc: "只生成C源代码，不编译为二进制文件或者模块。这是用于调试和代码覆盖分析的，不会浪费CPU。默认关闭。\n" +
+            "不要认为你可以直接使用这个。",
+    },
+    // Backend C compiler choice(后端 C 编译器选择)
+    clang: {
+        name: "强制使用clang",
+        desc: "强制使用 clang 编译。在 Windows 系统上，这需要一个正常运行的 Visual Studio 版本来支持。默认关闭。",
+    },
+    mingw64: {
+        name: "强制使用mingw64",
+        desc: "强制在 Windows 上使用 MinGW64。默认为关闭，除非使用 MSYS2 和 MinGW Python。",
+    },
+    msvc: {
+        name: "使用MSVC版本",
+        desc: "强制在Windows上使用特定的MSVC版本。允许的值有\"14.3\" (MSVC 2022)和其他MSVC版本号。\n" +
+            "使用 \"list \"以获得已安装编译器的列表，或使用 \"latest\"。默认在有的情况下使用最新的MSVC。否则使用MinGW64。",
+        elements: {
+            latest: {
+                name: "最新版",
+                desc: "使用最新的MSVC版本",
+            },
+        },
+    },
+    jobs: {
+        name: "并行编译任务数",
+        desc: "指定允许使用的并行C编译器任务数。默认为系统CPU数。",
+    },
+    lto: {
+        name: "链接时间优化",
+        desc: "使用链接时间优化（MSVC、gcc、clang）允许的值有 \"yes\"（是）、\"no\"（否）和 \"auto\"（自动）(已知可用)。默认为 \"auto\"。",
+        elements: {
+            yes: {
+                name: "是",
+                desc: "使用链接时间优化",
+            },
+            no: {
+                name: "否",
+                desc: "不使用链接时间优化",
+            },
+            auto: {
+                name: "自动",
+                desc: "自动使用链接时间优化",
+            },
+        },
+    },
+    static_libpython: {
+        name: "使用Python的静态链接库",
+        desc: "使用Python的静态链接库。允许的值有 \"yes\"（是）、\"no\"（否）和 \"auto\"（自动）(已知可用)。默认为 \"auto\"。",
+        elements: {
+            yes: {
+                name: "是",
+                desc: "使用Python的静态链接库",
+            },
+            no: {
+                name: "否",
+                desc: "不使用Python的静态链接库",
+            },
+            auto: {
+                name: "自动",
+                desc: "自动使用Python的静态链接库",
+            },
+        },
+    },
+    cf_protection: {
+        name: "gcc编译器CF保护模式",
+        desc: "这个选项是特定于gcc的。为gcc编译器选择\"cf-protection\"(cf保护)模式。默认值\"auto\"是使用gcc的默认值，但你可以覆盖它，\n" +
+            "例如，使用\"none\"值来禁用它。有关\"-fcf-protection\"的详细信息，请参阅gcc文档",
+        elements: {
+            auto: {
+                name: "自动",
+                desc: "使用gcc的默认值",
+            },
+        },
+    },
+    // Cache Control(缓存控制)
+    disable_cache: {
+        name: "禁用缓存",
+        desc: "禁用选定的缓存，设置\"all\"则为所有缓存。当前允许的值有：\"all(全部)\",\"ccache\",\"bytecode(字节码)\",\n" +
+            "\"compression(压缩)\",\"dll-dependencies(dll依赖项)\"。\n" +
+            "可以多次给出或使用逗号分隔给定的值。默认为无。",
+        elements: {
+            all: {
+                name: "全部",
+                desc: "禁用所有缓存",
+            },
+            ccache: {
+                name: "ccache缓存",
+                desc: "不要尝试使用ccache(gcc,clang等)或clcache(MSVC,clangcl)。",
+            },
+            bytecode: {
+                name: "字节码缓存",
+                desc: "不要重复使用模块的依赖分析结果，尤其是来自标准库的模块，这些模块会被包含为字节码。",
+            },
+            compression: {
+                name: "压缩缓存",
+                desc: "禁用压缩缓存",
+            },
+            dll_dependencies: {
+                name: "dll依赖项缓存",
+                desc: "禁用依赖项分析器缓存。这将导致创建分发文件夹的时间大大延长，但如果怀疑缓存会导致错误，则可以使用它。",
+            },
+        },
+
+    },
+    clean_cache: {
+        name: "清理缓存",
+        desc: "在执行前清理给定缓存，设置\"all\"则为所有缓存。当前允许的值有：\n" +
+            "\"all(全部)\",\"ccache\",\"bytecode(字节码)\",\"compression(压缩)\",\"dll-dependencies(dll依赖项)\"。\n" +
+            "可以多次给出或使用逗号分隔给定的值。默认为无。",
+        elements: {
+            all: {
+                name: "全部",
+                desc: "清理所有缓存",
+            },
+            ccache: {
+                name: "ccache缓存",
+                desc: "清理ccache缓存",
+            },
+            bytecode: {
+                name: "字节码缓存",
+                desc: "清理字节码缓存",
+            },
+            compression: {
+                name: "压缩缓存",
+                desc: "清理压缩缓存",
+            },
+            dll_dependencies: {
+                name: "dll依赖项缓存",
+                desc: "清理dll依赖项缓存",
+            },
+        },
+    },
+    disable_bytecode_cache: {
+        name: "禁用字节码缓存",
+        desc: "不要重复使用模块的依赖分析结果，尤其是来自标准库的模块，这些模块会被包含为字节码。与--disable-cache=bytecode效果相同。",
+    },
+    disable_ccache: {
+        name: "禁用ccache",
+        desc: "不要尝试使用ccache(gcc,clang等)或clcache(MSVC,clangcl)。与--disable-cache=ccache效果相同。",
+    },
+    disable_dll_dependency_cache: {
+        name: "禁用dll依赖项缓存",
+        desc: "禁用依赖项分析器缓存。这将导致创建分发文件夹的时间大大延长，但如果怀疑缓存会导致错误，则可以使用它。\n" +
+            "与--disable-cache=dll-dependencies效果相同。",
+    },
+    force_dll_dependency_cache_update: {
+        name: "强制更新dll依赖项缓存",
+        desc: "用于更新依赖分析器缓存。这将导致创建分发文件夹的时间大大延长，但如果怀疑缓存会导致错误或缓存需要更新，则可以使用它。",
+    },
+    // PGO compilation choices(PGO(配置文件引导优化)编译选项)
+    pgo: {
+        name: "配置文件引导优化",
+        desc: "通过先进行分析，然后使用结果来反馈到C编译中，启用C级别的配置文件引导优化（PGO）。\n" +
+            "注意：这是实验性的，还不能与Nuitka的独立模式一起使用。默认关闭。",
+    },
+    pgo_args: {
+        name: "配置文件引导优化参数",
+        desc: "在进行配置文件引导优化(PGO)时传递的参数。这些参数在配置文件引导优化(PGO)分析运行期间传递给被特殊的构建可执行文件。默认为空。",
+    },
+    pgo_executable: {
+        name: "配置文件引导优化可执行文件",
+        desc: "收集配置文件信息时要执行的命令。只有在需要通过准备运行的脚本来启动它时才使用它。默认使用创建的程序。",
+    },
+    // Tracing features(跟踪功能)
+    report: {
+        name: "输出报告",
+        desc: "输入一个XML文件名，在XML输出文件中报告模块、数据文件、编译、插件等详细信息。这对于报告问题也非常有用。\n" +
+            "例如，这些报告可以用于使用’–create-environment-from-report’轻松重建环境，但报告包含大量信息。默认关闭。",
+    },
+    report_diffable: {
+        name: "报告差异",
+        desc: "以可比较的方式报告数据，即没有随着运行而变化的时间或内存使用值。默认关闭。",
+    },
+    report_user_provided: {
+        name: "报告用户提供值",
+        desc: "报告来自您的数据。这可以多次给出，并且可以是任何形式的\"key=value\"，其中key应该是一个标识符，\n" +
+            "例如使用\"--report-user-provided=pipenv-lock-hash=64a5e4\"来跟踪一些输入值。默认为空。",
+    },
+    report_template: {
+        name: "报告模板",
+        desc: "通过模板报告。需要提供模板和输出文件名\"template.rst.j2:output.rst\"。对于内置模板，请查看用户手册。\n" +
+            "可以多次给出。默认为空。",
+    },
+    quiet: {
+        name: "静默模式",
+        desc: "禁止所有信息输出，但显示警告。默认关闭。",
+    },
+    show_scons: {
+        name: "显示scons",
+        desc: "运行C构建后端Scons，显示执行的命令、检测到的编译器的详细信息。默认关闭。",
+    },
+    no_progressbar: {
+        name: "不显示进度条",
+        desc: "禁用进度条。默认关闭。",
+    },
+    show_progress: {
+        name: "显示进度",
+        desc: "过时: 提供进度信息和统计信息。禁用正常的进度条。默认关闭。",
+    },
+    show_memory: {
+        name: "显示内存",
+        desc: "显示内存使用情况。默认关闭。",
+    },
+    show_modules: {
+        name: "显示模块",
+        desc: "过时: 您应该使用'--report'文件替代。提供包含的模块和DLL的信息。默认关闭。",
+    },
+    show_modules_output: {
+        name: "显示模块输出路径",
+        desc: "用于设定输出'--show-modules'的位置，应该是一个文件名。默认为标准输出。",
+    },
+    verbose: {
+        name: "详细模式",
+        desc: "输出采取的操作的详细信息，尤其是在优化过程中可能会大量输出。默认关闭。",
+    },
+    verbose_output: {
+        name: "详细模式输出路径",
+        desc: "用于设定输出'--verbose'的位置，应该是一个文件名。默认为标准输出。",
     },
     // Linux specific controls(Linux 特定控制)
     linux_icon: {
