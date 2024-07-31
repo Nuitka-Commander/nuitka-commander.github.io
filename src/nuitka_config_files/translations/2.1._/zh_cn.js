@@ -20,6 +20,8 @@ export default {
         cache_control: "缓存控制",
         PGO_compilation_choices: "PGO(配置文件引导优化)编译选项",
         tracing_features: "跟踪功能",
+        general_os_controls: "通用操作系统设置",
+        windows_specific_controls: "Windows 特定控制",
     },
     // basic
     module: {
@@ -590,6 +592,36 @@ export default {
     verbose_output: {
         name: "详细模式输出路径",
         desc: "用于设定输出'--verbose'的位置，应该是一个文件名。默认为标准输出。",
+    },
+    // General OS controls(通用操作系统控制)
+    disable_console: {
+        name: "禁用控制台",
+        desc: "在为Windows或macOS编译时，禁用控制台窗口并创建为一个GUI应用程序。默认关闭。",
+    },
+    enable_console: {
+        name: "启用控制台",
+        desc: "在为Windows或macOS编译时，启用控制台窗口并创建一个控制台应用程序。\n" +
+            "这将禁用来自某些模块的提示，例如\"PySide\"会建议禁用它。默认启用。",
+    },
+    force_stdout_spec: {
+        name: "强制标准输出规范",
+        desc: "强制程序的标准输出输出到这个位置。对于禁用控制台的程序和使用Nuitka商业版的Windows服务插件的程序非常有用。默认不激活，\n" +
+            "例如使用'{PROGRAM_BASE}.out.txt'，也就是程序目录附近的文件，查看用户手册以获取可用值的完整列表。",
+    },
+    force_stderr_spec: {
+        name: "强制标准错误规范",
+        desc: "强制程序的标准错误输出到这个位置。对于禁用控制台的程序和使用Nuitka商业版的Windows服务插件的程序非常有用。默认不激活，\n" +
+            "例如使用'{PROGRAM_BASE}.err.txt'，也就是程序目录附近的文件，查看用户手册以获取可用值的完整列表。",
+    },
+    // Windows specific controls(Windows 特定控制)
+    windows_icon_from_ico: {
+        name: "windows图标(ico文件)",
+        desc: "添加可执行文件的图标。可以多次给出不同分辨率或者包含多个图标的文件。在选择包含多个图标的文件时，\n" +
+            "您也可以使用#< n >后缀来指定要包含的特定图标并忽略其他所有的图标，其中n是从1开始的整数索引",
+    },
+    windows_icon_from_exe: {
+        name: "windows图标(exe文件)",
+        desc: "复制来自该可执行文件的图标(仅限Windows)。",
     },
     // Linux specific controls(Linux 特定控制)
     linux_icon: {

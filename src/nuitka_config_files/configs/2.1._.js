@@ -1048,6 +1048,64 @@ const config = {
             true,
         ),
     },
+    general_os_controls: {
+        disable_console: add_option.bool(
+            "disable_console",
+            {
+                original: "--disable-console",
+            },
+            true,
+            false,
+        ),
+        enable_console: add_option.bool(
+            "enable_console",
+            {
+                original: "--enable-console",
+            },
+            true,
+            true,
+        ),
+        force_stdout_spec: add_option.definable_single(
+            "force_stdout_spec",
+            {
+                original: "--force-stdout-spec",
+            },
+            true,
+            {},
+            "",
+            true,
+        ),
+        force_stderr_spec: add_option.definable_single(
+            "force_stderr_spec",
+            {
+                original: "--force-stderr-spec",
+            },
+            true,
+            {},
+            "",
+            true,
+        ),
+    },
+    windows_specific_controls: {
+        windows_icon_from_ico: add_option.definable_multi(
+            "windows_icon_from_ico",
+            {
+                original: "--windows-icon-from-ico",
+            },
+            true,
+            {},
+            [],
+        ),
+        windows_icon_from_exe: add_option.definable_multi(
+            "windows_icon_from_exe",
+            {
+                original: "--windows-icon-from-exe",
+            },
+            true,
+            {},
+            [],
+        ),
+    },
 
     Linux_specific_controls: {
         linux_icon: add_option.definable_single(
