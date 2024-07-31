@@ -1105,6 +1105,32 @@ const config = {
             {},
             [],
         ),
+        onefile_windows_splash_screen_image: add_option.definable_single(
+            "onefile_windows_splash_screen_image",
+            {
+                original: "--onefile-windows-splash-screen-image",
+            },
+            true,
+            {},
+            "",
+            true,
+        ),
+        windows_uac_admin: add_option.bool(
+            "windows_uac_admin",
+            {
+                original: "--windows-uac-admin",
+            },
+            true,
+            false,
+        ),
+        windows_uac_uiaccess: add_option.bool(
+            "windows_uac_uiaccess",
+            {
+                original: "--windows-uac-uiaccess",
+            },
+            true,
+            false,
+        ),
     },
 
     Linux_specific_controls: {

@@ -623,6 +623,18 @@ export default {
         name: "windows图标(exe文件)",
         desc: "复制来自该可执行文件的图标(仅限Windows)。",
     },
+    onefile_windows_splash_screen_image: {
+        name: "单文件Windows启动画面图像",
+        desc: "当编译为Windows下的单文件时，在加载应用程序时显示这个图像。默认关闭。",
+    },
+    windows_uac_admin: {
+        name: "请求Windows用户控制(UAC)管理员权限",
+        desc: "向Windows用户控制(UAC)请求在执行时授予管理员权限。(仅限Windows)。默认关闭。",
+    },
+    windows_uac_uiaccess: {
+        name: "请求Windows用户控制（UAC）UI访问权限",
+        desc: "请求Windows用户控制权限(UAC)，用于强制在特定的几个文件夹中运行和远程桌面访问。(仅限Windows)。默认关闭。",
+    },
     // Linux specific controls(Linux 特定控制)
     linux_icon: {
         name: "Linux图标",
