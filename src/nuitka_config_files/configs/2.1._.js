@@ -1132,6 +1132,164 @@ const config = {
             false,
         ),
     },
+    macOS_specific_controls: {
+        macos_create_app_bundle: add_option.bool(
+            "macos_create_app_bundle",
+            {
+                original: "--macos-create-app-bundle",
+            },
+            true,
+            false,
+        ),
+        macos_target_arch: add_option.definable_single(
+            "macos_target_arch",
+            {
+                original: "--macos-target-arch",
+            },
+            true,
+            {
+                native: add_option.multi_elements(
+                    "native",
+                    {
+                        original: "native",
+                    },
+                    true,
+                ),
+            },
+            "native",
+            false,
+        ),
+        macos_app_icon: add_option.definable_single(
+            "macos_app_icon",
+            {
+                original: "--macos-app-icon",
+            },
+            true,
+            {
+                python_icon: add_option.multi_elements(
+                    "python_icon",
+                    {
+                        original: "python",
+                    },
+                    true,
+                ),
+            },
+            "python_icon",
+            false,
+        ),
+        macos_signed_app_name: add_option.definable_single(
+            "macos_signed_app_name",
+            {
+                original: "--macos-signed-app-name",
+            },
+            true,
+            {},
+            "",
+            true,
+        ),
+        macos_app_name: add_option.definable_single(
+            "macos_app_name",
+            {
+                original: "--macos-app-name",
+            },
+            true,
+            {},
+            "",
+            true,
+        ),
+        macos_app_mode: add_option.single_option(
+            "macos_app_mode",
+            {
+                original: "--macos-app-mode",
+            },
+            true,
+            {
+                gui: add_option.multi_elements(
+                    "gui",
+                    {
+                        original: "gui",
+                    },
+                    true,
+                ),
+                background: add_option.multi_elements(
+                    "background",
+                    {
+                        original: "background",
+                    },
+                    true,
+                ),
+                ui_element: add_option.multi_elements(
+                    "ui_element",
+                    {
+                        original: "ui_element",
+                    },
+                    true,
+                ),
+            },
+            "gui",
+        ),
+        macos_sign_identity: add_option.definable_single(
+            "macos_sign_identity",
+            {
+                original: "--macos-sign-identity",
+            },
+            true,
+            {
+                auto: add_option.multi_elements(
+                    "auto",
+                    {
+                        original: "auto",
+                    },
+                    true,
+                ),
+                ad_hoc: add_option.multi_elements(
+                    "ad_hoc",
+                    {
+                        original: "ad-hoc",
+                    },
+                    true,
+                ),
+            },
+            "ad_hoc",
+            false,
+        ),
+        macos_sign_notarization: add_option.bool(
+            "macos_sign_notarization",
+            {
+                original: "--macos-sign",
+            },
+            true,
+            false,
+        ),
+        macos_app_version: add_option.definable_single(
+            "macos_app_version",
+            {
+                original: "--macos-app-version",
+            },
+            true,
+            {
+                "1.0": add_option.multi_elements(
+                    "1.0",
+                    {
+                        original: "1.0",
+                    },
+                    true,
+                ),
+            },
+            "1.0",
+            false,
+        ),
+        macos_app_protected_resource: add_option.definable_multi(
+            "macos_app_protected_resource",
+            {
+                original: "--macos-app-protected-resource",
+            },
+            true,
+            {},
+            [],
+        ),
+    },
+
 
     Linux_specific_controls: {
         linux_icon: add_option.definable_single(

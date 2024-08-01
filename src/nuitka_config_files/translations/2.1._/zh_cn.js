@@ -22,6 +22,7 @@ export default {
         tracing_features: "跟踪功能",
         general_os_controls: "通用操作系统设置",
         windows_specific_controls: "Windows 特定控制",
+        macOS_specific_controls: "macOS 特定控制",
     },
     // basic
     module: {
@@ -617,7 +618,7 @@ export default {
     windows_icon_from_ico: {
         name: "windows图标(ico文件)",
         desc: "添加可执行文件的图标。可以多次给出不同分辨率或者包含多个图标的文件。在选择包含多个图标的文件时，\n" +
-            "您也可以使用#< n >后缀来指定要包含的特定图标并忽略其他所有的图标，其中n是从1开始的整数索引",
+            "您也可以使用＃＜n＞后缀来指定要包含的特定图标并忽略其他所有的图标，其中n是从1开始的整数索引",
     },
     windows_icon_from_exe: {
         name: "windows图标(exe文件)",
@@ -634,6 +635,96 @@ export default {
     windows_uac_uiaccess: {
         name: "请求Windows用户控制（UAC）UI访问权限",
         desc: "请求Windows用户控制权限(UAC)，用于强制在特定的几个文件夹中运行和远程桌面访问。(仅限Windows)。默认关闭。",
+    },
+    // macOS specific controls(MacOS 特定控制)
+    macos_create_app_bundle: {
+        name: "创建MacOS应用程序包",
+        desc: "在为macOS编译时，创建一个包而不是一个普通的二进制应用程序。这是禁用控制台、获取高DPI图形等的唯一方式，并且将开启独立模式。默认为关闭。",
+    },
+    macos_target_arch: {
+        name: "MacOS目标架构",
+        desc: "这个程序应该在什么架构上运行。默认值和限制是运行Python允许的。默认值为\"native\"，这是Python运行的架构。",
+        elements: {
+            native: {
+                name: "本地架构",
+                desc: "默认值，这是Python运行的架构",
+            },
+        },
+    },
+    macos_app_icon: {
+        name: "MacOS应用程序图标路径",
+        desc: "为应用程序包添加图标。只能给出一次。默认为Python图标。",
+        elements: {
+            python_icon: {
+                name: "Python图标",
+                desc: "Python图标，如果可用的话，该选项为默认值",
+            },
+        },
+    },
+    macos_signed_app_name: {
+        name: "MacOS签名应用程序名称",
+        desc: "用于macOS签名的应用程序名称。为了获得最佳结果，请遵循\"com.YourCompany.AppName\"的命名格式，\n" +
+            "因为这些名称必须是全局唯一的，并且可能会授予受保护的API访问权限。",
+    },
+    macos_app_name: {
+        name: "macOS应用程序名称",
+        desc: "要在macOS捆绑包信息中使用的产品名称。默认为二进制文件的基本文件名。",
+    },
+    macos_app_mode: {
+        name: "macOS应用程序模式",
+        desc: "应用程序捆绑包的应用程序模式。",
+        elements: {
+            gui: {
+                name: "GUI模式",
+                desc: "。当你启动一个窗口，并且希望出现在Docker中时，默认值\"gui\"是一个很好的选择。",
+            },
+            background: {
+                name: "后台模式",
+                desc: "如果没有窗口，应用程序会是一个\"background\"应用程序。",
+            },
+            ui_element: {
+                name: "UI元素模式",
+                desc: "对于稍后显示的UI元素，\"ui-element\"介于两者之间。\n" +
+                    "应用程序不会出现在dock中，但是当它稍后打开一个窗口时，它将获得对桌面的完全访问权限。",
+            },
+        },
+    },
+    macos_sign_identity: {
+        name: "MacOS签名标识",
+        desc: "当在macOS上签名时，默认情况下会使用一个临时标识，但是使用这个选项时，您可以指定另一个要使用的标识。\n" +
+            "现在，在macOS上签名代码是强制性的，不能被禁用。使用\"auto\"来检测你唯一的已安装表示。\n" +
+            "如果没有给出，默认为\"ad-hoc\"。",
+        elements: {
+            auto: {
+                name: "自动",
+                desc: "检测你唯一的已安装表示",
+            },
+            ad_hoc: {
+                name: "自由签名",
+                desc: "自由签名，默认值",
+            },
+        },
+    },
+    macos_sign_notarization: {
+        name: "MacOS签名认证",
+        desc: "当进行用于公证的签名时，使用来自Apple的正确的TeamID标识，使用所需的运行时签名选项，以便它可以被接受。",
+    },
+    macos_app_version: {
+        name: "macOS应用程序版本",
+        desc: "要在macOS捆绑包信息中使用的产品版本。如果没有给出，则默认为\"1.0\"。",
+        elements: {
+            "1.0": {
+                name: "1.0",
+                desc: "默认值",
+            },
+        },
+    },
+    macos_app_protected_resource: {
+        name: "请求macOS受保护的资源",
+        desc: "请求访问macOS受保护的资源的权限，例如\"NSMicrophoneUsageDescription:Microphone access for recording audio.\"请求访问麦克风，\n" +
+            "并为用户提供一个信息文本，说明为什么需要这样做。在冒号之前，是一个访问权限的操作系统标识符，然后是信息文本。\n" +
+            "可以在https://developer.apple.com/documentation/bundleresources/information_property_list/protected_resources中找到合法的值，\n" +
+            "该选项可以多次指定。默认为空。",
     },
     // Linux specific controls(Linux 特定控制)
     linux_icon: {
