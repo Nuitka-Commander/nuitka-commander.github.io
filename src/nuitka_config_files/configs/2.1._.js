@@ -1289,8 +1289,6 @@ const config = {
             [],
         ),
     },
-
-
     Linux_specific_controls: {
         linux_icon: add_option.definable_single(
             "linux_icon",
@@ -1303,6 +1301,81 @@ const config = {
             true,
         ),
     },
+    binary_version_information: {
+        company_name: add_option.definable_single(
+            "company_name",
+            {
+                original: "--company-name",
+            },
+            true,
+            {},
+            "",
+            true,
+        ),
+        product_name: add_option.definable_single(
+            "product_name",
+            {
+                original: "--product-name",
+            },
+            true,
+            {},
+            "",
+            true,
+        ),
+        file_version: add_option.definable_single(
+            "file_version",
+            {
+                original: "--file-version",
+            },
+            true,
+            {},
+            "",
+            true,
+        ),
+        product_version: add_option.definable_single(
+            "product_version",
+            {
+                original: "--product-version",
+            },
+            true,
+            {},
+            "",
+            true,
+        ),
+        file_description: add_option.definable_single(
+            "file_description",
+            {
+                original: "--file-description",
+            },
+            true,
+            {},
+            "",
+            true,
+        ),
+        copyright: add_option.definable_single(
+            "copyright",
+            {
+                original: "--copyright",
+            },
+            true,
+            {},
+            "",
+            true,
+        ),
+        trademarks: add_option.definable_single(
+            "trademarks",
+            {
+                original: "--trademarks",
+            },
+            true,
+            {},
+            "",
+            true,
+        ),
+
+
+    },
+
 };
 //基本就这个格式 回调函数接受一个参数
 // config[watcher_key] = [add_watcher({

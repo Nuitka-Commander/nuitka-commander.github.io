@@ -23,6 +23,7 @@ export default {
         general_os_controls: "通用操作系统设置",
         windows_specific_controls: "Windows 特定控制",
         macOS_specific_controls: "macOS 特定控制",
+        binary_version_information: "二进制版本信息",
     },
     // basic
     module: {
@@ -730,5 +731,35 @@ export default {
     linux_icon: {
         name: "Linux图标",
         desc: "为单文件二进制可执行文件添加图标。只能给出一次。如果可用，默认为Python图标。",
+    },
+    // Binary Version Information(二进制版本信息)
+    company_name: {
+        name: "公司名称",
+        desc: "要在版本信息中使用的公司名称。默认为无。",
+    },
+    product_name: {
+        name: "产品名称",
+        desc: "要在版本信息中使用的产品名称。默认为二进制文件的基本文件名。",
+    },
+    file_version: {
+        name: "文件版本",
+        desc: "要在版本信息中使用的文件版本。必须为一个最多4个数字的序列，例如1.0或1.0.0.0,不允许使用更多的数字或者使用字符串。默认为无。",
+    },
+    product_version: {
+        name: "产品版本",
+        desc: "要在版本信息中使用的产品版本。必须为一个最多4个数字的序列，例如1.0或1.0.0.0, 不允许使用更多的数字或者使用字符串。默认为无。",
+    },
+    file_description: {
+        name: "文件描述",
+        desc: "要在版本信息中使用的文件描述。目前仅限Windows。默认为二进制文件的文件名。",
+    },
+    copyright: {
+        name: "版权文本",
+        desc: "在版本信息中使用的版权信息。目前仅限Windows/macOS可用。默认不显示。",
+    },
+    trademarks: {
+        name: "商标文本",
+        desc: "要在版本信息中使用的商标。目前仅限Windows/macOS可用。默认不显示。",
+
     },
 };
