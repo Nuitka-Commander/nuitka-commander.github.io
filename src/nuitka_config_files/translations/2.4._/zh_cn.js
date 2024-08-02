@@ -14,6 +14,7 @@ export default {
         tracing_features: "跟踪功能",
         windows_specific_controls: "针对 Windows 系统的设置",
         linux_specific_controls: "针对 Linux 系统的设置",
+        general_os_controls: "通用操作系统设置",
     },
     module: {
         name: "模块模式",
@@ -635,6 +636,7 @@ export default {
         name: "请求 Windows 用户控制（UI 访问）",
         desc: "请求 Windows 用户控制，以强制仅从少数文件夹运行，远程桌面访问（仅限 Windows）。默认关闭。",
     },
+
     linux_icon: {
         name: "Linux 可执行文件图标",
         desc: "为单文件二进制文件添加可执行文件图标。只能指定一次。如果可用，默认使用 Python 图标。",

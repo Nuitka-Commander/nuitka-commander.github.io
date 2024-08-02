@@ -1048,7 +1048,247 @@ const config = {
             true,
         ),
     },
-
+    general_os_controls: {
+        disable_console: add_option.bool(
+            "disable_console",
+            {
+                original: "--disable-console",
+            },
+            true,
+            false,
+        ),
+        enable_console: add_option.bool(
+            "enable_console",
+            {
+                original: "--enable-console",
+            },
+            true,
+            true,
+        ),
+        force_stdout_spec: add_option.definable_single(
+            "force_stdout_spec",
+            {
+                original: "--force-stdout-spec",
+            },
+            true,
+            {},
+            "",
+            true,
+        ),
+        force_stderr_spec: add_option.definable_single(
+            "force_stderr_spec",
+            {
+                original: "--force-stderr-spec",
+            },
+            true,
+            {},
+            "",
+            true,
+        ),
+    },
+    windows_specific_controls: {
+        windows_icon_from_ico: add_option.definable_multi(
+            "windows_icon_from_ico",
+            {
+                original: "--windows-icon-from-ico",
+            },
+            true,
+            {},
+            [],
+        ),
+        windows_icon_from_exe: add_option.definable_multi(
+            "windows_icon_from_exe",
+            {
+                original: "--windows-icon-from-exe",
+            },
+            true,
+            {},
+            [],
+        ),
+        onefile_windows_splash_screen_image: add_option.definable_single(
+            "onefile_windows_splash_screen_image",
+            {
+                original: "--onefile-windows-splash-screen-image",
+            },
+            true,
+            {},
+            "",
+            true,
+        ),
+        windows_uac_admin: add_option.bool(
+            "windows_uac_admin",
+            {
+                original: "--windows-uac-admin",
+            },
+            true,
+            false,
+        ),
+        windows_uac_uiaccess: add_option.bool(
+            "windows_uac_uiaccess",
+            {
+                original: "--windows-uac-uiaccess",
+            },
+            true,
+            false,
+        ),
+    },
+    macOS_specific_controls: {
+        macos_create_app_bundle: add_option.bool(
+            "macos_create_app_bundle",
+            {
+                original: "--macos-create-app-bundle",
+            },
+            true,
+            false,
+        ),
+        macos_target_arch: add_option.definable_single(
+            "macos_target_arch",
+            {
+                original: "--macos-target-arch",
+            },
+            true,
+            {
+                native: add_option.multi_elements(
+                    "native",
+                    {
+                        original: "native",
+                    },
+                    true,
+                ),
+            },
+            "native",
+            false,
+        ),
+        macos_app_icon: add_option.definable_single(
+            "macos_app_icon",
+            {
+                original: "--macos-app-icon",
+            },
+            true,
+            {
+                python_icon: add_option.multi_elements(
+                    "python_icon",
+                    {
+                        original: "python",
+                    },
+                    true,
+                ),
+            },
+            "python_icon",
+            false,
+        ),
+        macos_signed_app_name: add_option.definable_single(
+            "macos_signed_app_name",
+            {
+                original: "--macos-signed-app-name",
+            },
+            true,
+            {},
+            "",
+            true,
+        ),
+        macos_app_name: add_option.definable_single(
+            "macos_app_name",
+            {
+                original: "--macos-app-name",
+            },
+            true,
+            {},
+            "",
+            true,
+        ),
+        macos_app_mode: add_option.single_option(
+            "macos_app_mode",
+            {
+                original: "--macos-app-mode",
+            },
+            true,
+            {
+                gui: add_option.multi_elements(
+                    "gui",
+                    {
+                        original: "gui",
+                    },
+                    true,
+                ),
+                background: add_option.multi_elements(
+                    "background",
+                    {
+                        original: "background",
+                    },
+                    true,
+                ),
+                ui_element: add_option.multi_elements(
+                    "ui_element",
+                    {
+                        original: "ui_element",
+                    },
+                    true,
+                ),
+            },
+            "gui",
+        ),
+        macos_sign_identity: add_option.definable_single(
+            "macos_sign_identity",
+            {
+                original: "--macos-sign-identity",
+            },
+            true,
+            {
+                auto: add_option.multi_elements(
+                    "auto",
+                    {
+                        original: "auto",
+                    },
+                    true,
+                ),
+                ad_hoc: add_option.multi_elements(
+                    "ad_hoc",
+                    {
+                        original: "ad-hoc",
+                    },
+                    true,
+                ),
+            },
+            "ad_hoc",
+            false,
+        ),
+        macos_sign_notarization: add_option.bool(
+            "macos_sign_notarization",
+            {
+                original: "--macos-sign",
+            },
+            true,
+            false,
+        ),
+        macos_app_version: add_option.definable_single(
+            "macos_app_version",
+            {
+                original: "--macos-app-version",
+            },
+            true,
+            {
+                default_version: add_option.multi_elements(
+                    "default_version",
+                    {
+                        original: "1.0",
+                    },
+                    true,
+                ),
+            },
+            "1.0",
+            false,
+        ),
+        macos_app_protected_resource: add_option.definable_multi(
+            "macos_app_protected_resource",
+            {
+                original: "--macos-app-protected-resource",
+            },
+            true,
+            {},
+            [],
+        ),
+    },
     Linux_specific_controls: {
         linux_icon: add_option.definable_single(
             "linux_icon",
@@ -1061,6 +1301,224 @@ const config = {
             true,
         ),
     },
+    binary_version_information: {
+        company_name: add_option.definable_single(
+            "company_name",
+            {
+                original: "--company-name",
+            },
+            true,
+            {},
+            "",
+            true,
+        ),
+        product_name: add_option.definable_single(
+            "product_name",
+            {
+                original: "--product-name",
+            },
+            true,
+            {},
+            "",
+            true,
+        ),
+        file_version: add_option.definable_single(
+            "file_version",
+            {
+                original: "--file-version",
+            },
+            true,
+            {},
+            "",
+            true,
+        ),
+        product_version: add_option.definable_single(
+            "product_version",
+            {
+                original: "--product-version",
+            },
+            true,
+            {},
+            "",
+            true,
+        ),
+        file_description: add_option.definable_single(
+            "file_description",
+            {
+                original: "--file-description",
+            },
+            true,
+            {},
+            "",
+            true,
+        ),
+        copyright: add_option.definable_single(
+            "copyright",
+            {
+                original: "--copyright",
+            },
+            true,
+            {},
+            "",
+            true,
+        ),
+        trademarks: add_option.definable_single(
+            "trademarks",
+            {
+                original: "--trademarks",
+            },
+            true,
+            {},
+            "",
+            true,
+        ),
+    },
+    plugin_control: {
+        enable_plugins: add_option.defined_multi(
+            "enable_plugins",
+            {
+                original: "--enable-plugins",
+            },
+            true,
+            {}, // todo 把plugin list添加进去
+            [],
+        ),
+        disable_plugins: add_option.defined_multi(
+            "disable_plugins",
+            {
+                original: "--disable-plugins",
+            },
+            true,
+            {}, // todo 把plugin list添加进去
+            [],
+        ),
+        plugin_no_detection: add_option.bool(
+            "plugin_no_detection",
+            {
+                original: "--plugin-no-detection",
+            },
+            true,
+            false,
+        ),
+        plugin_list: add_option.bool(
+            "plugin_list",
+            {
+                original: "--plugin-list",
+            },
+            true,
+            false,
+        ),
+        user_plugin: add_option.definable_multi(
+            "user_plugin",
+            {
+                original: "--user-plugin",
+            },
+            true,
+            {},
+            [],
+        ),
+        module_parameter: add_option.definable_multi(
+            "module_parameter",
+            {
+                original: "--module-parameter",
+            },
+            true,
+            {},
+            [],
+        ),
+        show_source_changes: add_option.definable_multi(
+            "show_source_changes",
+            {
+                original: "--show-source-changes",
+            },
+            true,
+            {},
+            [],
+        ),
+    },
+    plugin_options_of_anti_bloat: {
+        show_anti_bloat_changes: add_option.bool(
+            "show_anti_bloat_changes",
+            {
+                original: "--show-anti-bloat-changes",
+            },
+            true,
+            false,
+        ),
+        noinclude_setuptools_mode: add_option.definable_multi(
+            "noinclude_setuptools_mode",
+            {
+                original: "--noinclude-setuptools-mode",
+            },
+            true,
+            {},
+            [],
+        ),
+        noinclude_pytest_mode: add_option.definable_multi(
+            "noinclude_pytest_mode",
+            {
+                original: "--noinclude-pytest-mode",
+            },
+            true,
+            {},
+            [],
+        ),
+        noinclude_unittest_mode: add_option.definable_multi(
+            "noinclude_unittest_mode",
+            {
+                original: "--noinclude-unittest-mode",
+            },
+            true,
+            {},
+            [],
+        ),
+        noinclude_IPython_mode: add_option.definable_multi(
+            "noinclude_IPython_mode",
+            {
+                original: "--noinclude-IPython-mode",
+            },
+            true,
+            {},
+            [],
+        ),
+        noinclude_dask_mode: add_option.definable_multi(
+            "noinclude_dask_mode",
+            {
+                original: "--noinclude-dask-mode",
+            },
+            true,
+            {},
+            [],
+        ),
+        noinclude_numba_mode: add_option.definable_multi(
+            "noinclude_numba_mode",
+            {
+                original: "--noinclude-numba-mode",
+            },
+            true,
+            {},
+            [],
+        ),
+        noinclude_default_mode: add_option.definable_multi(
+            "noinclude_default_mode",
+            {
+                original: "--noinclude-default-mode",
+            },
+            true,
+            {},
+            [],
+        ),
+        noinclude_custom_mode: add_option.definable_multi(
+            "noinclude_custom_mode",
+            {
+                original: "--noinclude-custom-mode",
+            },
+            true,
+            {},
+            [],
+        ),
+    },
+
 };
 //基本就这个格式 回调函数接受一个参数
 // config[watcher_key] = [add_watcher({

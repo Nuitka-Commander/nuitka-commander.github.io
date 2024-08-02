@@ -15,26 +15,14 @@ import supported_nuitka_version from "@/nuitka_config_files/supported_nuitka_ver
 
 
     <!--left-->
-    <div class="top_nav_bar">
-      <el-tooltip>
-        <el-switch
-
-            v-model="user_options.is_full_mode"
-            :active-text="$t('nav_bar.mode.full_mode')"
-            :inactive-text="$t('nav_bar.mode.easy_mode')"
-        ></el-switch>
-        <template #content>
-          {{ $t("nav_bar.mode.info.l1") }} <br>
-          {{ $t("nav_bar.mode.info.l2") }} <br>
-          {{ $t("nav_bar.mode.info.l3") }}
-        </template>
-      </el-tooltip>
-
+    <div id="top_nav_bar_left" class="top_nav_bar">
+      <!--必须给style来点硬的，不然排版老是出问题-->
       <el-tooltip>
         <el-switch
             v-model="user_options.show_original_command"
             :active-text="$t('nav_bar.mode.show_raw_command')"
             :inactive-text="$t('nav_bar.mode.no_show_raw_command')"
+            style="white-space: nowrap"
         ></el-switch>
         <template #content>
           {{ $t("nav_bar.mode.show_raw_command_info") }}
@@ -44,7 +32,7 @@ import supported_nuitka_version from "@/nuitka_config_files/supported_nuitka_ver
           v-model="user_options.nuitka_version"
           filterable
           @change="load_new_config()"
-
+          style="width:20vw"
       >
         <template #header>
           {{ $t("nav_bar.select_nuitka_version") }}
@@ -68,7 +56,7 @@ import supported_nuitka_version from "@/nuitka_config_files/supported_nuitka_ver
     </div>
 
     <!--right-->
-    <div class="top_nav_bar">
+    <div id="top_nav_bar_right" class="top_nav_bar">
 
 
       <setting-page></setting-page>
@@ -102,7 +90,6 @@ import supported_nuitka_version from "@/nuitka_config_files/supported_nuitka_ver
     gap: 15px;
 
   }
-
 
 }
 

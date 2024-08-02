@@ -20,6 +20,12 @@ export default {
         cache_control: "缓存控制",
         PGO_compilation_choices: "PGO(配置文件引导优化)编译选项",
         tracing_features: "跟踪功能",
+        general_os_controls: "通用操作系统设置",
+        windows_specific_controls: "Windows 特定控制",
+        macOS_specific_controls: "macOS 特定控制",
+        binary_version_information: "二进制版本信息",
+        plugin_control: "插件控制",
+        plugin_options_of_anti_bloat: "'反膨胀'插件选项",
     },
     // basic
     module: {
@@ -591,9 +597,242 @@ export default {
         name: "详细模式输出路径",
         desc: "用于设定输出'--verbose'的位置，应该是一个文件名。默认为标准输出。",
     },
+    // General OS controls(通用操作系统控制)
+    disable_console: {
+        name: "禁用控制台",
+        desc: "在为Windows或macOS编译时，禁用控制台窗口并创建为一个GUI应用程序。默认关闭。",
+    },
+    enable_console: {
+        name: "启用控制台",
+        desc: "在为Windows或macOS编译时，启用控制台窗口并创建一个控制台应用程序。\n" +
+            "这将禁用来自某些模块的提示，例如\"PySide\"会建议禁用它。默认启用。",
+    },
+    force_stdout_spec: {
+        name: "强制标准输出规范",
+        desc: "强制程序的标准输出输出到这个位置。对于禁用控制台的程序和使用Nuitka商业版的Windows服务插件的程序非常有用。默认不激活，\n" +
+            "例如使用'{PROGRAM_BASE}.out.txt'，也就是程序目录附近的文件，查看用户手册以获取可用值的完整列表。",
+    },
+    force_stderr_spec: {
+        name: "强制标准错误规范",
+        desc: "强制程序的标准错误输出到这个位置。对于禁用控制台的程序和使用Nuitka商业版的Windows服务插件的程序非常有用。默认不激活，\n" +
+            "例如使用'{PROGRAM_BASE}.err.txt'，也就是程序目录附近的文件，查看用户手册以获取可用值的完整列表。",
+    },
+    // Windows specific controls(Windows 特定控制)
+    windows_icon_from_ico: {
+        name: "windows图标(ico文件)",
+        desc: "添加可执行文件的图标。可以多次给出不同分辨率或者包含多个图标的文件。在选择包含多个图标的文件时，\n" +
+            "您也可以使用＃＜n＞后缀来指定要包含的特定图标并忽略其他所有的图标，其中n是从1开始的整数索引",
+    },
+    windows_icon_from_exe: {
+        name: "windows图标(exe文件)",
+        desc: "复制来自该可执行文件的图标(仅限Windows)。",
+    },
+    onefile_windows_splash_screen_image: {
+        name: "单文件Windows启动画面图像",
+        desc: "当编译为Windows下的单文件时，在加载应用程序时显示这个图像。默认关闭。",
+    },
+    windows_uac_admin: {
+        name: "请求Windows用户控制(UAC)管理员权限",
+        desc: "向Windows用户控制(UAC)请求在执行时授予管理员权限。(仅限Windows)。默认关闭。",
+    },
+    windows_uac_uiaccess: {
+        name: "请求Windows用户控制（UAC）UI访问权限",
+        desc: "请求Windows用户控制权限(UAC)，用于强制在特定的几个文件夹中运行和远程桌面访问。(仅限Windows)。默认关闭。",
+    },
+    // macOS specific controls(MacOS 特定控制)
+    macos_create_app_bundle: {
+        name: "创建MacOS应用程序包",
+        desc: "在为macOS编译时，创建一个包而不是一个普通的二进制应用程序。这是禁用控制台、获取高DPI图形等的唯一方式，并且将开启独立模式。默认为关闭。",
+    },
+    macos_target_arch: {
+        name: "MacOS目标架构",
+        desc: "这个程序应该在什么架构上运行。默认值和限制是运行Python允许的。默认值为\"native\"，这是Python运行的架构。",
+        elements: {
+            native: {
+                name: "本地架构",
+                desc: "默认值，这是Python运行的架构",
+            },
+        },
+    },
+    macos_app_icon: {
+        name: "MacOS应用程序图标路径",
+        desc: "为应用程序包添加图标。只能给出一次。默认为Python图标。",
+        elements: {
+            python_icon: {
+                name: "Python图标",
+                desc: "Python图标，如果可用的话，该选项为默认值",
+            },
+        },
+    },
+    macos_signed_app_name: {
+        name: "MacOS签名应用程序名称",
+        desc: "用于macOS签名的应用程序名称。为了获得最佳结果，请遵循\"com.YourCompany.AppName\"的命名格式，\n" +
+            "因为这些名称必须是全局唯一的，并且可能会授予受保护的API访问权限。",
+    },
+    macos_app_name: {
+        name: "macOS应用程序名称",
+        desc: "要在macOS捆绑包信息中使用的产品名称。默认为二进制文件的基本文件名。",
+    },
+    macos_app_mode: {
+        name: "macOS应用程序模式",
+        desc: "应用程序捆绑包的应用程序模式。",
+        elements: {
+            gui: {
+                name: "GUI模式",
+                desc: "。当你启动一个窗口，并且希望出现在Docker中时，默认值\"gui\"是一个很好的选择。",
+            },
+            background: {
+                name: "后台模式",
+                desc: "如果没有窗口，应用程序会是一个\"background\"应用程序。",
+            },
+            ui_element: {
+                name: "UI元素模式",
+                desc: "对于稍后显示的UI元素，\"ui-element\"介于两者之间。\n" +
+                    "应用程序不会出现在dock中，但是当它稍后打开一个窗口时，它将获得对桌面的完全访问权限。",
+            },
+        },
+    },
+    macos_sign_identity: {
+        name: "MacOS签名标识",
+        desc: "当在macOS上签名时，默认情况下会使用一个临时标识，但是使用这个选项时，您可以指定另一个要使用的标识。\n" +
+            "现在，在macOS上签名代码是强制性的，不能被禁用。使用\"auto\"来检测你唯一的已安装表示。\n" +
+            "如果没有给出，默认为\"ad-hoc\"。",
+        elements: {
+            auto: {
+                name: "自动",
+                desc: "检测你唯一的已安装表示",
+            },
+            ad_hoc: {
+                name: "自由签名",
+                desc: "自由签名，默认值",
+            },
+        },
+    },
+    macos_sign_notarization: {
+        name: "MacOS签名认证",
+        desc: "当进行用于公证的签名时，使用来自Apple的正确的TeamID标识，使用所需的运行时签名选项，以便它可以被接受。",
+    },
+    macos_app_version: {
+        name: "macOS应用程序版本",
+        desc: "要在macOS捆绑包信息中使用的产品版本。如果没有给出，则默认为\"1.0\"。",
+        elements: {
+            default_version: {
+                name: "1.0",
+                desc: "默认值",
+            },
+        },
+    },
+    macos_app_protected_resource: {
+        name: "请求macOS受保护的资源",
+        desc: "请求访问macOS受保护的资源的权限，例如\"NSMicrophoneUsageDescription:Microphone access for recording audio.\"请求访问麦克风，\n" +
+            "并为用户提供一个信息文本，说明为什么需要这样做。在冒号之前，是一个访问权限的操作系统标识符，然后是信息文本。\n" +
+            "可以在https://developer.apple.com/documentation/bundleresources/information_property_list/protected_resources中找到合法的值，\n" +
+            "该选项可以多次指定。默认为空。",
+    },
     // Linux specific controls(Linux 特定控制)
     linux_icon: {
         name: "Linux图标",
         desc: "为单文件二进制可执行文件添加图标。只能给出一次。如果可用，默认为Python图标。",
+    },
+    // Binary Version Information(二进制版本信息)
+    company_name: {
+        name: "公司名称",
+        desc: "要在版本信息中使用的公司名称。默认为无。",
+    },
+    product_name: {
+        name: "产品名称",
+        desc: "要在版本信息中使用的产品名称。默认为二进制文件的基本文件名。",
+    },
+    file_version: {
+        name: "文件版本",
+        desc: "要在版本信息中使用的文件版本。必须为一个最多4个数字的序列，例如1.0或1.0.0.0,不允许使用更多的数字或者使用字符串。默认为无。",
+    },
+    product_version: {
+        name: "产品版本",
+        desc: "要在版本信息中使用的产品版本。必须为一个最多4个数字的序列，例如1.0或1.0.0.0, 不允许使用更多的数字或者使用字符串。默认为无。",
+    },
+    file_description: {
+        name: "文件描述",
+        desc: "要在版本信息中使用的文件描述。目前仅限Windows。默认为二进制文件的文件名。",
+    },
+    copyright: {
+        name: "版权文本",
+        desc: "在版本信息中使用的版权信息。目前仅限Windows/macOS可用。默认不显示。",
+    },
+    trademarks: {
+        name: "商标文本",
+        desc: "要在版本信息中使用的商标。目前仅限Windows/macOS可用。默认不显示。",
+    },
+    // Plugin control(插件控制)
+    enable_plugins: {
+        name: "启用插件",
+        desc: "启用插件。必须为插件名称。默认为空",
+    },
+    disable_plugins: {
+        name: "禁用插件",
+        desc: "禁用插件。必须为插件名称。使用'--plugin-list'查询完整列表并退出。大多数情况下禁用标准插件并不是一个好主意。默认为空。",
+    },
+    plugin_no_detection: {
+        name: "禁用插件检测",
+        desc: "插件可以检测它们是否可能被使用，您可以通过\"--disable-plugin=plugin-that-warned\"禁用警告，\n" +
+            "或者你可以使用这个选项来完全禁用该机制，当然，这也会稍微加快编译速度，因为一旦你确定了要使用的插件，\n" +
+            "这个检测代码就会白白运行。默认关闭。",
+    },
+    plugin_list: {
+        name: "插件列表",
+        desc: "显示所有可用插件的列表并退出。默认关闭。",
+    },
+    user_plugin: {
+        name: "用户插件",
+        desc: "用户插件的文件名。可以多次给出。默认为空。",
+    },
+    module_parameter: {
+        name: "模块参数",
+        desc: "提供一个模块参数。一些包要求你提供额外的决策。当前格式是 --module-parameter=module.name-option-name=value\n" +
+            "(模块参数=模块.名称-选项-名称=值)。默认为空。",
+    },
+    show_source_changes: {
+        name: "显示源代码更改",
+        desc: "在编译之前显示对原Python文件内容的源代码更改。主要用于开发插件和配置Nuitka包。例如使用'-show-source-changes=numpy.**'\n" +
+            "可以查看给定命名空间下所有的更改，或者使用'*'来查看所有可能的大量更改。默认为空",
+    },
+    // Plugin options of 'anti-bloat'('反膨胀'插件选项)
+    show_anti_bloat_changes: {
+        name: "显示反膨胀更改",
+        desc: "注释插件所做的更改。",
+    },
+    noinclude_setuptools_mode: {
+        name: "不包含setuptools模式",
+        desc: "遇到\"setuptools\"或\"setuptools_scm\"导入时的处理方式。这个包可能会有很多依赖而变得很大，应该尽量避免使用。",
+    },
+    noinclude_pytest_mode: {
+        name: "不包含pytest模式",
+        desc: "遇到\"pytest\"或\"nose\"导入时的处理方式。这个包可能会有很多依赖而变得很大，应该尽量避免使用。",
+    },
+    noinclude_unittest_mode: {
+        name: "不包含单元测试模式",
+        desc: "遇到\"unittest(单元测试)\"导入时的处理方式。这个包可能会有很多依赖而变得很大，应该尽量避免使用。",
+    },
+    noinclude_IPython_mode: {
+        name: "不包含IPython模式",
+        desc: "遇到\"IPython\"导入时的处理方式。这个包可能会有很多依赖而变得很大，应该尽量避免使用。",
+    },
+    noinclude_dask_mode: {
+        name: "不包含dask模式",
+        desc: "遇到\"dask\"导入时的处理方式。这个包可能会有很多依赖而变得很大，应该尽量避免使用。",
+    },
+    noinclude_numba_mode: {
+        name: "不包含numba模式",
+        desc: "遇到\"numba\"导入时的处理方式。这个包可能会有很多依赖而变得很大，目前在独立模式下还不能正常工作。\n" +
+            "这个包可能会有很多依赖而变得很大，应该尽量避免使用。",
+    },
+    noinclude_default_mode: {
+        name: "不包含默认模式",
+        desc: "这实际上为上面的选项提供了默认的\"警告(warning)\"值，并且可以用来打开上述所有选项。",
+    },
+    noinclude_custom_mode: {
+        name: "不包含自定义模式",
+        desc: "遇到特定导入时的处理方式。格式为模块名称，可以并且应该是一个顶级包，接着是一个选项，\"error\", \"warning\", \"nofollow\"，\n" +
+            "例如PyQt5:error。",
     },
 };
