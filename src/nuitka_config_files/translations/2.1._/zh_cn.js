@@ -25,6 +25,7 @@ export default {
         macOS_specific_controls: "macOS 特定控制",
         binary_version_information: "二进制版本信息",
         plugin_control: "插件控制",
+        plugin_options_of_anti_bloat: "'反膨胀'插件选项",
     },
     // basic
     module: {
@@ -794,5 +795,44 @@ export default {
         name: "显示源代码更改",
         desc: "在编译之前显示对原Python文件内容的源代码更改。主要用于开发插件和配置Nuitka包。例如使用'-show-source-changes=numpy.**'\n" +
             "可以查看给定命名空间下所有的更改，或者使用'*'来查看所有可能的大量更改。默认为空",
+    },
+    // Plugin options of 'anti-bloat'('反膨胀'插件选项)
+    show_anti_bloat_changes: {
+        name: "显示反膨胀更改",
+        desc: "注释插件所做的更改。",
+    },
+    noinclude_setuptools_mode: {
+        name: "不包含setuptools模式",
+        desc: "遇到\"setuptools\"或\"setuptools_scm\"导入时的处理方式。这个包可能会有很多依赖而变得很大，应该尽量避免使用。",
+    },
+    noinclude_pytest_mode: {
+        name: "不包含pytest模式",
+        desc: "遇到\"pytest\"或\"nose\"导入时的处理方式。这个包可能会有很多依赖而变得很大，应该尽量避免使用。",
+    },
+    noinclude_unittest_mode: {
+        name: "不包含单元测试模式",
+        desc: "遇到\"unittest(单元测试)\"导入时的处理方式。这个包可能会有很多依赖而变得很大，应该尽量避免使用。",
+    },
+    noinclude_IPython_mode: {
+        name: "不包含IPython模式",
+        desc: "遇到\"IPython\"导入时的处理方式。这个包可能会有很多依赖而变得很大，应该尽量避免使用。",
+    },
+    noinclude_dask_mode: {
+        name: "不包含dask模式",
+        desc: "遇到\"dask\"导入时的处理方式。这个包可能会有很多依赖而变得很大，应该尽量避免使用。",
+    },
+    noinclude_numba_mode: {
+        name: "不包含numba模式",
+        desc: "遇到\"numba\"导入时的处理方式。这个包可能会有很多依赖而变得很大，目前在独立模式下还不能正常工作。\n" +
+            "这个包可能会有很多依赖而变得很大，应该尽量避免使用。",
+    },
+    noinclude_default_mode: {
+        name: "不包含默认模式",
+        desc: "这实际上为上面的选项提供了默认的\"警告(warning)\"值，并且可以用来打开上述所有选项。",
+    },
+    noinclude_custom_mode: {
+        name: "不包含自定义模式",
+        desc: "遇到特定导入时的处理方式。格式为模块名称，可以并且应该是一个顶级包，接着是一个选项，\"error\", \"warning\", \"nofollow\"，\n" +
+            "例如PyQt5:error。",
     },
 };

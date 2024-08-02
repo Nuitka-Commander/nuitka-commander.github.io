@@ -1436,7 +1436,88 @@ const config = {
             [],
         ),
     },
-
+    plugin_options_of_anti_bloat: {
+        show_anti_bloat_changes: add_option.bool(
+            "show_anti_bloat_changes",
+            {
+                original: "--show-anti-bloat-changes",
+            },
+            true,
+            false,
+        ),
+        noinclude_setuptools_mode: add_option.definable_multi(
+            "noinclude_setuptools_mode",
+            {
+                original: "--noinclude-setuptools-mode",
+            },
+            true,
+            {},
+            [],
+        ),
+        noinclude_pytest_mode: add_option.definable_multi(
+            "noinclude_pytest_mode",
+            {
+                original: "--noinclude-pytest-mode",
+            },
+            true,
+            {},
+            [],
+        ),
+        noinclude_unittest_mode: add_option.definable_multi(
+            "noinclude_unittest_mode",
+            {
+                original: "--noinclude-unittest-mode",
+            },
+            true,
+            {},
+            [],
+        ),
+        noinclude_IPython_mode: add_option.definable_multi(
+            "noinclude_IPython_mode",
+            {
+                original: "--noinclude-IPython-mode",
+            },
+            true,
+            {},
+            [],
+        ),
+        noinclude_dask_mode: add_option.definable_multi(
+            "noinclude_dask_mode",
+            {
+                original: "--noinclude-dask-mode",
+            },
+            true,
+            {},
+            [],
+        ),
+        noinclude_numba_mode: add_option.definable_multi(
+            "noinclude_numba_mode",
+            {
+                original: "--noinclude-numba-mode",
+            },
+            true,
+            {},
+            [],
+        ),
+        noinclude_default_mode: add_option.definable_multi(
+            "noinclude_default_mode",
+            {
+                original: "--noinclude-default-mode",
+            },
+            true,
+            {},
+            [],
+        ),
+    },
+    noinclude_custom_mode: add_option.definable_multi(
+        "noinclude_custom_mode",
+        {
+            original: "--noinclude-custom-mode",
+        },
+        true,
+        {},
+        [],
+    ),
 };
 //基本就这个格式 回调函数接受一个参数
 // config[watcher_key] = [add_watcher({
