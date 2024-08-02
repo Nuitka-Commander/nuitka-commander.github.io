@@ -16,6 +16,7 @@ import supported_nuitka_version from "@/nuitka_config_files/supported_nuitka_ver
 
     <!--left-->
     <div id="top_nav_bar_left" class="top_nav_bar">
+      <!--必须给style来点硬的，不然排版老是出问题-->
       <el-tooltip>
         <el-switch
             v-model="user_options.show_original_command"
@@ -31,7 +32,7 @@ import supported_nuitka_version from "@/nuitka_config_files/supported_nuitka_ver
           v-model="user_options.nuitka_version"
           filterable
           @change="load_new_config()"
-
+          style="width:20vw"
       >
         <template #header>
           {{ $t("nav_bar.select_nuitka_version") }}
