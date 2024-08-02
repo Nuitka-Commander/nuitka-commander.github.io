@@ -716,7 +716,7 @@ export default {
         name: "macOS应用程序版本",
         desc: "要在macOS捆绑包信息中使用的产品版本。如果没有给出，则默认为\"1.0\"。",
         elements: {
-            "1.0": {
+            default_version: {
                 name: "1.0",
                 desc: "默认值",
             },

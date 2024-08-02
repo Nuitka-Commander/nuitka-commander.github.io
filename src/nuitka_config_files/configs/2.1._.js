@@ -1268,8 +1268,8 @@ const config = {
             },
             true,
             {
-                "1.0": add_option.multi_elements(
-                    "1.0",
+                default_version: add_option.multi_elements(
+                    "default_version",
                     {
                         original: "1.0",
                     },
@@ -1508,16 +1508,17 @@ const config = {
             {},
             [],
         ),
+        noinclude_custom_mode: add_option.definable_multi(
+            "noinclude_custom_mode",
+            {
+                original: "--noinclude-custom-mode",
+            },
+            true,
+            {},
+            [],
+        ),
     },
-    noinclude_custom_mode: add_option.definable_multi(
-        "noinclude_custom_mode",
-        {
-            original: "--noinclude-custom-mode",
-        },
-        true,
-        {},
-        [],
-    ),
+
 };
 //基本就这个格式 回调函数接受一个参数
 // config[watcher_key] = [add_watcher({
