@@ -1372,8 +1372,69 @@ const config = {
             "",
             true,
         ),
-
-
+    },
+    plugin_control: {
+        enable_plugins: add_option.defined_multi(
+            "enable_plugins",
+            {
+                original: "--enable-plugins",
+            },
+            true,
+            {}, // todo 把plugin list添加进去
+            [],
+        ),
+        disable_plugins: add_option.defined_multi(
+            "disable_plugins",
+            {
+                original: "--disable-plugins",
+            },
+            true,
+            {}, // todo 把plugin list添加进去
+            [],
+        ),
+        plugin_no_detection: add_option.bool(
+            "plugin_no_detection",
+            {
+                original: "--plugin-no-detection",
+            },
+            true,
+            false,
+        ),
+        plugin_list: add_option.bool(
+            "plugin_list",
+            {
+                original: "--plugin-list",
+            },
+            true,
+            false,
+        ),
+        user_plugin: add_option.definable_multi(
+            "user_plugin",
+            {
+                original: "--user-plugin",
+            },
+            true,
+            {},
+            [],
+        ),
+        module_parameter: add_option.definable_multi(
+            "module_parameter",
+            {
+                original: "--module-parameter",
+            },
+            true,
+            {},
+            [],
+        ),
+        show_source_changes: add_option.definable_multi(
+            "show_source_changes",
+            {
+                original: "--show-source-changes",
+            },
+            true,
+            {},
+            [],
+        ),
     },
 
 };

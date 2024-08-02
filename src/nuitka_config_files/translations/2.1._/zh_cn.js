@@ -24,6 +24,7 @@ export default {
         windows_specific_controls: "Windows 特定控制",
         macOS_specific_controls: "macOS 特定控制",
         binary_version_information: "二进制版本信息",
+        plugin_control: "插件控制",
     },
     // basic
     module: {
@@ -760,6 +761,38 @@ export default {
     trademarks: {
         name: "商标文本",
         desc: "要在版本信息中使用的商标。目前仅限Windows/macOS可用。默认不显示。",
-
+    },
+    // Plugin control(插件控制)
+    enable_plugins: {
+        name: "启用插件",
+        desc: "启用插件。必须为插件名称。默认为空",
+    },
+    disable_plugins: {
+        name: "禁用插件",
+        desc: "禁用插件。必须为插件名称。使用'--plugin-list'查询完整列表并退出。大多数情况下禁用标准插件并不是一个好主意。默认为空。",
+    },
+    plugin_no_detection: {
+        name: "禁用插件检测",
+        desc: "插件可以检测它们是否可能被使用，您可以通过\"--disable-plugin=plugin-that-warned\"禁用警告，\n" +
+            "或者你可以使用这个选项来完全禁用该机制，当然，这也会稍微加快编译速度，因为一旦你确定了要使用的插件，\n" +
+            "这个检测代码就会白白运行。默认关闭。",
+    },
+    plugin_list: {
+        name: "插件列表",
+        desc: "显示所有可用插件的列表并退出。默认关闭。",
+    },
+    user_plugin: {
+        name: "用户插件",
+        desc: "用户插件的文件名。可以多次给出。默认为空。",
+    },
+    module_parameter: {
+        name: "模块参数",
+        desc: "提供一个模块参数。一些包要求你提供额外的决策。当前格式是 --module-parameter=module.name-option-name=value\n" +
+            "(模块参数=模块.名称-选项-名称=值)。默认为空。",
+    },
+    show_source_changes: {
+        name: "显示源代码更改",
+        desc: "在编译之前显示对原Python文件内容的源代码更改。主要用于开发插件和配置Nuitka包。例如使用'-show-source-changes=numpy.**'\n" +
+            "可以查看给定命名空间下所有的更改，或者使用'*'来查看所有可能的大量更改。默认为空",
     },
 };
