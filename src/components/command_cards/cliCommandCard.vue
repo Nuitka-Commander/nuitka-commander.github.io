@@ -29,9 +29,7 @@ const props = defineProps({
 </template>
 
 <style lang="scss" scoped>
-.use_original_text {
-  white-space: pre-wrap;
-}
+
 
 .cli_tooltip_desc {
   margin-top: 10px;

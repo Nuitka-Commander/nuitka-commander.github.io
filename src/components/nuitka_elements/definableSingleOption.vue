@@ -316,7 +316,5 @@ watch(() => model.value.val, (new_val) => {
 </template>
 
 <style lang="scss" scoped>
-.use_original_text {
-  white-space: pre-wrap;
-}
+
 </style>

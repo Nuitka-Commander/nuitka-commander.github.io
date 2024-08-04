@@ -310,7 +310,5 @@ watch(() => model.value.enabled, (new_enabled) => {
 </template>
 
 <style lang="scss" scoped>
-.use_original_text {
-  white-space: pre-wrap;
-}
+
 </style>
