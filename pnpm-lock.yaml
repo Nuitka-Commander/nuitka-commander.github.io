@@ -32,6 +32,9 @@ dependencies:
   html-minifier-terser:
     specifier: ^7.2.0
     version: 7.2.0
+  iterable-transform-replace:
+    specifier: ^1.2.0
+    version: 1.2.0
   js-yaml:
     specifier: ^4.1.0
     version: 4.1.0
@@ -53,6 +56,9 @@ dependencies:
   scss-loader:
     specifier: ^0.0.1
     version: 0.0.1
+  transform-spread-iterable:
+    specifier: ^1.4.1
+    version: 1.4.1
   unplugin-auto-import:
     specifier: ^0.17.6
     version: 0.17.6(@vueuse/core@10.9.0)(rollup@4.18.0)
