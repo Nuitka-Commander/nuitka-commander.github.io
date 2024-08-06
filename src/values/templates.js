@@ -152,7 +152,7 @@ export const watcher_key = "watch_function_closer";
 /**
  * 生成一个watcher的对象
  * @param source {object}
- * @param callback {function} 一个回调函数，可以访问source中的每个key，在source中key对应的对象发生变化后被调用
+ * @param callback {function} 一个回调函数，可以访问source中的每个key，在source中key对应的对象发生变化后被调用 在use_command中初始化
  * @returns {{callback :function, source:object}}
  */
 export const add_watcher = (source, callback) => {
