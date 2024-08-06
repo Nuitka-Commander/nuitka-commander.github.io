@@ -4,7 +4,6 @@
  * @Date: 2023-12-05 22:28:39
  */
 import {add_option, add_watcher, watcher_key} from "@/values/templates.js";
-import {is_array_equivalent} from "@/modules/untils.js";
 
 
 const config = {
@@ -1523,43 +1522,31 @@ const config = {
 };
 
 config[watcher_key] = [
-    add_watcher({
-        standalone: config.basic.standalone,
-        follow_imports: config.control_the_following_into_imported_modules.follow_imports,
-        python_flag: config.basic.python_flag,
-    }, (config) => {
-        if (config.standalone.val === true) {
-            if (config.follow_imports.val !== true) {
-                config.follow_imports.val = true;
-            }
+    (function () {
+        let standalone_status = false;
 
-            if (config.follow_imports.enabled !== false) {
+        return add_watcher({
+            standalone: config.basic.standalone,
+            follow_imports: config.control_the_following_into_imported_modules.follow_imports,
+            python_flag: config.basic.python_flag,
+        }, (config) => {
+            if (standalone_status === config.standalone.val) { //没变化可能是递归调用 退出
+                return;
+            }
+            standalone_status = config.standalone.val;
+            if (config.standalone.val === true) {
+                config.follow_imports.val = true;
                 config.follow_imports.enabled = false;
-            }
-            if (is_array_equivalent(config.python_flag.val, ["s"]) !== true) {
                 config.python_flag.val = ["s"];
-            }
-            if (config.python_flag.enabled !== false) {
                 config.python_flag.enabled = false;
-            }
-        } else if (config.standalone.val === false) {
-            if (config.follow_imports.val !== false) {
+            } else if (config.standalone.val === false) {
                 config.follow_imports.val = false;
-            }
-            if (config.follow_imports.enabled !== true) {
                 config.follow_imports.enabled = true;
-            }
-            console.log(config.follow_imports.val);
-            if (is_array_equivalent(config.python_flag.val, []) !== false) {
                 config.python_flag.val = [];
-            }
-            if (config.python_flag.enabled !== true) {
                 config.python_flag.enabled = true;
             }
-
-        }
-
-    }),
+        })
+    })(),
 ];
 // noinspection JSUnusedGlobalSymbols
 export default config;
