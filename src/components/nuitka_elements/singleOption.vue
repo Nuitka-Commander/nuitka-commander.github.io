@@ -77,12 +77,6 @@ onBeforeUnmount(() => {
   delete use_command.output.value[props.key_name];
 });
 ///////////////////////////
-//在禁用时，将值设置为默认值
-watch(() => model.value.enabled, (new_enabled) => {
-  if (!new_enabled) {
-    model.value.val = model.value.default;
-  }
-});
 //todo 可空考虑
 </script>
 
