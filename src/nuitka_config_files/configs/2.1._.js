@@ -1522,6 +1522,7 @@ const config = {
 };
 
 config[watcher_key] = [
+    // standalone
     (function () {
         let standalone_status = false;
 
@@ -1529,6 +1530,7 @@ config[watcher_key] = [
             standalone: config.basic.standalone,
             follow_imports: config.control_the_following_into_imported_modules.follow_imports,
             python_flag: config.basic.python_flag,
+            nofollow_imports: config.control_the_following_into_imported_modules.nofollow_imports,
         }, (config) => {
             if (standalone_status === config.standalone.val) { //没变化可能是递归调用 退出
                 return;
@@ -1539,11 +1541,14 @@ config[watcher_key] = [
                 config.follow_imports.enabled = false;
                 config.python_flag.val = ["s"];
                 config.python_flag.enabled = false;
+                config.nofollow_imports.val = false;
+                config.nofollow_imports.enabled = false;
             } else if (config.standalone.val === false) {
                 config.follow_imports.val = false;
                 config.follow_imports.enabled = true;
                 config.python_flag.val = [];
                 config.python_flag.enabled = true;
+                config.nofollow_imports.enabled = true;
             }
         })
     })(),
