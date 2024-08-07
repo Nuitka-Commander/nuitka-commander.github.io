@@ -1661,6 +1661,24 @@ config[watcher_key] = [
             },
         )
     })(),
+    (function () {
+        let standalone_status = null;
+        return add_watcher({
+            standalone: config.basic.standalone,
+            pgo: config.PGO_compilation_choices.pgo,
+        }, (config) => {
+            if (standalone_status === config.standalone.val) {
+                return;
+            }
+            standalone_status = config.standalone.val;
+            if (config.standalone.val === true) {
+                config.pgo.val = false;
+                config.pgo.enabled = false;
+            } else {
+                config.pgo.enabled = true;
+            }
+        })
+    })(),
 ];
 // noinspection JSUnusedGlobalSymbols
 export default config;
