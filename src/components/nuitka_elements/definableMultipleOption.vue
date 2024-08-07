@@ -223,12 +223,7 @@ onBeforeUnmount(() => {
   delete use_command.output.value[props.key_name];
 });
 ///////////////////////////
-//在禁用时，将值设置为默认值
-watch(() => model.value.enabled, (new_enabled) => {
-  if (!new_enabled) {
-    model.value.val = model.value.default;
-  }
-});
+
 </script>
 
 <template>
@@ -310,7 +305,5 @@ watch(() => model.value.enabled, (new_enabled) => {
 </template>
 
 <style lang="scss" scoped>
-.use_original_text {
-  white-space: pre-wrap;
-}
+
 </style>

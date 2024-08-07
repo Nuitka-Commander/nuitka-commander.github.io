@@ -3,7 +3,8 @@
  * @Author: erduotong
  * @Date: 2023-12-05 22:28:39
  */
-import {add_option, watcher_key} from "@/values/templates.js";
+import {add_option, add_watcher, watcher_key} from "@/values/templates.js";
+import {is_array_equivalent} from "@/modules/untils.js";
 
 
 const config = {
@@ -968,7 +969,7 @@ const config = {
                 original: "--report-template",
             },
             true,
-            {}, //todo
+            {},
             [],
         ),
         quiet: add_option.bool(
@@ -1380,7 +1381,204 @@ const config = {
                 original: "--enable-plugins",
             },
             true,
-            {}, // todo 把plugin list添加进去
+            {
+                anti_bloat: add_option.multi_elements(
+                    "anti_bloat",
+                    {
+                        original: "anti-bloat",
+                    },
+                    true,
+                ),
+                data_files: add_option.multi_elements(
+                    "data_files",
+                    {
+                        original: "data-files",
+                    },
+                    true,
+                ),
+                delvewheel: add_option.multi_elements(
+                    "delvewheel",
+                    {
+                        original: "delvewheel",
+                    },
+                    true,
+                ),
+                dill_compat: add_option.multi_elements(
+                    "dill_compat",
+                    {
+                        original: "dill-compat",
+                    },
+                    true,
+                ),
+                dll_files: add_option.multi_elements(
+                    "dll_files",
+                    {
+                        original: "dll-files",
+                    },
+                    true,
+                ),
+                enum_compat: add_option.multi_elements(
+                    "enum_compat",
+                    {
+                        original: "enum-compat",
+                    },
+                    true,
+                ),
+                eventlet: add_option.multi_elements(
+                    "eventlet",
+                    {
+                        original: "eventlet",
+                    },
+                    true,
+                ),
+                gevent: add_option.multi_elements(
+                    "gevent",
+                    {
+                        original: "gevent",
+                    },
+                    true,
+                ),
+                gi: add_option.multi_elements(
+                    "gi",
+                    {
+                        original: "gi",
+                    },
+                    true,
+                ),
+                glfw: add_option.multi_elements(
+                    "glfw",
+                    {
+                        original: "glfw",
+                    },
+                    true,
+                ),
+                implicit_imports: add_option.multi_elements(
+                    "implicit_imports",
+                    {
+                        original: "implicit-imports",
+                    },
+                    true,
+                ),
+                kivy: add_option.multi_elements(
+                    "kivy",
+                    {
+                        original: "kivy",
+                    },
+                    true,
+                ),
+                matplotlib: add_option.multi_elements(
+                    "matplotlib",
+                    {
+                        original: "matplotlib",
+                    },
+                    true,
+                ),
+                multiprocessing: add_option.multi_elements(
+                    "multiprocessing",
+                    {
+                        original: "multiprocessing",
+                    },
+                    true,
+                ),
+                no_qt: add_option.multi_elements(
+                    "no_qt",
+                    {
+                        original: "no-qt",
+                    },
+                    true,
+                ),
+                options_nanny: add_option.multi_elements(
+                    "options_nanny",
+                    {
+                        original: "options-nanny",
+                    },
+                    true,
+                ),
+                pbr_compat: add_option.multi_elements(
+                    "pbr_compat",
+                    {
+                        original: "pbr-compat",
+                    },
+                    true,
+                ),
+                pkg_resources: add_option.multi_elements(
+                    "pkg_resources",
+                    {
+                        original: "pkg-resources",
+                    },
+                    true,
+                ),
+                pmw_freezer: add_option.multi_elements(
+                    "pmw_freezer",
+                    {
+                        original: "pmw-freezer",
+                    },
+                    true,
+                ),
+                pylint_warnings: add_option.multi_elements(
+                    "pylint_warnings",
+                    {
+                        original: "pylint-warnings",
+                    },
+                    true,
+                ),
+                pyqt5: add_option.multi_elements(
+                    "pyqt5",
+                    {
+                        original: "pyqt5",
+                    },
+                    true,
+                ),
+                pyqt6: add_option.multi_elements(
+                    "pyqt6",
+                    {
+                        original: "pyqt6",
+                    },
+                    true,
+                ),
+                pyside2: add_option.multi_elements(
+                    "pyside2",
+                    {
+                        original: "pyside2",
+                    },
+                    true,
+                ),
+                pyside6: add_option.multi_elements(
+                    "pyside6",
+                    {
+                        original: "pyside6",
+                    },
+                    true,
+                ),
+                pywebview: add_option.multi_elements(
+                    "pywebview",
+                    {
+                        original: "pywebview",
+                    },
+                    true,
+                ),
+                tk_inter: add_option.multi_elements(
+                    "tk_inter",
+                    {
+                        original: "tk-inter",
+                    },
+                    true,
+                ),
+                transformers: add_option.multi_elements(
+                    "transformers",
+                    {
+                        original: "transformers",
+                    },
+                    true,
+                ),
+                upx: add_option.multi_elements(
+                    "upx",
+                    {
+                        original: "upx",
+                    },
+                    true,
+                ),
+            },
             [],
         ),
         disable_plugins: add_option.defined_multi(
@@ -1389,7 +1587,204 @@ const config = {
                 original: "--disable-plugins",
             },
             true,
-            {}, // todo 把plugin list添加进去
+            {
+                anti_bloat: add_option.multi_elements(
+                    "anti_bloat",
+                    {
+                        original: "anti-bloat",
+                    },
+                    true,
+                ),
+                data_files: add_option.multi_elements(
+                    "data_files",
+                    {
+                        original: "data-files",
+                    },
+                    true,
+                ),
+                delvewheel: add_option.multi_elements(
+                    "delvewheel",
+                    {
+                        original: "delvewheel",
+                    },
+                    true,
+                ),
+                dill_compat: add_option.multi_elements(
+                    "dill_compat",
+                    {
+                        original: "dill-compat",
+                    },
+                    true,
+                ),
+                dll_files: add_option.multi_elements(
+                    "dll_files",
+                    {
+                        original: "dll-files",
+                    },
+                    true,
+                ),
+                enum_compat: add_option.multi_elements(
+                    "enum_compat",
+                    {
+                        original: "enum-compat",
+                    },
+                    true,
+                ),
+                eventlet: add_option.multi_elements(
+                    "eventlet",
+                    {
+                        original: "eventlet",
+                    },
+                    true,
+                ),
+                gevent: add_option.multi_elements(
+                    "gevent",
+                    {
+                        original: "gevent",
+                    },
+                    true,
+                ),
+                gi: add_option.multi_elements(
+                    "gi",
+                    {
+                        original: "gi",
+                    },
+                    true,
+                ),
+                glfw: add_option.multi_elements(
+                    "glfw",
+                    {
+                        original: "glfw",
+                    },
+                    true,
+                ),
+                implicit_imports: add_option.multi_elements(
+                    "implicit_imports",
+                    {
+                        original: "implicit-imports",
+                    },
+                    true,
+                ),
+                kivy: add_option.multi_elements(
+                    "kivy",
+                    {
+                        original: "kivy",
+                    },
+                    true,
+                ),
+                matplotlib: add_option.multi_elements(
+                    "matplotlib",
+                    {
+                        original: "matplotlib",
+                    },
+                    true,
+                ),
+                multiprocessing: add_option.multi_elements(
+                    "multiprocessing",
+                    {
+                        original: "multiprocessing",
+                    },
+                    true,
+                ),
+                no_qt: add_option.multi_elements(
+                    "no_qt",
+                    {
+                        original: "no-qt",
+                    },
+                    true,
+                ),
+                options_nanny: add_option.multi_elements(
+                    "options_nanny",
+                    {
+                        original: "options-nanny",
+                    },
+                    true,
+                ),
+                pbr_compat: add_option.multi_elements(
+                    "pbr_compat",
+                    {
+                        original: "pbr-compat",
+                    },
+                    true,
+                ),
+                pkg_resources: add_option.multi_elements(
+                    "pkg_resources",
+                    {
+                        original: "pkg-resources",
+                    },
+                    true,
+                ),
+                pmw_freezer: add_option.multi_elements(
+                    "pmw_freezer",
+                    {
+                        original: "pmw-freezer",
+                    },
+                    true,
+                ),
+                pylint_warnings: add_option.multi_elements(
+                    "pylint_warnings",
+                    {
+                        original: "pylint-warnings",
+                    },
+                    true,
+                ),
+                pyqt5: add_option.multi_elements(
+                    "pyqt5",
+                    {
+                        original: "pyqt5",
+                    },
+                    true,
+                ),
+                pyqt6: add_option.multi_elements(
+                    "pyqt6",
+                    {
+                        original: "pyqt6",
+                    },
+                    true,
+                ),
+                pyside2: add_option.multi_elements(
+                    "pyside2",
+                    {
+                        original: "pyside2",
+                    },
+                    true,
+                ),
+                pyside6: add_option.multi_elements(
+                    "pyside6",
+                    {
+                        original: "pyside6",
+                    },
+                    true,
+                ),
+                pywebview: add_option.multi_elements(
+                    "pywebview",
+                    {
+                        original: "pywebview",
+                    },
+                    true,
+                ),
+                tk_inter: add_option.multi_elements(
+                    "tk_inter",
+                    {
+                        original: "tk-inter",
+                    },
+                    true,
+                ),
+                transformers: add_option.multi_elements(
+                    "transformers",
+                    {
+                        original: "transformers",
+                    },
+                    true,
+                ),
+                upx: add_option.multi_elements(
+                    "upx",
+                    {
+                        original: "upx",
+                    },
+                    true,
+                ),
+            },
             [],
         ),
         plugin_no_detection: add_option.bool(
@@ -1520,13 +1915,164 @@ const config = {
     },
 
 };
-//基本就这个格式 回调函数接受一个参数
-// config[watcher_key] = [add_watcher({
-//     s: config.basic.content_mult_test,
-// }, (config) => {
-//     console.log(config, "callback");
-// })];
-config[watcher_key] = [];
 
+config[watcher_key] = [
+    // standalone
+    (function () {
+        // null/boolean 强制更新一次
+        let standalone_status = null;
+
+        return add_watcher({
+            standalone: config.basic.standalone,
+            follow_imports: config.control_the_following_into_imported_modules.follow_imports,
+            python_flag: config.basic.python_flag,
+            nofollow_imports: config.control_the_following_into_imported_modules.nofollow_imports,
+        }, (config) => {
+            if (standalone_status === config.standalone.val) { //没变化可能是递归调用 退出
+                return;
+            }
+            standalone_status = config.standalone.val;
+            if (config.standalone.val === true) {
+                config.follow_imports.val = true;
+                config.follow_imports.enabled = false;
+                config.python_flag.val = ["s"];
+                config.python_flag.enabled = false;
+                config.nofollow_imports.val = false;
+                config.nofollow_imports.enabled = false;
+            } else if (config.standalone.val === false) {
+                config.follow_imports.val = false;
+                config.follow_imports.enabled = true;
+                config.python_flag.val = [];
+                config.python_flag.enabled = true;
+                config.nofollow_imports.enabled = true;
+            }
+        })
+    })(),
+    (function () {
+        // null/boolean
+        let onefile_status = null;
+        return add_watcher({
+            onefile: config.basic.onefile,
+            onefile_tempdir_spec: config.onefile_options.onefile_tempdir_spec,
+            onefile_child_grace_time: config.onefile_options.onefile_child_grace_time,
+            onefile_no_compression: config.onefile_options.onefile_no_compression,
+            onefile_as_archive: config.onefile_options.onefile_as_archive,
+
+        }, (config) => {
+            if (onefile_status === config.onefile.val) {
+                return;
+            }
+            onefile_status = config.onefile.val;
+            if (config.onefile.val === true) {
+                config.onefile_tempdir_spec.enabled = true;
+                config.onefile_child_grace_time.enabled = true;
+                config.onefile_no_compression.enabled = true;
+                config.onefile_as_archive.enabled = true;
+            } else if (config.onefile.val === false) {
+                config.onefile_tempdir_spec.enabled = false;
+                config.onefile_child_grace_time.enabled = false;
+                config.onefile_no_compression.enabled = false;
+                config.onefile_as_archive.enabled = false;
+                // 恢复默认值
+                config.onefile_tempdir_spec.val = config.onefile_tempdir_spec.default;
+                config.onefile_child_grace_time.val = config.onefile_child_grace_time.default;
+                config.onefile_no_compression.val = config.onefile_no_compression.default;
+                config.onefile_as_archive.val = config.onefile_as_archive.default;
+            }
+
+        })
+    })(),
+    (function () {
+        let standalone = null;
+        let module = null;
+        return add_watcher(
+            {
+                standalone: config.basic.standalone,
+                module: config.basic.module_,
+                output_filename: config.output_choices.output_filename,
+
+            }, (config) => {
+                if (standalone === config.standalone.val && module === config.module.val) {
+                    return;
+                }
+                standalone = config.standalone.val;
+                module = config.module.val;
+                if (config.standalone.val === true || config.module.val === true) {
+                    config.output_filename.enabled = false;
+                    config.output_filename.val = config.output_filename.default;
+                } else {
+                    config.output_filename.enabled = true;
+                }
+            },
+        )
+    })(),
+    // C backend compiler choice
+    (function () {
+        let clang_status = null;
+        let mingw_status = null;
+        let msvc_status = null;
+
+        return add_watcher(
+            {
+                clang: config.backend_c_compiler_choice.clang,
+                mingw64: config.backend_c_compiler_choice.mingw64,
+                msvc: config.backend_c_compiler_choice.msvc,
+
+            }, (config) => {
+                if (clang_status === config.clang.val &&
+                    mingw_status === config.mingw64.val &&
+                    is_array_equivalent(msvc_status, config.msvc.val)) {
+                    return;
+                }
+                clang_status = config.clang.val;
+                mingw_status = config.mingw64.val;
+                msvc_status = config.msvc.val;
+                if (config.clang.val === true) {
+                    config.mingw64.val = false;
+                    config.msvc.val = config.msvc.default;
+                    config.mingw64.enabled = false;
+                    config.msvc.enabled = false;
+                } else if (config.mingw64.val === true) {
+                    config.clang.val = false;
+                    config.msvc.val = config.msvc.default;
+                    config.clang.enabled = false;
+                    config.msvc.enabled = false;
+                } else if (config.msvc.val.length > 0) {
+                    config.clang.val = false;
+                    config.mingw64.val = false;
+                    config.clang.enabled = false;
+                    config.mingw64.enabled = false;
+                } else {
+                    config.clang.enabled = true;
+                    config.mingw64.enabled = true;
+                    config.msvc.enabled = true;
+                    config.clang.val = config.clang.default;
+                    config.mingw64.val = config.mingw64.default;
+                    config.msvc.val = config.msvc.default;
+                }
+
+
+            },
+        )
+    })(),
+    (function () {
+        let standalone_status = null;
+        return add_watcher({
+            standalone: config.basic.standalone,
+            pgo: config.PGO_compilation_choices.pgo,
+        }, (config) => {
+            if (standalone_status === config.standalone.val) {
+                return;
+            }
+            standalone_status = config.standalone.val;
+            if (config.standalone.val === true) {
+                config.pgo.val = false;
+                config.pgo.enabled = false;
+            } else {
+                config.pgo.enabled = true;
+            }
+        })
+    })(),
+];
 // noinspection JSUnusedGlobalSymbols
 export default config;

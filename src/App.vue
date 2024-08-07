@@ -7,6 +7,7 @@ import {Edit, Share, Upload} from "@element-plus/icons-vue";
 import CommandEdit from "@/components/commandEdit.vue";
 import {user_options} from "@/values/stores/user_options.js";
 import OutputPage from "@/components/outputPage.vue";
+import InputPage from "@/components/inputPage.vue";
 </script>
 
 <template>
@@ -26,7 +27,7 @@ import OutputPage from "@/components/outputPage.vue";
     <el-tabs v-model="user_options.action_tab" stretch tab-position="right">
       <el-tab-pane name="input">
         <template #default>
-          前面的区域，以后再来探索吧
+          <input-page></input-page>
         </template>
         <template #label>
           <el-icon size="25" style="margin-right: 10px">

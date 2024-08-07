@@ -56,6 +56,11 @@ export default {
         output: "输出",
         input: "输入",
     },
+    input_page: {
+        input_from_cli: "从命令行导入",
+        start_input: "开始导入",
+        please_input_cli_command: "请输入Nuitka的命令行指令",
+    },
     nuitka_elements: {
         select_placeholder: "选择",
         not_selected: "未选择",
