@@ -767,10 +767,238 @@ export default {
     enable_plugins: {
         name: "启用插件",
         desc: "启用插件。必须为插件名称。默认为空",
+        elements: {
+            anti_bloat: {
+                name: "反膨胀",
+                desc: "从广泛使用的库模块源代码中去除愚蠢的导入补丁。",
+            },
+            data_files: {
+                name: "包含数据文件",
+                desc: "包含由包配置文件指定的数据文件。",
+            },
+            delvewheel: {
+                name: "delvewheel支持",
+                desc: "支持在独立模式下使用 delvewheel 的软件包",
+            },
+            dill_compat: {
+                name: "dill包兼容性支持",
+                desc: "支持\'dill\'包的兼容性",
+            },
+            dll_files: {
+                name: "包含DLL文件",
+                desc: "根据包配置文件包含DLL配置文件",
+            },
+            enum_compat: {
+                name: "enum兼容",
+                desc: "支持Python2和enum包",
+            },
+            eventlet: {
+                name: "eventlet支持",
+                desc: "支持包含 'eventlet' 依赖项及其对 'dns' 包的猴子补丁需求。",
+            },
+            gevent: {
+                name: "gevent支持",
+                desc: "支持gevent包",
+            },
+            gi: {
+                name: "GI支持",
+                desc: "支持GI包的typelib依赖",
+            },
+            glfw: {
+                name: "支持glfw",
+                desc: "支持在独立模式下使用 'OpenGL' (PyOpenGL) 和 'glfw' 包",
+            },
+            implicit_imports: {
+                name: "隐式导入",
+                desc: "根据包配置文件提供隐式导入。",
+            },
+            kivy: {
+                name: "kivy支持",
+                desc: "支持 'kivy' 包。",
+            },
+            matplotlib: {
+                name: "matplotlib支持",
+                desc: "支持 'matplotlib' 模块。",
+            },
+            multiprocessing: {
+                name: "multiprocessing支持",
+                desc: "支持 Python 的 'multiprocessing' 模块。",
+            },
+            no_qt: {
+                name: "禁用Qt",
+                desc: "禁用独立模式下的所有 Qt 绑定。",
+            },
+            options_nanny: {
+                name: "选项通知",
+                desc: "根据包配置文件通知用户潜在问题。",
+            },
+            pbr_compat: {
+                name: "pbr兼容支持",
+                desc: "支持在独立模式下使用 'pbr' 包。",
+            },
+            pkg_resources: {
+                name: "pkg resources支持",
+                desc: "解决pkg resources的方法",
+            },
+            pmw_freezer: {
+                name: "pmw 支持",
+                desc: "支持'Pmw'包",
+            },
+            pylint_warnings: {
+                name: "pylint警告",
+                desc: "支持 PyLint / PyDev 代码标记。",
+            },
+            pyqt5: {
+                name: "PyQt5支持",
+                desc: "支持 'PyQt5' 包。",
+            },
+            pyqt6: {
+                name: "PyQt6支持",
+                desc: "支持 'PyQt6' 包",
+            },
+            pyside2: {
+                name: "PySide2支持",
+                desc: "支持 'PySide2' 包",
+            },
+            pyside6: {
+                name: "PySide6支持",
+                desc: "支持 'PySide6' 包",
+            },
+            pywebview: {
+                name: "支持PyWebview",
+                desc: "支持 'webview' 包（PyPI 上的 pywebview）。",
+            },
+            tk_inter: {
+                name: "Tkinter支持",
+                desc: "支持 Python 的 Tk 模块。",
+            },
+            transformers: {
+                name: "transformers隐式导入",
+                desc: "为 transformers 包提供隐式导入。",
+            },
+            upx: {
+                name: "自动使用upx",
+                desc: "自动使用 UPX 压缩创建的二进制文件。",
+            },
+        },
     },
     disable_plugins: {
         name: "禁用插件",
         desc: "禁用插件。必须为插件名称。使用'--plugin-list'查询完整列表并退出。大多数情况下禁用标准插件并不是一个好主意。默认为空。",
+        elements: {
+            anti_bloat: {
+                name: "反膨胀",
+                desc: "从广泛使用的库模块源代码中去除愚蠢的导入补丁。",
+            },
+            data_files: {
+                name: "包含数据文件",
+                desc: "包含由包配置文件指定的数据文件。",
+            },
+            delvewheel: {
+                name: "delvewheel支持",
+                desc: "支持在独立模式下使用 delvewheel 的软件包",
+            },
+            dill_compat: {
+                name: "dill包兼容性支持",
+                desc: "支持\'dill\'包的兼容性",
+            },
+            dll_files: {
+                name: "包含DLL文件",
+                desc: "根据包配置文件包含DLL配置文件",
+            },
+            enum_compat: {
+                name: "enum兼容",
+                desc: "支持Python2和enum包",
+            },
+            eventlet: {
+                name: "eventlet支持",
+                desc: "支持包含 'eventlet' 依赖项及其对 'dns' 包的猴子补丁需求。",
+            },
+            gevent: {
+                name: "gevent支持",
+                desc: "支持gevent包",
+            },
+            gi: {
+                name: "GI支持",
+                desc: "支持GI包的typelib依赖",
+            },
+            glfw: {
+                name: "支持glfw",
+                desc: "支持在独立模式下使用 'OpenGL' (PyOpenGL) 和 'glfw' 包",
+            },
+            implicit_imports: {
+                name: "隐式导入",
+                desc: "根据包配置文件提供隐式导入。",
+            },
+            kivy: {
+                name: "kivy支持",
+                desc: "支持 'kivy' 包。",
+            },
+            matplotlib: {
+                name: "matplotlib支持",
+                desc: "支持 'matplotlib' 模块。",
+            },
+            multiprocessing: {
+                name: "multiprocessing支持",
+                desc: "支持 Python 的 'multiprocessing' 模块。",
+            },
+            no_qt: {
+                name: "禁用Qt",
+                desc: "禁用独立模式下的所有 Qt 绑定。",
+            },
+            options_nanny: {
+                name: "选项通知",
+                desc: "根据包配置文件通知用户潜在问题。",
+            },
+            pbr_compat: {
+                name: "pbr兼容支持",
+                desc: "支持在独立模式下使用 'pbr' 包。",
+            },
+            pkg_resources: {
+                name: "pkg resources支持",
+                desc: "解决pkg resources的方法",
+            },
+            pmw_freezer: {
+                name: "pmw 支持",
+                desc: "支持'Pmw'包",
+            },
+            pylint_warnings: {
+                name: "pylint警告",
+                desc: "支持 PyLint / PyDev 代码标记。",
+            },
+            pyqt5: {
+                name: "PyQt5支持",
+                desc: "支持 'PyQt5' 包。",
+            },
+            pyqt6: {
+                name: "PyQt6支持",
+                desc: "支持 'PyQt6' 包",
+            },
+            pyside2: {
+                name: "PySide2支持",
+                desc: "支持 'PySide2' 包",
+            },
+            pyside6: {
+                name: "PySide6支持",
+                desc: "支持 'PySide6' 包",
+            },
+            pywebview: {
+                name: "支持PyWebview",
+                desc: "支持 'webview' 包（PyPI 上的 pywebview）。",
+            },
+            tk_inter: {
+                name: "Tkinter支持",
+                desc: "支持 Python 的 Tk 模块。",
+            },
+            transformers: {
+                name: "transformers隐式导入",
+                desc: "为 transformers 包提供隐式导入。",
+            },
+            upx: {
+                name: "自动使用upx",
+                desc: "自动使用 UPX 压缩创建的二进制文件。",
+            },
+        },
     },
     plugin_no_detection: {
         name: "禁用插件检测",

@@ -969,7 +969,7 @@ const config = {
                 original: "--report-template",
             },
             true,
-            {}, //todo
+            {},
             [],
         ),
         quiet: add_option.bool(
@@ -1381,7 +1381,204 @@ const config = {
                 original: "--enable-plugins",
             },
             true,
-            {}, // todo 把plugin list添加进去
+            {
+                anti_bloat: add_option.multi_elements(
+                    "anti_bloat",
+                    {
+                        original: "anti-bloat",
+                    },
+                    true,
+                ),
+                data_files: add_option.multi_elements(
+                    "data_files",
+                    {
+                        original: "data-files",
+                    },
+                    true,
+                ),
+                delvewheel: add_option.multi_elements(
+                    "delvewheel",
+                    {
+                        original: "delvewheel",
+                    },
+                    true,
+                ),
+                dill_compat: add_option.multi_elements(
+                    "dill_compat",
+                    {
+                        original: "dill-compat",
+                    },
+                    true,
+                ),
+                dll_files: add_option.multi_elements(
+                    "dll_files",
+                    {
+                        original: "dll-files",
+                    },
+                    true,
+                ),
+                enum_compat: add_option.multi_elements(
+                    "enum_compat",
+                    {
+                        original: "enum-compat",
+                    },
+                    true,
+                ),
+                eventlet: add_option.multi_elements(
+                    "eventlet",
+                    {
+                        original: "eventlet",
+                    },
+                    true,
+                ),
+                gevent: add_option.multi_elements(
+                    "gevent",
+                    {
+                        original: "gevent",
+                    },
+                    true,
+                ),
+                gi: add_option.multi_elements(
+                    "gi",
+                    {
+                        original: "gi",
+                    },
+                    true,
+                ),
+                glfw: add_option.multi_elements(
+                    "glfw",
+                    {
+                        original: "glfw",
+                    },
+                    true,
+                ),
+                implicit_imports: add_option.multi_elements(
+                    "implicit_imports",
+                    {
+                        original: "implicit-imports",
+                    },
+                    true,
+                ),
+                kivy: add_option.multi_elements(
+                    "kivy",
+                    {
+                        original: "kivy",
+                    },
+                    true,
+                ),
+                matplotlib: add_option.multi_elements(
+                    "matplotlib",
+                    {
+                        original: "matplotlib",
+                    },
+                    true,
+                ),
+                multiprocessing: add_option.multi_elements(
+                    "multiprocessing",
+                    {
+                        original: "multiprocessing",
+                    },
+                    true,
+                ),
+                no_qt: add_option.multi_elements(
+                    "no_qt",
+                    {
+                        original: "no-qt",
+                    },
+                    true,
+                ),
+                options_nanny: add_option.multi_elements(
+                    "options_nanny",
+                    {
+                        original: "options-nanny",
+                    },
+                    true,
+                ),
+                pbr_compat: add_option.multi_elements(
+                    "pbr_compat",
+                    {
+                        original: "pbr-compat",
+                    },
+                    true,
+                ),
+                pkg_resources: add_option.multi_elements(
+                    "pkg_resources",
+                    {
+                        original: "pkg-resources",
+                    },
+                    true,
+                ),
+                pmw_freezer: add_option.multi_elements(
+                    "pmw_freezer",
+                    {
+                        original: "pmw-freezer",
+                    },
+                    true,
+                ),
+                pylint_warnings: add_option.multi_elements(
+                    "pylint_warnings",
+                    {
+                        original: "pylint-warnings",
+                    },
+                    true,
+                ),
+                pyqt5: add_option.multi_elements(
+                    "pyqt5",
+                    {
+                        original: "pyqt5",
+                    },
+                    true,
+                ),
+                pyqt6: add_option.multi_elements(
+                    "pyqt6",
+                    {
+                        original: "pyqt6",
+                    },
+                    true,
+                ),
+                pyside2: add_option.multi_elements(
+                    "pyside2",
+                    {
+                        original: "pyside2",
+                    },
+                    true,
+                ),
+                pyside6: add_option.multi_elements(
+                    "pyside6",
+                    {
+                        original: "pyside6",
+                    },
+                    true,
+                ),
+                pywebview: add_option.multi_elements(
+                    "pywebview",
+                    {
+                        original: "pywebview",
+                    },
+                    true,
+                ),
+                tk_inter: add_option.multi_elements(
+                    "tk_inter",
+                    {
+                        original: "tk-inter",
+                    },
+                    true,
+                ),
+                transformers: add_option.multi_elements(
+                    "transformers",
+                    {
+                        original: "transformers",
+                    },
+                    true,
+                ),
+                upx: add_option.multi_elements(
+                    "upx",
+                    {
+                        original: "upx",
+                    },
+                    true,
+                ),
+            },
             [],
         ),
         disable_plugins: add_option.defined_multi(
@@ -1390,7 +1587,204 @@ const config = {
                 original: "--disable-plugins",
             },
             true,
-            {}, // todo 把plugin list添加进去
+            {
+                anti_bloat: add_option.multi_elements(
+                    "anti_bloat",
+                    {
+                        original: "anti-bloat",
+                    },
+                    true,
+                ),
+                data_files: add_option.multi_elements(
+                    "data_files",
+                    {
+                        original: "data-files",
+                    },
+                    true,
+                ),
+                delvewheel: add_option.multi_elements(
+                    "delvewheel",
+                    {
+                        original: "delvewheel",
+                    },
+                    true,
+                ),
+                dill_compat: add_option.multi_elements(
+                    "dill_compat",
+                    {
+                        original: "dill-compat",
+                    },
+                    true,
+                ),
+                dll_files: add_option.multi_elements(
+                    "dll_files",
+                    {
+                        original: "dll-files",
+                    },
+                    true,
+                ),
+                enum_compat: add_option.multi_elements(
+                    "enum_compat",
+                    {
+                        original: "enum-compat",
+                    },
+                    true,
+                ),
+                eventlet: add_option.multi_elements(
+                    "eventlet",
+                    {
+                        original: "eventlet",
+                    },
+                    true,
+                ),
+                gevent: add_option.multi_elements(
+                    "gevent",
+                    {
+                        original: "gevent",
+                    },
+                    true,
+                ),
+                gi: add_option.multi_elements(
+                    "gi",
+                    {
+                        original: "gi",
+                    },
+                    true,
+                ),
+                glfw: add_option.multi_elements(
+                    "glfw",
+                    {
+                        original: "glfw",
+                    },
+                    true,
+                ),
+                implicit_imports: add_option.multi_elements(
+                    "implicit_imports",
+                    {
+                        original: "implicit-imports",
+                    },
+                    true,
+                ),
+                kivy: add_option.multi_elements(
+                    "kivy",
+                    {
+                        original: "kivy",
+                    },
+                    true,
+                ),
+                matplotlib: add_option.multi_elements(
+                    "matplotlib",
+                    {
+                        original: "matplotlib",
+                    },
+                    true,
+                ),
+                multiprocessing: add_option.multi_elements(
+                    "multiprocessing",
+                    {
+                        original: "multiprocessing",
+                    },
+                    true,
+                ),
+                no_qt: add_option.multi_elements(
+                    "no_qt",
+                    {
+                        original: "no-qt",
+                    },
+                    true,
+                ),
+                options_nanny: add_option.multi_elements(
+                    "options_nanny",
+                    {
+                        original: "options-nanny",
+                    },
+                    true,
+                ),
+                pbr_compat: add_option.multi_elements(
+                    "pbr_compat",
+                    {
+                        original: "pbr-compat",
+                    },
+                    true,
+                ),
+                pkg_resources: add_option.multi_elements(
+                    "pkg_resources",
+                    {
+                        original: "pkg-resources",
+                    },
+                    true,
+                ),
+                pmw_freezer: add_option.multi_elements(
+                    "pmw_freezer",
+                    {
+                        original: "pmw-freezer",
+                    },
+                    true,
+                ),
+                pylint_warnings: add_option.multi_elements(
+                    "pylint_warnings",
+                    {
+                        original: "pylint-warnings",
+                    },
+                    true,
+                ),
+                pyqt5: add_option.multi_elements(
+                    "pyqt5",
+                    {
+                        original: "pyqt5",
+                    },
+                    true,
+                ),
+                pyqt6: add_option.multi_elements(
+                    "pyqt6",
+                    {
+                        original: "pyqt6",
+                    },
+                    true,
+                ),
+                pyside2: add_option.multi_elements(
+                    "pyside2",
+                    {
+                        original: "pyside2",
+                    },
+                    true,
+                ),
+                pyside6: add_option.multi_elements(
+                    "pyside6",
+                    {
+                        original: "pyside6",
+                    },
+                    true,
+                ),
+                pywebview: add_option.multi_elements(
+                    "pywebview",
+                    {
+                        original: "pywebview",
+                    },
+                    true,
+                ),
+                tk_inter: add_option.multi_elements(
+                    "tk_inter",
+                    {
+                        original: "tk-inter",
+                    },
+                    true,
+                ),
+                transformers: add_option.multi_elements(
+                    "transformers",
+                    {
+                        original: "transformers",
+                    },
+                    true,
+                ),
+                upx: add_option.multi_elements(
+                    "upx",
+                    {
+                        original: "upx",
+                    },
+                    true,
+                ),
+            },
             [],
         ),
         plugin_no_detection: add_option.bool(
