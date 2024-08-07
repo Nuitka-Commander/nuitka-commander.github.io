@@ -1524,7 +1524,8 @@ const config = {
 config[watcher_key] = [
     // standalone
     (function () {
-        let standalone_status = false;
+        // null/boolean 强制更新一次
+        let standalone_status = null;
 
         return add_watcher({
             standalone: config.basic.standalone,
@@ -1550,6 +1551,40 @@ config[watcher_key] = [
                 config.python_flag.enabled = true;
                 config.nofollow_imports.enabled = true;
             }
+        })
+    })(),
+    (function () {
+        // null/boolean
+        let onefile_status = null;
+        return add_watcher({
+            onefile: config.basic.onefile,
+            onefile_tempdir_spec: config.onefile_options.onefile_tempdir_spec,
+            onefile_child_grace_time: config.onefile_options.onefile_child_grace_time,
+            onefile_no_compression: config.onefile_options.onefile_no_compression,
+            onefile_as_archive: config.onefile_options.onefile_as_archive,
+
+        }, (config) => {
+            if (onefile_status === config.onefile.val) {
+                return;
+            }
+            onefile_status = config.onefile.val;
+            if (config.onefile.val === true) {
+                config.onefile_tempdir_spec.enabled = true;
+                config.onefile_child_grace_time.enabled = true;
+                config.onefile_no_compression.enabled = true;
+                config.onefile_as_archive.enabled = true;
+            } else if (config.onefile.val === false) {
+                config.onefile_tempdir_spec.enabled = false;
+                config.onefile_child_grace_time.enabled = false;
+                config.onefile_no_compression.enabled = false;
+                config.onefile_as_archive.enabled = false;
+                // 恢复默认值
+                config.onefile_tempdir_spec.val = config.onefile_tempdir_spec.default;
+                config.onefile_child_grace_time.val = config.onefile_child_grace_time.default;
+                config.onefile_no_compression.val = config.onefile_no_compression.default;
+                config.onefile_as_archive.val = config.onefile_as_archive.default;
+            }
+
         })
     })(),
 ];
