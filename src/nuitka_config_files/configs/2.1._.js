@@ -4,6 +4,7 @@
  * @Date: 2023-12-05 22:28:39
  */
 import {add_option, add_watcher, watcher_key} from "@/values/templates.js";
+import {is_array_equivalent} from "@/modules/untils.js";
 
 
 const config = {
@@ -1586,6 +1587,79 @@ config[watcher_key] = [
             }
 
         })
+    })(),
+    (function () {
+        let standalone = null;
+        let module = null;
+        return add_watcher(
+            {
+                standalone: config.basic.standalone,
+                module: config.basic.module_,
+                output_filename: config.output_choices.output_filename,
+
+            }, (config) => {
+                if (standalone === config.standalone.val && module === config.module.val) {
+                    return;
+                }
+                standalone = config.standalone.val;
+                module = config.module.val;
+                if (config.standalone.val === true || config.module.val === true) {
+                    config.output_filename.enabled = false;
+                    config.output_filename.val = config.output_filename.default;
+                } else {
+                    config.output_filename.enabled = true;
+                }
+            },
+        )
+    })(),
+    // C backend compiler choice
+    (function () {
+        let clang_status = null;
+        let mingw_status = null;
+        let msvc_status = null;
+
+        return add_watcher(
+            {
+                clang: config.backend_c_compiler_choice.clang,
+                mingw64: config.backend_c_compiler_choice.mingw64,
+                msvc: config.backend_c_compiler_choice.msvc,
+
+            }, (config) => {
+                if (clang_status === config.clang.val &&
+                    mingw_status === config.mingw64.val &&
+                    is_array_equivalent(msvc_status, config.msvc.val)) {
+                    return;
+                }
+                clang_status = config.clang.val;
+                mingw_status = config.mingw64.val;
+                msvc_status = config.msvc.val;
+                if (config.clang.val === true) {
+                    config.mingw64.val = false;
+                    config.msvc.val = config.msvc.default;
+                    config.mingw64.enabled = false;
+                    config.msvc.enabled = false;
+                } else if (config.mingw64.val === true) {
+                    config.clang.val = false;
+                    config.msvc.val = config.msvc.default;
+                    config.clang.enabled = false;
+                    config.msvc.enabled = false;
+                } else if (config.msvc.val.length > 0) {
+                    config.clang.val = false;
+                    config.mingw64.val = false;
+                    config.clang.enabled = false;
+                    config.mingw64.enabled = false;
+                } else {
+                    config.clang.enabled = true;
+                    config.mingw64.enabled = true;
+                    config.msvc.enabled = true;
+                    config.clang.val = config.clang.default;
+                    config.mingw64.val = config.mingw64.default;
+                    config.msvc.val = config.msvc.default;
+                }
+
+
+            },
+        )
     })(),
 ];
 // noinspection JSUnusedGlobalSymbols
