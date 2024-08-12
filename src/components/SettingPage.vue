@@ -3,12 +3,16 @@
  * 设置页面相关逻辑
  */
 import {ref} from "vue";
-import {Close, Setting} from "@element-plus/icons-vue";
-import {user_options} from "@/values/stores/user_options.js";
+import {Close, RefreshLeft, Setting} from "@element-plus/icons-vue";
+import {reset_user_options, user_options} from "@/values/stores/user_options.js";
 import {set_theme} from "@/modules/use_theme.js";
 import {set_i18n_language} from "@/assets/languages/i18n.js";
 import {supported_i18n} from "@/assets/languages/supported_i18n.js";
 import {current_version_support_language, load_config_language} from "@/modules/use_nuitka_config.js";
+import {ElMessage, ElMessageBox} from "element-plus";
+import * as constants from "@/values/constants.json";
+import {useI18n} from "vue-i18n";
+import {local_nuitka_version_config} from "@/modules/use_local_forage.js";
 //设置页面的显示与隐藏
 const settings_page_show = ref(false);
 //关闭设置页面 event:点击事件
@@ -17,6 +21,67 @@ const close_setting_page = (event) => {
     settings_page_show.value = false;
   }
 };
+const t = useI18n().t;
+
+const reset_user = () => {
+  //询问是否重置
+  ElMessageBox.confirm(
+      "该操作无法撤销",
+      "是否重置用户设置",
+      {
+        confirmButtonText: t("message.OK"),
+        cancelButtonText: t("message.cancel"),
+        type: "warning",
+      },
+  ).then(() => {
+
+    reset_user_options();
+
+    ElMessage({
+      type: "success",
+      message: "删除成功",
+      showClose: true,
+      duration: constants.message_duration,
+    });
+  }).catch(() => {
+    ElMessage({
+      type: "info",
+      message: "取消删除",
+      showClose: true,
+      duration: constants.message_duration,
+    });
+  });
+}
+
+const reset_current = () => {
+  ElMessageBox.confirm(
+      "该操作无法撤销",
+      `是否重置${user_options.value.nuitka_version}版本的Nuitka配置?`,
+      {
+        confirmButtonText: t("message.OK"),
+        cancelButtonText: t("message.cancel"),
+        type: "warning",
+      },
+  ).then(() => {
+
+    local_nuitka_version_config.remove_config(user_options.value.nuitka_version);
+    location.reload();
+
+    ElMessage({
+      type: "success",
+      message: "删除成功",
+      showClose: true,
+      duration: constants.message_duration,
+    });
+  }).catch(() => {
+    ElMessage({
+      type: "info",
+      message: "取消删除",
+      showClose: true,
+      duration: constants.message_duration,
+    });
+  });
+}
 </script>
 
 <template>
@@ -85,6 +150,34 @@ const close_setting_page = (event) => {
                 :value="key"
             ></el-option>
           </el-select>
+        </div>
+        <div class="setting_page_selects_fa">
+
+          <h1>
+            <img alt="language icon" src="@/assets/images/warehouse.svg">
+            存储设置
+          </h1>
+          <h3>用户设置</h3>
+          <div>
+            <el-button @click="reset_user">
+              <el-icon size="20">
+                <refresh-left></refresh-left>
+              </el-icon>
+              重置用户设置
+            </el-button>
+
+          </div>
+
+          <h3>命令设置</h3>
+          <div>
+            <el-button @click="reset_current">
+              <el-icon size="20">
+                <refresh-left></refresh-left>
+              </el-icon>
+              重置当前版本的用户配置
+            </el-button>
+
+          </div>
         </div>
 
       </div>

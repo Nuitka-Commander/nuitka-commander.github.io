@@ -4,7 +4,7 @@
  * @Date: 2023-11-26 10:59:18
  */
 import {ref, watch} from "vue";
-import {read_local_storage, save_local_storage} from "@/modules/local_storage.js";
+import {read_local_storage, remove_localstorage_key, save_local_storage} from "@/modules/local_storage.js";
 import supported_nuitka_version from "@/nuitka_config_files/supported_nuitka_version.js";
 
 const localstorage_name = "_Nuitka_Commander_user_options";
@@ -48,3 +48,11 @@ export function init_user_options() {
 
 }
 
+/**
+ * 重置用户设置
+ */
+export function reset_user_options() {
+    remove_localstorage_key(localstorage_name);
+    location.reload();
+
+}
