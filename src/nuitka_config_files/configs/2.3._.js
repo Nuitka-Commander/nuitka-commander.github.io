@@ -1,5 +1,5 @@
 /**
- * @Description 2.2版本的配置文件
+ * @Description 2.3版本的配置文件
  * @Author: erduotong
  * @Date: 2023-12-05 22:28:39
  */
@@ -326,6 +326,15 @@ const config = {
             "list_package_data",
             {
                 original: "--list-package-data",
+            },
+            true,
+            {},
+            [],
+        ),
+        include_raw_dir: add_option.definable_multi(
+            "include_raw_dir",
+            {
+                original: "--include-raw-dir",
             },
             true,
             {},
@@ -1053,13 +1062,36 @@ const config = {
         ),
     },
     general_os_controls: {
-        disable_console: add_option.bool(
-            "disable_console",
+        windows_console_mode: add_option.single_option(
+            "windows_console_mode",
             {
-                original: "--disable-console",
+                original: "--windows-console-mode",
             },
             true,
-            false,
+            {
+                force: add_option.multi_elements(
+                    "force",
+                    {
+                        original: "force",
+                    },
+                    true,
+                ),
+                disable: add_option.multi_elements(
+                    "disable",
+                    {
+                        original: "disable",
+                    },
+                    true,
+                ),
+                attach: add_option.multi_elements(
+                    "attach",
+                    {
+                        original: "attach",
+                    },
+                    true,
+                ),
+            },
+            "force",
         ),
         enable_console: add_option.bool(
             "enable_console",
