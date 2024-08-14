@@ -129,9 +129,9 @@ const reset_current = () => {
 
           <h1>
             <img alt="language icon" src="@/assets/images/language.svg">
-            {{ $t("setting.language") }}
+            {{ $t("setting.language.title") }}
           </h1>
-          <h3>界面语言</h3>
+          <h3> {{ $t("setting.language.interface_language") }}</h3>
           <el-select v-model="user_options.language" filterable @change="set_i18n_language(user_options.language)">
             <el-option
                 v-for="(value, key) in supported_i18n"
@@ -140,7 +140,7 @@ const reset_current = () => {
                 :value="key">
             </el-option>
           </el-select>
-          <h3>命令语言</h3>
+          <h3>{{ $t("setting.language.command_language") }}</h3>
           <el-select v-model="user_options.nuitka_language" filterable
                      @change="load_config_language(user_options.nuitka_language)">
             <el-option
@@ -155,26 +155,26 @@ const reset_current = () => {
 
           <h1>
             <img alt="language icon" src="@/assets/images/warehouse.svg">
-            存储设置
+            {{ $t("setting.storage.title") }}
           </h1>
-          <h3>用户设置</h3>
+          <h3> {{ $t("setting.storage.user") }}</h3>
           <div>
             <el-button @click="reset_user">
               <el-icon size="20">
                 <refresh-left></refresh-left>
               </el-icon>
-              重置用户设置
+              {{ $t("setting.storage.reset_user") }}
             </el-button>
 
           </div>
 
-          <h3>命令设置</h3>
+          <h3> {{ $t("setting.storage.command") }}</h3>
           <div>
             <el-button @click="reset_current">
               <el-icon size="20">
                 <refresh-left></refresh-left>
               </el-icon>
-              重置当前版本的用户配置
+              {{ $t("setting.storage.reset_command") }}
             </el-button>
 
           </div>

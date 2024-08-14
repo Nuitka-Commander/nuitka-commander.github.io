@@ -30,8 +30,20 @@ export default {
             dark: "深色模式",
             theme: "主题",
         },
-        language: "语言",
+        language: {
+            title: "语言",
+            interface_language: "界面语言",
+            command_language: "命令语言",
+        },
         nuitka_language_no_support: "当前Nuitka版本暂不支持该语言",
+        storage: {
+            title: "存储设置",
+            user: "用户设置",
+            reset_user: "重置用户设置",
+            command: "命令设置",
+            reset_command: "重置命令设置",
+        },
+
 
     },
     nav_bar: { //导航栏
