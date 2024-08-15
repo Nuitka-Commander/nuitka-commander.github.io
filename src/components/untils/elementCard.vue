@@ -22,13 +22,12 @@
   margin: 10px;
   padding: 5px 10px;
   transition: all 0.3s;
-  border: 1px solid #3b3c3d;
   border-radius: 6px;
-  background-color: var(--card-background); //掺点怪东西
-  box-shadow: 0 0 10px #3b3c3d;
+  background-color: var(--card-background);
+  box-shadow: var(--card-shadow) 0 3px 8px;
 
   &:hover {
-    box-shadow: 0 0 3px #3b3c3d;
+    box-shadow: var(--card-shadow) 0 1px 4px;
   }
 
   gap: 5px;
