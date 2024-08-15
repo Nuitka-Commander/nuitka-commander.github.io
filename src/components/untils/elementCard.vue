@@ -24,7 +24,7 @@
   transition: all 0.3s;
   border: 1px solid #3b3c3d;
   border-radius: 6px;
-  background-color: #1f1e33; //掺点怪东西
+  background-color: var(--card-background); //掺点怪东西
   box-shadow: 0 0 10px #3b3c3d;
 
   &:hover {
@@ -34,4 +34,5 @@
   gap: 5px;
 
 }
+
 </style>

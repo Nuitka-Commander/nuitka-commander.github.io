@@ -80,7 +80,7 @@ const output = computed(() => {
 
   margin: 10px 5px;
   border-radius: 12px;
-  background: #1f1e33;
+  background: var(--card-background);
 
   #cli_output {
     display: flex;
@@ -95,7 +95,7 @@ const output = computed(() => {
   min-height: 50px;
   margin: 10px 5px;
   border-radius: 12px;
-  background: #1f1e33;
+  background: var(--card-background);
 }
 
 </style>

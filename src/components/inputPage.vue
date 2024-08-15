@@ -73,7 +73,7 @@ const start_input = async (type) => {
   height: 60vh;
   margin: 10px 5px;
   border-radius: 12px;
-  background: #1f1e33;
+  background: var(--card-background);
 
   #cli_input_button {
     display: flex;
