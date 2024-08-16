@@ -2,7 +2,7 @@
 import {CopyDocument} from "@element-plus/icons-vue";
 import {use_command} from "@/modules/use_command.js";
 import {computed} from "vue";
-
+import {JsonViewer} from "vue3-json-viewer"
 /**
  * 复制所选内容到剪贴板
  * @param type {string} 要复制的类型
@@ -47,10 +47,10 @@ const output = computed(() => {
         </div>
       </el-tab-pane>
 
-      <el-tab-pane>
-        <template #label>pyproject</template>
-        <div id="pyproject_output"></div>
-      </el-tab-pane>
+      <!--<el-tab-pane>-->
+      <!--  <template #label>pyproject</template>-->
+      <!--  <div id="pyproject_output"></div>-->
+      <!--</el-tab-pane>-->
       <el-tab-pane>
         <template #label>JSON</template>
         <div id="json_output_area">
@@ -79,8 +79,10 @@ const output = computed(() => {
 #cli_output_area {
 
   margin: 10px 5px;
+  border: 1px solid var(--el-border-color);
   border-radius: 12px;
   background: var(--card-background);
+  box-shadow: var(--card-shadow) 0 3px 8px;
 
   #cli_output {
     display: flex;
@@ -94,8 +96,11 @@ const output = computed(() => {
 #json_output_area {
   min-height: 50px;
   margin: 10px 5px;
+  padding: 10px 20px;
+  border: 1px solid var(--el-border-color);
   border-radius: 12px;
   background: var(--card-background);
+  box-shadow: var(--card-shadow) 0 3px 8px;
 }
 
 </style>
