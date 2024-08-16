@@ -92,4 +92,9 @@ export default {
         or: "or",
         click_select_file: "Select a file",
     },
+    output_page: {
+        CLI: "Command Line Interface",
+        JSON: "JSON",
+    },
+
 };

@@ -36,7 +36,7 @@ const output = computed(() => {
   <div>
     <el-tabs stretch tab-position="left" type="card">
       <el-tab-pane>
-        <template #label>CLI</template>
+        <template #label>{{ $t("output_page.CLI") }}</template>
         <div id="cli_output_area">
           <span class="copy_button">
             <el-button round @click="on_copy('cli')">
@@ -52,7 +52,7 @@ const output = computed(() => {
       <!--  <div id="pyproject_output"></div>-->
       <!--</el-tab-pane>-->
       <el-tab-pane>
-        <template #label>JSON</template>
+        <template #label>{{ $t("output_page.JSON") }}</template>
         <div id="json_output_area">
             <span class="copy_button">
             <el-button round>

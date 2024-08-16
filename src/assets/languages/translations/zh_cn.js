@@ -95,6 +95,9 @@ export default {
         or: "或",
         click_select_file: "选择一个文件",
     },
-
+    output_page: {
+        CLI: "命令行输出",
+        JSON: "JSON输出",
+    },
 
 };
