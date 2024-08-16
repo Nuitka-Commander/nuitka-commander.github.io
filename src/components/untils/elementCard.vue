@@ -26,12 +26,13 @@
   background-color: var(--card-background);
   box-shadow: var(--card-shadow) 0 3px 8px;
 
-  &:hover {
-    box-shadow: var(--card-shadow) 0 1px 4px;
-  }
 
   gap: 5px;
 
+}
+
+.edit_content_card:hover {
+  box-shadow: var(--card-shadow) 0 1px 4px;
 }
 
 </style>

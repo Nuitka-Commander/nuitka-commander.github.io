@@ -2,7 +2,7 @@
 import {CopyDocument} from "@element-plus/icons-vue";
 import {use_command} from "@/modules/use_command.js";
 import {computed} from "vue";
-import {JsonViewer} from "vue3-json-viewer"
+
 /**
  * 复制所选内容到剪贴板
  * @param type {string} 要复制的类型
