@@ -98,6 +98,6 @@ import supported_nuitka_version from "@/nuitka_config_files/supported_nuitka_ver
   width: 30px;
   height: 30px;
   transform: translateX(-1000vw);
-  filter: drop-shadow(1000vw 0 white);
+  filter: drop-shadow(1000vw 0 var(--el-text-color-primary));
 }
 </style>

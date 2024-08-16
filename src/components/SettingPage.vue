@@ -96,27 +96,30 @@ const reset_current = () => {
 
         <div class="setting_page_selects_fa">
           <h1>
-            <img v-show="user_options.theme==='auto'" alt="auto theme" src="@/assets/images/auto_theme.svg">
-            <img v-show="user_options.theme==='light'" alt="light theme" src="@/assets/images/sun.svg">
-            <img v-show="user_options.theme==='dark'" alt="dark theme" src="@/assets/images/moon.svg">
+            <img v-show="user_options.theme==='auto'" alt="auto theme" class="setting-icon"
+                 src="@/assets/images/auto_theme.svg">
+            <img v-show="user_options.theme==='light'" alt="light theme" class="setting-icon"
+                 src="@/assets/images/sun.svg">
+            <img v-show="user_options.theme==='dark'" alt="dark theme" class="setting-icon"
+                 src="@/assets/images/moon.svg">
             {{ $t("setting.theme.theme") }}
           </h1>
           <el-select v-model="user_options.theme" @change="set_theme(user_options.theme)">
             <el-option key="auto" :label="$t('setting.theme.auto')" value="auto">
              <span slot="label" class="theme_select_content">
-                  <img alt="auto theme" src="@/assets/images/auto_theme.svg">
+                  <img alt="auto theme" class="setting-icon" src="@/assets/images/auto_theme.svg">
                   {{ $t("setting.theme.auto") }}
              </span>
             </el-option>
             <el-option key="light" :label="$t('setting.theme.light')" value="light">
                 <span slot="label" class="theme_select_content">
-                  <img alt="light theme" src="@/assets/images/sun.svg">
+                  <img alt="light theme" class="setting-icon" src="@/assets/images/sun.svg">
                   {{ $t("setting.theme.light") }}
                 </span>
             </el-option>
             <el-option key="dark" :label="$t('setting.theme.dark')" value="dark">
                 <span slot="label" class="theme_select_content">
-                  <img alt="dark theme" src="@/assets/images/moon.svg">
+                  <img alt="dark theme" class="setting-icon" src="@/assets/images/moon.svg">
                   {{ $t("setting.theme.dark") }}
                 </span>
             </el-option>
@@ -128,7 +131,7 @@ const reset_current = () => {
         <div class="setting_page_selects_fa">
 
           <h1>
-            <img alt="language icon" src="@/assets/images/language.svg">
+            <img alt="language icon" class="setting-icon" src="@/assets/images/language.svg">
             {{ $t("setting.language.title") }}
           </h1>
           <h3> {{ $t("setting.language.interface_language") }}</h3>
@@ -154,7 +157,7 @@ const reset_current = () => {
         <div class="setting_page_selects_fa">
 
           <h1>
-            <img alt="language icon" src="@/assets/images/warehouse.svg">
+            <img alt="language icon" class="setting-icon" src="@/assets/images/warehouse.svg">
             {{ $t("setting.storage.title") }}
           </h1>
           <h3> {{ $t("setting.storage.user") }}</h3>
@@ -198,7 +201,10 @@ const reset_current = () => {
 </template>
 
 <style lang="scss" scoped>
-@import "@/assets/styles/animations.scss";
+//设置的svg图标
+.setting-icon {
+  filter: drop-shadow(1000vw 0 var(--el-text-color-primary));
+}
 
 #setting_drawer {
   position: fixed;
@@ -213,7 +219,7 @@ const reset_current = () => {
   height: 100%;
   border-top-left-radius: 20px;
   border-bottom-left-radius: 20px;
-  background-color: rgba(black, 0.5);
+  background-color: var(--setting-card-background);
   backdrop-filter: blur(10px);
 
 
@@ -229,7 +235,6 @@ const reset_current = () => {
     //悬停的效果是一个小方块
     &:hover {
       color: white;
-      background-color: #30363d;
     }
   }
 }
@@ -258,7 +263,7 @@ const reset_current = () => {
     height: 20px;
     margin-right: 10px;
     transform: translateX(-1000vw);
-    filter: drop-shadow(1000vw 0 white);
+
   }
 }
 
@@ -274,7 +279,7 @@ const reset_current = () => {
   border-radius: 12px;
 
   background: none;
-  box-shadow: -5px 5px 15px rgba(white, 0.5);
+  box-shadow: -5px 5px 15px var(--setting-card-shadow);
 
   h1 {
     font-size: 1.5rem;
@@ -287,7 +292,6 @@ const reset_current = () => {
       height: 30px;
       margin-right: 10px;
       transform: translateX(-1000vw);
-      filter: drop-shadow(1000vw 0 white);
     }
   }
 }
