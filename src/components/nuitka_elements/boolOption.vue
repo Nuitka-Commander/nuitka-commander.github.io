@@ -68,7 +68,7 @@ onBeforeUnmount(() => {
 
 <template>
 
-  <el-tooltip :show-after="constants.element_show_after_time" placement="top">
+  <el-tooltip :show-after="constants.element_show_after_time" effect="light" placement="top">
     <template #content>
       <div class="use_original_text">
         {{ $t(`nuitka_info.${model.i18n}.desc`) }}

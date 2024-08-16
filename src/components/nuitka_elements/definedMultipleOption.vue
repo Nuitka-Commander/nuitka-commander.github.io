@@ -101,7 +101,7 @@ onBeforeUnmount(() => {
 
 <template>
 
-  <el-tooltip :show-after=" constants.element_show_after_time">
+  <el-tooltip :show-after=" constants.element_show_after_time" effect="light">
     <template #content>
       <div class="use_original_text">
         {{ $t(`nuitka_info.${model.i18n}.desc`) }}
@@ -124,7 +124,7 @@ onBeforeUnmount(() => {
           multiple
       >
         <template v-for="(value,key) in model.elements" :key="key">
-          <el-tooltip :show-after=" constants.element_show_after_time" placement="left-start">
+          <el-tooltip :show-after=" constants.element_show_after_time" effect="light" placement="left-start">
             <template #content>
               <div class="use_original_text">
                 {{

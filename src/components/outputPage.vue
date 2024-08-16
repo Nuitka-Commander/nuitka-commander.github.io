@@ -59,8 +59,9 @@ const output = computed(() => {
                <el-icon><CopyDocument /></el-icon>
             </el-button>
           </span>
-
-          <pre><code>{{ use_command.storage_config }}</code></pre>
+          <el-text>
+            <pre><code>{{ use_command.storage_config }}</code></pre>
+          </el-text>
 
         </div>
       </el-tab-pane>
@@ -87,6 +88,7 @@ const output = computed(() => {
   #cli_output {
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
     padding: 25px 20px;
     gap: 0;
   }
