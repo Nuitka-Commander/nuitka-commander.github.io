@@ -25,8 +25,10 @@ header {
   height: auto;
   margin-bottom: 10px;
   padding: 0;
+  transition: all 0.5s;
   border: none;
-  background-color: rgba(63, 79, 112, 0.42);
+  background-color: var(--title-background);
+  box-shadow: inset 0px -15px 12px -10px var(--shadow-color);
 
   a {
     font-size: 1.26rem;
@@ -38,7 +40,7 @@ header {
     padding-bottom: 17.5px;
     padding-left: 15vw;
     text-decoration: none;
-    color: white;
+    color: var(--el-text-color-primary);
 
     img {
       width: 25px;

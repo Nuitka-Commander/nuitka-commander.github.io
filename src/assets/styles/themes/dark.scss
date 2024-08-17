@@ -7,10 +7,13 @@ html.dark {
   color-scheme: dark;
   --loading-page-bg-rgba: rgba(21, 21, 21, 0.67);
   --card-background: #202833;
-  --card-shadow: rgba(196, 196, 196, 0.24);
+  --card-shadow: rgba(196, 196, 196, 0.3);
+  --card-shadow-hover: rgba(196, 196, 196, 0.24);
   --setting-card-background: rgba(0, 0, 0, 0.3);
   --setting-card-shadow: rgba(255, 255, 255, 0.4);
   --hover-background: rgba(255, 255, 255, 0.1);
+  --title-background: rgb(65, 77, 98);
+  --shadow-color: rgba(255, 255, 255, 0.13);
 }
 
 // elements
