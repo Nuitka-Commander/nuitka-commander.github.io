@@ -13,7 +13,7 @@
 
 ## 🚨 弃用 Deprecated
 
--
+- 调试中的`Capture Stack`功能，为了兼容firefox
 
 ## 🗑️ 删除 Removed
 
