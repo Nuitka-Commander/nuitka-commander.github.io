@@ -26,7 +26,7 @@ header {
   margin-bottom: 10px;
   padding: 0;
   border: none;
-  background-color: rgba(63, 84, 112, 0.34);
+  background-color: rgba(63, 79, 112, 0.42);
 
   a {
     font-size: 1.26rem;
