@@ -41,7 +41,6 @@ export const i18n = createI18n({
         if (constants.debug === true) {
             //构建后文件结构不同，就不给用户看了
             const error = new Error(`i18n: missing '${key}' for locale '${locale}`);
-            Error.captureStackTrace(error, i18n.global.missing);
             console.error(error.stack);
         } else {
             console.error(`i18n: missing '${key}' for locale '${locale}`);
