@@ -2,6 +2,7 @@
 import {CopyDocument} from "@element-plus/icons-vue";
 import {use_command} from "@/modules/use_command.js";
 import {computed} from "vue";
+import CliCommandCard from "@/components/command_cards/cliCommandCard.vue";
 
 /**
  * 复制所选内容到剪贴板
@@ -42,7 +43,16 @@ const output = computed(() => {
                <el-icon><CopyDocument /></el-icon>
             </el-button>
           </span>
-          <div id="cli_output"></div>
+          <div id="cli_output">
+            <cli-command-card
+                :desc="$t('output_page.run_nuitka_through_python')"
+                :show="true"
+                command="python -m nuitka"
+                name=""
+            >
+
+            </cli-command-card>
+          </div>
         </div>
       </el-tab-pane>
 

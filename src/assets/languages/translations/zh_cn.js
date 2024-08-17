@@ -96,6 +96,7 @@ export default {
         click_select_file: "选择一个文件",
     },
     output_page: {
+        run_nuitka_through_python: "通过Python运行Nuitka",
         CLI: "命令行输出",
         JSON: "JSON输出",
     },
