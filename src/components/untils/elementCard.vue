@@ -24,15 +24,14 @@
   transition: all 0.3s;
   border-radius: 6px;
   background-color: var(--card-background);
-  box-shadow: var(--card-shadow) 0 3px 8px;
-
-
+  box-shadow: 0 5px 10px var(--card-shadow);
   gap: 5px;
 
 }
 
 .edit_content_card:hover {
-  box-shadow: var(--card-shadow) 0 1px 4px;
+  transform: translateY(-2px) scale(1.01, 1.01);
+  box-shadow: var(--card-shadow-hover) 0 10px 15px;
 }
 
 </style>
