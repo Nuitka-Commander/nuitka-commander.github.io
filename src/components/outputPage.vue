@@ -19,15 +19,14 @@ const on_copy = async (type) => {
 };
 const output = computed(() => {
   const result = {
-    cli: "",
-    json: "",
+    cli: "python -m nuitka",
+    json: JSON.stringify(use_command.storage_config.value, null, 2),
     pyproject: "",
   };
   Object.keys(use_command.output.value).forEach((key) => {
     const value = use_command.output.value[key];
     result.cli += value.cli + " ";
   });
-  console.log("result:\n", result);
   return result;
 });
 </script>
@@ -55,7 +54,7 @@ const output = computed(() => {
         <template #label>{{ $t("output_page.JSON") }}</template>
         <div id="json_output_area">
             <span class="copy_button">
-            <el-button round>
+            <el-button round @click="on_copy('json')">
                <el-icon><CopyDocument /></el-icon>
             </el-button>
           </span>
