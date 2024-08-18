@@ -133,4 +133,136 @@ elements: 一个对象，其中内部的格式是: `key: value`
 
 ### 监听选项
 
-todo
+每个配置文件的对象中，我们都用一个特殊的key:value来存放监听函数，也就是`template.js`中的`watcher_key`。  
+因此，添加监听函数的第一步，就是设定监听函数列表
+> 我们推荐在文件末尾，export之前添加监听函数
+
+```js
+config[watcher_key] = [];
+```
+
+然后，你可以添加监听函数。但是每个监听函数可能都会维护一些自己的变量，所以我们推荐闭包的写法。  
+这样，你可以在闭包内部维护一些变量，而不会影响到其他监听函数。
+
+```js
+config[watcher_key] = [
+  (function () {
+
+  })(),
+]
+```
+
+为了方便管理，我们统一使用add_watcher函数来添加监听函数。  
+这个函数会返回格式化的值，所以需要在你的闭包内部返回这个函数。
+
+```js
+(function () {
+  return add_watcher({}, (config) => {
+  })
+})()
+```
+
+监听函数一共有两个参数。
+
+- 参数一是一个对象，内部的key:value分别表示`你自己取得一个别名`:`监听的选项`。监听的选项要用config(
+  也就是即将导出的选项对象名).选项名来表示，并且最终应该指向一个具体的选项。`其中应该包含你需要监听和修改的全部选项`      
+  例如`  follow_imports: config.control_the_following_into_imported_modules.follow_imports,`
+- 参数二是一个回调函数，收到一个参数，内部是一个对象，key是你刚刚定义的别名，value则是你刚刚别名指向选项的整个对象，你可以自由调用其中的值。
+
+```js
+(function () {
+  return add_watcher({
+    standalone: config.basic.standalone,
+    follow_imports: config.control_the_following_into_imported_modules.follow_imports,
+    python_flag: config.basic.python_flag,
+    nofollow_imports: config.control_the_following_into_imported_modules.nofollow_imports,
+  }, (config) => {
+    if (config.standalone.val === true) {
+      config.follow_imports.val = true;
+      config.follow_imports.enabled = false;
+      config.python_flag.val = ["s"];
+      config.python_flag.enabled = false;
+      config.nofollow_imports.val = false;
+      config.nofollow_imports.enabled = false;
+    } else if (config.standalone.val === false) {
+      config.follow_imports.val = false;
+      config.follow_imports.enabled = true;
+      config.python_flag.val = [];
+      config.python_flag.enabled = true;
+      config.nofollow_imports.enabled = true;
+    }
+  })
+})()
+```
+
+但是由于底层实现是vue的watch，所以如果你在回调函数内部修改了监听的选项，会导致无限循环(包括设置相同的值)  
+因此，你应该在闭包函数内新建一个变量，在开始修改之前设置这个变量为指定值，若后续修改时发现未变动则直接返回。  
+如果你需要在一开始加载选项的时候更新一次，你可以先设置会null强制更新一次。   
+例如，下面的实例中，我们关注的是standalone这个选项的值，所以我们就将他的值保存为一个独立的变量，并且在之后的每次调用中进行比较，如果没有变化则直接返回。
+
+```js
+
+(function () {
+  let standalone_status = null;
+  return add_watcher({
+    standalone: config.basic.standalone,
+    follow_imports: config.control_the_following_into_imported_modules.follow_imports,
+    python_flag: config.basic.python_flag,
+    nofollow_imports: config.control_the_following_into_imported_modules.nofollow_imports,
+  }, (config) => {
+    if (standalone_status === config.standalone.val) { //没变化可能是递归调用 退出
+      return;
+    }
+    standalone_status = config.standalone.val;
+    if (config.standalone.val === true) {
+      config.follow_imports.val = true;
+      config.follow_imports.enabled = false;
+      config.python_flag.val = ["s"];
+      config.python_flag.enabled = false;
+      config.nofollow_imports.val = false;
+      config.nofollow_imports.enabled = false;
+    } else if (config.standalone.val === false) {
+      config.follow_imports.val = false;
+      config.follow_imports.enabled = true;
+      config.python_flag.val = [];
+      config.python_flag.enabled = true;
+      config.nofollow_imports.enabled = true;
+    }
+  })
+})()
+```
+
+这样，你就完成了一个监听函数的编写，将其添加到监听函数列表中，即可完成监听函数的添加。
+
+```js
+config[watcher_key] = [
+  (function () {
+    let standalone_status = null;
+    return add_watcher({
+      standalone: config.basic.standalone,
+      follow_imports: config.control_the_following_into_imported_modules.follow_imports,
+      python_flag: config.basic.python_flag,
+      nofollow_imports: config.control_the_following_into_imported_modules.nofollow_imports,
+    }, (config) => {
+      if (standalone_status === config.standalone.val) { //没变化可能是递归调用 退出
+        return;
+      }
+      standalone_status = config.standalone.val;
+      if (config.standalone.val === true) {
+        config.follow_imports.val = true;
+        config.follow_imports.enabled = false;
+        config.python_flag.val = ["s"];
+        config.python_flag.enabled = false;
+        config.nofollow_imports.val = false;
+        config.nofollow_imports.enabled = false;
+      } else if (config.standalone.val === false) {
+        config.follow_imports.val = false;
+        config.follow_imports.enabled = true;
+        config.python_flag.val = [];
+        config.python_flag.enabled = true;
+        config.nofollow_imports.enabled = true;
+      }
+    })
+  })()
+]
+```

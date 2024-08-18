@@ -14,6 +14,7 @@ import {nextTick} from "vue";
 
 export let current_version_support_language = {};
 export let nuitka_info_loaded = false;
+export let nuitka_config_loaded = false;
 
 /**
  * 初始化
@@ -41,6 +42,7 @@ export function init_nuitka_config() {
  */
 export async function load_new_config() {
     const new_version = user_options.value.nuitka_version;
+    nuitka_config_loaded = false
     set_loading(true);
     const response = await import(`@/nuitka_config_files/configs/${supported_nuitka_version.versions[new_version]}.js`);
     console.log(`Loading new language: ${user_options.value.nuitka_language.toString()}`);
@@ -48,6 +50,7 @@ export async function load_new_config() {
     await load_config_language(user_options.value.nuitka_language);
     await use_command.update_config(response.default);
     set_loading(false);
+    nuitka_config_loaded = true;
 }
 
 /**

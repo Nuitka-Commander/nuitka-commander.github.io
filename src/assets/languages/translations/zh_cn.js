@@ -14,7 +14,6 @@ export default {
         changelog: "更新日志",
         project_homepage: "项目主页",
         github_website: "在Github源使用",
-        gitee_website: "在Gitee源使用",
         local_use: "本地使用",
         current_version_author: "当前版本贡献者",
         open_source_license: "开源协议",
@@ -30,8 +29,20 @@ export default {
             dark: "深色模式",
             theme: "主题",
         },
-        language: "语言",
+        language: {
+            title: "语言",
+            interface_language: "界面语言",
+            command_language: "命令语言",
+        },
         nuitka_language_no_support: "当前Nuitka版本暂不支持该语言",
+        storage: {
+            title: "存储设置",
+            user: "用户设置",
+            reset_user: "重置用户设置",
+            command: "命令设置",
+            reset_command: "重置命令设置",
+        },
+
 
     },
     nav_bar: { //导航栏
@@ -83,6 +94,10 @@ export default {
         or: "或",
         click_select_file: "选择一个文件",
     },
-
+    output_page: {
+        run_nuitka_through_python: "通过Python运行Nuitka",
+        CLI: "命令行输出",
+        JSON: "JSON输出",
+    },
 
 };

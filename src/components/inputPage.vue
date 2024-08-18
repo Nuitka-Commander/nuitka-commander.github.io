@@ -34,6 +34,7 @@ const start_input = async (type) => {
 </script>
 
 <template>
+
   <el-tabs stretch tab-position="left" type="card">
     <el-tab-pane>
       <template #label>{{ $t("input_page.input_from_cli") }}</template>
@@ -48,7 +49,7 @@ const start_input = async (type) => {
             {{ $t("input_page.start_input") }}
           </el-button>
         </div>
-
+        <el-text size="large">=============施工中=================</el-text>
         <div id="cli_input">
           <el-input
               v-model="input_data.cli"
@@ -73,7 +74,7 @@ const start_input = async (type) => {
   height: 60vh;
   margin: 10px 5px;
   border-radius: 12px;
-  background: #1f1e33;
+  background: var(--card-background);
 
   #cli_input_button {
     display: flex;

@@ -22,16 +22,16 @@
   margin: 10px;
   padding: 5px 10px;
   transition: all 0.3s;
-  border: 1px solid #3b3c3d;
   border-radius: 6px;
-  background-color: #1f1e33; //掺点怪东西
-  box-shadow: 0 0 10px #3b3c3d;
-
-  &:hover {
-    box-shadow: 0 0 3px #3b3c3d;
-  }
-
+  background-color: var(--card-background);
+  box-shadow: 0 5px 10px var(--card-shadow);
   gap: 5px;
 
 }
+
+.edit_content_card:hover {
+  transform: translateY(-2px) scale(1.01, 1.01);
+  box-shadow: var(--card-shadow-hover) 0 10px 15px;
+}
+
 </style>

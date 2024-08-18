@@ -1,0 +1,20 @@
+/**
+ * @Description dark主题css变量
+ * @Author: erduotong
+ * @Date: 2023-11-26 15:17:35
+ */
+html.dark {
+  color-scheme: dark;
+  --loading-page-bg-rgba: rgba(21, 21, 21, 0.67);
+  --card-background: #202833;
+  --card-shadow: rgba(196, 196, 196, 0.3);
+  --card-shadow-hover: rgba(196, 196, 196, 0.15);
+  --setting-card-background: rgba(0, 0, 0, 0.3);
+  --setting-card-shadow: rgba(255, 255, 255, 0.4);
+  --hover-background: rgba(255, 255, 255, 0.1);
+  --title-background: rgb(65, 77, 98);
+  --shadow-color: rgba(255, 255, 255, 0.13);
+  --background-color-page: #141414;
+}
+
+

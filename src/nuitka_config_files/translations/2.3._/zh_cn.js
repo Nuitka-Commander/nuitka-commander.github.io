@@ -26,9 +26,7 @@ export default {
         macOS_specific_controls: "macOS 特定控制",
         binary_version_information: "二进制版本信息",
         plugin_control: "插件控制",
-        cross_compilation: "交叉编译",
         plugin_options_of_anti_bloat: "'反膨胀'插件选项",
-        plugin_options_of_spacy: "Spacy插件选项",
     },
     // basic
     module: {
@@ -346,11 +344,6 @@ export default {
         desc: "执行所有可能的自身检查以发现Nuitka中的错误，请不要用与生产中。\n" +
             "默认关闭。",
     },
-    no_debug_immortal_assumptions: {
-        name: "禁用对不朽对象(Immortal Objects)的调试假设",
-        desc: "禁用通常使用 \"--debug\" 进行的检查。在 Python 3.12 及以上版本中，不检查已知的不朽对象(Immortal Objects)假设。\n" +
-            "一些 C 库会破坏它们。如果启用了 \"--debug\"，默认会进行检查。",
-    },
     unstripped: {
         name: "不去除调试信息",
         desc: "在生成的对象文件中保留调试信息，以便更好的和调试器交互。默认关闭。",
@@ -416,8 +409,7 @@ export default {
     },
     jobs: {
         name: "并行编译任务数",
-        desc: "指定允许的并行 C 编译器作业数量。负值表示系统的 CPU 数量减去给定值。\n" +
-            "默认情况下，除非启用低内存模式，否则会使用系统 CPU 的全部数量；若在低内存模式下，默认值为 1。",
+        desc: "指定允许使用的并行C编译器任务数。默认为系统CPU数。",
     },
     lto: {
         name: "链接时间优化",
@@ -542,7 +534,7 @@ export default {
         desc: "用于更新依赖分析器缓存。这将导致创建分发文件夹的时间大大延长，但如果怀疑缓存会导致错误或缓存需要更新，则可以使用它。",
     },
     // PGO compilation choices(PGO(配置文件引导优化)编译选项)
-    pgo_c: {
+    pgo: {
         name: "配置文件引导优化",
         desc: "通过先进行分析，然后使用结果来反馈到C编译中，启用C级别的配置文件引导优化（PGO）。\n" +
             "注意：这是实验性的，还不能与Nuitka的独立模式一起使用。默认关闭。",
@@ -612,22 +604,6 @@ export default {
         desc: "用于设定输出'--verbose'的位置，应该是一个文件名。默认为标准输出。",
     },
     // General OS controls(通用操作系统控制)
-    enable_console: {
-        name: "启用控制台",
-        desc: "在为Windows或macOS编译时，启用控制台窗口并创建一个控制台应用程序。\n" +
-            "这将禁用来自某些模块的提示，例如\"PySide\"会建议禁用它。默认启用。",
-    },
-    force_stdout_spec: {
-        name: "强制标准输出规范",
-        desc: "强制程序的标准输出输出到这个位置。对于禁用控制台的程序和使用Nuitka商业版的Windows服务插件的程序非常有用。默认不激活，\n" +
-            "例如使用'{PROGRAM_BASE}.out.txt'，也就是程序目录附近的文件，查看用户手册以获取可用值的完整列表。",
-    },
-    force_stderr_spec: {
-        name: "强制标准错误规范",
-        desc: "强制程序的标准错误输出到这个位置。对于禁用控制台的程序和使用Nuitka商业版的Windows服务插件的程序非常有用。默认不激活，\n" +
-            "例如使用'{PROGRAM_BASE}.err.txt'，也就是程序目录附近的文件，查看用户手册以获取可用值的完整列表。",
-    },
-    // Windows specific controls(Windows 特定控制)
     windows_console_mode: {
         name: "Windows控制台模式",
         desc: "选择要使用的控制台模式，默认模式是force",
@@ -646,6 +622,22 @@ export default {
             },
         },
     },
+    enable_console: {
+        name: "启用控制台",
+        desc: "在为Windows或macOS编译时，启用控制台窗口并创建一个控制台应用程序。\n" +
+            "这将禁用来自某些模块的提示，例如\"PySide\"会建议禁用它。默认启用。",
+    },
+    force_stdout_spec: {
+        name: "强制标准输出规范",
+        desc: "强制程序的标准输出输出到这个位置。对于禁用控制台的程序和使用Nuitka商业版的Windows服务插件的程序非常有用。默认不激活，\n" +
+            "例如使用'{PROGRAM_BASE}.out.txt'，也就是程序目录附近的文件，查看用户手册以获取可用值的完整列表。",
+    },
+    force_stderr_spec: {
+        name: "强制标准错误规范",
+        desc: "强制程序的标准错误输出到这个位置。对于禁用控制台的程序和使用Nuitka商业版的Windows服务插件的程序非常有用。默认不激活，\n" +
+            "例如使用'{PROGRAM_BASE}.err.txt'，也就是程序目录附近的文件，查看用户手册以获取可用值的完整列表。",
+    },
+    // Windows specific controls(Windows 特定控制)
     windows_icon_from_ico: {
         name: "windows图标(ico文件)",
         desc: "添加可执行文件的图标。可以多次给出不同分辨率或者包含多个图标的文件。在选择包含多个图标的文件时，\n" +
@@ -1046,11 +1038,6 @@ export default {
         desc: "在编译之前显示对原Python文件内容的源代码更改。主要用于开发插件和配置Nuitka包。例如使用'-show-source-changes=numpy.**'\n" +
             "可以查看给定命名空间下所有的更改，或者使用'*'来查看所有可能的大量更改。默认为空",
     },
-    // Cross compilation(交叉编译)
-    target: {
-        name: "目标",
-        desc: "交叉编译目标。该功能是高度实验性的，且正在开发中，目前尚不可用。我们正在开发目标 '--target=wasi'，其他目标则暂不支持。",
-    },
     // Plugin options of 'anti-bloat'('反膨胀'插件选项)
     show_anti_bloat_changes: {
         name: "显示反膨胀更改",
@@ -1067,10 +1054,6 @@ export default {
     noinclude_unittest_mode: {
         name: "不包含单元测试模式",
         desc: "遇到\"unittest(单元测试)\"导入时的处理方式。这个包可能会有很多依赖而变得很大，应该尽量避免使用。",
-    },
-    noinclude_pydoc_mode: {
-        name: "不包含pydoc模式",
-        desc: "遇到\"pydoc\"导入时的处理方式。这个包的使用标志着在部署中无用的代码，应该尽量避免使用。",
     },
     noinclude_IPython_mode: {
         name: "不包含IPython模式",
@@ -1093,16 +1076,5 @@ export default {
         name: "不包含自定义模式",
         desc: "遇到特定导入时的处理方式。格式为模块名称，可以并且应该是一个顶级包，接着是一个选项，\"error\", \"warning\", \"nofollow\"，\n" +
             "例如PyQt5:error。",
-    },
-    // Plugin options of 'spacy'('spaCy'插件选项)
-    spacy_language_model: {
-        name: "spaCy语言模型",
-        desc: "要使用的 Spacy 语言模型。可以多次指定。使用 'all' 包含所有已下载的模型。",
-        elements: {
-            all: {
-                name: "包含全部",
-                desc: "包含所有已下载的模型",
-            },
-        },
     },
 };

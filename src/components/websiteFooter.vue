@@ -57,9 +57,6 @@ const license_info_visible = ref(false);
           <li>
             <el-link href="https://nuitka-commander.github.io/">{{ $t("website_info.github_website") }}</el-link>
           </li>
-          <li>
-            <el-link href="https://nuitka-commander.gitee.io">{{ $t("website_info.gitee_website") }}</el-link>
-          </li>
         </ul>
       </div>
       <!--项目开发/使用相关-->

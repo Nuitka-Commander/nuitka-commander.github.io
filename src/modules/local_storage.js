@@ -65,3 +65,19 @@ export function read_local_storage(key) {
         throw new Error("localStorage is not available! \nError: " + e);
     }
 }
+
+/**
+ * 从localStorage中删除指定的键
+ * @param key {string} 要删除的localStorage的键名
+ */
+export function remove_localstorage_key(key) {
+    if (!local_storage_enabled) {
+        return;
+    }
+    try {
+        localStorage.removeItem(key);
+    } catch (e) {
+        console.warn("localStorage is not available! \nError: " + e);
+        local_storage_enabled = false;
+    }
+}

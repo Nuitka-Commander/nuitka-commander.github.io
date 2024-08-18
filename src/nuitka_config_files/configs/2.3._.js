@@ -1,5 +1,5 @@
 /**
- * @Description 2.4版本的配置文件
+ * @Description 2.3版本的配置文件
  * @Author: erduotong
  * @Date: 2023-12-05 22:28:39
  */
@@ -585,14 +585,6 @@ const config = {
             true,
             false,
         ),
-        no_debug_immortal_assumptions: add_option.bool(
-            "no_debug_immortal_assumptions",
-            {
-                original: "--no-debug-immortal-assumptions",
-            },
-            true,
-            false,
-        ),
         unstripped: add_option.bool(
             "unstripped",
             {
@@ -928,10 +920,10 @@ const config = {
         ),
     },
     PGO_compilation_choices: {
-        pgo_c: add_option.bool(
-            "pgo_c",
+        pgo: add_option.bool(
+            "pgo",
             {
-                original: "--pgo-c",
+                original: "--pgo",
             },
             true,
             false,
@@ -1070,36 +1062,6 @@ const config = {
         ),
     },
     general_os_controls: {
-        enable_console: add_option.bool(
-            "enable_console",
-            {
-                original: "--enable-console",
-            },
-            true,
-            true,
-        ),
-        force_stdout_spec: add_option.definable_single(
-            "force_stdout_spec",
-            {
-                original: "--force-stdout-spec",
-            },
-            true,
-            {},
-            "",
-            true,
-        ),
-        force_stderr_spec: add_option.definable_single(
-            "force_stderr_spec",
-            {
-                original: "--force-stderr-spec",
-            },
-            true,
-            {},
-            "",
-            true,
-        ),
-    },
-    windows_specific_controls: {
         windows_console_mode: add_option.single_option(
             "windows_console_mode",
             {
@@ -1131,6 +1093,36 @@ const config = {
             },
             "force",
         ),
+        enable_console: add_option.bool(
+            "enable_console",
+            {
+                original: "--enable-console",
+            },
+            true,
+            true,
+        ),
+        force_stdout_spec: add_option.definable_single(
+            "force_stdout_spec",
+            {
+                original: "--force-stdout-spec",
+            },
+            true,
+            {},
+            "",
+            true,
+        ),
+        force_stderr_spec: add_option.definable_single(
+            "force_stderr_spec",
+            {
+                original: "--force-stderr-spec",
+            },
+            true,
+            {},
+            "",
+            true,
+        ),
+    },
+    windows_specific_controls: {
         windows_icon_from_ico: add_option.definable_multi(
             "windows_icon_from_ico",
             {
@@ -1866,18 +1858,6 @@ const config = {
             [],
         ),
     },
-    cross_compilation: {
-        target: add_option.definable_single(
-            "target",
-            {
-                original: "--target",
-            },
-            true,
-            {},
-            "",
-            true,
-        ),
-    },
     plugin_options_of_anti_bloat: {
         show_anti_bloat_changes: add_option.bool(
             "show_anti_bloat_changes",
@@ -1909,15 +1889,6 @@ const config = {
             "noinclude_unittest_mode",
             {
                 original: "--noinclude-unittest-mode",
-            },
-            true,
-            {},
-            [],
-        ),
-        noinclude_pydoc_mode: add_option.definable_multi(
-            "noinclude_pydoc_mode",
-            {
-                original: "--noinclude-pydoc-mode",
             },
             true,
             {},
@@ -1966,25 +1937,6 @@ const config = {
             },
             true,
             {},
-            [],
-        ),
-    },
-    plugin_options_of_spacy: {
-        spacy_language_model: add_option.definable_multi(
-            "spacy_language_model",
-            {
-                original: "--spacy-language-model",
-            },
-            true,
-            {
-                all: add_option.multi_elements(
-                    "all",
-                    {
-                        original: "all",
-                    },
-                    true,
-                ),
-            },
             [],
         ),
     },
@@ -2134,7 +2086,7 @@ config[watcher_key] = [
         let standalone_status = null;
         return add_watcher({
             standalone: config.basic.standalone,
-            pgo: config.PGO_compilation_choices.pgo_c,
+            pgo: config.PGO_compilation_choices.pgo,
         }, (config) => {
             if (standalone_status === config.standalone.val) {
                 return;

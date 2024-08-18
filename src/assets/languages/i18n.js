@@ -7,7 +7,7 @@ import {createI18n} from "vue-i18n";
 import {user_options} from "@/values/stores/user_options.js";
 import {supported_i18n} from "@/assets/languages/supported_i18n.js";
 import {set_loading} from "@/values/stores/loading.js";
-import {load_config_language, nuitka_info_loaded} from "@/modules/use_nuitka_config.js";
+import {load_config_language, nuitka_config_loaded, nuitka_info_loaded} from "@/modules/use_nuitka_config.js";
 import * as constants from "@/values/constants.json";
 
 /**
@@ -35,13 +35,12 @@ export const i18n = createI18n({
         if (!is_language_load) {
             return "loading...";
         }
-        if (key.startsWith("nuitka_info.") && nuitka_info_loaded === false) {
-            return "loading...";
+        if (key.startsWith("nuitka_info.") && !nuitka_info_loaded && !nuitka_config_loaded) {
+            return "loading nuitka config...";
         }
         if (constants.debug === true) {
             //构建后文件结构不同，就不给用户看了
             const error = new Error(`i18n: missing '${key}' for locale '${locale}`);
-            Error.captureStackTrace(error, i18n.global.missing);
             console.error(error.stack);
         } else {
             console.error(`i18n: missing '${key}' for locale '${locale}`);

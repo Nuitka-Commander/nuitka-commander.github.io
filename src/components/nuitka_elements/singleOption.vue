@@ -7,7 +7,7 @@
 import ElementCard from "@/components/untils/elementCard.vue";
 import * as constants from "@/values/constants.json";
 import {user_options} from "@/values/stores/user_options.js";
-import {computed, defineModel, onBeforeUnmount, watch} from "vue";
+import {computed, onBeforeUnmount, watch} from "vue";
 import {use_command} from "@/modules/use_command.js";
 import CliCommandCard from "@/components/command_cards/cliCommandCard.vue";
 import {useI18n} from "vue-i18n";
@@ -81,7 +81,7 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <el-tooltip :show-after=" constants.element_show_after_time" placement="top">
+  <el-tooltip :show-after=" constants.element_show_after_time" effect="light" placement="top">
 
     <template #content>
       <div class="use_original_text">
@@ -100,7 +100,7 @@ onBeforeUnmount(() => {
 
         <template v-for="(value,key) in model.elements" :key="key">
 
-          <el-tooltip :show-after=" constants.element_show_after_time" placement="left-start">
+          <el-tooltip :show-after=" constants.element_show_after_time" effect="light" placement="left-start">
 
             <template #content>
               <div class="use_original_text">

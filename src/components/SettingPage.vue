@@ -3,12 +3,16 @@
  * 设置页面相关逻辑
  */
 import {ref} from "vue";
-import {Close, Setting} from "@element-plus/icons-vue";
-import {user_options} from "@/values/stores/user_options.js";
+import {Close, RefreshLeft, Setting} from "@element-plus/icons-vue";
+import {reset_user_options, user_options} from "@/values/stores/user_options.js";
 import {set_theme} from "@/modules/use_theme.js";
 import {set_i18n_language} from "@/assets/languages/i18n.js";
 import {supported_i18n} from "@/assets/languages/supported_i18n.js";
 import {current_version_support_language, load_config_language} from "@/modules/use_nuitka_config.js";
+import {ElMessage, ElMessageBox} from "element-plus";
+import * as constants from "@/values/constants.json";
+import {useI18n} from "vue-i18n";
+import {local_nuitka_version_config} from "@/modules/use_local_forage.js";
 //设置页面的显示与隐藏
 const settings_page_show = ref(false);
 //关闭设置页面 event:点击事件
@@ -17,6 +21,67 @@ const close_setting_page = (event) => {
     settings_page_show.value = false;
   }
 };
+const t = useI18n().t;
+
+const reset_user = () => {
+  //询问是否重置
+  ElMessageBox.confirm(
+      "该操作无法撤销",
+      "是否重置用户设置",
+      {
+        confirmButtonText: t("message.OK"),
+        cancelButtonText: t("message.cancel"),
+        type: "warning",
+      },
+  ).then(() => {
+
+    reset_user_options();
+
+    ElMessage({
+      type: "success",
+      message: "删除成功",
+      showClose: true,
+      duration: constants.message_duration,
+    });
+  }).catch(() => {
+    ElMessage({
+      type: "info",
+      message: "取消删除",
+      showClose: true,
+      duration: constants.message_duration,
+    });
+  });
+}
+
+const reset_current = () => {
+  ElMessageBox.confirm(
+      "该操作无法撤销",
+      `是否重置${user_options.value.nuitka_version}版本的Nuitka配置?`,
+      {
+        confirmButtonText: t("message.OK"),
+        cancelButtonText: t("message.cancel"),
+        type: "warning",
+      },
+  ).then(() => {
+
+    local_nuitka_version_config.remove_config(user_options.value.nuitka_version);
+    location.reload();
+
+    ElMessage({
+      type: "success",
+      message: "删除成功",
+      showClose: true,
+      duration: constants.message_duration,
+    });
+  }).catch(() => {
+    ElMessage({
+      type: "info",
+      message: "取消删除",
+      showClose: true,
+      duration: constants.message_duration,
+    });
+  });
+}
 </script>
 
 <template>
@@ -31,27 +96,30 @@ const close_setting_page = (event) => {
 
         <div class="setting_page_selects_fa">
           <h1>
-            <img v-show="user_options.theme==='auto'" alt="auto theme" src="@/assets/images/auto_theme.svg">
-            <img v-show="user_options.theme==='light'" alt="light theme" src="@/assets/images/sun.svg">
-            <img v-show="user_options.theme==='dark'" alt="dark theme" src="@/assets/images/moon.svg">
+            <img v-show="user_options.theme==='auto'" alt="auto theme" class="setting-icon"
+                 src="@/assets/images/auto_theme.svg">
+            <img v-show="user_options.theme==='light'" alt="light theme" class="setting-icon"
+                 src="@/assets/images/sun.svg">
+            <img v-show="user_options.theme==='dark'" alt="dark theme" class="setting-icon"
+                 src="@/assets/images/moon.svg">
             {{ $t("setting.theme.theme") }}
           </h1>
           <el-select v-model="user_options.theme" @change="set_theme(user_options.theme)">
             <el-option key="auto" :label="$t('setting.theme.auto')" value="auto">
              <span slot="label" class="theme_select_content">
-                  <img alt="auto theme" src="@/assets/images/auto_theme.svg">
+                  <img alt="auto theme" class="setting-icon" src="@/assets/images/auto_theme.svg">
                   {{ $t("setting.theme.auto") }}
              </span>
             </el-option>
             <el-option key="light" :label="$t('setting.theme.light')" value="light">
                 <span slot="label" class="theme_select_content">
-                  <img alt="light theme" src="@/assets/images/sun.svg">
+                  <img alt="light theme" class="setting-icon" src="@/assets/images/sun.svg">
                   {{ $t("setting.theme.light") }}
                 </span>
             </el-option>
             <el-option key="dark" :label="$t('setting.theme.dark')" value="dark">
                 <span slot="label" class="theme_select_content">
-                  <img alt="dark theme" src="@/assets/images/moon.svg">
+                  <img alt="dark theme" class="setting-icon" src="@/assets/images/moon.svg">
                   {{ $t("setting.theme.dark") }}
                 </span>
             </el-option>
@@ -63,10 +131,10 @@ const close_setting_page = (event) => {
         <div class="setting_page_selects_fa">
 
           <h1>
-            <img alt="language icon" src="@/assets/images/language.svg">
-            {{ $t("setting.language") }}
+            <img alt="language icon" class="setting-icon" src="@/assets/images/language.svg">
+            {{ $t("setting.language.title") }}
           </h1>
-          <h3>界面语言</h3>
+          <h3> {{ $t("setting.language.interface_language") }}</h3>
           <el-select v-model="user_options.language" filterable @change="set_i18n_language(user_options.language)">
             <el-option
                 v-for="(value, key) in supported_i18n"
@@ -75,7 +143,7 @@ const close_setting_page = (event) => {
                 :value="key">
             </el-option>
           </el-select>
-          <h3>命令语言</h3>
+          <h3>{{ $t("setting.language.command_language") }}</h3>
           <el-select v-model="user_options.nuitka_language" filterable
                      @change="load_config_language(user_options.nuitka_language)">
             <el-option
@@ -85,6 +153,34 @@ const close_setting_page = (event) => {
                 :value="key"
             ></el-option>
           </el-select>
+        </div>
+        <div class="setting_page_selects_fa">
+
+          <h1>
+            <img alt="language icon" class="setting-icon" src="@/assets/images/warehouse.svg">
+            {{ $t("setting.storage.title") }}
+          </h1>
+          <h3> {{ $t("setting.storage.user") }}</h3>
+          <div>
+            <el-button @click="reset_user">
+              <el-icon size="20">
+                <refresh-left></refresh-left>
+              </el-icon>
+              {{ $t("setting.storage.reset_user") }}
+            </el-button>
+
+          </div>
+
+          <h3> {{ $t("setting.storage.command") }}</h3>
+          <div>
+            <el-button @click="reset_current">
+              <el-icon size="20">
+                <refresh-left></refresh-left>
+              </el-icon>
+              {{ $t("setting.storage.reset_command") }}
+            </el-button>
+
+          </div>
         </div>
 
       </div>
@@ -105,7 +201,10 @@ const close_setting_page = (event) => {
 </template>
 
 <style lang="scss" scoped>
-@import "@/assets/styles/animations.scss";
+//设置的svg图标
+.setting-icon {
+  filter: drop-shadow(1000vw 0 var(--el-text-color-primary));
+}
 
 #setting_drawer {
   position: fixed;
@@ -120,7 +219,7 @@ const close_setting_page = (event) => {
   height: 100%;
   border-top-left-radius: 20px;
   border-bottom-left-radius: 20px;
-  background-color: rgba(black, 0.5);
+  background-color: var(--setting-card-background);
   backdrop-filter: blur(10px);
 
 
@@ -136,7 +235,6 @@ const close_setting_page = (event) => {
     //悬停的效果是一个小方块
     &:hover {
       color: white;
-      background-color: #30363d;
     }
   }
 }
@@ -165,7 +263,7 @@ const close_setting_page = (event) => {
     height: 20px;
     margin-right: 10px;
     transform: translateX(-1000vw);
-    filter: drop-shadow(1000vw 0 white);
+
   }
 }
 
@@ -181,7 +279,7 @@ const close_setting_page = (event) => {
   border-radius: 12px;
 
   background: none;
-  box-shadow: -5px 5px 15px rgba(white, 0.5);
+  box-shadow: -5px 5px 15px var(--setting-card-shadow);
 
   h1 {
     font-size: 1.5rem;
@@ -194,7 +292,6 @@ const close_setting_page = (event) => {
       height: 30px;
       margin-right: 10px;
       transform: translateX(-1000vw);
-      filter: drop-shadow(1000vw 0 white);
     }
   }
 }

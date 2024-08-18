@@ -1,4 +1,5 @@
 // noinspection JSUnusedGlobalSymbols
+
 /**
  * @Description English language package
  * @Author: erduotong
@@ -29,8 +30,19 @@ export default {
             dark: "Dark mode",
             theme: "Theme",
         },
-        language: "Language",
+        language: {
+            title: "Language",
+            interface_language: "Interface language",
+            command_language: "Command language",
+        },
         nuitka_language_no_support: "The current version of Nuitka does not support this language",
+        storage: {
+            title: "Storage settings",
+            user: "User settings",
+            reset_user: "Reset user settings",
+            command: "Command settings",
+            reset_command: "Reset command settings",
+        },
     },
     nav_bar: { // Navigation bar
         mode: {
@@ -48,12 +60,17 @@ export default {
         now_nuitka_version: "Currently selected Nuitka version:",
         select_nuitka_version: "Select the version of Nuitka you are using",
     },
-    tabs: { // Translation of function switch sidebar
+    tabs: {
         edit: "Edit",
         output: "Output",
         input: "Input",
     },
-    nuitka_elements: { // Elements used in each tab
+    input_page: {
+        input_from_cli: "Import from CLI",
+        start_input: "Start import",
+        please_input_cli_command: "Please enter the Nuitka command line instruction",
+    },
+    nuitka_elements: {
         select_placeholder: "Select",
         not_selected: "Not selected",
         selected: "Selected",
@@ -62,7 +79,7 @@ export default {
         input_an_option: "Input an option",
         option_desc: "Option description",
     },
-    message: { // Some prompt messages
+    message: {
         will_del_option: "You are about to delete this custom option",
         continue_del: "Do you want to continue?",
         warning: "Warning",
@@ -75,4 +92,9 @@ export default {
         or: "or",
         click_select_file: "Select a file",
     },
+    output_page: {
+        CLI: "Command Line Interface",
+        JSON: "JSON",
+    },
+
 };

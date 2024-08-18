@@ -3,17 +3,19 @@
  * @Author: erduotong
  * @Date: 2023-11-26 11:09:19
  */
-@import "./themes/light.css";
-@import "./themes/dark.css";
+@use "./themes/light.scss" as *;
+@use "./themes/dark.scss" as *;
 
 body {
   margin: 0;
   padding: 0;
+  background-color: var(--background-color-page)
 }
 #app{
   display:flex;
   flex-direction: column;
   min-height: 100vh;
+
 }
 
 .use_original_text {

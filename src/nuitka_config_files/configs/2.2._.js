@@ -1,5 +1,5 @@
 /**
- * @Description 2.4版本的配置文件
+ * @Description 2.2版本的配置文件
  * @Author: erduotong
  * @Date: 2023-12-05 22:28:39
  */
@@ -331,15 +331,6 @@ const config = {
             {},
             [],
         ),
-        include_raw_dir: add_option.definable_multi(
-            "include_raw_dir",
-            {
-                original: "--include-raw-dir",
-            },
-            true,
-            {},
-            [],
-        ),
     },
     metadata_support: {
         include_distribution_metadata: add_option.definable_multi(
@@ -581,14 +572,6 @@ const config = {
             "debug",
             {
                 original: "--debug",
-            },
-            true,
-            false,
-        ),
-        no_debug_immortal_assumptions: add_option.bool(
-            "no_debug_immortal_assumptions",
-            {
-                original: "--no-debug-immortal-assumptions",
             },
             true,
             false,
@@ -928,10 +911,10 @@ const config = {
         ),
     },
     PGO_compilation_choices: {
-        pgo_c: add_option.bool(
-            "pgo_c",
+        pgo: add_option.bool(
+            "pgo",
             {
-                original: "--pgo-c",
+                original: "--pgo",
             },
             true,
             false,
@@ -1070,6 +1053,14 @@ const config = {
         ),
     },
     general_os_controls: {
+        disable_console: add_option.bool(
+            "disable_console",
+            {
+                original: "--disable-console",
+            },
+            true,
+            false,
+        ),
         enable_console: add_option.bool(
             "enable_console",
             {
@@ -1100,37 +1091,6 @@ const config = {
         ),
     },
     windows_specific_controls: {
-        windows_console_mode: add_option.single_option(
-            "windows_console_mode",
-            {
-                original: "--windows-console-mode",
-            },
-            true,
-            {
-                force: add_option.multi_elements(
-                    "force",
-                    {
-                        original: "force",
-                    },
-                    true,
-                ),
-                disable: add_option.multi_elements(
-                    "disable",
-                    {
-                        original: "disable",
-                    },
-                    true,
-                ),
-                attach: add_option.multi_elements(
-                    "attach",
-                    {
-                        original: "attach",
-                    },
-                    true,
-                ),
-            },
-            "force",
-        ),
         windows_icon_from_ico: add_option.definable_multi(
             "windows_icon_from_ico",
             {
@@ -1866,18 +1826,6 @@ const config = {
             [],
         ),
     },
-    cross_compilation: {
-        target: add_option.definable_single(
-            "target",
-            {
-                original: "--target",
-            },
-            true,
-            {},
-            "",
-            true,
-        ),
-    },
     plugin_options_of_anti_bloat: {
         show_anti_bloat_changes: add_option.bool(
             "show_anti_bloat_changes",
@@ -1909,15 +1857,6 @@ const config = {
             "noinclude_unittest_mode",
             {
                 original: "--noinclude-unittest-mode",
-            },
-            true,
-            {},
-            [],
-        ),
-        noinclude_pydoc_mode: add_option.definable_multi(
-            "noinclude_pydoc_mode",
-            {
-                original: "--noinclude-pydoc-mode",
             },
             true,
             {},
@@ -1966,25 +1905,6 @@ const config = {
             },
             true,
             {},
-            [],
-        ),
-    },
-    plugin_options_of_spacy: {
-        spacy_language_model: add_option.definable_multi(
-            "spacy_language_model",
-            {
-                original: "--spacy-language-model",
-            },
-            true,
-            {
-                all: add_option.multi_elements(
-                    "all",
-                    {
-                        original: "all",
-                    },
-                    true,
-                ),
-            },
             [],
         ),
     },
@@ -2134,7 +2054,7 @@ config[watcher_key] = [
         let standalone_status = null;
         return add_watcher({
             standalone: config.basic.standalone,
-            pgo: config.PGO_compilation_choices.pgo_c,
+            pgo: config.PGO_compilation_choices.pgo,
         }, (config) => {
             if (standalone_status === config.standalone.val) {
                 return;
