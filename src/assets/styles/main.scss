@@ -9,12 +9,14 @@
 body {
   margin: 0;
   padding: 0;
-  background-color: var(--background-color-page)
+  background-color: var(--background-color-page);
 }
 
 #app {
   display: flex;
+  overflow-x: auto;
   flex-direction: column;
+  min-width: 1000px;
   min-height: 100vh;
 
 }
@@ -27,6 +29,7 @@ body {
 // nuitka-elements
 .nuitka-elements-selector {
   min-width: 180px;
+
 }
 
 .nuitka-elements-text-area {

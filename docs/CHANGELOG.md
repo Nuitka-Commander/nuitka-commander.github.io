@@ -27,6 +27,7 @@
 - defineModel作为一个编译宏却仍被导入
 - Github Action中，配置文件的加载问题
 - 更新了Vite-plugin-singlefile 修复了本地构建会出问题的问题
+- CSS的异常换行
 
 ## 🔒 安全 Security
 

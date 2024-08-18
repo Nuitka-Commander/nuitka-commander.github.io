@@ -69,7 +69,9 @@ const output = computed(() => {
             </el-button>
           </span>
           <el-text>
-            <pre><code>{{ use_command.storage_config }}</code></pre>
+            <pre>
+              <code style=" white-space: pre-wrap;">{{ use_command.storage_config }}</code>
+            </pre>
           </el-text>
 
         </div>
@@ -112,6 +114,7 @@ const output = computed(() => {
   border-radius: 12px;
   background: var(--card-background);
   box-shadow: var(--card-shadow) 0 3px 8px;
+
 }
 
 </style>

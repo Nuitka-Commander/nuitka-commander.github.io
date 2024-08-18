@@ -80,10 +80,12 @@ import InputPage from "@/components/inputPage.vue";
 
 <style lang="scss" scoped>
 main {
+  flex: 1;
+  min-width: 240px;
   margin-top: 20px;
   margin-right: 20px;
   margin-left: 20px;
-  flex: 1;
+
 }
 
 #website_footer {
