@@ -15,7 +15,6 @@
     "@voerkai18n/runtime": "^2.1.9",
     "@vueuse/core": "^10.9.0",
     "axios": "^1.7.2",
-    "default-passive-events": "^2.0.0",
     "element-plus": "^2.7.3",
     "html-minifier-terser": "^7.2.0",
     "js-yaml": "^4.1.0",

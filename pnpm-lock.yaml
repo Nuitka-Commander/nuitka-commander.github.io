@@ -26,9 +26,6 @@ importers:
       axios:
         specifier: ^1.7.2
         version: 1.7.4
-      default-passive-events:
-        specifier: ^2.0.0
-        version: 2.0.0
       element-plus:
         specifier: ^2.7.3
         version: 2.8.0(vue@3.4.38)
@@ -893,9 +890,6 @@ packages:
 
   deep-is@0.1.4:
     resolution: {integrity: sha512-oIPzksmTg4/MriiaYGO+okXDT7ztn/w3Eptv/+gSIdMdKsJo0u4CfYNFJPy+4SKMuCqGw2wxnA+URMg3t8a/bQ==, tarball: https://registry.npmmirror.com/deep-is/-/deep-is-0.1.4.tgz}
-
-  default-passive-events@2.0.0:
-    resolution: {integrity: sha512-eMtt76GpDVngZQ3ocgvRcNCklUMwID1PaNbCNxfpDXuiOXttSh0HzBbda1HU9SIUsDc02vb7g9+3I5tlqe/qMQ==, tarball: https://registry.npmmirror.com/default-passive-events/-/default-passive-events-2.0.0.tgz}
 
   delayed-stream@1.0.0:
     resolution: {integrity: sha512-ZySD7Nf91aLB0RxL4KGrKHBXl7Eds1DAmEdcoVawXnLD7SDhpNgtuII2aAkg7a7QS41jxPSZ17p4VdGnMHk3MQ==, tarball: https://registry.npmmirror.com/delayed-stream/-/delayed-stream-1.0.0.tgz}
@@ -3398,8 +3392,6 @@ snapshots:
       strip-dirs: 2.1.0
 
   deep-is@0.1.4: {}
-
-  default-passive-events@2.0.0: {}
 
   delayed-stream@1.0.0: {}
 
