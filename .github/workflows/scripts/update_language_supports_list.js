@@ -39,7 +39,8 @@ let output_data_config = "";
         content1 = content1.default.support_language;
         output_data_config += `* [${key}](../../src/nuitka_config_files/configs/${Supported_nuitka_version.default.versions[key]}.js)\n`;
         for (const lang in content1) {
-            output_data_config += `    * [${lang}](../../src/nuitka_config_files/translations/${Supported_nuitka_version.default.versions[key]}/${content1[lang]}.js)\n`;
+
+            output_data_config += `    * [${content1[lang].name}(${lang})](../../src/nuitka_config_files/translations/${Supported_nuitka_version.default.versions[key]}/${content1[lang].path}.js)\n`;
         }
         fs.unlinkSync(filename);
     }

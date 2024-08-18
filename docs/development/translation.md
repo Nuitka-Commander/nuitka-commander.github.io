@@ -60,9 +60,13 @@
 <div id="nuitka_commander_translation_config"> 
 
 * [2.1.*](../../src/nuitka_config_files/configs/2.1._.js)
-  * [zh-CN](../../src/nuitka_config_files/translations/2.1._/[object Object].js)
+  * [简体中文(zh-CN)](../../src/nuitka_config_files/translations/2.1._/zh_cn.js)
+* [2.2.*](../../src/nuitka_config_files/configs/2.2._.js)
+  * [简体中文(zh-CN)](../../src/nuitka_config_files/translations/2.2._/zh_cn.js)
+* [2.3.*](../../src/nuitka_config_files/configs/2.3._.js)
+  * [简体中文(zh-CN)](../../src/nuitka_config_files/translations/2.3._/zh_cn.js)
 * [2.4.*](../../src/nuitka_config_files/configs/2.4._.js)
-  * [zh-CN](../../src/nuitka_config_files/translations/2.4._/[object Object].js)
+  * [简体中文(zh-CN)](../../src/nuitka_config_files/translations/2.4._/zh_cn.js)
 </div>
 </details>
 
