@@ -1,0 +1,38 @@
+name: 构建测试版本
+on:
+  workflow_dispatch:
+permissions: write-all
+jobs:
+  publish:
+    name: 构建测试版本
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        name: Install pnpm
+        with:
+          version: 8
+          run_install: false
+
+      - name: Install Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: 安装依赖
+        if: steps.pnpm-cache.outputs.cache-hit != 'true'
+        run: pnpm install
+      - name: 为本地运行构建
+        run: |
+          pnpm run build:local_use
+      - name: 上传 index.html
+        uses: actions/upload-artifact@v3
+        with:
+          name: local_use index.html
+          path: ${{ github.workspace }}/dist/index.html
