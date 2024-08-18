@@ -91,12 +91,16 @@ onBeforeUnmount(() => {
 
     <element-card>
 
-      <div>
+      <div class="nuitka-elements-text-area">
         <el-text size="large">{{ $t(`nuitka_info.${model.i18n}.name`) }}</el-text>
         <el-text v-if="user_options.show_original_command" size="large"> ({{ model.command.original }})</el-text>
       </div>
 
-      <el-select v-model="model.val" :disabled="!model.enabled" filterable>
+      <el-select
+          v-model="model.val"
+          :disabled="!model.enabled"
+          class="nuitka-elements-selector"
+          filterable>
 
         <template v-for="(value,key) in model.elements" :key="key">
 

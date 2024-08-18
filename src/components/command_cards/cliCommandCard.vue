@@ -39,14 +39,16 @@ const props = defineProps({
 
 .cli_tooltip {
   font-size: 14px;
+  max-width: 60vw;
 }
 
 .cli_command {
   max-width: max-content;
   margin: 2px 2px;
   padding: 4px;
+  word-break: break-all; /* 处理超长单词 */
   border-radius: 8px;
-
+  overflow-wrap: break-word; /* 处理超长单词 */
   &:hover {
     background: var(--hover-background);
   }

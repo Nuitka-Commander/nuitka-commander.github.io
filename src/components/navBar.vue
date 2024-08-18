@@ -32,7 +32,7 @@ import supported_nuitka_version from "@/nuitka_config_files/supported_nuitka_ver
           v-model="user_options.nuitka_version"
           filterable
           @change="load_new_config()"
-          style="width:20vw"
+          style="min-width: 95%"
       >
         <template #header>
           {{ $t("nav_bar.select_nuitka_version") }}
