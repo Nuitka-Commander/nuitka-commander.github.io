@@ -15,25 +15,22 @@ importers:
         specifier: ^2.3.1
         version: 2.3.1(vue@3.4.38)
       '@vitejs/plugin-vue':
-        specifier: ^5.1.2
+        specifier: ^5.0.4
         version: 5.1.2(vite@5.4.1(@types/node@22.3.0)(sass@1.77.8)(terser@5.31.6))(vue@3.4.38)
       '@voerkai18n/runtime':
         specifier: ^2.1.9
         version: 2.1.9
       '@vueuse/core':
-        specifier: ^10.11.1
+        specifier: ^10.9.0
         version: 10.11.1(vue@3.4.38)
       axios:
-        specifier: ^1.7.4
+        specifier: ^1.7.2
         version: 1.7.4
-      clipboard:
-        specifier: ^2.0.11
-        version: 2.0.11
       default-passive-events:
         specifier: ^2.0.0
         version: 2.0.0
       element-plus:
-        specifier: ^2.8.0
+        specifier: ^2.7.3
         version: 2.8.0(vue@3.4.38)
       html-minifier-terser:
         specifier: ^7.2.0
@@ -42,7 +39,7 @@ importers:
         specifier: ^4.1.0
         version: 4.1.0
       jsdom:
-        specifier: ^24.1.1
+        specifier: ^24.1.0
         version: 24.1.1
       localforage:
         specifier: ^1.10.0
@@ -54,19 +51,19 @@ importers:
         specifier: ^2.3.1
         version: 2.3.1
       sass:
-        specifier: ^1.77.8
+        specifier: ^1.77.2
         version: 1.77.8
       scss-loader:
         specifier: ^0.0.1
         version: 0.0.1
       unplugin-auto-import:
-        specifier: ^0.17.8
+        specifier: ^0.17.6
         version: 0.17.8(@vueuse/core@10.11.1(vue@3.4.38))(rollup@4.20.0)
       unplugin-vue-components:
         specifier: ^0.26.0
         version: 0.26.0(@babel/parser@7.25.3)(rollup@4.20.0)(vue@3.4.38)
       vite:
-        specifier: ^5.4.1
+        specifier: ^5.2.11
         version: 5.4.1(@types/node@22.3.0)(sass@1.77.8)(terser@5.31.6)
       vite-plugin-html:
         specifier: ^3.2.2
@@ -78,14 +75,11 @@ importers:
         specifier: ^1.0.0
         version: 1.0.0(rollup@4.20.0)(vite@5.4.1(@types/node@22.3.0)(sass@1.77.8)(terser@5.31.6))
       vue:
-        specifier: ^3.4.38
+        specifier: ^3.4.27
         version: 3.4.38
       vue-i18n:
         specifier: ^9.13.1
         version: 9.13.1(vue@3.4.38)
-      vue3-json-viewer:
-        specifier: ^2.2.2
-        version: 2.2.2(vue@3.4.38)
 
 packages:
 
@@ -736,9 +730,6 @@ packages:
     resolution: {integrity: sha512-D5J+kHaVb/wKSFcyyV75uCn8fiY4sV38XJoe4CUyGQ+mOU/fMVYUdH1hJC+CJQ5uY3EnW27SbJYS4X8BiLrAFg==, tarball: https://registry.npmmirror.com/clean-css/-/clean-css-5.3.3.tgz}
     engines: {node: '>= 10.0'}
 
-  clipboard@2.0.11:
-    resolution: {integrity: sha512-C+0bbOqkezLIsmWSvlsXS0Q0bmkugu7jcfMIACB+RDEntIzQIkdr148we28AfSloQLRdZlYL/QYyrq05j/3Faw==, tarball: https://registry.npmmirror.com/clipboard/-/clipboard-2.0.11.tgz}
-
   clone-response@1.0.2:
     resolution: {integrity: sha512-yjLXh88P599UOyPTFX0POsd7WxnbsVsGohcwzHOLspIhhpalPw1BcqED8NblyZLKcGrL8dTgMlcaZxV2jAD41Q==, tarball: https://registry.npmmirror.com/clone-response/-/clone-response-1.0.2.tgz}
 
@@ -909,9 +900,6 @@ packages:
   delayed-stream@1.0.0:
     resolution: {integrity: sha512-ZySD7Nf91aLB0RxL4KGrKHBXl7Eds1DAmEdcoVawXnLD7SDhpNgtuII2aAkg7a7QS41jxPSZ17p4VdGnMHk3MQ==, tarball: https://registry.npmmirror.com/delayed-stream/-/delayed-stream-1.0.0.tgz}
     engines: {node: '>=0.4.0'}
-
-  delegate@3.2.0:
-    resolution: {integrity: sha512-IofjkYBZaZivn0V8nnsMJGBr4jVLxHDheKSW88PyxS5QC4Vo9ZbZVvhzlSxY87fVq3STR6r+4cGepyHkcWOQSw==, tarball: https://registry.npmmirror.com/delegate/-/delegate-3.2.0.tgz}
 
   dir-glob@3.0.1:
     resolution: {integrity: sha512-WkrWp9GR4KXfKGYzOLmTuGVi1UWFfws377n9cc55/tb6DuqyF6pcQ5AbiHEshaDpY9v6oaSr2XCDidGmMwdzIA==, tarball: https://registry.npmmirror.com/dir-glob/-/dir-glob-3.0.1.tgz}
@@ -1350,9 +1338,6 @@ packages:
   globby@10.0.2:
     resolution: {integrity: sha512-7dUi7RvCoT/xast/o/dLN53oqND4yk0nsHkhRgn9w65C4PofCLOoJ39iSOg+qVDdWQPIEj+eszMHQ+aLVwwQSg==, tarball: https://registry.npmmirror.com/globby/-/globby-10.0.2.tgz}
     engines: {node: '>=8'}
-
-  good-listener@1.2.2:
-    resolution: {integrity: sha512-goW1b+d9q/HIwbVYZzZ6SsTr4IgE+WA44A0GmPIQstuOrgsFcT7VEJ48nmr9GaRtNu0XTKacFLGnBPAM6Afouw==, tarball: https://registry.npmmirror.com/good-listener/-/good-listener-1.2.2.tgz}
 
   got@7.1.0:
     resolution: {integrity: sha512-Y5WMo7xKKq1muPsxD+KmrR8DH5auG7fBdDVueZwETwV6VytKyU9OX/ddpq2/1hp1vIPvVb4T81dKQz3BivkNLw==, tarball: https://registry.npmmirror.com/got/-/got-7.1.0.tgz}
@@ -2164,9 +2149,6 @@ packages:
     resolution: {integrity: sha512-e1QtP3YL5tWww8uKaOCQ18UxIT2laNBXHjV/S2WYCiK4udiv8lkG89KRIoCjUagnAmCBurjF4zEVX2ByBbnCjQ==, tarball: https://registry.npmmirror.com/seek-bzip/-/seek-bzip-1.0.6.tgz}
     hasBin: true
 
-  select@1.1.2:
-    resolution: {integrity: sha512-OwpTSOfy6xSs1+pwcNrv0RBMOzI39Lp3qQKUTPVVPRjCdNa5JH/oPRiqsesIskK8TVgmRiHwO4KXlV2Li9dANA==, tarball: https://registry.npmmirror.com/select/-/select-1.1.2.tgz}
-
   semver-regex@2.0.0:
     resolution: {integrity: sha512-mUdIBBvdn0PLOeP3TEkMH7HHeUP3GjsXCwKarjv/kGmUFOYg1VqEemKhoQpWMu6X2I8kHeuVdGibLGkVK+/5Qw==, tarball: https://registry.npmmirror.com/semver-regex/-/semver-regex-2.0.0.tgz}
     engines: {node: '>=6'}
@@ -2358,9 +2340,6 @@ packages:
     resolution: {integrity: sha512-G7r3AhovYtr5YKOWQkta8RKAPb+J9IsO4uVmzjl8AZwfhs8UcUwTiD6gcJYSgOtzyjvQKrKYn41syHbUWMkafA==, tarball: https://registry.npmmirror.com/timed-out/-/timed-out-4.0.1.tgz}
     engines: {node: '>=0.10.0'}
 
-  tiny-emitter@2.1.0:
-    resolution: {integrity: sha512-NB6Dk1A9xgQPMoGqC5CVXn123gWyte215ONT5Pp5a0yt4nlEoO1ZWeCwpncaekPHXO60i47ihFnZPiRPjRMq4Q==, tarball: https://registry.npmmirror.com/tiny-emitter/-/tiny-emitter-2.1.0.tgz}
-
   to-buffer@1.1.1:
     resolution: {integrity: sha512-lx9B5iv7msuFYE3dytT+KE5tap+rNYw+K4jVkb9R/asAb+pbBSM17jtunHplhBe6RRJdZx3Pn2Jph24O32mOVg==, tarball: https://registry.npmmirror.com/to-buffer/-/to-buffer-1.1.1.tgz}
 
@@ -2549,11 +2528,6 @@ packages:
     engines: {node: '>= 16'}
     peerDependencies:
       vue: ^3.0.0
-
-  vue3-json-viewer@2.2.2:
-    resolution: {integrity: sha512-56l3XDGggnpwEqZieXsSMhNT4NhtO6d7zuSAxHo4i0UVxymyY2jRb7UMQOU1ztChKALZCAzX7DlgrsnEhxu77A==, tarball: https://registry.npmmirror.com/vue3-json-viewer/-/vue3-json-viewer-2.2.2.tgz}
-    peerDependencies:
-      vue: ^3.2.0
 
   vue@3.4.38:
     resolution: {integrity: sha512-f0ZgN+mZ5KFgVv9wz0f4OgVKukoXtS3nwET4c2vLBGQR50aI8G0cqbFtLlX9Yiyg3LFGBitruPHt2PxwTduJEw==, tarball: https://registry.npmmirror.com/vue/-/vue-3.4.38.tgz}
@@ -3259,12 +3233,6 @@ snapshots:
     dependencies:
       source-map: 0.6.1
 
-  clipboard@2.0.11:
-    dependencies:
-      good-listener: 1.2.2
-      select: 1.1.2
-      tiny-emitter: 2.1.0
-
   clone-response@1.0.2:
     dependencies:
       mimic-response: 1.0.1
@@ -3434,8 +3402,6 @@ snapshots:
   default-passive-events@2.0.0: {}
 
   delayed-stream@1.0.0: {}
-
-  delegate@3.2.0: {}
 
   dir-glob@3.0.1:
     dependencies:
@@ -3919,10 +3885,6 @@ snapshots:
       ignore: 5.3.2
       merge2: 1.4.1
       slash: 3.0.0
-
-  good-listener@1.2.2:
-    dependencies:
-      delegate: 3.2.0
 
   got@7.1.0:
     dependencies:
@@ -4783,8 +4745,6 @@ snapshots:
     dependencies:
       commander: 2.20.3
 
-  select@1.1.2: {}
-
   semver-regex@2.0.0: {}
 
   semver-truncate@1.1.2:
@@ -4961,8 +4921,6 @@ snapshots:
   through@2.3.8: {}
 
   timed-out@4.0.1: {}
-
-  tiny-emitter@2.1.0: {}
 
   to-buffer@1.1.1: {}
 
@@ -5175,11 +5133,6 @@ snapshots:
       '@intlify/core-base': 9.13.1
       '@intlify/shared': 9.13.1
       '@vue/devtools-api': 6.6.3
-      vue: 3.4.38
-
-  vue3-json-viewer@2.2.2(vue@3.4.38):
-    dependencies:
-      clipboard: 2.0.11
       vue: 3.4.38
 
   vue@3.4.38:
