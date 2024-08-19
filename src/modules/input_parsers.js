@@ -5,7 +5,9 @@ import {input_type} from "@/values/enums.js";
 
 export const parsers = {
     [input_type.cli]: async (data) => {
-        // const ast = parse(data)
-        // return ast
+        return data;
+    },
+    [input_type.json]: async (data) => {
+        return data;
     },
 }
