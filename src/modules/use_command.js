@@ -10,6 +10,7 @@ import {debounce_func} from "@/modules/untils.js";
 import {debug} from "@/modules/debug.js";
 import {watcher_key} from "@/values/templates.js";
 import {nuitka_element_type} from "@/values/enums.js";
+import {set_loading} from "@/values/stores/loading.js";
 
 
 class CommandStatus {
@@ -38,9 +39,8 @@ class CommandStatus {
     watchers = []; //
 
     constructor() {
-        //未改变的配置 用于重置
-        this.original_status = {};
-        //已预处理完成的配置
+        this.original_status = {}; //没有奇奇怪怪函数的原始配置 直接修改并不会触发vue的引用？
+        //已预处理完成的配置，并且添加了一些引用
         this.status = ref({});
 
     }
@@ -104,7 +104,7 @@ class CommandStatus {
                 if (second_value.default === undefined) {
                     console.warn(`配置文件中 ${top_key}.${second_key} 的default值未定义`);
                 } else {
-                    second_value.val = second_value.default;
+                    second_value.val = JSON.parse(JSON.stringify(second_value.default)); //深拷贝
                 }
                 // 检查是否有存储值
                 if (local_config?.[second_key] !== undefined) {
@@ -114,11 +114,11 @@ class CommandStatus {
                         second_value.val = local_config[second_key];
                     } else {
                         const local_val = local_config[second_key];
-                        second_value.val = local_val.value
+                        second_value.val = local_val.value;
                         second_value.elements = {
                             ...second_value.elements,
                             ...local_val.user_provides_choices,
-                        }
+                        };
                     }
                 }
                 // 添加到原始配置中
@@ -168,6 +168,29 @@ class CommandStatus {
 
     }
 
+    /**
+     * 重置当前状态
+     * @return {Promise<void>}
+     */
+    async reset_status() {
+        if (this.original_status === {}) {
+            console.error("尚未初始化配置");
+            return;
+        }
+        set_loading(true);
+        //遍历所有的配置，将val重置为default
+        Object.keys(this.status.value).forEach(topKey => {
+            const topValue = this.status.value[topKey];
+            Object.keys(topValue).forEach(subKey => {
+                const subValue = topValue[subKey];
+                Object.keys(subValue).forEach(final_key => {
+                    const final_value = subValue[final_key];
+                    final_value.val = JSON.parse(JSON.stringify(final_value.default));
+                });
+            });
+        });
+        set_loading(false);
+    }
 
 }
 

@@ -8,6 +8,7 @@ import CommandEdit from "@/components/commandEdit.vue";
 import {user_options} from "@/values/stores/user_options.js";
 import OutputPage from "@/components/outputPage.vue";
 import InputPage from "@/components/inputPage.vue";
+import {use_command} from "@/modules/use_command.js";
 </script>
 
 <template>
@@ -23,7 +24,7 @@ import InputPage from "@/components/inputPage.vue";
 
 
   <main>
-
+    <el-button @click="use_command.reset_status()">console</el-button>
     <el-tabs v-model="user_options.action_tab" stretch tab-position="right">
       <el-tab-pane name="input">
         <template #default>
