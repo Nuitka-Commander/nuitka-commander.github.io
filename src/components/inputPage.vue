@@ -7,7 +7,8 @@ import {ref} from "vue";
 import {input_type} from "@/values/enums.js";
 import {ElMessage} from "element-plus";
 import * as constants from "@/values/constants.json";
-import {parsers} from "@/modules/input_parsers.js";
+import {input_handlers} from "@/modules/input_handlers.js";
+import {set_loading} from "@/values/stores/loading.js";
 
 const input_data = ref({
   [input_type.cli]: "",
@@ -26,10 +27,10 @@ const start_input = async (type) => {
     });
     return;
   }
-
+  set_loading(true);
   is_importing.value = true; // 一个防止过快导入的东西
-  const result = await parsers[type](input_data.value[type]);
-  console.log(result);
+  await input_handlers[type](input_data.value[type]);
+  set_loading(false);
   is_importing.value = false;
 };
 </script>

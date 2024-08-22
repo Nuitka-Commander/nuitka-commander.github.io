@@ -24,8 +24,8 @@ import {use_command} from "@/modules/use_command.js";
 
 
   <main>
-    <el-button @click="use_command.reset_status()">console</el-button>
-    <el-tabs v-model="user_options.action_tab" stretch tab-position="right">
+
+  <el-tabs v-model="user_options.action_tab" stretch tab-position="right">
       <el-tab-pane name="input">
         <template #default>
           <input-page></input-page>
