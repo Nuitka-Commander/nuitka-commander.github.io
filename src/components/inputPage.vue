@@ -53,7 +53,7 @@ const start_input = async (type) => {
           </el-button>
         </div>
         <!---->
-        <div id="cli_input">
+        <div class="input-area">
           <el-input
               v-model="input_data[input_type.cli]"
               :autosize="{minRows:10,maxRows:20}"
@@ -83,12 +83,16 @@ const start_input = async (type) => {
 
         </div>
 
-        <el-input
-            v-model="input_data[input_type.json]"
-            type="textarea"
-        >
+        <div class="input-area">
+          <el-input
+              v-model="input_data[input_type.json]"
+              :autosize="{minRows:10,maxRows:20}"
+              :placeholder="'(to i18n) 请输入从本网站json导出的数据'"
+              type="textarea"
+          >
 
-        </el-input>
+          </el-input>
+        </div>
       </div>
 
     </el-tab-pane>
@@ -105,9 +109,10 @@ const start_input = async (type) => {
   background: var(--card-background);
 
 
-  #cli_input {
-    margin: 15px 60px;
-  }
+}
+
+.input-area {
+  margin: 15px 60px;
 }
 
 .start_input_button {
