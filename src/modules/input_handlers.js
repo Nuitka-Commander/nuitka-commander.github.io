@@ -3,8 +3,9 @@
  */
 import {input_type, nuitka_element_type} from "@/values/enums.js";
 import {use_command} from "@/modules/use_command.js";
-import {ElMessage} from "element-plus";
+import {ElMessage, ElMessageBox, ElText} from "element-plus";
 import * as constants from "@/values/constants.json";
+import {h} from "vue";
 
 const throw_error = (message) => {
     ElMessage({
@@ -80,7 +81,44 @@ export const input_handlers = {
             });
         });
         //检查是否有无法处理的属性，如果有就提示用户
-        
-        return data;
+        if (Object.keys(original_data).length > 0) {
+            throw_error(`(to i18n) 提供的数据中存在无法识别的属性，请检查或者手动输入`);
+            // 一个简单的弹窗，提示用户有哪些属性无法识别
+            try {
+                await ElMessageBox({
+                    // 设置弹窗的标题
+                    title: "(to i18n) 提供的数据中存在无法识别的属性，请在下方检查",
+                    // 设置弹窗的消息内容
+                    message: () => {
+                        // 获取original_data对象中所有剩余的键
+                        const remainingKeys = Object.keys(original_data);
+                        // 将每个键值对格式化为字符串
+                        const formattedStrings = remainingKeys.map(key => {
+                            const value = JSON.stringify(original_data[key], null, 4); // 将值格式化为JSON字符串
+                            return `${key}: ${value}`; // 返回格式化后的键值对字符串
+                        });
+                        // 返回一个包含所有格式化字符串的div元素
+                        return h("div", {}, formattedStrings.map(str =>
+                            h(ElText, {}, {
+                                default: () => [ // 使用ElText组件包裹每个字符串，并使用函数式插槽
+                                    h("pre", {}, [
+                                        h("code", {}, str),
+                                    ]),
+                                ],
+                            }),
+                        ));
+                    },
+
+                });
+            } catch {
+            } //只是防止用户取消操作导致崩溃
+        }
+        ElMessage({
+            type: "success",
+            message: "(to i18n)数据导入成功",
+            showClose: true,
+            duration: constants.message_duration,
+        });
+
     },
 };
