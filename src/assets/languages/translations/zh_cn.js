@@ -99,5 +99,9 @@ export default {
         CLI: "命令行输出",
         JSON: "JSON输出",
     },
+    //配置文件版本的标题 如果你想要的话其实哪个版本都能给一个 如果没有的话就调用默认的key name
+    nuitka_config_title: {
+        simple: "简单模式",
+    },
 
 };

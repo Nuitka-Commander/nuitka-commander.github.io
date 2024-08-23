@@ -48,6 +48,7 @@ export default {
 };
 ```
 
+如果这不是一个简单的版本，例如这是`简单模式`，不能用版本号来表示，则你需要前往网页的翻译配置文件中设置。
 详细的翻译内容请查看[翻译相关](./translation.md)，在此不再赘述。
 
 ### 选项
@@ -146,9 +147,9 @@ config[watcher_key] = [];
 
 ```js
 config[watcher_key] = [
-  (function () {
+    (function () {
 
-  })(),
+    })(),
 ]
 ```
 
@@ -157,8 +158,8 @@ config[watcher_key] = [
 
 ```js
 (function () {
-  return add_watcher({}, (config) => {
-  })
+    return add_watcher({}, (config) => {
+    })
 })()
 ```
 
@@ -171,27 +172,27 @@ config[watcher_key] = [
 
 ```js
 (function () {
-  return add_watcher({
-    standalone: config.basic.standalone,
-    follow_imports: config.control_the_following_into_imported_modules.follow_imports,
-    python_flag: config.basic.python_flag,
-    nofollow_imports: config.control_the_following_into_imported_modules.nofollow_imports,
-  }, (config) => {
-    if (config.standalone.val === true) {
-      config.follow_imports.val = true;
-      config.follow_imports.enabled = false;
-      config.python_flag.val = ["s"];
-      config.python_flag.enabled = false;
-      config.nofollow_imports.val = false;
-      config.nofollow_imports.enabled = false;
-    } else if (config.standalone.val === false) {
-      config.follow_imports.val = false;
-      config.follow_imports.enabled = true;
-      config.python_flag.val = [];
-      config.python_flag.enabled = true;
-      config.nofollow_imports.enabled = true;
-    }
-  })
+    return add_watcher({
+        standalone: config.basic.standalone,
+        follow_imports: config.control_the_following_into_imported_modules.follow_imports,
+        python_flag: config.basic.python_flag,
+        nofollow_imports: config.control_the_following_into_imported_modules.nofollow_imports,
+    }, (config) => {
+        if (config.standalone.val === true) {
+            config.follow_imports.val = true;
+            config.follow_imports.enabled = false;
+            config.python_flag.val = ["s"];
+            config.python_flag.enabled = false;
+            config.nofollow_imports.val = false;
+            config.nofollow_imports.enabled = false;
+        } else if (config.standalone.val === false) {
+            config.follow_imports.val = false;
+            config.follow_imports.enabled = true;
+            config.python_flag.val = [];
+            config.python_flag.enabled = true;
+            config.nofollow_imports.enabled = true;
+        }
+    })
 })()
 ```
 
@@ -203,32 +204,32 @@ config[watcher_key] = [
 ```js
 
 (function () {
-  let standalone_status = null;
-  return add_watcher({
-    standalone: config.basic.standalone,
-    follow_imports: config.control_the_following_into_imported_modules.follow_imports,
-    python_flag: config.basic.python_flag,
-    nofollow_imports: config.control_the_following_into_imported_modules.nofollow_imports,
-  }, (config) => {
-    if (standalone_status === config.standalone.val) { //没变化可能是递归调用 退出
-      return;
-    }
-    standalone_status = config.standalone.val;
-    if (config.standalone.val === true) {
-      config.follow_imports.val = true;
-      config.follow_imports.enabled = false;
-      config.python_flag.val = ["s"];
-      config.python_flag.enabled = false;
-      config.nofollow_imports.val = false;
-      config.nofollow_imports.enabled = false;
-    } else if (config.standalone.val === false) {
-      config.follow_imports.val = false;
-      config.follow_imports.enabled = true;
-      config.python_flag.val = [];
-      config.python_flag.enabled = true;
-      config.nofollow_imports.enabled = true;
-    }
-  })
+    let standalone_status = null;
+    return add_watcher({
+        standalone: config.basic.standalone,
+        follow_imports: config.control_the_following_into_imported_modules.follow_imports,
+        python_flag: config.basic.python_flag,
+        nofollow_imports: config.control_the_following_into_imported_modules.nofollow_imports,
+    }, (config) => {
+        if (standalone_status === config.standalone.val) { //没变化可能是递归调用 退出
+            return;
+        }
+        standalone_status = config.standalone.val;
+        if (config.standalone.val === true) {
+            config.follow_imports.val = true;
+            config.follow_imports.enabled = false;
+            config.python_flag.val = ["s"];
+            config.python_flag.enabled = false;
+            config.nofollow_imports.val = false;
+            config.nofollow_imports.enabled = false;
+        } else if (config.standalone.val === false) {
+            config.follow_imports.val = false;
+            config.follow_imports.enabled = true;
+            config.python_flag.val = [];
+            config.python_flag.enabled = true;
+            config.nofollow_imports.enabled = true;
+        }
+    })
 })()
 ```
 
@@ -236,33 +237,33 @@ config[watcher_key] = [
 
 ```js
 config[watcher_key] = [
-  (function () {
-    let standalone_status = null;
-    return add_watcher({
-      standalone: config.basic.standalone,
-      follow_imports: config.control_the_following_into_imported_modules.follow_imports,
-      python_flag: config.basic.python_flag,
-      nofollow_imports: config.control_the_following_into_imported_modules.nofollow_imports,
-    }, (config) => {
-      if (standalone_status === config.standalone.val) { //没变化可能是递归调用 退出
-        return;
-      }
-      standalone_status = config.standalone.val;
-      if (config.standalone.val === true) {
-        config.follow_imports.val = true;
-        config.follow_imports.enabled = false;
-        config.python_flag.val = ["s"];
-        config.python_flag.enabled = false;
-        config.nofollow_imports.val = false;
-        config.nofollow_imports.enabled = false;
-      } else if (config.standalone.val === false) {
-        config.follow_imports.val = false;
-        config.follow_imports.enabled = true;
-        config.python_flag.val = [];
-        config.python_flag.enabled = true;
-        config.nofollow_imports.enabled = true;
-      }
-    })
-  })()
+    (function () {
+        let standalone_status = null;
+        return add_watcher({
+            standalone: config.basic.standalone,
+            follow_imports: config.control_the_following_into_imported_modules.follow_imports,
+            python_flag: config.basic.python_flag,
+            nofollow_imports: config.control_the_following_into_imported_modules.nofollow_imports,
+        }, (config) => {
+            if (standalone_status === config.standalone.val) { //没变化可能是递归调用 退出
+                return;
+            }
+            standalone_status = config.standalone.val;
+            if (config.standalone.val === true) {
+                config.follow_imports.val = true;
+                config.follow_imports.enabled = false;
+                config.python_flag.val = ["s"];
+                config.python_flag.enabled = false;
+                config.nofollow_imports.val = false;
+                config.nofollow_imports.enabled = false;
+            } else if (config.standalone.val === false) {
+                config.follow_imports.val = false;
+                config.follow_imports.enabled = true;
+                config.python_flag.val = [];
+                config.python_flag.enabled = true;
+                config.nofollow_imports.enabled = true;
+            }
+        })
+    })()
 ]
 ```

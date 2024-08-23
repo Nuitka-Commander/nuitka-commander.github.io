@@ -105,7 +105,31 @@
    }
     ```
    其中，`title`为配置文件第一层的标题所用的翻译，例如`basic`等
-5. 接下来，开始你的翻译。除了第一层中的title的翻译要写在`title`中(以key:value)的形式，  
+5. 如果你希望你的配置文件有一个单独的名称(不是版本号)，你还需要前往
+   网页的i18n(具体内容见上方)中，修改`nuitka_config_title`这个key中的内容，修改为你的语言的key。
+   ```js
+   // supported_nuitka_version
+   export default {
+    latest_key: "2.4.*",//最新版本的key
+    versions: { //version:path
+        "2.1.*": "2.1._",
+        "2.2.*": "2.2._",
+        "2.3.*": "2.3._",
+        "2.4.*": "2.4._",
+        "simple": "simple", //前面的版本名称是simple的key
+    },
+   };
+   ```
+   ```js
+   // src/assets/languages/translations/zh_cn.js
+   export default{
+         nuitka_config_title:{
+            simple:"简单配置", 
+         },    
+   };
+   ```
+   > 由于每个版本的配置信息无法在被加载前得知，所以必须直接写在网页的配置文件中。
+6. 接下来，开始你的翻译。除了第一层中的title的翻译要写在`title`中(以key:value)的形式，  
    其他的翻译则根据选项中的i18n的值来决定，并且我们推荐每一块(例如basic)中的翻译，都要放在有着标题名的注释下方。  
    而其中的值，要写name和desc两个属性，分别是标题和描述的翻译。  
    例如:
@@ -142,7 +166,7 @@
         },        
     }
     ```
-6. 如果选项中还有部分的元素，那么请在选项中添加一个`elements`属性，然后在`elements`中添加你的元素。  
+7. 如果选项中还有部分的元素，那么请在选项中添加一个`elements`属性，然后在`elements`中添加你的元素。  
    例如:
     ```js
     // 配置文件 2.1._.js
@@ -263,5 +287,5 @@
         },  
     }
     ```
-7. 请在完成翻译后，尝试在本地切换到该语言，然后运行一次Nuitka Commander，查看是否有问题。  
+8. 请在完成翻译后，尝试在本地切换到该语言，然后运行一次Nuitka Commander，查看是否有问题。  
    如果没有问题，你可以提交pull request。

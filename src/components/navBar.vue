@@ -40,14 +40,13 @@ import supported_nuitka_version from "@/nuitka_config_files/supported_nuitka_ver
         <template #prefix>
           {{ $t("nav_bar.now_nuitka_version") }}
         </template>
+        <!--要查找一下是否存在这个版本的翻译，如果存在的话那么就用翻译-->
         <el-option
             v-for="(val,key) in supported_nuitka_version.versions"
             :key="val"
-            :label="key"
+            :label="$te(`nuitka_config_title.${key}`)?$t(`nuitka_config_title.${key}`) : val"
             :value="key"
-
         >
-
         </el-option>
 
       </el-select>
