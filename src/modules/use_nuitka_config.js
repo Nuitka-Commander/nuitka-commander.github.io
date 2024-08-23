@@ -42,7 +42,7 @@ export function init_nuitka_config() {
  */
 export async function load_new_config() {
     const new_version = user_options.value.nuitka_version;
-    nuitka_config_loaded = false
+    nuitka_config_loaded = false;
     set_loading(true);
     const response = await import(`@/nuitka_config_files/configs/${supported_nuitka_version.versions[new_version]}.js`);
     console.log(`Loading new language: ${user_options.value.nuitka_language.toString()}`);
@@ -62,13 +62,13 @@ export async function load_config_language(language) {
 
     if (current_version_support_language[language] === undefined) {
         const first_key = Object.keys(current_version_support_language)[0];// 获得一个key保证可用
-        user_options.value.nuitka_language = first_key
+        user_options.value.nuitka_language = first_key;
         await set_language(first_key);
         if (nuitka_config_first_loaded.value) {
             ElMessage({
                 message: i18n.global.t("setting.nuitka_language_no_support").toString(),
                 type: "warning",
-            })
+            });
         }
         nuitka_config_first_loaded.value = true;
         return;
