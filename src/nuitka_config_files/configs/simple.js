@@ -4,7 +4,6 @@ import {is_array_equivalent} from "@/modules/untils.js";
 /**
  * 简单模式的配置文件
  * @author erduotong
- * @type {{support_language: {requires_translation: boolean, "zh-CN": {path: string, name: string}}}}
  */
 const config = {
     support_language: {
