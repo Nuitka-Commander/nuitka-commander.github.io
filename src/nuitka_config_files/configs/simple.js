@@ -551,6 +551,15 @@ const config = {
             },
             "force",
         ),
+        windows_icon_from_ico: add_option.definable_multi(
+            "windows_icon_from_ico",
+            {
+                original: "--windows-icon-from-ico",
+            },
+            true,
+            {},
+            [],
+        ),
     },
     compiler_settings: {
         clang: add_option.bool(

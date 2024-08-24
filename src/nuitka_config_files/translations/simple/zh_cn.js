@@ -309,6 +309,11 @@ export default {
             },
         },
     },
+    windows_icon_from_ico: {
+        name: "windows图标(ico文件)",
+        desc: "添加可执行文件的图标。可以多次给出不同分辨率或者包含多个图标的文件。在选择包含多个图标的文件时，\n" +
+            "您也可以使用＃＜n＞后缀来指定要包含的特定图标并忽略其他所有的图标，其中n是从1开始的整数索引",
+    },
     // 编译器设置 compiler settings
     clang: {
         name: "强制使用clang",
