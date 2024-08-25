@@ -11,6 +11,10 @@ const config = {
             name: "简体中文",
             path: "zh_cn",
         },
+        "en": {
+            name: "English",
+            path: "en",
+        },
     },
     basic: {
         standalone: add_option.bool(

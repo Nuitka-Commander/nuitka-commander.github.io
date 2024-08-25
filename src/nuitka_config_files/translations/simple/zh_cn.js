@@ -1,5 +1,8 @@
 // noinspection JSUnusedGlobalSymbols
-
+/**
+ * @Description 简体中文语言包
+ * @author erduotong
+ */
 export default {
     //title类请在此处翻译
     title: {
