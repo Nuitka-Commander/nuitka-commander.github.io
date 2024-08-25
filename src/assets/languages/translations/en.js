@@ -92,6 +92,7 @@ export default {
         or: "or",
         click_select_file: "Select a file",
     },
+    useage_for_nuitka: "Nuitka使用说明",
     output_page: {
         CLI: "Command Line Interface",
         JSON: "JSON",
