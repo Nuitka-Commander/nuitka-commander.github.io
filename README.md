@@ -17,9 +17,6 @@
 
 最方便的方式是直接使用在线的网页，这样您同时可以获得最新的版本支持和语言支持。您可以从以下网址访问:  
 [在Github上使用Nuitka Commander](https://nuitka-commander.github.io)
-> 如果你是中国的用户，也可以从Gitee使用以获得更快地访问速度
-
-[在Gitee上使用Nuitka Commander](https://nuitka-commander.gitee.io)
 
 ### 下载到本地使用
 
@@ -28,6 +25,13 @@
 请从 -> [Release](https://github.com/Nuitka-Commander/nuitka-commander.github.io/releases/latest) <-
 界面下载`Nuitka-Commander.html`到本地，随后通过浏览器打开该文件以使用。
 
+### 开始使用
+
+首先，请打开网页或下载到本地的`Nuitka-Commander.html`文件。`推荐使用Chrome/Firefox/Edge浏览器`  
+一般来说，若您的浏览器的语言是符合您的习惯的，那么网页会自动切换到您的语言(若已支持）。  
+接下来，你可以进入设置页面，随后查看教程
+![img.png](docs/imgs/click-setting.png)
+![img.png](docs/imgs/click-guide.png)
 ## 帮助我们完善
 
 Nuitka Commander是一个开源项目，遵循[GPL v3](./LICENSE)开源协议开源。如果您希望Nuitka Commander更加完善，我们十分欢迎您一起贡献代码，使Nuitka
