@@ -13,6 +13,10 @@ const config = {
             name: "简体中文",
             path: "zh_cn",
         },
+        "en": {
+            name: "English",
+            path: "en",
+        },
     },
     basic: {
         module_: add_option.bool(
@@ -2021,7 +2025,7 @@ config[watcher_key] = [
                 config.python_flag.enabled = true;
                 config.nofollow_imports.enabled = true;
             }
-        })
+        });
     })(),
     (function () {
         // null/boolean
@@ -2055,7 +2059,7 @@ config[watcher_key] = [
                 config.onefile_as_archive.val = config.onefile_as_archive.default;
             }
 
-        })
+        });
     })(),
     (function () {
         let standalone = null;
@@ -2079,7 +2083,7 @@ config[watcher_key] = [
                     config.output_filename.enabled = true;
                 }
             },
-        )
+        );
     })(),
     // C backend compiler choice
     (function () {
@@ -2128,7 +2132,7 @@ config[watcher_key] = [
 
 
             },
-        )
+        );
     })(),
     (function () {
         let standalone_status = null;
@@ -2146,7 +2150,7 @@ config[watcher_key] = [
             } else {
                 config.pgo.enabled = true;
             }
-        })
+        });
     })(),
 ];
 // noinspection JSUnusedGlobalSymbols
