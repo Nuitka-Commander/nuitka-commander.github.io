@@ -41,32 +41,32 @@ const start_input = async (type) => {
   <!--记得写input_type-->
   <!--command line-->
   <el-tabs stretch tab-position="left" type="card">
-    <el-tab-pane>
-      <template #label>{{ $t("input_page.input_from_cli") }}</template>
-      <div class="input_page_content_area">
-        <div class="start_input_button">
-          <el-button :disabled="is_importing"
-                     @click="start_input(input_type.cli)"
-          >
-            <el-icon>
-              <promotion></promotion>
-            </el-icon>
-            {{ $t("input_page.start_input") }}
-          </el-button>
-        </div>
-        <!---->
-        <div class="input-area">
-          <el-input
-              v-model="input_data[input_type.cli]"
-              :autosize="{minRows:10,maxRows:20}"
-              :placeholder="$t('input_page.please_input_cli_command')"
-              type="textarea"
-          >
-          </el-input>
-        </div>
+    <!--<el-tab-pane>-->
+    <!--  <template #label>{{ $t("input_page.input_from_cli") }}</template>-->
+    <!--  <div class="input_page_content_area">-->
+    <!--    <div class="start_input_button">-->
+    <!--      <el-button :disabled="is_importing"-->
+    <!--                 @click="start_input(input_type.cli)"-->
+    <!--      >-->
+    <!--        <el-icon>-->
+    <!--          <promotion></promotion>-->
+    <!--        </el-icon>-->
+    <!--        {{ $t("input_page.start_input") }}-->
+    <!--      </el-button>-->
+    <!--    </div>-->
+    <!--    &lt;!&ndash;&ndash;&gt;-->
+    <!--    <div class="input-area">-->
+    <!--      <el-input-->
+    <!--          v-model="input_data[input_type.cli]"-->
+    <!--          :autosize="{minRows:10,maxRows:20}"-->
+    <!--          :placeholder="$t('input_page.please_input_cli_command')"-->
+    <!--          type="textarea"-->
+    <!--      >-->
+    <!--      </el-input>-->
+    <!--    </div>-->
 
-      </div>
-    </el-tab-pane>
+    <!--  </div>-->
+    <!--</el-tab-pane>-->
     <!--json-->
     <el-tab-pane>
       <template #label>{{ $t("input_page.json.input_from_json") }}</template>
