@@ -13,6 +13,7 @@ import {ElMessage, ElMessageBox} from "element-plus";
 import * as constants from "@/values/constants.json";
 import {useI18n} from "vue-i18n";
 import {local_nuitka_version_config} from "@/modules/use_local_forage.js";
+import {tour_status} from "@/values/stores/tour_status.js";
 //设置页面的显示与隐藏
 const settings_page_show = ref(false);
 //关闭设置页面 event:点击事件
@@ -51,7 +52,7 @@ const reset_user = () => {
       duration: constants.message_duration,
     });
   });
-}
+};
 
 const reset_current = () => {
   ElMessageBox.confirm(
@@ -81,7 +82,7 @@ const reset_current = () => {
       duration: constants.message_duration,
     });
   });
-}
+};
 </script>
 
 <template>
@@ -93,7 +94,12 @@ const reset_current = () => {
             <close></close>
           </el-icon>
         </el-button>
-
+        <div class="setting_page_selects_fa">
+          <h1>(to i18n)教程</h1>
+          <el-button @click="tour_status=true">
+            (to-i18n)开始教程
+          </el-button>
+        </div>
         <div class="setting_page_selects_fa">
           <h1>
             <img v-show="user_options.theme==='auto'" alt="auto theme" class="setting-icon"

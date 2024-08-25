@@ -13,6 +13,7 @@ import InputPage from "@/components/inputPage.vue";
 <template>
 
   <loading-page></loading-page>
+  <guide></guide>
   <header>
     <website-header></website-header>
   </header>
@@ -24,7 +25,7 @@ import InputPage from "@/components/inputPage.vue";
 
   <main>
 
-  <el-tabs v-model="user_options.action_tab" stretch tab-position="right">
+    <el-tabs v-model="user_options.action_tab" stretch tab-position="right">
       <el-tab-pane name="input">
         <template #default>
           <input-page></input-page>
