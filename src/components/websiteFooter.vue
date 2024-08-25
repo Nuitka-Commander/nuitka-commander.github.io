@@ -8,7 +8,7 @@ const license_info_visible = ref(false);
 </script>
 
 <template>
-  <footer>
+  <footer id="website-footer-area">
     <!--贡献者dialog-->
     <el-dialog
         v-model="author_info_visible"

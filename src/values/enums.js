@@ -27,4 +27,5 @@ export const nuitka_element_status = Object.freeze({
  */
 export const input_type = Object.freeze({
     cli: "cli", //命令行输入
+    json: "json", //json输入
 })

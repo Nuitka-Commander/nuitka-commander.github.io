@@ -18,21 +18,27 @@ import supported_nuitka_version from "@/nuitka_config_files/supported_nuitka_ver
     <div id="top_nav_bar_left" class="top_nav_bar">
       <!--必须给style来点硬的，不然排版老是出问题-->
       <el-tooltip>
-        <el-switch
-            v-model="user_options.show_original_command"
-            :active-text="$t('nav_bar.mode.show_raw_command')"
-            :inactive-text="$t('nav_bar.mode.no_show_raw_command')"
-            style="white-space: nowrap"
-        ></el-switch>
+        <div id="show_original_command">
+          <el-switch
+              v-model="user_options.show_original_command"
+              :active-text="$t('nav_bar.mode.show_raw_command')"
+              :inactive-text="$t('nav_bar.mode.no_show_raw_command')"
+              style="white-space: nowrap"
+
+          ></el-switch>
+        </div>
+
         <template #content>
           {{ $t("nav_bar.mode.show_raw_command_info") }}
         </template>
       </el-tooltip>
+
       <el-select
           v-model="user_options.nuitka_version"
           filterable
           @change="load_new_config()"
           style="min-width: 95%"
+
       >
         <template #header>
           {{ $t("nav_bar.select_nuitka_version") }}
@@ -40,14 +46,13 @@ import supported_nuitka_version from "@/nuitka_config_files/supported_nuitka_ver
         <template #prefix>
           {{ $t("nav_bar.now_nuitka_version") }}
         </template>
+        <!--要查找一下是否存在这个版本的翻译，如果存在的话那么就用翻译-->
         <el-option
             v-for="(val,key) in supported_nuitka_version.versions"
             :key="val"
-            :label="key"
+            :label="$te(`nuitka_config_title.${key}`)?$t(`nuitka_config_title.${key}`) : val"
             :value="key"
-
         >
-
         </el-option>
 
       </el-select>

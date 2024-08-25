@@ -13,6 +13,7 @@ import InputPage from "@/components/inputPage.vue";
 <template>
 
   <loading-page></loading-page>
+  <guide></guide>
   <header>
     <website-header></website-header>
   </header>

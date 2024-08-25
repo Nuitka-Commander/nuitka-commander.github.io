@@ -1,10 +1,10 @@
 {
   "name": "nuitka-commander",
   "private": true,
-  "version": "1.0.0.0",
+  "version": "1.1.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite --port 3001",
+    "dev": "vite --port 3002",
     "build:website": "vite build --mode website",
     "build:local_use": "vite build --mode local_use",
     "preview": "vite preview"

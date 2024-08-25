@@ -17,6 +17,7 @@ export const user_options = ref({
     nuitka_language: "undefined",
     nuitka_version: supported_nuitka_version.versions[supported_nuitka_version.latest_key], //获取最新版
     show_original_command: false,
+    settings_page_show: false,
     action_tab: "edit",
 });
 

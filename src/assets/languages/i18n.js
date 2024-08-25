@@ -35,7 +35,7 @@ export const i18n = createI18n({
         if (!is_language_load) {
             return "loading...";
         }
-        if (key.startsWith("nuitka_info.") && !nuitka_info_loaded && !nuitka_config_loaded) {
+        if (key.startsWith("nuitka_info.") && (!nuitka_info_loaded || !nuitka_config_loaded)) {
             return "loading nuitka config...";
         }
         if (constants.debug === true) {
