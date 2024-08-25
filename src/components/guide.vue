@@ -6,8 +6,9 @@
 
 import {tour_status} from "@/values/stores/tour_status.js";
 import {ElTour, ElTourStep} from "element-plus";
-import {ref} from "vue";
+import {computed, ref} from "vue";
 import {user_options} from "@/values/stores/user_options.js";
+
 
 // 介绍的配置文件
 // 注:第一个元素的callback方法不会被调用
@@ -16,20 +17,21 @@ const config = [
     // target: "", 目标元素 可以不存在
     title: "使用教程", // 标题 必须存在
     desc: "欢迎使用Nuitka Commander，接下来，请点击右下角，让我们一步步学习如何使用", // 描述 必须存在
+    // notModal: true, // 是否不用模态框
     //第一个元素没有callback
   },
   {
     target: "#setting-page-enter-button",
-    title: "设置页面入口",
+    title: "导航栏",
     desc: "让我们先来看看设置页面 点击该按钮会打开设置页面，点击后，请按下一步",
     callback: () => {
-      user_options.value.settings_page_show = false; //关闭设置页面
+      user_options.value.settings_page_show = true;
     },
   },
   {
     target: "#setting_drawer",
     title: "设置页面",
-    desc: "这里是设置页面，你可以在这里配置Nuitka Commander中的各种设置",
+    desc: "这里是设置页面，你可以在这里配置Nuitka Commander中的各种设置。如果需要再次观看教程，也可以前往此处",
     callback: () => {
       user_options.value.settings_page_show = true; //打开设置页面
     },
@@ -42,7 +44,6 @@ const handle_change = (step) => {
   config[step].callback?.();
 };
 
-
 </script>
 
 <template>
@@ -54,6 +55,7 @@ const handle_change = (step) => {
       <el-tour-step
           v-for="(item,index) in config"
           :key="index"
+          placement="right"
           :description="item.desc"
           :next-button-props="{
             children: '(to i18n) 下一步',
