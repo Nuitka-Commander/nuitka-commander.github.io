@@ -2,7 +2,6 @@
 /**
  * 设置页面相关逻辑
  */
-import {ref} from "vue";
 import {Close, RefreshLeft, Setting} from "@element-plus/icons-vue";
 import {reset_user_options, user_options} from "@/values/stores/user_options.js";
 import {set_theme} from "@/modules/use_theme.js";
@@ -14,12 +13,13 @@ import * as constants from "@/values/constants.json";
 import {useI18n} from "vue-i18n";
 import {local_nuitka_version_config} from "@/modules/use_local_forage.js";
 import {tour_status} from "@/values/stores/tour_status.js";
-//设置页面的显示与隐藏
-const settings_page_show = ref(false);
+
+//本文件使用useroptions中的setting page show
+
 //关闭设置页面 event:点击事件
 const close_setting_page = (event) => {
   if (event.target.id === "setting_mask") { //不是点击在设置页上
-    settings_page_show.value = false;
+    user_options.value.settings_page_show.value = false;
   }
 };
 const t = useI18n().t;
@@ -86,10 +86,10 @@ const reset_current = () => {
 </script>
 
 <template>
-  <div v-show="settings_page_show" id="setting_mask" @click="close_setting_page($event)">
+  <div v-show="user_options.settings_page_show" id="setting_mask" @click="close_setting_page($event)">
     <transition name="setting_drawer">
-      <div v-show="settings_page_show" id="setting_drawer">
-        <el-button id="close_setting_button" @click="settings_page_show=false">
+      <div v-show="user_options.settings_page_show" id="setting_drawer">
+        <el-button id="close_setting_button" @click="user_options.settings_page_show=false">
           <el-icon :size="30">
             <close></close>
           </el-icon>
@@ -198,7 +198,7 @@ const reset_current = () => {
 
   <!--这里内联禁用了padding等外边界元素 实在不想用那一坨选择器了-->
   <el-button style="border:none;padding: 0;margin: 0;"
-             @click="settings_page_show = !settings_page_show"
+             @click="user_options.settings_page_show = !user_options.settings_page_show"
   >
     <el-icon size="30">
       <setting></setting>
