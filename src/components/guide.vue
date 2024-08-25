@@ -6,7 +6,7 @@
 
 import {tour_status} from "@/values/stores/tour_status.js";
 import {ElTour, ElTourStep} from "element-plus";
-import {ref} from "vue";
+import {computed, ref} from "vue";
 import {user_options} from "@/values/stores/user_options.js";
 
 
@@ -17,7 +17,7 @@ const config = [
     // target: "", 目标元素 可以不存在
     title: "使用教程", // 标题 必须存在
     desc: "欢迎使用Nuitka Commander，接下来，请点击右下角，让我们一步步学习如何使用", // 描述 必须存在
-    // notModal: true, // 是否不用模态框
+    //     no_mask: true, // 是否不使用遮罩层
     //第一个元素没有callback
   },
   {
@@ -66,12 +66,58 @@ const config = [
       user_options.value.settings_page_show = true;
     },
   },
-  {
+  { //至少留一个页面缓冲
     title: "编辑页面",
     desc: "接下来，是编辑页面",
     callback: () => {
       user_options.value.settings_page_show = true;
     },
+  },
+  {
+    target: "#command-edit-main-area",
+    title: "编辑页面——介绍",
+    desc: "这里是编辑页面，你可以在这里配置你的nuitka命令。你可以点击左侧来切换命令的分类，在中间进行命令的编辑",
+    callback: () => {
+      user_options.value.action_tab = "edit";
+      user_options.value.settings_page_show = false;
+    },
+    no_mask: true,
+  },
+  {
+    title: "编辑页面——编辑框",
+    desc: "这里面具有很多编辑框，每个都代表了一个参数。若是让鼠标悬停在上面，会有详细的介绍。不妨现在试试",
+    no_mask: true,
+    callback: () => {
+      user_options.value.action_tab = "edit";
+      user_options.value.settings_page_show = false;
+    },
+  },
+  {
+    title: "输出页面——介绍",
+    desc: "这里是输出页面，你可以在这里获得你刚刚编辑的命令的输出成果。你可以点击左侧来切换输出的种类，中间查看输出的命令。点击右上角可直接复制命令。当然，你也可以将鼠标悬停在每个元素上面，查看详细的介绍。",
+    callback: () => {
+      user_options.value.settings_page_show = false;
+      user_options.value.action_tab = "output";
+    },
+    no_mask: true,
+  },
+  {
+    title: "输入页面——介绍",
+    desc: "这里是输入页面，你可以在这里输入命令，然后将其导入到nuitka commander中进行编辑。你可以点击左侧切换输入的种类，右上角开始导入。",
+    callback: () => {
+      user_options.value.settings_page_show = false;
+      user_options.value.action_tab = "input";
+    },
+    no_mask: true,
+  },
+  {
+    target: "#website-footer-area",
+    title: "网页底部",
+    desc: "这里是网页底部，你可以在这里找到一些有用的链接，例如Nuitka官网和项目主页。同时，也能找到项目的版本号，作者等信息",
+  },
+  {
+    title: "结束",
+    desc: "教程就到这里结束了，感谢你的使用。若是有任何问题或者建议，欢迎在github上提出Issue",
   },
 
 ];
@@ -82,6 +128,9 @@ const handle_change = (step) => {
   config[step].callback?.();
 };
 
+const is_mask = computed(() => {
+  return !(config[current_step.value].no_mask !== undefined && config[current_step.value].no_mask === true);
+});
 </script>
 
 <template>
@@ -89,6 +138,8 @@ const handle_change = (step) => {
     <el-tour
         v-model="tour_status"
         @change="handle_change"
+        :mask="is_mask"
+        :type="is_mask ? 'default' : 'primary'"
     >
       <el-tour-step
           v-for="(item,index) in config"
