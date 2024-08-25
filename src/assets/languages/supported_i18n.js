@@ -12,6 +12,9 @@ export const supported_i18n = {
     "zh-CN": {
         name: "简体中文",
         path_name: "zh_cn",
-
+    },
+    "de": {
+        name: "Deutsch",
+        path_name: "de",
     },
 };
