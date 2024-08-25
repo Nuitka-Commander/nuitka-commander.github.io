@@ -69,7 +69,7 @@ const start_input = async (type) => {
     </el-tab-pane>
     <!--json-->
     <el-tab-pane>
-      <template #label>从JSON导入</template>
+      <template #label>{{ $t("input_page.json.input_from_json") }}</template>
 
 
       <div class="input_page_content_area">

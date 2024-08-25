@@ -80,6 +80,7 @@ export default {
             please_check_down: "提供的数据中存在无法识别的属性，请在下方检查",
         },
         json: {
+            input_from_json: "从JSON导入",
             please_input_json: "请输入从本网站导出的JSON数据",
             json_parse_error: "JSON解析失败，请检查输入的数据是否符合JSON格式",
         },
