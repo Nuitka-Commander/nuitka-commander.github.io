@@ -19,7 +19,7 @@ import {tour_status} from "@/values/stores/tour_status.js";
 //关闭设置页面 event:点击事件
 const close_setting_page = (event) => {
   if (event.target.id === "setting_mask") { //不是点击在设置页上
-    user_options.value.settings_page_show.value = false;
+    user_options.value.settings_page_show = false;
   }
 };
 const t = useI18n().t;
