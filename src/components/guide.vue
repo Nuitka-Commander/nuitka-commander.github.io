@@ -6,7 +6,7 @@
 
 import {tour_status} from "@/values/stores/tour_status.js";
 import {ElTour, ElTourStep} from "element-plus";
-import {computed, ref} from "vue";
+import {ref} from "vue";
 import {user_options} from "@/values/stores/user_options.js";
 
 
@@ -21,21 +21,59 @@ const config = [
     //第一个元素没有callback
   },
   {
-    target: "#setting-page-enter-button",
+    target: "#nav_bar",
     title: "导航栏",
-    desc: "让我们先来看看设置页面 点击该按钮会打开设置页面，点击后，请按下一步",
+    desc: "这里是导航栏，一些全局的功能都在这里设置",
+    callback: () => {
+      user_options.value.settings_page_show = false;
+    },
+  },
+  {
+    target: "#show_original_command",
+    title: "导航栏——原始命令切换",
+    desc: "这里可以切换是否展示原始的nuitka命令，方便查看。你可以尝试切换一下",
+  },
+  {
+    target: "#top_nav_bar_left",
+    title: "导航栏——版本选择",
+    desc: "在右侧的选择框可以选择不同的Nuitka版本，你可以找到适合自己版本的配置文件。如果你想要一个精简一点的命令，你可以选择最下方的'简单模式'",
+  },
+  {
+    target: "#setting-page-enter-button",
+    title: "导航栏——设置按钮",
+    desc: "点击这个按钮，就可以进入到设置页面中",
+  },
+  {
+    title: "设置页面",
+    desc: "接下来，是设置页面",
     callback: () => {
       user_options.value.settings_page_show = true;
     },
   },
   {
-    target: "#setting_drawer",
-    title: "设置页面",
-    desc: "这里是设置页面，你可以在这里配置Nuitka Commander中的各种设置。如果需要再次观看教程，也可以前往此处",
+    target: "#setting-selects-area",
+    title: "设置页面——介绍",
+    desc: "这里是设置界面，你可以在这里调整你心怡的设置",
     callback: () => {
-      user_options.value.settings_page_show = true; //打开设置页面
+      user_options.value.settings_page_show = true;
     },
   },
+  {
+    target: "#setting-tour",
+    title: "设置页面——引导",
+    desc: "若要在将来重新查看教程，可以点击这里",
+    callback: () => {
+      user_options.value.settings_page_show = true;
+    },
+  },
+  {
+    title: "编辑页面",
+    desc: "接下来，是编辑页面",
+    callback: () => {
+      user_options.value.settings_page_show = true;
+    },
+  },
+
 ];
 const current_step = ref(0);
 
@@ -55,7 +93,6 @@ const handle_change = (step) => {
       <el-tour-step
           v-for="(item,index) in config"
           :key="index"
-          placement="right"
           :description="item.desc"
           :next-button-props="{
             children: '(to i18n) 下一步',

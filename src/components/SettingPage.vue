@@ -94,98 +94,100 @@ const reset_current = () => {
             <close></close>
           </el-icon>
         </el-button>
-        <div class="setting_page_selects_fa">
-          <h1>(to i18n)教程</h1>
-          <el-button @click="tour_status=true">
-            (to-i18n)开始教程
-          </el-button>
-        </div>
-        <div class="setting_page_selects_fa">
-          <h1>
-            <img v-show="user_options.theme==='auto'" alt="auto theme" class="setting-icon"
-                 src="@/assets/images/auto_theme.svg">
-            <img v-show="user_options.theme==='light'" alt="light theme" class="setting-icon"
-                 src="@/assets/images/sun.svg">
-            <img v-show="user_options.theme==='dark'" alt="dark theme" class="setting-icon"
-                 src="@/assets/images/moon.svg">
-            {{ $t("setting.theme.theme") }}
-          </h1>
-          <el-select v-model="user_options.theme" @change="set_theme(user_options.theme)">
-            <el-option key="auto" :label="$t('setting.theme.auto')" value="auto">
+        <div id="setting-selects-area">
+          <div id="setting-tour" class="setting_page_selects_fa">
+            <h1>(to i18n)教程</h1>
+            <el-button @click="tour_status=true">
+              (to-i18n)开始教程
+            </el-button>
+          </div>
+          <div class="setting_page_selects_fa">
+            <h1>
+              <img v-show="user_options.theme==='auto'" alt="auto theme" class="setting-icon"
+                   src="@/assets/images/auto_theme.svg">
+              <img v-show="user_options.theme==='light'" alt="light theme" class="setting-icon"
+                   src="@/assets/images/sun.svg">
+              <img v-show="user_options.theme==='dark'" alt="dark theme" class="setting-icon"
+                   src="@/assets/images/moon.svg">
+              {{ $t("setting.theme.theme") }}
+            </h1>
+            <el-select v-model="user_options.theme" @change="set_theme(user_options.theme)">
+              <el-option key="auto" :label="$t('setting.theme.auto')" value="auto">
              <span slot="label" class="theme_select_content">
                   <img alt="auto theme" class="setting-icon" src="@/assets/images/auto_theme.svg">
                   {{ $t("setting.theme.auto") }}
              </span>
-            </el-option>
-            <el-option key="light" :label="$t('setting.theme.light')" value="light">
+              </el-option>
+              <el-option key="light" :label="$t('setting.theme.light')" value="light">
                 <span slot="label" class="theme_select_content">
                   <img alt="light theme" class="setting-icon" src="@/assets/images/sun.svg">
                   {{ $t("setting.theme.light") }}
                 </span>
-            </el-option>
-            <el-option key="dark" :label="$t('setting.theme.dark')" value="dark">
+              </el-option>
+              <el-option key="dark" :label="$t('setting.theme.dark')" value="dark">
                 <span slot="label" class="theme_select_content">
                   <img alt="dark theme" class="setting-icon" src="@/assets/images/moon.svg">
                   {{ $t("setting.theme.dark") }}
                 </span>
-            </el-option>
+              </el-option>
 
 
-          </el-select>
-        </div>
-
-        <div class="setting_page_selects_fa">
-
-          <h1>
-            <img alt="language icon" class="setting-icon" src="@/assets/images/language.svg">
-            {{ $t("setting.language.title") }}
-          </h1>
-          <h3> {{ $t("setting.language.interface_language") }}</h3>
-          <el-select v-model="user_options.language" filterable @change="set_i18n_language(user_options.language)">
-            <el-option
-                v-for="(value, key) in supported_i18n"
-                :key="key"
-                :label="value.name"
-                :value="key">
-            </el-option>
-          </el-select>
-          <h3>{{ $t("setting.language.command_language") }}</h3>
-          <el-select v-model="user_options.nuitka_language" filterable
-                     @change="load_config_language(user_options.nuitka_language)">
-            <el-option
-                v-for="(value,key ) in current_version_support_language"
-                :key="key"
-                :label="value.name"
-                :value="key"
-            ></el-option>
-          </el-select>
-        </div>
-        <div class="setting_page_selects_fa">
-
-          <h1>
-            <img alt="language icon" class="setting-icon" src="@/assets/images/warehouse.svg">
-            {{ $t("setting.storage.title") }}
-          </h1>
-          <h3> {{ $t("setting.storage.user") }}</h3>
-          <div>
-            <el-button @click="reset_user">
-              <el-icon size="20">
-                <refresh-left></refresh-left>
-              </el-icon>
-              {{ $t("setting.storage.reset_user") }}
-            </el-button>
-
+            </el-select>
           </div>
 
-          <h3> {{ $t("setting.storage.command") }}</h3>
-          <div>
-            <el-button @click="reset_current">
-              <el-icon size="20">
-                <refresh-left></refresh-left>
-              </el-icon>
-              {{ $t("setting.storage.reset_command") }}
-            </el-button>
+          <div class="setting_page_selects_fa">
 
+            <h1>
+              <img alt="language icon" class="setting-icon" src="@/assets/images/language.svg">
+              {{ $t("setting.language.title") }}
+            </h1>
+            <h3> {{ $t("setting.language.interface_language") }}</h3>
+            <el-select v-model="user_options.language" filterable @change="set_i18n_language(user_options.language)">
+              <el-option
+                  v-for="(value, key) in supported_i18n"
+                  :key="key"
+                  :label="value.name"
+                  :value="key">
+              </el-option>
+            </el-select>
+            <h3>{{ $t("setting.language.command_language") }}</h3>
+            <el-select v-model="user_options.nuitka_language" filterable
+                       @change="load_config_language(user_options.nuitka_language)">
+              <el-option
+                  v-for="(value,key ) in current_version_support_language"
+                  :key="key"
+                  :label="value.name"
+                  :value="key"
+              ></el-option>
+            </el-select>
+          </div>
+          <div class="setting_page_selects_fa">
+
+            <h1>
+              <img alt="language icon" class="setting-icon" src="@/assets/images/warehouse.svg">
+              {{ $t("setting.storage.title") }}
+            </h1>
+            <h3> {{ $t("setting.storage.user") }}</h3>
+            <div>
+              <el-button @click="reset_user">
+                <el-icon size="20">
+                  <refresh-left></refresh-left>
+                </el-icon>
+                {{ $t("setting.storage.reset_user") }}
+              </el-button>
+
+            </div>
+
+            <h3> {{ $t("setting.storage.command") }}</h3>
+            <div>
+              <el-button @click="reset_current">
+                <el-icon size="20">
+                  <refresh-left></refresh-left>
+                </el-icon>
+                {{ $t("setting.storage.reset_command") }}
+              </el-button>
+
+            </div>
           </div>
         </div>
 
