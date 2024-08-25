@@ -23,6 +23,10 @@ export default {
         },
     },
     setting: { //设置页面
+        guide: {
+            title: "教程",
+            start: "开始教程",
+        },
         theme: {
             auto: "跟随系统",
             light: "浅色模式",
@@ -71,6 +75,14 @@ export default {
         input_from_cli: "从命令行导入",
         start_input: "开始导入",
         please_input_cli_command: "请输入Nuitka的命令行指令",
+        general: {
+            unable_parse_check: "提供的数据中存在无法识别的属性，请检查输入的数据是否符合要求或者手动输入",
+            please_check_down: "提供的数据中存在无法识别的属性，请在下方检查",
+        },
+        json: {
+            please_input_json: "请输入从本网站导出的JSON数据",
+            json_parse_error: "JSON解析失败，请检查输入的数据是否符合JSON格式",
+        },
     },
     nuitka_elements: {
         select_placeholder: "选择",
@@ -93,11 +105,16 @@ export default {
         drop_file: "将文件拖拽到此处",
         or: "或",
         click_select_file: "选择一个文件",
+        next_step: "下一步",
+        prev_step: "上一步",
+        data_input_success: "数据导入成功",
+        calling: "正在调用，请稍后",
     },
     output_page: {
         run_nuitka_through_python: "通过Python运行Nuitka",
         CLI: "命令行输出",
         JSON: "JSON输出",
+
     },
     //使用说明
     website_guide: {

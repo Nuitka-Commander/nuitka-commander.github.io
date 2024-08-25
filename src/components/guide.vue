@@ -132,10 +132,10 @@ const is_mask = computed(() => {
           :description="$t(`website_guide.${item.i18n}.desc`)"
           :title="$t(`website_guide.${item.i18n}.title`)"
           :next-button-props="{
-            children: '(to i18n) 下一步',
+            children: $t('message.next_step'),
         }"
           :prev-button-props="{
-            children: '(to i18n) 上一步',
+            children: $t('message.prev_step'),
           }"
           :target="config[index].target"
 

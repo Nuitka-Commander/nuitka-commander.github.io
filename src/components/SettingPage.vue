@@ -96,9 +96,12 @@ const reset_current = () => {
         </el-button>
         <div id="setting-selects-area">
           <div id="setting-tour" class="setting_page_selects_fa">
-            <h1>(to i18n)教程</h1>
+            <h1>
+              <img alt="guide icon" class="setting-icon" src="@/assets/images/guide.svg">
+              {{ $t("setting.guide.title") }}
+            </h1>
             <el-button @click="tour_status=true">
-              (to-i18n)开始教程
+              {{ $t("setting.guide.start") }}
             </el-button>
           </div>
           <div class="setting_page_selects_fa">

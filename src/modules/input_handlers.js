@@ -6,7 +6,10 @@ import {use_command} from "@/modules/use_command.js";
 import {ElMessage, ElMessageBox, ElText} from "element-plus";
 import * as constants from "@/values/constants.json";
 import {h} from "vue";
+import {i18n} from "@/assets/languages/i18n.js";
 
+
+const t = i18n.global.t;
 const throw_error = (message) => {
     ElMessage({
         type: "error",
@@ -30,7 +33,7 @@ export const input_handlers = {
         try {
             original_data = JSON.parse(data);
         } catch (e) {
-            throw_error("(to i18n)JSON解析失败，请检查输入的数据是否符合JSON格式");
+            throw_error(t("output_page.json.json_parse_error"));
             return null;
         }
         await use_command.reset_status();
@@ -82,12 +85,12 @@ export const input_handlers = {
         });
         //检查是否有无法处理的属性，如果有就提示用户
         if (Object.keys(original_data).length > 0) {
-            throw_error(`(to i18n) 提供的数据中存在无法识别的属性，请检查或者手动输入`);
+            throw_error(t("output_page.general.unable_parse_check"));
             // 一个简单的弹窗，提示用户有哪些属性无法识别
             try {
                 await ElMessageBox({
                     // 设置弹窗的标题
-                    title: "(to i18n) 提供的数据中存在无法识别的属性，请在下方检查",
+                    title: t(`output_page.general.please_check_down`),
                     // 设置弹窗的消息内容
                     message: () => {
                         // 获取original_data对象中所有剩余的键
@@ -115,7 +118,7 @@ export const input_handlers = {
         }
         ElMessage({
             type: "success",
-            message: "(to i18n)数据导入成功",
+            message: t(`message.data_input_success`),
             showClose: true,
             duration: constants.message_duration,
         });

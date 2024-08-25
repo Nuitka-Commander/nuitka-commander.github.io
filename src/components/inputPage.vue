@@ -9,6 +9,7 @@ import {ElMessage} from "element-plus";
 import * as constants from "@/values/constants.json";
 import {input_handlers} from "@/modules/input_handlers.js";
 import {set_loading} from "@/values/stores/loading.js";
+import {useI18n} from "vue-i18n";
 
 const input_data = ref({
   [input_type.cli]: "",
@@ -17,11 +18,12 @@ const input_data = ref({
 
 const is_importing = ref(false);
 // type为input_type
+const t = useI18n().t;
 const start_input = async (type) => {
   if (is_importing.value) {
     ElMessage({
       type: "warning",
-      message: "(to i18n) 已经在调用了!!",
+      message: t("message.calling"),
       showClose: true,
       duration: constants.message_duration,
     });
@@ -87,7 +89,7 @@ const start_input = async (type) => {
           <el-input
               v-model="input_data[input_type.json]"
               :autosize="{minRows:10,maxRows:20}"
-              :placeholder="'(to i18n) 请输入从本网站json导出的数据'"
+              :placeholder="$t(`input_page.json.please_input_json`)"
               type="textarea"
           >
 
@@ -112,6 +114,7 @@ const start_input = async (type) => {
 }
 
 .input-area {
+  display: flex;
   margin: 15px 60px;
 }
 
