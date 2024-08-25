@@ -199,6 +199,7 @@ const reset_current = () => {
   <!--这里内联禁用了padding等外边界元素 实在不想用那一坨选择器了-->
   <el-button style="border:none;padding: 0;margin: 0;"
              @click="user_options.settings_page_show = !user_options.settings_page_show"
+             id="setting-page-enter-button"
   >
     <el-icon size="30">
       <setting></setting>
@@ -214,7 +215,7 @@ const reset_current = () => {
 
 #setting_drawer {
   position: fixed;
-  z-index: 9999;
+  z-index: 801;
   top: 0;
   right: 0;
   display: flex;
@@ -248,7 +249,7 @@ const reset_current = () => {
 //遮罩层
 #setting_mask {
   position: fixed;
-  z-index: 2000;
+  z-index: 800;
   top: 0;
   left: 0;
   width: 100%;

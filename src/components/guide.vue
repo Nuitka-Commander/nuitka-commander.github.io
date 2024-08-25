@@ -7,7 +7,7 @@
 import {tour_status} from "@/values/stores/tour_status.js";
 import {ElTour, ElTourStep} from "element-plus";
 import {ref} from "vue";
-
+import {user_options} from "@/values/stores/user_options.js";
 
 // 介绍的配置文件
 // 注:第一个元素的callback方法不会被调用
@@ -19,18 +19,20 @@ const config = [
     //第一个元素没有callback
   },
   {
-    target: "#top_nav_bar_left", // 目标元素 可以不存在
-    title: "x2xx", // 标题 必须存在
-    desc: "xxx", // 描述 必须存在
+    target: "#setting-page-enter-button",
+    title: "设置页面入口",
+    desc: "让我们先来看看设置页面 点击该按钮会打开设置页面，点击后，请按下一步",
     callback: () => {
-      console.log("callback");
+      user_options.value.settings_page_show = false; //关闭设置页面
     },
   },
   {
-    target: "#nav_github_logo", // 目标元素 可以不存在
-    title: "x23xx", // 标题 必须存在
-    desc: "xxx123123", // 描述 必须存在
-
+    target: "#setting_drawer",
+    title: "设置页面",
+    desc: "这里是设置页面，你可以在这里配置Nuitka Commander中的各种设置",
+    callback: () => {
+      user_options.value.settings_page_show = true; //打开设置页面
+    },
   },
 ];
 const current_step = ref(0);
@@ -39,6 +41,8 @@ const handle_change = (step) => {
   current_step.value = step;
   config[step].callback?.();
 };
+
+
 </script>
 
 <template>
@@ -57,7 +61,7 @@ const handle_change = (step) => {
           :prev-button-props="{
             children: '(to i18n) 上一步',
           }"
-          :target="item.target"
+          :target="config[index].target"
           :title="item.title"
 
       >
