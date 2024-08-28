@@ -17,6 +17,7 @@
 ## 🐛 修复 Fixed
 
 - footer会覆盖在setting页面上方的问题
+- 2.4版本no_site的描述错误问题
 
 ## 🔒 安全 Security
 
