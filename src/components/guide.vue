@@ -46,6 +46,7 @@ const config = [
     },
   },
   {
+    placement: "left",
     target: "#setting-selects-area",
     i18n: "settings_page_intro", // 设置页面——介绍
     callback: () => {
@@ -53,6 +54,7 @@ const config = [
     },
   },
   {
+    placement: "left",
     target: "#setting-tour",
     i18n: "settings_page_tour", // 设置页面——引导
     callback: () => {
@@ -125,10 +127,12 @@ const is_mask = computed(() => {
         @change="handle_change"
         :mask="is_mask"
         :type="is_mask ? 'default' : 'primary'"
+
     >
       <el-tour-step
           v-for="(item,index) in config"
           :key="index"
+          :placement="item.placement ? item.placement : ''"
           :description="$t(`website_guide.${item.i18n}.desc`)"
           :title="$t(`website_guide.${item.i18n}.title`)"
           :next-button-props="{
