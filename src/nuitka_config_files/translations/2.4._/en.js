@@ -53,7 +53,7 @@ export default {
         elements: {
             s: {
                 name: "Exclude site-packages directory",
-                desc: "Alias for no_site, should not include the Python site-packages directory, i.e., no third-party libraries from the Python environment.",
+                desc: "Alias for no_site",
             },
             static_hashes: {
                 name: "Static Hashes",

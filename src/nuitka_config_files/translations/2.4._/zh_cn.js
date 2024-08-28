@@ -53,7 +53,7 @@ export default {
         elements: {
             s: {
                 name: "不包含site-packages目录",
-                desc: "别称no_site,不应该包含python的site-packages目录,也就是不包含任何python环境的第三方库",
+                desc: "别称no_site",
             },
             static_hashes: {
                 name: "静态哈希",

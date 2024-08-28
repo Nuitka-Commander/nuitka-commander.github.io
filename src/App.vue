@@ -91,7 +91,7 @@ main {
 
 #website_footer {
 
-  z-index: 1000;
+  z-index: 20;
 
   width: 100%;
 }
