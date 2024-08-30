@@ -20,7 +20,7 @@ const command = use_command;
   <div>
     <el-tabs stretch tab-position="left" type="card">
 
-    <template v-for="(value1,key1) in command.status.value" :key="key1">
+      <template v-for="(value1,key1) in command.status.value" :key="key1">
         <!--做出分页-->
         <el-tab-pane>
           <template #label>
@@ -109,5 +109,15 @@ const command = use_command;
 
   }
 
+}
+
+//对左侧的tab做点样式调整
+:deep(.el-tabs__nav.is-left) {
+  overflow-y: auto;
+  max-height: 80vh;
+
+  .el-tabs__item.is-left {
+    min-height: 40px;
+  }
 }
 </style>
