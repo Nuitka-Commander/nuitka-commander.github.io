@@ -16,7 +16,7 @@
 
 ## 🐛 修复 Fixed
 
--
+- 命令行输出中,`python -m nuitka`缺少空格，会和后方的命令粘连在一起
 
 ## 🔒 安全 Security
 

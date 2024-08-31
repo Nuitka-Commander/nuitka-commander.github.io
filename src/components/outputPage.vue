@@ -20,7 +20,7 @@ const on_copy = async (type) => {
 };
 const output = computed(() => {
   const result = {
-    cli: "python -m nuitka",
+    cli: "python -m nuitka ",
     json: JSON.stringify(use_command.storage_config.value, null, 2),
     pyproject: "",
   };
