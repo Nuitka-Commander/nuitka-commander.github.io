@@ -1,5 +1,5 @@
 <script setup>
-import LoadingPage from "@/components/untils/loadingPage.vue";
+import LoadingPage from "@/components/utils/loadingPage.vue";
 import WebsiteHeader from "@/components/websiteHeader.vue";
 import WebsiteFooter from "@/components/websiteFooter.vue";
 import NavBar from "@/components/navBar.vue";

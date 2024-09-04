@@ -5,7 +5,7 @@
  * @Date: 2024-02-25 19:34:22
  */
 import * as constants from "@/values/constants.json";
-import ElementCard from "@/components/untils/elementCard.vue";
+import ElementCard from "@/components/utils/elementCard.vue";
 import {user_options} from "@/values/stores/user_options.js";
 import {Delete} from "@element-plus/icons-vue";
 import {ElInput, ElMessage, ElMessageBox} from "element-plus";

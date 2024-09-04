@@ -6,7 +6,7 @@
  */
 import * as constants from "@/values/constants.json";
 import {user_options} from "@/values/stores/user_options.js";
-import ElementCard from "@/components/untils/elementCard.vue";
+import ElementCard from "@/components/utils/elementCard.vue";
 import {ElInput, ElMessage, ElMessageBox} from "element-plus";
 import {computed, onBeforeUnmount, ref, watch} from "vue";
 import {add_option} from "@/values/templates.js";

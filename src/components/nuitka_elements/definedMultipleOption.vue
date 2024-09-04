@@ -4,7 +4,7 @@
  * @Author: erduotong
  * @Date: 2024-02-18 18:56:41
  */
-import ElementCard from "@/components/untils/elementCard.vue";
+import ElementCard from "@/components/utils/elementCard.vue";
 import * as constants from "@/values/constants.json";
 import {user_options} from "@/values/stores/user_options.js";
 import {is_array_equivalent} from "@/modules/untils.js";

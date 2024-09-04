@@ -8,6 +8,7 @@ import SettingPage from "@/components/SettingPage.vue";
 import {user_options} from "@/values/stores/user_options.js";
 import {load_new_config} from "@/modules/use_nuitka_config.js";
 import supported_nuitka_version from "@/nuitka_config_files/supported_nuitka_version.js";
+import SearchPage from "@/components/searchPage.vue";
 </script>
 
 <template>
@@ -63,7 +64,7 @@ import supported_nuitka_version from "@/nuitka_config_files/supported_nuitka_ver
     <!--right-->
     <div id="top_nav_bar_right" class="top_nav_bar">
 
-
+      <search-page></search-page>
       <setting-page></setting-page>
       <a href="https://github.com/Nuitka-Commander/nuitka-commander.github.io">
         <img id="nav_github_logo" alt="github logo" src="@/assets/images/github.svg">
