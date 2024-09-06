@@ -29,8 +29,9 @@ const props = defineProps(
   min-width: 60px;
   margin: 10px;
   padding: 5px 10px;
-  transition: all 0.3s;
+  transition: all 0.3s ease-in-out;
   border-radius: 6px;
+  outline: 4px solid transparent;
   background-color: var(--card-background);
   box-shadow: 0 5px 10px var(--card-shadow);
   gap: 5px;
@@ -43,7 +44,28 @@ const props = defineProps(
 }
 
 .focusing {
-  background-color: red;
+  animation: focusInAnimation 3s forwards;
 }
+
+@keyframes focusInAnimation {
+  0% {
+    outline: 4px solid transparent;
+    transform: translateY(0);
+  }
+  20% {
+    outline: 4px solid var(--el-color-primary);
+
+    transform: translateY(-10px);
+  }
+  80% {
+    outline: 4px solid var(--el-color-primary);
+    transform: translateY(-10px);
+  }
+  100% {
+    outline: 4px solid transparent;
+    transform: translateY(0);
+  }
+}
+
 
 </style>

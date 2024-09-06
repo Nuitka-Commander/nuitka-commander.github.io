@@ -62,7 +62,7 @@ const jump_to_search_result = (item) => {
   item.is_focusing = true;
   setTimeout(() => {
     item.is_focusing = false;
-  }, 2000);
+  }, 4000);
 };
 // 处理高亮显示的匹配
 const highlight_match = (text, match) => {
