@@ -63,6 +63,7 @@ watch(() => [result, is_equal], ([new_result, new_is_equal]) => {
 onBeforeUnmount(() => {
   delete use_command.output.value[props.key_name];
 });
+
 ///////////////////////////
 
 </script>

@@ -145,7 +145,7 @@ class CommandStatus {
             }));
 
         this.status.value = this.original_status; // 拷贝 注意修改original_status会导致status也变化
-        await get_search_index(this.original_status); // 生成搜索的索引
+        await get_search_index(this.status.value); // 生成搜索的索引
 
         console.log(this.status.value);
         for (let watcher of config[watcher_key]) { //path转引用

@@ -53,11 +53,16 @@ const search_result = computed(() => {
 });
 
 //跳转到搜索结果
-const jump_to_search_result = (target_page) => {
+const jump_to_search_result = (item) => {
   is_searching.value = false;
   //跳转到command页面并且设置目标页面
   user_options.value.action_tab = "edit";
-  user_options.value.action_command_tab = target_page;
+  user_options.value.action_command_tab = item.target_page;
+  //高亮
+  item.is_focusing = true;
+  setTimeout(() => {
+    item.is_focusing = false;
+  }, 2000);
 };
 </script>
 <template>
@@ -95,7 +100,7 @@ const jump_to_search_result = (target_page) => {
         <div
             v-for="item in search_result"
             class="search-output-element"
-            @click="jump_to_search_result(item.item.target_page)">
+            @click="jump_to_search_result(item.item)">
           <!--todo icon-->
 
           <div>

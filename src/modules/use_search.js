@@ -8,7 +8,7 @@ import {i18n} from "@/assets/languages/i18n.js";
 const basic_search_index = ref([]);
 /**
  * 手动更新一次基础配置(方便后续computed计算，防止过多更新)
- * @param config {Object} use_command中的original_status
+ * @param config {Object} use_command中的status
  * @return {Promise<void>}
  */
 export const get_search_index = async (config) => {
