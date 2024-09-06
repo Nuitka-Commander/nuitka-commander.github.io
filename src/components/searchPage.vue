@@ -63,7 +63,22 @@ const jump_to_search_result = (item) => {
   setTimeout(() => {
     item.is_focusing = false;
   }, 2000);
-
+};
+// 处理高亮显示的匹配
+const highlight_match = (text, match) => {
+  if (!match) {
+    return text;
+  }
+  const parts = text.split(new RegExp(`(${match})`, "gi"));
+  return parts.map((part) => {
+    if (part.toLowerCase() === match.toLowerCase()) {
+      return {
+        value: part,
+      };
+    } else {
+      return part;
+    }
+  });
 };
 </script>
 <template>
@@ -105,7 +120,33 @@ const jump_to_search_result = (item) => {
           <!--todo icon-->
 
           <div>
-            <el-text>{{ item.item.index.name }}</el-text>
+            <el-text>
+              <!--名称高亮显示-->
+              <template
+                  v-for="(part,index) in highlight_match(item.item.index.name,throttled_input)" :key="index">
+                <span v-if="typeof part === 'object'" class="highlight_elements">
+                  {{ part.value }}
+                </span>
+                <span v-else>
+                  {{ part }}
+                </span>
+              </template>
+              <!--代码显示-->
+              <template v-if="user_options.show_original_command===true">
+                (
+                <template
+                    v-for="(part,index) in highlight_match(item.item.index.command,throttled_input)" :key="index">
+                <span v-if="typeof part === 'object'" class="highlight_elements">
+                  {{ part.value }}
+                </span>
+                  <span v-else>
+                  {{ part }}
+                </span>
+                </template>
+                )
+              </template>
+
+            </el-text>
             <el-text>{{ item.item.target_page }}</el-text>
           </div>
           <img alt="continue" src="@/assets/images/continue.svg">
@@ -170,5 +211,7 @@ const jump_to_search_result = (item) => {
   }
 }
 
-
+.highlight_elements {
+  color: var(--el-color-primary)
+}
 </style>
