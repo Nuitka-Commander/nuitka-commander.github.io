@@ -5,6 +5,8 @@
  */
 @use "./themes/light.scss" as *;
 @use "./themes/dark.scss" as *;
+@use "./util_style" as *;
+@use "./scrollbar"  as *;
 
 body {
   margin: 0;
@@ -21,19 +23,4 @@ body {
   background-color: transparent;
 }
 
-// 一些在很多地方都会用到的样式
-.use_original_text {
-  white-space: pre-wrap;
-}
 
-// nuitka-elements
-.nuitka-elements-selector {
-  min-width: 180px;
-
-}
-
-.nuitka-elements-text-area {
-  display: inline-block;
-  margin-right: 10px;
-  white-space: nowrap;
-}

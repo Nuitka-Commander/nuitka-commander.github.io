@@ -131,6 +131,8 @@ watch(() => command.status.value, (new_status) => {
 
   .el-tabs__item.is-left {
     min-height: 40px;
+    padding-right: 2em;
   }
+
 }
 </style>
