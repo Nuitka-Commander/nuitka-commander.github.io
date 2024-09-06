@@ -87,12 +87,12 @@ const highlight_match = (text, match) => {
     <el-icon>
       <Search></Search>
     </el-icon>
-    <el-text>Search content</el-text>
-    <div>
-      <el-text>
-        Ctrl K
-      </el-text>
-    </div>
+    <el-text size="large">{{ $t("search.search_placeholder") }}</el-text>
+
+    <el-text id="shortcut-tip">
+      Ctrl K
+    </el-text>
+
   </div>
   <!--搜索页面-->
   <div v-if="is_searching" id="search-mask" @click="close_search($event)">
@@ -100,7 +100,7 @@ const highlight_match = (text, match) => {
 
       <el-input
           v-model="input"
-          placeholder="(to i18n) please input"
+          :placeholder="$t('search.please_input')"
           size="large"
           @input.native="input_handler"
           autofocus
@@ -158,7 +158,13 @@ const highlight_match = (text, match) => {
 
         </div>
         <div v-if="search_result.length < 1 && throttled_input !== ''" id="search-no-result">
-          (to i18n) 貌似没东西呢！换个关键词？
+          <img alt="empty " src="@/assets/images/empty.svg">
+          <el-text size="large" style="word-wrap: break-word;">
+            {{ $t("search.no_result") }} :&nbsp;<span style="font-weight: bold">"{{ throttled_input }}"</span>
+          </el-text>
+          <el-text size="large">
+            {{ $t("search.try_keyword") }}
+          </el-text>
         </div>
       </div>
 
@@ -173,7 +179,23 @@ const highlight_match = (text, match) => {
   display: flex;
   align-items: center;
   justify-content: center;
+  min-width: 160px;
+  padding: 4px 8px;
+  border-radius: 16px;
+  background-color: var(--search-background);
   gap: 10px;
+
+  & *:last-child {
+    margin-left: auto;
+  }
+
+  #shortcut-tip {
+    padding: 6px;
+    border-radius: 16px;
+    background-color: var(--search-sub-background);
+  }
+
+
 }
 
 #search-mask {
@@ -222,7 +244,7 @@ const highlight_match = (text, match) => {
 
   &:hover {
     background-color: var(--search-hoving-background);
-    //将
+    //将所有子元素都拥有高对比度一些的颜色
     & * {
       color: var(--text-color-pure);
     }
@@ -264,6 +286,18 @@ const highlight_match = (text, match) => {
 }
 
 #search-no-result {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  margin-top: 20px;
+  gap: 10px;
 
+
+  img {
+    height: 50px;
+    transform: translateX(-1000vw);
+    filter: drop-shadow(1000vw 0 var(--el-text-color-primary));
+  }
 }
 </style>
