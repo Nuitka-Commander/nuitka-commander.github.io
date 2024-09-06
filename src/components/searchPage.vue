@@ -8,6 +8,7 @@ import Mousetrap from "mousetrap";
 import Fuse from "fuse.js";
 import {search_index} from "@/modules/use_search.js";
 import {throttle_func} from "@/modules/untils.js";
+import {user_options} from "@/values/stores/user_options.js";
 
 const is_searching = ref(false);
 // mask点击关闭搜索
@@ -50,6 +51,14 @@ const input_handler = throttle_func((value) => {
 const search_result = computed(() => {
   return search_object.value.search(throttled_input.value);
 });
+
+//跳转到搜索结果
+const jump_to_search_result = (target_page) => {
+  is_searching.value = false;
+  //跳转到command页面并且设置目标页面
+  user_options.value.action_tab = "edit";
+  user_options.value.action_command_tab = target_page;
+};
 </script>
 <template>
   <!--搜索按钮-->
@@ -82,10 +91,20 @@ const search_result = computed(() => {
         <template></template>
 
       </el-input>
-      <el-text v-for="item in search_result">
-        {{ item.item.index.name }} aka {{ item.item.index.command }}
-        <br>
-      </el-text>
+      <div id="search-output">
+        <div
+            v-for="item in search_result"
+            class="search-output-element"
+            @click="jump_to_search_result(item.item.target_page)">
+          <!--todo icon-->
+
+          <div>
+            <el-text>{{ item.item.index.name }}</el-text>
+          </div>
+          <img alt="" src="@/assets/images/continue.svg">
+        </div>
+      </div>
+
     </div>
   </div>
 
@@ -125,4 +144,20 @@ const search_result = computed(() => {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 
 }
+
+#search-output {
+  display: flex;
+  flex-direction: column;
+}
+
+.search-output-element {
+  display: flex;
+  align-items: center;
+
+  & img:last-child { //最后的前往按钮
+    margin-left: auto;
+  }
+}
+
+
 </style>
