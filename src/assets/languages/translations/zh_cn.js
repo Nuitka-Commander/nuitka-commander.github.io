@@ -60,7 +60,7 @@ export default {
             },
             show_raw_command: "显示原命令",
             no_show_raw_command: "隐藏原命令",
-            show_raw_command_info: "是否在命令设置中显示原始命令",
+            show_raw_command_info: "是否在所有选项中显示原始命令",
         },
         now_nuitka_version: "当前选择的配置文件版本:",
         select_nuitka_version: "选择您使用的Nuitka的版本",
