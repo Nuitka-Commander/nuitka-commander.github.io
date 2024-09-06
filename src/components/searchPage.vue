@@ -22,9 +22,11 @@ Mousetrap.bind(["ctrl+k", "command+k"], (event) => {
   }
   is_searching.value = !is_searching.value;
 });
+// 搜索框内容
+const input = ref("");
 </script>
 <template>
-
+  <!--搜索按钮-->
   <div id="search-button" @click="is_searching=true">
     <el-icon size="large">
       <Search></Search>
@@ -36,10 +38,24 @@ Mousetrap.bind(["ctrl+k", "command+k"], (event) => {
       </el-text>
     </div>
   </div>
-
+  <!--搜索页面-->
   <div v-if="is_searching" id="search-mask" @click="close_search($event)">
     <div id="search-area">
-      <el-autocomplete></el-autocomplete>
+
+      <el-input
+          v-model="input"
+          placeholder="(to i18n) please input"
+          size="large"
+
+      >
+        <template #prefix>
+          <el-icon>
+            <Search></Search>
+          </el-icon>
+        </template>
+        <template></template>
+
+      </el-input>
     </div>
   </div>
 
@@ -65,6 +81,18 @@ Mousetrap.bind(["ctrl+k", "command+k"], (event) => {
 }
 
 #search-area {
+
+  position: fixed;
+  z-index: 900;
+  top: 50%;
+  left: 50%;
+  width: 400px;
+  height: 200px;
+  padding: 20px;
+  transform: translate(-50%, -50%);
+  border-radius: 10px;
+  background-color: rgba(192, 168, 0, 1);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 
 }
 </style>

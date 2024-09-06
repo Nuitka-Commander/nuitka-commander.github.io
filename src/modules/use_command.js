@@ -11,6 +11,7 @@ import {debug} from "@/modules/debug.js";
 import {watcher_key} from "@/values/templates.js";
 import {nuitka_element_type} from "@/values/enums.js";
 import {set_loading} from "@/values/stores/loading.js";
+import {get_search_index} from "@/modules/use_search.js";
 
 
 class CommandStatus {
@@ -42,7 +43,6 @@ class CommandStatus {
         this.original_status = {}; //没有奇奇怪怪函数的原始配置 直接修改并不会触发vue的引用？
         //已预处理完成的配置，并且添加了一些引用
         this.status = ref({});
-
     }
 
     /**
@@ -143,7 +143,9 @@ class CommandStatus {
                 immediate: true,
             }));
 
-        this.status.value = this.original_status; //深拷贝
+        this.status.value = this.original_status; // 拷贝 注意修改original_status会导致status也变化
+        await get_search_index(this.original_status); // 生成搜索的索引
+
         console.log(this.status.value);
         for (let watcher of config[watcher_key]) { //path转引用
             const source = watcher.source;
