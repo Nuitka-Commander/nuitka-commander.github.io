@@ -3,8 +3,11 @@
  * @fileOverview 搜索页面
  */
 import {Search} from "@element-plus/icons-vue";
-import {ref} from "vue";
+import {computed, ref, watch} from "vue";
 import Mousetrap from "mousetrap";
+import Fuse from "fuse.js";
+import {search_index} from "@/modules/use_search.js";
+import {throttle_func} from "@/modules/untils.js";
 
 const is_searching = ref(false);
 // mask点击关闭搜索
@@ -22,8 +25,27 @@ Mousetrap.bind(["ctrl+k", "command+k"], (event) => {
   }
   is_searching.value = !is_searching.value;
 });
-// 搜索框内容
+
+
 const input = ref("");
+const throttled_input = ref("");
+
+// 获得fuse搜索对象
+const search_object = computed(() => {
+  const options = {
+    keys: ["index"],
+  };
+  return new Fuse(search_index.value, options);
+});
+
+// 对输入进行带节流的搜索
+const input_handler = throttle_func((value) => {
+  throttled_input.value = value;
+}, 500);
+
+watch(throttled_input, (value) => {
+  console.log("deb", value);
+});
 </script>
 <template>
   <!--搜索按钮-->
@@ -46,7 +68,7 @@ const input = ref("");
           v-model="input"
           placeholder="(to i18n) please input"
           size="large"
-
+          @input.native="input_handler"
       >
         <template #prefix>
           <el-icon>

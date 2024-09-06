@@ -43,7 +43,7 @@ export const search_index = computed(() => {
         return {
             target_page: item.target_page,
             type: item.type,
-            index: `${i18n.global.t(`nuitka_info.${item.i18n}.name`)} (${item.command})`.toLowerCase(), //只提供command的搜索 desc以后再说
+            index: `${i18n.global.t(`nuitka_info.${item.i18n}.name`)} (${item.command})`, //只提供command的搜索 desc以后再说
         };
     });
     console.log("search index:", result);
