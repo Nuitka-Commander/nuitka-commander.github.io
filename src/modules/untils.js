@@ -53,7 +53,7 @@ export const debounce_func = (fn, delay = 500) => {
 
 };
 /**
- * 节流函数
+ * 节流函数 带立即调用以及尾部调用，可保证最终会得到一次调用
  * @param fn {Function} 需要节流的函数
  * @param delay   {Number} 节流时间(ms)
  * @return {(function(): void)|*}

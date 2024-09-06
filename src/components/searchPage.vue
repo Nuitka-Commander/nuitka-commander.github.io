@@ -3,7 +3,7 @@
  * @fileOverview 搜索页面
  */
 import {Search} from "@element-plus/icons-vue";
-import {computed, ref, watch} from "vue";
+import {computed, ref} from "vue";
 import Mousetrap from "mousetrap";
 import Fuse from "fuse.js";
 import {search_index} from "@/modules/use_search.js";
@@ -33,7 +33,10 @@ const throttled_input = ref("");
 // 获得fuse搜索对象
 const search_object = computed(() => {
   const options = {
-    keys: ["index"],
+    keys: ["index.name", "index.command"], //要搜索的字段
+    shouldSort: true,
+    threshold: 0.25, //匹配的阈值
+
   };
   return new Fuse(search_index.value, options);
 });
@@ -43,8 +46,9 @@ const input_handler = throttle_func((value) => {
   throttled_input.value = value;
 }, 500);
 
-watch(throttled_input, (value) => {
-  console.log("deb", value);
+//最终的搜索结果
+const search_result = computed(() => {
+  return search_object.value.search(throttled_input.value);
 });
 </script>
 <template>
@@ -78,6 +82,10 @@ watch(throttled_input, (value) => {
         <template></template>
 
       </el-input>
+      <el-text v-for="item in search_result">
+        {{ item.item.index.name }} aka {{ item.item.index.command }}
+        <br>
+      </el-text>
     </div>
   </div>
 
@@ -113,7 +121,7 @@ watch(throttled_input, (value) => {
   padding: 20px;
   transform: translate(-50%, -50%);
   border-radius: 10px;
-  background-color: rgba(192, 168, 0, 1);
+  background-color: rgb(40, 44, 52);
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 
 }
