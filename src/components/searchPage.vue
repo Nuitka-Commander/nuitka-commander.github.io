@@ -100,8 +100,10 @@ const jump_to_search_result = (target_page) => {
 
           <div>
             <el-text>{{ item.item.index.name }}</el-text>
+            <el-text>{{ item.item.target_page }}</el-text>
           </div>
-          <img alt="" src="@/assets/images/continue.svg">
+          <img alt="continue" src="@/assets/images/continue.svg">
+
         </div>
         <div v-if="search_result.length < 1 && throttled_input !== ''" id="search-no-result">
           (to i18n) 貌似没东西呢！换个关键词？

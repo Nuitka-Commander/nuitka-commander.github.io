@@ -4,10 +4,18 @@
  * @Author: erduotong
  * @Date: 2024-01-23 23:13:41
  */
+const props = defineProps(
+    {
+      focusing: {
+        type: Boolean,
+        default: false,
+      },
+    },
+);
 </script>
 
 <template>
-  <div class="edit_content_card">
+  <div :class="{focusing:props.focusing}" class="edit_content_card">
     <slot></slot>
   </div>
 </template>
@@ -32,6 +40,10 @@
 .edit_content_card:hover {
   transform: translateY(-2px) scale(1.01, 1.01);
   box-shadow: var(--card-shadow-hover) 0 10px 15px;
+}
+
+.focusing {
+  background-color: red;
 }
 
 </style>

@@ -17,6 +17,7 @@ import {useI18n} from "vue-i18n";
  *  i18n: string,
  *  val:string,
  *  id:number,
+ *  is_focusing:boolean,
  *  command: {
  *    original:string,
  *  }
@@ -89,7 +90,7 @@ onBeforeUnmount(() => {
       </div>
     </template>
 
-    <element-card>
+    <element-card :focusing="model.is_focusing">
 
       <div class="nuitka-elements-text-area">
         <el-text size="large">{{ $t(`nuitka_info.${model.i18n}.name`) }}</el-text>

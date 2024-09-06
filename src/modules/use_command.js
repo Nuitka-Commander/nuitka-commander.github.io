@@ -126,6 +126,7 @@ class CommandStatus {
                 this.original_status[top_key][second_value.type] = this.original_status[top_key][second_value.type] || {};
                 this.original_status[top_key][second_value.type][second_key] = {
                     ...second_value,
+                    is_focusing: false, // 是否聚焦 便于其他组件的交互
                     id: id,
                 };
                 id++;

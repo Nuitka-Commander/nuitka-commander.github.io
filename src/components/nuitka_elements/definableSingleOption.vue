@@ -22,6 +22,7 @@ import CliCommandCard from "@/components/command_cards/cliCommandCard.vue";
  *  val:string,
  *  default:string,
  *  id:number,
+ *  is_focusing:boolean,
  *  command: {
  *    original:string,
  *  }
@@ -235,7 +236,7 @@ watch(() => model.value.val, (new_val) => {
         {{ $t(`nuitka_info.${model.i18n}.desc`) }}
       </div>
     </template>
-    <element-card>
+    <element-card :focusing="model.is_focusing">
       <div class="nuitka-elements-text-area">
         <el-text size="large">{{ $t(`nuitka_info.${model.i18n}.name`) }}</el-text>
         <el-text v-if="user_options.show_original_command" size="large"> ({{ model.command.original }})</el-text>

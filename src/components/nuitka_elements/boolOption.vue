@@ -24,6 +24,7 @@ import {use_command} from "@/modules/use_command.js";
  *      original: string,
  *    },
  *    id: number,
+ *    is_focusing:boolean,
  * }>}
  */
 const model = defineModel();
@@ -75,7 +76,7 @@ onBeforeUnmount(() => {
       </div>
     </template>
 
-    <element-card>
+    <element-card :focusing="model.is_focusing">
       <el-text size="large">{{ $t(`nuitka_info.${model.i18n}.name`) }}</el-text>
       <!--  original command-->
       <el-text v-if="user_options.show_original_command" size="large"> ({{ model.command.original }})</el-text>
