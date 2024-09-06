@@ -103,6 +103,7 @@ const highlight_match = (text, match) => {
           placeholder="(to i18n) please input"
           size="large"
           @input.native="input_handler"
+          autofocus
       >
         <template #prefix>
           <el-icon>
@@ -212,12 +213,13 @@ const highlight_match = (text, match) => {
 
 .search-output-element {
   display: flex;
-
   align-items: center;
   margin: 3px 0;
   padding: 12px;
   border-radius: 10px;
   background-color: var(--search-sub-background);
+  box-shadow: 0 1px 3px var(--search-shadow);
+
   &:hover {
     background-color: var(--search-hoving-background);
     //将
