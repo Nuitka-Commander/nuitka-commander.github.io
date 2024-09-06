@@ -45,7 +45,7 @@ const search_object = computed(() => {
 // 对输入进行带节流的搜索
 const input_handler = throttle_func((value) => {
   throttled_input.value = value;
-}, 500);
+}, 300);
 
 //最终的搜索结果
 const search_result = computed(() => {
@@ -102,6 +102,9 @@ const jump_to_search_result = (target_page) => {
             <el-text>{{ item.item.index.name }}</el-text>
           </div>
           <img alt="" src="@/assets/images/continue.svg">
+        </div>
+        <div v-if="search_result.length < 1 && throttled_input !== ''" id="search-no-result">
+          (to i18n) 貌似没东西呢！换个关键词？
         </div>
       </div>
 
