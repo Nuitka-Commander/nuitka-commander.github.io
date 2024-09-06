@@ -11,18 +11,31 @@ import SingleOption from "@/components/nuitka_elements/singleOption.vue";
 import DefinedMultipleOption from "@/components/nuitka_elements/definedMultipleOption.vue";
 import DefinableSingleOption from "@/components/nuitka_elements/definableSingleOption.vue";
 import DefinableMultipleOption from "@/components/nuitka_elements/definableMultipleOption.vue";
+import {user_options} from "@/values/stores/user_options.js";
+import {watch} from "vue";
 
 const command = use_command;
-
+watch(() => command.status.value, (new_status) => {
+  const keys = Object.keys(new_status);
+  if (keys.length < 1) {
+    return;
+  }
+  if (!keys.includes(user_options.value.action_command_tab)) {
+    user_options.value.action_command_tab = keys[0];
+  }
+}, {
+  immediate: true,
+});
 </script>
 
 <template>
   <div>
-    <el-tabs stretch tab-position="left" type="card">
+
+    <el-tabs v-model="user_options.action_command_tab" stretch tab-position="left" type="card">
 
       <template v-for="(value1,key1) in command.status.value" :key="key1">
         <!--做出分页-->
-        <el-tab-pane>
+        <el-tab-pane :name="key1">
           <template #label>
             <el-text>
               {{ $t(`nuitka_info.title.${key1}`) }}
