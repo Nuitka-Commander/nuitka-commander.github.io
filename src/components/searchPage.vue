@@ -2,7 +2,7 @@
 /**
  * @fileOverview 搜索页面
  */
-import {Search} from "@element-plus/icons-vue";
+import {Right, Search} from "@element-plus/icons-vue";
 import {computed, ref} from "vue";
 import Mousetrap from "mousetrap";
 import Fuse from "fuse.js";
@@ -84,7 +84,7 @@ const highlight_match = (text, match) => {
 <template>
   <!--搜索按钮-->
   <div id="search-button" @click="is_searching=true">
-    <el-icon size="large">
+    <el-icon>
       <Search></Search>
     </el-icon>
     <el-text>Search content</el-text>
@@ -117,10 +117,10 @@ const highlight_match = (text, match) => {
             v-for="item in search_result"
             class="search-output-element"
             @click="jump_to_search_result(item.item)">
-          <!--todo icon-->
+          <!--todo 这边可以来个icon-->
 
           <div>
-            <el-text>
+            <span class="index-area">
               <!--名称高亮显示-->
               <template
                   v-for="(part,index) in highlight_match(item.item.index.name,throttled_input)" :key="index">
@@ -132,22 +132,26 @@ const highlight_match = (text, match) => {
                 </span>
               </template>
               <!--代码显示-->
-              <template v-if="user_options.show_original_command===true">
-                (
-                <template
-                    v-for="(part,index) in highlight_match(item.item.index.command,throttled_input)" :key="index">
+
+              (
+              <template
+                  v-for="(part,index) in highlight_match(item.item.index.command,throttled_input)" :key="index">
                 <span v-if="typeof part === 'object'" class="highlight_elements">
                   {{ part.value }}
                 </span>
-                  <span v-else>
+                <span v-else>
                   {{ part }}
                 </span>
-                </template>
-                )
               </template>
+              )
 
-            </el-text>
-            <el-text>{{ item.item.target_page }}</el-text>
+
+            </span>
+            <br>
+            <el-icon size="12">
+              <right></right>
+            </el-icon>
+            <span class="path-area">{{ $t(`nuitka_info.title.${item.item.target_page}`) }}</span>
           </div>
           <img alt="continue" src="@/assets/images/continue.svg">
 
@@ -178,40 +182,86 @@ const highlight_match = (text, match) => {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(69, 71, 73, 0.68);
+  background-color: rgba(0, 0, 0, 0.2);
 }
 
 #search-area {
 
   position: fixed;
   z-index: 900;
-  top: 50%;
-  left: 50%;
-  width: 400px;
-  height: 200px;
+  top: 15%;
+
+  left: calc(50% - 280px);
+  width: 560px;
   padding: 20px;
-  transform: translate(-50%, -50%);
-  border-radius: 10px;
-  background-color: rgb(40, 44, 52);
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 1em;
+
+  background-color: var(--search-background);
+  box-shadow: 0 0 10px var(--shadow-color);
+
 
 }
 
 #search-output {
   display: flex;
+  overflow: auto;
   flex-direction: column;
+  max-height: 60vh;
+  margin-top: 5px;
 }
 
 .search-output-element {
   display: flex;
+
   align-items: center;
+  margin: 3px 0;
+  padding: 12px;
+  border-radius: 10px;
+  background-color: var(--search-sub-background);
+  &:hover {
+    background-color: var(--search-hoving-background);
+    //将
+    & * {
+      color: var(--text-color-pure);
+    }
+
+    .path-area {
+      color: var(--text-color-pure);
+    }
+  }
+
+  div {
+    margin-left: 12px;
+
+    .index-area {
+      font-size: 16px;
+    }
+
+    .path-area {
+      font-size: 12px;
+      margin-left: 5px;
+      color: grey;
+    }
+
+
+  }
+
+  img {
+    transform: translateX(-1000vw);
+    filter: drop-shadow(1000vw 0 var(--el-text-color-primary));
+  }
 
   & img:last-child { //最后的前往按钮
     margin-left: auto;
   }
+
 }
 
 .highlight_elements {
   color: var(--el-color-primary)
+}
+
+#search-no-result {
+
 }
 </style>
