@@ -63,6 +63,7 @@ const jump_to_search_result = (item) => {
   setTimeout(() => {
     item.is_focusing = false;
   }, 2000);
+
 };
 </script>
 <template>

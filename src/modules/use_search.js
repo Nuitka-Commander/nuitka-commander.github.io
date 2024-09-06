@@ -25,7 +25,12 @@ export const get_search_index = async (config) => {
                     type: final_value.type,
                     i18n: final_value.i18n,
                     command: final_value.command.original,
-                    is_focusing: final_value.is_focusing,
+                    get is_focusing() {
+                        return final_value.is_focusing;
+                    },
+                    set is_focusing(value) {
+                        final_value.is_focusing = value;
+                    },
                 });
             });
         });
@@ -48,7 +53,12 @@ export const search_index = computed(() => {
                 name: `${i18n.global.t(`nuitka_info.${item.i18n}.name`)}`,
                 command: item.command,
             },
-            is_focusing: item.is_focusing,
+            get is_focusing() {
+                return item.is_focusing;
+            },
+            set is_focusing(value) {
+                item.is_focusing = value;
+            },
         };
     });
     console.log("search index:", result);
