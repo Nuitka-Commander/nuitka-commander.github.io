@@ -29,6 +29,9 @@ importers:
       element-plus:
         specifier: ^2.7.3
         version: 2.8.0(vue@3.4.38)
+      fuse.js:
+        specifier: ^7.0.0
+        version: 7.0.0
       html-minifier-terser:
         specifier: ^7.2.0
         version: 7.2.0
@@ -41,6 +44,9 @@ importers:
       localforage:
         specifier: ^1.10.0
         version: 1.10.0
+      mousetrap:
+        specifier: ^1.6.5
+        version: 1.6.5
       node-fetch:
         specifier: ^3.3.2
         version: 3.3.2
@@ -1284,6 +1290,10 @@ packages:
   function-bind@1.1.2:
     resolution: {integrity: sha512-7XHNxH7qX9xG5mIwxkhumTox/MIRNcOgDrxWsMt2pAr23WHp6MrRlN7FBSFpCpr+oVO0F744iUgR82nJMfG2SA==, tarball: https://registry.npmmirror.com/function-bind/-/function-bind-1.1.2.tgz}
 
+  fuse.js@7.0.0:
+    resolution: {integrity: sha512-14F4hBIxqKvD4Zz/XjDc3y94mNZN6pRv3U13Udo0lNLCWRBUsrMv2xwcF/y/Z5sV6+FQW+/ow68cHpm4sunt8Q==, tarball: https://registry.npmmirror.com/fuse.js/-/fuse.js-7.0.0.tgz}
+    engines: {node: '>=10'}
+
   get-proxy@2.1.0:
     resolution: {integrity: sha512-zmZIaQTWnNQb4R4fJUEp/FC51eZsc6EkErspy3xtIYStaq8EB/hDIWipxsal+E8rz0qD7f2sL/NA9Xee4RInJw==, tarball: https://registry.npmmirror.com/get-proxy/-/get-proxy-2.1.0.tgz}
     engines: {node: '>=4'}
@@ -1771,6 +1781,9 @@ packages:
 
   mlly@1.7.1:
     resolution: {integrity: sha512-rrVRZRELyQzrIUAVMHxP97kv+G786pHmOKzuFII8zDYahFBS7qnHh2AlYSl1GAHhaMPCz6/oHjVMcfFYgFYHgA==, tarball: https://registry.npmmirror.com/mlly/-/mlly-1.7.1.tgz}
+
+  mousetrap@1.6.5:
+    resolution: {integrity: sha512-QNo4kEepaIBwiT8CDhP98umTetp+JNfQYBWvC1pc6/OAibuXtRcxZ58Qz8skvEHYvURne/7R8T5VoOI7rDsEUA==, tarball: https://registry.npmmirror.com/mousetrap/-/mousetrap-1.6.5.tgz}
 
   mozjpeg@7.1.1:
     resolution: {integrity: sha512-iIDxWvzhWvLC9mcRJ1uSkiKaj4drF58oCqK2bITm5c2Jt6cJ8qQjSSru2PCaysG+hLIinryj8mgz5ZJzOYTv1A==, tarball: https://registry.npmmirror.com/mozjpeg/-/mozjpeg-7.1.1.tgz}
@@ -3815,6 +3828,8 @@ snapshots:
 
   function-bind@1.1.2: {}
 
+  fuse.js@7.0.0: {}
+
   get-proxy@2.1.0:
     dependencies:
       npm-conf: 1.1.3
@@ -4371,6 +4386,8 @@ snapshots:
       pathe: 1.1.2
       pkg-types: 1.1.3
       ufo: 1.5.4
+
+  mousetrap@1.6.5: {}
 
   mozjpeg@7.1.1:
     dependencies:

@@ -6,7 +6,7 @@
  */
 import * as constants from "@/values/constants.json";
 import {user_options} from "@/values/stores/user_options.js";
-import ElementCard from "@/components/untils/elementCard.vue";
+import ElementCard from "@/components/utils/elementCard.vue";
 import {ElInput, ElMessage, ElMessageBox} from "element-plus";
 import {computed, onBeforeUnmount, ref, watch} from "vue";
 import {add_option} from "@/values/templates.js";
@@ -27,6 +27,7 @@ import CliCommandCard from "@/components/command_cards/cliCommandCard.vue";
  *  }
  *  enabled: boolean,
  *  default: string[],
+ *  is_focusing:boolean,
  *  elements: {
  *    [key: string]: {
  *      i18n: string, // 如果是用户定义的，那么该属性不存在
@@ -176,7 +177,7 @@ const user_provides_options = computed(() => {
   }
 
   return result;
-})
+});
 // 检测当前是否有用户自定义的配置，是否要保存到Json种
 const need_json = computed(() => Object.keys(user_provides_options.value).length !== 0);
 
@@ -233,7 +234,7 @@ onBeforeUnmount(() => {
         {{ $t(`nuitka_info.${model.i18n}.desc`) }}
       </div>
     </template>
-    <element-card>
+    <element-card :focusing="model.is_focusing">
       <div class="nuitka-elements-text-area">
         <el-text size="large">{{ $t(`nuitka_info.${model.i18n}.name`) }}</el-text>
         <el-text v-if="user_options.show_original_command" size="large"> ({{ model.command.original }})</el-text>

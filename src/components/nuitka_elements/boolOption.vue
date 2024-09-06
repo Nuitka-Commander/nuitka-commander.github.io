@@ -5,7 +5,7 @@
  * @Date: 2023-12-08 22:16:35
  */
 import {user_options} from "@/values/stores/user_options.js";
-import ElementCard from "@/components/untils/elementCard.vue";
+import ElementCard from "@/components/utils/elementCard.vue";
 import * as constants from "@/values/constants.json";
 import CliCommandCard from "@/components/command_cards/cliCommandCard.vue";
 import {useI18n} from "vue-i18n";
@@ -24,6 +24,7 @@ import {use_command} from "@/modules/use_command.js";
  *      original: string,
  *    },
  *    id: number,
+ *    is_focusing:boolean,
  * }>}
  */
 const model = defineModel();
@@ -62,6 +63,7 @@ watch(() => [result, is_equal], ([new_result, new_is_equal]) => {
 onBeforeUnmount(() => {
   delete use_command.output.value[props.key_name];
 });
+
 ///////////////////////////
 
 </script>
@@ -75,7 +77,7 @@ onBeforeUnmount(() => {
       </div>
     </template>
 
-    <element-card>
+    <element-card :focusing="model.is_focusing">
       <el-text size="large">{{ $t(`nuitka_info.${model.i18n}.name`) }}</el-text>
       <!--  original command-->
       <el-text v-if="user_options.show_original_command" size="large"> ({{ model.command.original }})</el-text>

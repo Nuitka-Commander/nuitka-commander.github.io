@@ -60,7 +60,7 @@ export default {
             },
             show_raw_command: "显示原命令",
             no_show_raw_command: "隐藏原命令",
-            show_raw_command_info: "是否在命令设置中显示原始命令",
+            show_raw_command_info: "是否在所有选项中显示原始命令",
         },
         now_nuitka_version: "当前选择的配置文件版本:",
         select_nuitka_version: "选择您使用的Nuitka的版本",
@@ -179,6 +179,12 @@ export default {
             title: "结束",
             desc: "教程就到这里结束了，感谢你的使用。若是有任何问题或者建议，欢迎在github上提出Issue",
         },
+    },
+    search: { //搜索
+        search_placeholder: "搜索",
+        please_input: "请输入搜索内容",
+        no_result: "没有找到包含该关键字的选项",
+        try_keyword: "请尝试替换其他的关键字再次搜索",
     },
     //配置文件版本的标题 如果你想要的话其实哪个版本都能给一个 如果没有的话就调用默认的key name
     nuitka_config_title: {

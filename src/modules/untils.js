@@ -52,3 +52,31 @@ export const debounce_func = (fn, delay = 500) => {
     };
 
 };
+/**
+ * 节流函数 带立即调用以及尾部调用，可保证最终会得到一次调用
+ * @param fn {Function} 需要节流的函数
+ * @param delay   {Number} 节流时间(ms)
+ * @return {(function(): void)|*}
+ */
+export const throttle_func = (fn, delay = 500) => {
+    let timer = null;
+    let lastArgs = null;
+
+    return function () {
+        const context = this;
+        const args = arguments;
+
+        if (!timer) {
+            fn.apply(context, args);
+            timer = setTimeout(() => {
+                if (lastArgs) {
+                    fn.apply(context, lastArgs);
+                    lastArgs = null;
+                }
+                timer = null;
+            }, delay);
+        } else {
+            lastArgs = args;
+        }
+    };
+};

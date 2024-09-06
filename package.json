@@ -1,7 +1,7 @@
 {
   "name": "nuitka-commander",
   "private": true,
-  "version": "1.1.0.2",
+  "version": "1.2.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite --port 3002",
@@ -16,10 +16,12 @@
     "@vueuse/core": "^10.9.0",
     "axios": "^1.7.2",
     "element-plus": "^2.7.3",
+    "fuse.js": "^7.0.0",
     "html-minifier-terser": "^7.2.0",
     "js-yaml": "^4.1.0",
     "jsdom": "^24.1.0",
     "localforage": "^1.10.0",
+    "mousetrap": "^1.6.5",
     "node-fetch": "^3.3.2",
     "punycode": "^2.3.1",
     "sass": "^1.77.2",

@@ -6,62 +6,62 @@
  * @Date: 2023-11-26 11:09:00
  */
 export default {
-    website_info: { //Informationen anzeigen
-        supported_to_nuitka_version: "Unterstützt bis Nuitka Version",
+    website_info: { // Verschiedene Informationen anzeigen
+        supported_to_nuitka_version: "Unterstützung der Nuitka-Version",
         report_issue: "Problem melden",
         nuitka_website: "Nuitka Webseite",
         get_involved: "Mitwirken",
         changelog: "Änderungsprotokoll",
         project_homepage: "Projekt-Homepage",
-        github_website: "Auf Github verwenden",
-        local_use: "Lokal verwenden",
+        github_website: "Auf GitHub verwenden",
+        local_use: "Lokale Nutzung",
         current_version_author: "Aktuelle Version Beitragende",
-        open_source_license: "Open Source Lizenz",
+        open_source_license: "Open-Source-Lizenz",
         long_info: {
-            license: "Wir verwenden die GPLv3 Open Source Lizenz, Sie können die vollständige Lizenz hier ansehen:",
-            author: "Bis zur aktuellen Version, danke den folgenden Beitragenden für ihre Beiträge (Reihenfolge ohne Bedeutung):",
+            license: "Wir verwenden die GPLv3 Open-Source-Lizenz, die vollständige Lizenz können Sie hier einsehen:",
+            author: "Bis zur aktuellen Version danken wir den folgenden Beitragenden für ihre Beiträge zu diesem Projekt (in keiner bestimmten Reihenfolge):",
         },
     },
-    setting: { //Einstellungsseite
+    setting: { // Einstellungsseite
         guide: {
             title: "Anleitung",
             start: "Anleitung starten",
         },
         theme: {
-            auto: "Systemfolgen",
-            light: "Helles Modus",
-            dark: "Dunkles Modus",
+            auto: "System folgen",
+            light: "Helles Thema",
+            dark: "Dunkles Thema",
             theme: "Thema",
         },
         language: {
             title: "Sprache",
             interface_language: "Oberflächensprache",
-            command_language: "Befehlssprache",
+            command_language: "Befehlsprache",
         },
-        nuitka_language_no_support: "Die aktuelle Nuitka Version unterstützt diese Sprache nicht",
+        nuitka_language_no_support: "Die aktuelle Nuitka-Version unterstützt diese Sprache nicht",
         storage: {
             title: "Speichereinstellungen",
             user: "Benutzereinstellungen",
             reset_user: "Benutzereinstellungen zurücksetzen",
-            command: "Befehleinstellungen",
-            reset_command: "Befehleinstellungen zurücksetzen",
+            command: "Befehlseinstellungen",
+            reset_command: "Befehlseinstellungen zurücksetzen",
         },
     },
-    nav_bar: { //Navigationsleiste
+    nav_bar: { // Navigationsleiste
         mode: {
-            easy_mode: "Einfaches Modus",
-            full_mode: "Vollständiges Modus",
+            easy_mode: "Einfacher Modus",
+            full_mode: "Vollständiger Modus",
             info: {
-                l1: "Ob die vollständige Befehlsliste angezeigt werden soll",
-                l2: "Einfaches Modus: Zeigt häufig verwendete Nuitka-Optionen an",
-                l3: "Komplexes Modus: Zeigt alle verfügbaren Optionen an",
+                l1: "Soll die vollständige Befehlsliste angezeigt werden",
+                l2: "Einfacher Modus: Zeigt häufig verwendete Nuitka-Optionen",
+                l3: "Komplexer Modus: Zeigt alle verfügbaren Optionen",
             },
-            show_raw_command: "Originalbefehl anzeigen",
-            no_show_raw_command: "Originalbefehl verbergen",
-            show_raw_command_info: "Ob der Originalbefehl in den Befehlseinstellungen angezeigt werden soll",
+            show_raw_command: "Rohbefehl anzeigen",
+            no_show_raw_command: "Rohbefehl ausblenden",
+            show_raw_command_info: "Soll der Rohbefehl in allen Optionen angezeigt werden",
         },
         now_nuitka_version: "Aktuell ausgewählte Konfigurationsdateiversion:",
-        select_nuitka_version: "Wählen Sie die Version von Nuitka, die Sie verwenden",
+        select_nuitka_version: "Wählen Sie die von Ihnen verwendete Nuitka-Version",
     },
     tabs: {
         edit: "Bearbeiten",
@@ -69,27 +69,27 @@ export default {
         input: "Eingabe",
     },
     input_page: {
-        input_from_cli: "Von der Kommandozeile importieren",
+        input_from_cli: "Von der Befehlszeile importieren",
         start_input: "Import starten",
         please_input_cli_command: "Bitte geben Sie den Nuitka-Befehlszeilenbefehl ein",
         general: {
-            unable_parse_check: "Es gibt nicht erkennbare Attribute in den bereitgestellten Daten, bitte überprüfen Sie, ob die eingegebenen Daten korrekt sind oder manuell eingeben",
-            please_check_down: "Es gibt nicht erkennbare Attribute in den bereitgestellten Daten, bitte überprüfen Sie unten",
+            unable_parse_check: "Die bereitgestellten Daten enthalten nicht erkennbare Attribute. Bitte überprüfen Sie, ob die eingegebenen Daten den Anforderungen entsprechen oder geben Sie sie manuell ein",
+            please_check_down: "Die bereitgestellten Daten enthalten nicht erkennbare Attribute. Bitte überprüfen Sie unten",
         },
         json: {
             input_from_json: "Von JSON importieren",
             please_input_json: "Bitte geben Sie die von dieser Website exportierten JSON-Daten ein",
-            json_parse_error: "JSON-Parsing fehlgeschlagen, bitte überprüfen Sie, ob die eingegebenen Daten das JSON-Format haben",
+            json_parse_error: "JSON-Parsing fehlgeschlagen. Bitte überprüfen Sie, ob die eingegebenen Daten dem JSON-Format entsprechen",
         },
     },
     nuitka_elements: {
         select_placeholder: "Auswählen",
         not_selected: "Nicht ausgewählt",
         selected: "Ausgewählt",
-        user_provide: "Dies ist eine von Ihnen benutzerdefinierte Option",
+        user_provide: "Dies ist Ihre benutzerdefinierte Option",
         add_option: "Eine Option hinzufügen",
         input_an_option: "Eine Option eingeben",
-        option_desc: "Option Beschreibung",
+        option_desc: "Optionsbeschreibung",
     },
     message: {
         will_del_option: "Sie sind dabei, diese benutzerdefinierte Option zu löschen",
@@ -105,7 +105,7 @@ export default {
         click_select_file: "Datei auswählen",
         next_step: "Nächster Schritt",
         prev_step: "Vorheriger Schritt",
-        data_input_success: "Dateneingabe erfolgreich",
+        data_input_success: "Daten erfolgreich importiert",
         calling: "Wird aufgerufen, bitte warten",
     },
     output_page: {
@@ -113,69 +113,77 @@ export default {
         CLI: "Befehlszeilenausgabe",
         JSON: "JSON-Ausgabe",
     },
+    // Benutzeranleitung
     website_guide: {
         start: {
-            title: "Anleitung",
-            desc: "Willkommen bei Nuitka Commander, klicken Sie auf die rechte untere Ecke, um Schritt für Schritt zu lernen, wie man es benutzt",
+            title: "Benutzeranleitung",
+            desc: "Willkommen bei Nuitka Commander, klicken Sie als nächstes auf die untere rechte Ecke, um Schritt für Schritt zu lernen, wie man es benutzt",
         },
         navbar: {
             title: "Navigationsleiste",
-            desc: "Hier ist die Navigationsleiste, einige globale Funktionen werden hier eingestellt",
+            desc: "Dies ist die Navigationsleiste, in der einige globale Funktionen eingestellt sind",
         },
         navbar_original_command: {
-            title: "Navigationsleiste – Originalbefehl umschalten",
-            desc: "Hier können Sie umschalten, ob der originale Nuitka-Befehl angezeigt werden soll, um die Anzeige zu erleichtern. Sie können es versuchen",
+            title: "Navigationsleiste - Rohbefehl umschalten",
+            desc: "Hier können Sie umschalten, ob der ursprüngliche Nuitka-Befehl zur einfachen Ansicht angezeigt werden soll. Sie können es ausprobieren",
         },
         navbar_version_select: {
-            title: "Navigationsleiste – Version auswählen",
-            desc: "Im rechten Auswahlfeld können Sie verschiedene Nuitka-Versionen auswählen, Sie können die für Ihre Version passende Konfigurationsdatei finden. Wenn Sie einen einfacheren Befehl wollen, können Sie die unterste Option 'Einfaches Modus' auswählen",
+            title: "Navigationsleiste - Versionsauswahl",
+            desc: "Im Auswahlfeld rechts können Sie verschiedene Versionen von Nuitka auswählen. Sie können die Konfigurationsdatei finden, die zu Ihrer Version passt. Wenn Sie einen einfacheren Befehl möchten, können Sie 'Einfacher Modus' unten auswählen",
         },
         navbar_settings_button: {
-            title: "Navigationsleiste – Einstellungsbutton",
-            desc: "Klicken Sie auf diesen Button, um in die Einstellungsseite zu gelangen",
+            title: "Navigationsleiste - Einstellungsbutton",
+            desc: "Klicken Sie auf diesen Button, um zur Einstellungsseite zu gelangen",
         },
         settings_page: {
             title: "Einstellungsseite",
             desc: "Als nächstes ist die Einstellungsseite",
         },
         settings_page_intro: {
-            title: "Einstellungsseite – Einführung",
-            desc: "Hier ist die Einstellungsseite, Sie können hier Ihre bevorzugten Einstellungen anpassen",
+            title: "Einstellungsseite - Einführung",
+            desc: "Dies ist die Einstellungsoberfläche, in der Sie Ihre gewünschten Einstellungen anpassen können",
         },
         settings_page_tour: {
-            title: "Einstellungsseite – Tour",
-            desc: "Wenn Sie die Anleitung in Zukunft erneut ansehen möchten, können Sie hier klicken",
+            title: "Einstellungsseite - Anleitung",
+            desc: "Um die Anleitung in Zukunft erneut anzuzeigen, können Sie hier klicken",
         },
         edit_page_buffer: {
             title: "Bearbeitungsseite",
             desc: "Als nächstes ist die Bearbeitungsseite",
         },
         edit_page_intro: {
-            title: "Bearbeitungsseite – Einführung",
-            desc: "Hier ist die Bearbeitungsseite, Sie können hier Ihren Nuitka-Befehl konfigurieren. Sie können auf der linken Seite klicken, um die Befehlskategorie zu wechseln, und in der Mitte die Befehle bearbeiten",
+            title: "Bearbeitungsseite - Einführung",
+            desc: "Dies ist die Bearbeitungsseite, auf der Sie Ihre Nuitka-Befehle konfigurieren können. Sie können links klicken, um die Befehlsgruppen zu wechseln und in der Mitte Befehle bearbeiten",
         },
         edit_page_edit_box: {
-            title: "Bearbeitungsseite – Bearbeitungsfeld",
-            desc: "Hier gibt es viele Bearbeitungsfelder, jedes repräsentiert einen Parameter. Wenn Sie die Maus darüber halten, gibt es eine detaillierte Einführung. Probieren Sie es jetzt aus",
+            title: "Bearbeitungsseite - Bearbeitungsfeld",
+            desc: "Hier gibt es viele Bearbeitungsfelder, die jeweils einen Parameter darstellen. Wenn Sie die Maus darüber bewegen, wird eine detaillierte Einführung angezeigt. Probieren Sie es jetzt aus",
         },
         output_page_intro: {
-            title: "Ausgabeseite – Einführung",
-            desc: "Hier ist die Ausgabeseite, Sie können hier die Ergebnisse der von Ihnen bearbeiteten Befehle sehen. Sie können auf der linken Seite klicken, um die Art der Ausgabe zu wechseln, und in der Mitte die ausgegebenen Befehle anzeigen. Klicken Sie oben rechts, um den Befehl direkt zu kopieren. Natürlich können Sie auch die Maus über jedes Element halten, um eine detaillierte Einführung zu erhalten.",
+            title: "Ausgabeseite - Einführung",
+            desc: "Dies ist die Ausgabeseite, auf der Sie die Ausgaberesultate der gerade bearbeiteten Befehle erhalten können. Sie können links klicken, um den Ausgabetyp zu wechseln und den Ausgabebefehl in der Mitte anzeigen. Klicken Sie oben rechts, um den Befehl direkt zu kopieren. Natürlich können Sie auch die Maus über jedes Element bewegen, um detaillierte Einführungen anzuzeigen.",
         },
         input_page_intro: {
-            title: "Eingabeseite – Einführung",
-            desc: "Hier ist die Eingabeseite, Sie können hier Befehle eingeben und sie in Nuitka Commander importieren, um sie zu bearbeiten. Sie können auf der linken Seite klicken, um die Art der Eingabe zu wechseln, und oben rechts den Import starten.",
+            title: "Eingabeseite - Einführung",
+            desc: "Dies ist die Eingabeseite, auf der Sie Befehle eingeben und dann in Nuitka Commander zur Bearbeitung importieren können. Sie können links klicken, um den Eingabetyp zu wechseln und oben rechts mit dem Import beginnen.",
         },
         website_footer: {
-            title: "Website-Fußzeile",
-            desc: "Hier ist die Website-Fußzeile, Sie können hier einige nützliche Links finden, wie die Nuitka-Webseite und die Projekt-Homepage. Gleichzeitig können Sie auch die Versionsnummer, Autoren und andere Informationen finden",
+            title: "Webseiten-Fußzeile",
+            desc: "Dies ist die Webseiten-Fußzeile, in der Sie einige nützliche Links finden können, wie die Nuitka-Webseite und die Projekt-Homepage. Sie können auch die Versionsnummer des Projekts, die Autoren und andere Informationen finden",
         },
         end: {
             title: "Ende",
-            desc: "Die Anleitung endet hier, danke für Ihre Nutzung. Wenn Sie irgendwelche Probleme oder Vorschläge haben, zögern Sie nicht, auf Github ein Issue zu erstellen",
+            desc: "Die Anleitung endet hier, danke für Ihre Nutzung. Wenn Sie Fragen oder Vorschläge haben, können Sie gerne ein Issue auf GitHub erstellen",
         },
     },
+    search: { // Suche
+        search_placeholder: "Suche",
+        please_input: "Bitte geben Sie den Suchinhalt ein",
+        no_result: "Keine Optionen mit diesem Schlüsselwort gefunden",
+        try_keyword: "Bitte versuchen Sie es mit anderen Schlüsselwörtern erneut",
+    },
+    // Konfigurationsdateiversionstitel, wenn Sie möchten, können Sie jeder Version einen Titel geben. Wenn nicht, wird der Standard-Schlüsselname verwendet
     nuitka_config_title: {
-        simple: "Einfaches Modus",
+        simple: "Einfacher Modus",
     },
 };

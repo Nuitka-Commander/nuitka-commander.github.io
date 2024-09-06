@@ -19,6 +19,7 @@ export const user_options = ref({
     show_original_command: false,
     settings_page_show: false,
     action_tab: "edit",
+    action_command_tab: "",
 });
 
 /**
