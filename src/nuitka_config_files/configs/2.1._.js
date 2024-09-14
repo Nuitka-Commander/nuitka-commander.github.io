@@ -200,7 +200,7 @@ const config = {
         nofollow_import_to: add_option.definable_multi(
             "nofollow_import_to",
             {
-                original: "--no-follow-import-to",
+                original: "--nofollow-import-to",
             },
             true,
             {},
