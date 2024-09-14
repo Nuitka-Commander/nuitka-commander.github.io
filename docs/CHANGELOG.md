@@ -16,7 +16,7 @@
 
 ## 🐛 修复 Fixed
 
--
+- 命令选项中，nofollow-import-to中多了一个短横线，导致Nuitka的命令无法执行，已修复
 
 ## 🔒 安全 Security
 
