@@ -2,7 +2,7 @@
 /**
  * @fileOverview 搜索页面
  */
-import {Right, Search} from "@element-plus/icons-vue";
+import {Close, Right, Search} from "@element-plus/icons-vue";
 import {computed, nextTick, ref, watch} from "vue";
 import Mousetrap from "mousetrap";
 import Fuse from "fuse.js";
@@ -141,6 +141,25 @@ watch(is_searching, async (value) => {
     input_ref.value.focus();
   }
 });
+
+//防溢出
+const search_output_ref = ref(null);
+watch([search_result, active_index], async () => {
+  await nextTick();
+  // noinspection JSUnresolvedReference
+  const activeElement = search_output_ref.value?.querySelector(".output_active");
+  if (activeElement) {
+    const parent = search_output_ref.value;
+    // noinspection JSUnresolvedReference
+    const parentRect = parent.getBoundingClientRect();
+    const activeRect = activeElement.getBoundingClientRect();
+    if (activeRect.bottom > parentRect.bottom) {
+      parent.scrollTop += activeRect.bottom - parentRect.bottom;
+    } else if (activeRect.top < parentRect.top) {
+      parent.scrollTop -= parentRect.top - activeRect.top;
+    }
+  }
+});
 </script>
 <template>
   <!--搜索按钮-->
@@ -172,9 +191,17 @@ watch(is_searching, async (value) => {
           </el-icon>
         </template>
         <template></template>
+        <template #append>
+          <el-button @click="is_searching=false">
+            <el-icon>
+              <close></close>
+            </el-icon>
+          </el-button>
 
+
+        </template>
       </el-input>
-      <div id="search-output">
+      <div id="search-output" ref="search_output_ref">
         <div
             v-for="(item,index) in search_result"
             class="search-output-element"
@@ -231,7 +258,15 @@ watch(is_searching, async (value) => {
           </el-text>
         </div>
       </div>
-
+      <div v-if="search_result.length > 0 " id="search-bottom">
+        <div class="hotkey-tip">Enter</div>
+        <div>跳转</div>
+        <div class="hotkey-tip">↑</div>
+        <div class="hotkey-tip">↓</div>
+        <div>选择</div>
+        <div class="hotkey-tip">Esc</div>
+        <div>退出</div>
+      </div>
     </div>
   </div>
 
@@ -362,6 +397,19 @@ watch(is_searching, async (value) => {
     height: 50px;
     transform: translateX(-1000vw);
     filter: drop-shadow(1000vw 0 var(--el-text-color-primary));
+  }
+}
+
+#search-bottom {
+  font-size: 13px;
+  display: flex;
+  margin-top: 12px;
+  gap: 5px;
+
+  .hotkey-tip {
+    padding: 2px 4px;
+    border-radius: 8px;
+    background-color: var(--search-sub-background);
   }
 }
 </style>
