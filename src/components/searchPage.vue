@@ -3,7 +3,7 @@
  * @fileOverview 搜索页面
  */
 import {Right, Search} from "@element-plus/icons-vue";
-import {computed, ref, watch} from "vue";
+import {computed, nextTick, ref, watch} from "vue";
 import Mousetrap from "mousetrap";
 import Fuse from "fuse.js";
 import {search_index} from "@/modules/use_search.js";
@@ -29,7 +29,14 @@ const close_search = (event) => {
     is_searching.value = false;
   }
 };
+
 // 快捷键
+// 允许在 input, textarea 和 select 元素中触发快捷键
+// noinspection JSUnusedGlobalSymbols
+Mousetrap.prototype.stopCallback = function () {
+  return false;
+};
+// 打开搜索
 Mousetrap.bind(["ctrl+k", "command+k"], (event) => {
   if (event.preventDefault) {
     event.preventDefault();
@@ -38,11 +45,30 @@ Mousetrap.bind(["ctrl+k", "command+k"], (event) => {
   }
   is_searching.value = !is_searching.value;
 });
+// 上下移动键
+Mousetrap.bind(["up"], () => {
+  if (is_searching.value) {
+    active_index.value = Math.max(0, active_index.value - 1);
+  }
+});
+Mousetrap.bind(["down"], () => {
+  if (is_searching.value) {
+    active_index.value = Math.min(search_result.value.length - 1, active_index.value + 1);
+  }
+});
+// 回车键跳转
+Mousetrap.bind(["enter"], () => {
+  if (is_searching.value) {
+    jump_to_search_result();
+  }
+});
+// esc键退出
 Mousetrap.bind(["esc"], () => {
   if (is_searching.value) {
     is_searching.value = false;
   } //关闭搜索的另一种方式
 });
+
 
 const input = ref("");
 const throttled_input = ref("");
@@ -70,6 +96,9 @@ const search_result = computed(() => {
 
 //跳转到搜索结果
 const jump_to_search_result = () => {
+  if (search_result.value.length < 1) { //没有搜索结果返回
+    return;
+  }
   const item = search_result.value[active_index.value].item;
   is_searching.value = false;
   //跳转到command页面并且设置目标页面
@@ -81,6 +110,7 @@ const jump_to_search_result = () => {
     item.is_focusing = false;
   }, 4000);
 };
+
 // 处理高亮显示的匹配
 const highlight_match = (text, match) => {
   if (!match) {
@@ -97,6 +127,20 @@ const highlight_match = (text, match) => {
     }
   });
 };
+// 监听搜索结果，防止溢出
+watch(search_result, () => {
+  active_index.value = Math.min(search_result.value.length - 1, active_index.value);
+});
+
+// auto focus
+const input_ref = ref(null);
+watch(is_searching, async (value) => {
+  if (value) {
+    await nextTick();
+    // noinspection JSUnresolvedReference
+    input_ref.value.focus();
+  }
+});
 </script>
 <template>
   <!--搜索按钮-->
@@ -120,7 +164,7 @@ const highlight_match = (text, match) => {
           :placeholder="$t('search.please_input')"
           size="large"
           @input.native="input_handler"
-          autofocus
+          ref="input_ref"
       >
         <template #prefix>
           <el-icon>
