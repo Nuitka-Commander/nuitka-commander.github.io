@@ -260,12 +260,12 @@ watch([search_result, active_index], async () => {
       </div>
       <div v-if="search_result.length > 0 " id="search-bottom">
         <div class="hotkey-tip">Enter</div>
-        <div>跳转</div>
+        <div>{{ $t("search.jump") }}</div>
         <div class="hotkey-tip">↑</div>
         <div class="hotkey-tip">↓</div>
-        <div>选择</div>
+        <div>{{ $t("search.select") }}</div>
         <div class="hotkey-tip">Esc</div>
-        <div>退出</div>
+        <div>{{ $t("search.exit") }}</div>
       </div>
     </div>
   </div>
