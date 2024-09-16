@@ -10,7 +10,11 @@ import {search_index} from "@/modules/use_search.js";
 import {throttle_func} from "@/modules/untils.js";
 import {user_options} from "@/values/stores/user_options.js";
 
+
 const is_searching = ref(false);
+// 当前高亮的index
+const active_index = ref(0);
+
 // mask点击关闭搜索
 const close_search = (event) => {
   if (event.target.id === "search-mask") {
@@ -53,7 +57,8 @@ const search_result = computed(() => {
 });
 
 //跳转到搜索结果
-const jump_to_search_result = (item) => {
+const jump_to_search_result = () => {
+  const item = search_result.value[active_index.value].item;
   is_searching.value = false;
   //跳转到command页面并且设置目标页面
   user_options.value.action_tab = "edit";
@@ -115,9 +120,12 @@ const highlight_match = (text, match) => {
       </el-input>
       <div id="search-output">
         <div
-            v-for="item in search_result"
+            v-for="(item,index) in search_result"
             class="search-output-element"
-            @click="jump_to_search_result(item.item)">
+            :class="{output_active: index === active_index}"
+            @click="jump_to_search_result"
+            @mouseover="active_index = index"
+        >
           <!--todo 这边可以来个icon-->
 
           <div>
@@ -242,7 +250,7 @@ const highlight_match = (text, match) => {
   background-color: var(--search-sub-background);
   box-shadow: 0 1px 3px var(--search-shadow);
 
-  &:hover {
+  &.output_active {
     background-color: var(--search-hoving-background);
     //将所有子元素都拥有高对比度一些的颜色
     & * {
