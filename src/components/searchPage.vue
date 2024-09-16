@@ -3,17 +3,25 @@
  * @fileOverview 搜索页面
  */
 import {Right, Search} from "@element-plus/icons-vue";
-import {computed, ref} from "vue";
+import {computed, ref, watch} from "vue";
 import Mousetrap from "mousetrap";
 import Fuse from "fuse.js";
 import {search_index} from "@/modules/use_search.js";
 import {throttle_func} from "@/modules/untils.js";
 import {user_options} from "@/values/stores/user_options.js";
 
-
 const is_searching = ref(false);
 // 当前高亮的index
 const active_index = ref(0);
+
+// 监听搜索状态，在适当的时候清空输入
+watch(is_searching, (value) => {
+  if (value) { // 打开搜索时清空
+    input.value = "";
+    throttled_input.value = "";
+    active_index.value = 0;
+  }
+});
 
 // mask点击关闭搜索
 const close_search = (event) => {
@@ -30,7 +38,11 @@ Mousetrap.bind(["ctrl+k", "command+k"], (event) => {
   }
   is_searching.value = !is_searching.value;
 });
-
+Mousetrap.bind(["esc"], () => {
+  if (is_searching.value) {
+    is_searching.value = false;
+  } //关闭搜索的另一种方式
+});
 
 const input = ref("");
 const throttled_input = ref("");
