@@ -185,6 +185,10 @@ export default {
         please_input: "请输入搜索内容",
         no_result: "没有找到包含该关键字的选项",
         try_keyword: "请尝试替换其他的关键字再次搜索",
+        jump: "跳转",
+        select: "选择",
+        exit: "退出",
+
     },
     //配置文件版本的标题 如果你想要的话其实哪个版本都能给一个 如果没有的话就调用默认的key name
     nuitka_config_title: {

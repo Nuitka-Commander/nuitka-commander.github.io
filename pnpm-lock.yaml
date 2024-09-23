@@ -64,7 +64,7 @@ importers:
         version: 0.17.8(@vueuse/core@10.11.1(vue@3.4.38))(rollup@4.20.0)
       unplugin-vue-components:
         specifier: ^0.26.0
-        version: 0.26.0(@babel/parser@7.25.3)(rollup@4.20.0)(vue@3.4.38)
+        version: 0.26.0(@babel/parser@7.25.6)(rollup@4.20.0)(vue@3.4.38)
       vite:
         specifier: ^5.2.11
         version: 5.4.1(@types/node@22.3.0)(sass@1.77.8)(terser@5.31.6)
@@ -102,8 +102,17 @@ packages:
     engines: {node: '>=6.0.0'}
     hasBin: true
 
+  '@babel/parser@7.25.6':
+    resolution: {integrity: sha512-trGdfBdbD0l1ZPmcJ83eNxB9rbEax4ALFTF7fN386TMYbeCQbyme5cOEXQhbGXKebwGaB/J52w1mrklMcbgy6Q==, tarball: https://registry.npmmirror.com/@babel/parser/-/parser-7.25.6.tgz}
+    engines: {node: '>=6.0.0'}
+    hasBin: true
+
   '@babel/types@7.25.2':
     resolution: {integrity: sha512-YTnYtra7W9e6/oAZEHj0bJehPRUlLH9/fbpT5LfB0NhQXyALCRkRs3zH9v07IYhkgpqX6Z78FnuccZr/l4Fs4Q==, tarball: https://registry.npmmirror.com/@babel/types/-/types-7.25.2.tgz}
+    engines: {node: '>=6.9.0'}
+
+  '@babel/types@7.25.6':
+    resolution: {integrity: sha512-/l42B1qxpG6RdfYf343Uw1vmDjeNhneUXtzhojE7pDgfpEypmRhI6j1kr17XCVv4Cgl9HdAiQY2x0GwKm7rWCw==, tarball: https://registry.npmmirror.com/@babel/types/-/types-7.25.6.tgz}
     engines: {node: '>=6.9.0'}
 
   '@ctrl/tinycolor@3.6.1':
@@ -2640,11 +2649,23 @@ snapshots:
     dependencies:
       '@babel/types': 7.25.2
 
+  '@babel/parser@7.25.6':
+    dependencies:
+      '@babel/types': 7.25.6
+    optional: true
+
   '@babel/types@7.25.2':
     dependencies:
       '@babel/helper-string-parser': 7.24.8
       '@babel/helper-validator-identifier': 7.24.7
       to-fast-properties: 2.0.0
+
+  '@babel/types@7.25.6':
+    dependencies:
+      '@babel/helper-string-parser': 7.24.8
+      '@babel/helper-validator-identifier': 7.24.7
+      to-fast-properties: 2.0.0
+    optional: true
 
   '@ctrl/tinycolor@3.6.1': {}
 
@@ -5019,7 +5040,7 @@ snapshots:
     transitivePeerDependencies:
       - rollup
 
-  unplugin-vue-components@0.26.0(@babel/parser@7.25.3)(rollup@4.20.0)(vue@3.4.38):
+  unplugin-vue-components@0.26.0(@babel/parser@7.25.6)(rollup@4.20.0)(vue@3.4.38):
     dependencies:
       '@antfu/utils': 0.7.10
       '@rollup/pluginutils': 5.1.0(rollup@4.20.0)
@@ -5033,7 +5054,7 @@ snapshots:
       unplugin: 1.12.2
       vue: 3.4.38
     optionalDependencies:
-      '@babel/parser': 7.25.3
+      '@babel/parser': 7.25.6
     transitivePeerDependencies:
       - rollup
       - supports-color

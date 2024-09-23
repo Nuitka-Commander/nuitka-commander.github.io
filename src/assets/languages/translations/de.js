@@ -181,6 +181,9 @@ export default {
         please_input: "Bitte geben Sie den Suchinhalt ein",
         no_result: "Keine Optionen mit diesem Schlüsselwort gefunden",
         try_keyword: "Bitte versuchen Sie es mit anderen Schlüsselwörtern erneut",
+        jump: "Springen",
+        select: "Auswählen",
+        exit: "Beenden",
     },
     // Konfigurationsdateiversionstitel, wenn Sie möchten, können Sie jeder Version einen Titel geben. Wenn nicht, wird der Standard-Schlüsselname verwendet
     nuitka_config_title: {

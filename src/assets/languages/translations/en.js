@@ -181,6 +181,9 @@ export default {
         please_input: "Please enter search content",
         no_result: "No options containing this keyword were found",
         try_keyword: "Please try replacing with other keywords and search again",
+        jump: "Jump",
+        select: "Select",
+        exit: "Exit",
     },
     // Configuration file version titles, if you want, you can give each version a title. If not, the default key name will be used
     nuitka_config_title: {

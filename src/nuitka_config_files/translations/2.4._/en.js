@@ -575,11 +575,6 @@ export default {
         desc: "Used to set the output location for '--verbose', should be a filename. Defaults to standard output.",
     },
     // General OS controls
-    enable_console: {
-        name: "Enable Console",
-        desc: "When compiling for Windows or macOS, enable the console window and create a console application. \n" +
-            "This will disable prompts from some modules, e.g., \"PySide\" will suggest disabling it. Defaults to enabled.",
-    },
     force_stdout_spec: {
         name: "Force Standard Output Specification",
         desc: "Force the program's standard output to this location. Useful for programs that disable the console and for Windows services using the Nuitka Commercial plugin. Defaults to inactive, \n" +

@@ -2,8 +2,8 @@
 /**
  * @fileOverview 搜索页面
  */
-import {Right, Search} from "@element-plus/icons-vue";
-import {computed, ref} from "vue";
+import {Close, Right, Search} from "@element-plus/icons-vue";
+import {computed, nextTick, ref, watch} from "vue";
 import Mousetrap from "mousetrap";
 import Fuse from "fuse.js";
 import {search_index} from "@/modules/use_search.js";
@@ -11,13 +11,32 @@ import {throttle_func} from "@/modules/untils.js";
 import {user_options} from "@/values/stores/user_options.js";
 
 const is_searching = ref(false);
+// 当前高亮的index
+const active_index = ref(0);
+
+// 监听搜索状态，在适当的时候清空输入
+watch(is_searching, (value) => {
+  if (value) { // 打开搜索时清空
+    input.value = "";
+    throttled_input.value = "";
+    active_index.value = 0;
+  }
+});
+
 // mask点击关闭搜索
 const close_search = (event) => {
   if (event.target.id === "search-mask") {
     is_searching.value = false;
   }
 };
+
 // 快捷键
+// 允许在 input, textarea 和 select 元素中触发快捷键
+// noinspection JSUnusedGlobalSymbols
+Mousetrap.prototype.stopCallback = function () {
+  return false;
+};
+// 打开搜索
 Mousetrap.bind(["ctrl+k", "command+k"], (event) => {
   if (event.preventDefault) {
     event.preventDefault();
@@ -25,6 +44,29 @@ Mousetrap.bind(["ctrl+k", "command+k"], (event) => {
     event.returnValue = false;
   }
   is_searching.value = !is_searching.value;
+});
+// 上下移动键
+Mousetrap.bind(["up"], () => {
+  if (is_searching.value) {
+    active_index.value = Math.max(0, active_index.value - 1);
+  }
+});
+Mousetrap.bind(["down"], () => {
+  if (is_searching.value) {
+    active_index.value = Math.min(search_result.value.length - 1, active_index.value + 1);
+  }
+});
+// 回车键跳转
+Mousetrap.bind(["enter"], () => {
+  if (is_searching.value) {
+    jump_to_search_result();
+  }
+});
+// esc键退出
+Mousetrap.bind(["esc"], () => {
+  if (is_searching.value) {
+    is_searching.value = false;
+  } //关闭搜索的另一种方式
 });
 
 
@@ -53,7 +95,11 @@ const search_result = computed(() => {
 });
 
 //跳转到搜索结果
-const jump_to_search_result = (item) => {
+const jump_to_search_result = () => {
+  if (search_result.value.length < 1) { //没有搜索结果返回
+    return;
+  }
+  const item = search_result.value[active_index.value].item;
   is_searching.value = false;
   //跳转到command页面并且设置目标页面
   user_options.value.action_tab = "edit";
@@ -64,6 +110,7 @@ const jump_to_search_result = (item) => {
     item.is_focusing = false;
   }, 4000);
 };
+
 // 处理高亮显示的匹配
 const highlight_match = (text, match) => {
   if (!match) {
@@ -80,6 +127,39 @@ const highlight_match = (text, match) => {
     }
   });
 };
+// 监听搜索结果，防止溢出
+watch(search_result, () => {
+  active_index.value = Math.min(search_result.value.length - 1, active_index.value);
+});
+
+// auto focus
+const input_ref = ref(null);
+watch(is_searching, async (value) => {
+  if (value) {
+    await nextTick();
+    // noinspection JSUnresolvedReference
+    input_ref.value.focus();
+  }
+});
+
+//防溢出
+const search_output_ref = ref(null);
+watch([search_result, active_index], async () => {
+  await nextTick();
+  // noinspection JSUnresolvedReference
+  const activeElement = search_output_ref.value?.querySelector(".output_active");
+  if (activeElement) {
+    const parent = search_output_ref.value;
+    // noinspection JSUnresolvedReference
+    const parentRect = parent.getBoundingClientRect();
+    const activeRect = activeElement.getBoundingClientRect();
+    if (activeRect.bottom > parentRect.bottom) {
+      parent.scrollTop += activeRect.bottom - parentRect.bottom;
+    } else if (activeRect.top < parentRect.top) {
+      parent.scrollTop -= parentRect.top - activeRect.top;
+    }
+  }
+});
 </script>
 <template>
   <!--搜索按钮-->
@@ -103,7 +183,7 @@ const highlight_match = (text, match) => {
           :placeholder="$t('search.please_input')"
           size="large"
           @input.native="input_handler"
-          autofocus
+          ref="input_ref"
       >
         <template #prefix>
           <el-icon>
@@ -111,13 +191,24 @@ const highlight_match = (text, match) => {
           </el-icon>
         </template>
         <template></template>
+        <template #append>
+          <el-button @click="is_searching=false">
+            <el-icon>
+              <close></close>
+            </el-icon>
+          </el-button>
 
+
+        </template>
       </el-input>
-      <div id="search-output">
+      <div id="search-output" ref="search_output_ref">
         <div
-            v-for="item in search_result"
+            v-for="(item,index) in search_result"
             class="search-output-element"
-            @click="jump_to_search_result(item.item)">
+            :class="{output_active: index === active_index}"
+            @click="jump_to_search_result"
+            @mouseover="active_index = index"
+        >
           <!--todo 这边可以来个icon-->
 
           <div>
@@ -167,7 +258,15 @@ const highlight_match = (text, match) => {
           </el-text>
         </div>
       </div>
-
+      <div v-if="search_result.length > 0 " id="search-bottom">
+        <div class="hotkey-tip">Enter</div>
+        <div>{{ $t("search.jump") }}</div>
+        <div class="hotkey-tip">↑</div>
+        <div class="hotkey-tip">↓</div>
+        <div>{{ $t("search.select") }}</div>
+        <div class="hotkey-tip">Esc</div>
+        <div>{{ $t("search.exit") }}</div>
+      </div>
     </div>
   </div>
 
@@ -242,7 +341,7 @@ const highlight_match = (text, match) => {
   background-color: var(--search-sub-background);
   box-shadow: 0 1px 3px var(--search-shadow);
 
-  &:hover {
+  &.output_active {
     background-color: var(--search-hoving-background);
     //将所有子元素都拥有高对比度一些的颜色
     & * {
@@ -298,6 +397,19 @@ const highlight_match = (text, match) => {
     height: 50px;
     transform: translateX(-1000vw);
     filter: drop-shadow(1000vw 0 var(--el-text-color-primary));
+  }
+}
+
+#search-bottom {
+  font-size: 13px;
+  display: flex;
+  margin-top: 12px;
+  gap: 5px;
+
+  .hotkey-tip {
+    padding: 2px 4px;
+    border-radius: 8px;
+    background-color: var(--search-sub-background);
   }
 }
 </style>
