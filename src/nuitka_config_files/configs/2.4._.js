@@ -1074,14 +1074,6 @@ const config = {
         ),
     },
     general_os_controls: {
-        enable_console: add_option.bool(
-            "enable_console",
-            {
-                original: "--enable-console",
-            },
-            true,
-            true,
-        ),
         force_stdout_spec: add_option.definable_single(
             "force_stdout_spec",
             {

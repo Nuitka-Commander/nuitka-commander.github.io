@@ -622,11 +622,6 @@ export default {
             },
         },
     },
-    enable_console: {
-        name: "启用控制台",
-        desc: "在为Windows或macOS编译时，启用控制台窗口并创建一个控制台应用程序。\n" +
-            "这将禁用来自某些模块的提示，例如\"PySide\"会建议禁用它。默认启用。",
-    },
     force_stdout_spec: {
         name: "强制标准输出规范",
         desc: "强制程序的标准输出输出到这个位置。对于禁用控制台的程序和使用Nuitka商业版的Windows服务插件的程序非常有用。默认不激活，\n" +
