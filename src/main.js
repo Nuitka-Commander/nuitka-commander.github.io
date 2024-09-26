@@ -18,6 +18,9 @@ import "element-plus/theme-chalk/el-message.css";
 import "element-plus/theme-chalk/el-notification.css";
 import "element-plus/theme-chalk/el-tour.css";
 
+import("shell-quote").then((s) => {
+    console.log(s.parse("echo 123"));
+});
 init_all();
 const app = createApp(App);
 app.use(i18n);
