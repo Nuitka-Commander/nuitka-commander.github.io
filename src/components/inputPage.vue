@@ -60,7 +60,7 @@ const start_input = async (type) => {
               v-model="input_data[input_type.cli]"
               :autosize="{minRows:10,maxRows:20}"
               :placeholder="$t('input_page.please_input_cli_command')"
-              type="textarea"
+
           >
           </el-input>
         </div>
@@ -90,7 +90,7 @@ const start_input = async (type) => {
               v-model="input_data[input_type.json]"
               :autosize="{minRows:10,maxRows:20}"
               :placeholder="$t(`input_page.json.please_input_json`)"
-              type="textarea"
+
 
           >
 
@@ -116,7 +116,7 @@ const start_input = async (type) => {
 
 .input-area {
   display: flex;
-  max-height: 80%;
+  height: 80%;
   margin: 15px 60px;
 }
 

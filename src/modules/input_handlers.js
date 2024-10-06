@@ -26,7 +26,18 @@ const throw_error = (message) => {
  */
 export const input_handlers = {
     [input_type.cli]: async (data) => {
-        return data;
+        if (bash_parser === undefined) {
+            ElMessage({
+                type: "success",
+                message: "(to i18n)请等待bash_parser加载完毕",
+                showClose: true,
+                duration: constants.message_duration,
+            });
+            return;
+        }
+        console.log(`CLI Input ${data}`);
+
+        return;
     },
 
     [input_type.json]: async (data) => {
