@@ -126,4 +126,5 @@ const start_input = async (type) => {
   padding-top: 10px; //这里因为div是在button外面所以用padding
   padding-right: 10px;
 }
+
 </style>

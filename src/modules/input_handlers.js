@@ -26,18 +26,49 @@ const throw_error = (message) => {
  */
 export const input_handlers = {
     [input_type.cli]: async (data) => {
+        const styles = {
+            error_code: "color: red;font-weight: fold;",
+            area: "display: flex;flex-wrap: wrap;justify-content: center;align-items: center;gap:10px;",
+        };
         if (bash_parser === undefined) {
-            ElMessage({
-                type: "success",
+            await ElMessage({
+                type: "warning",
                 message: "(to i18n)请等待bash_parser加载完毕",
                 showClose: true,
                 duration: constants.message_duration,
             });
             return;
         }
-        console.log(`CLI Input ${data}`);
+        const parsed_data = (await bash_parser).parse(data);
+        console.log(`parsed_data: ${JSON.stringify(parsed_data, null, 4)}`);
 
-        return;
+        let flag_error = false;
+        parsed_data.forEach((item) => {
+            //如果不是字符串
+            if (typeof item !== "string") {
+                flag_error = true;
+            }
+        });
+        // 错误处理1 —— 不支持操作符
+        if (flag_error) {
+            await ElMessageBox({
+                // 设置弹窗的标题
+                title: "to i18n 输入错误——不支持操作符",
+                // 设置弹窗的消息内容
+                message: () => {
+                    return h("div", {style: styles.area}, parsed_data.map(str => {
+                        if (typeof str === "string") {
+                            return h("code", {}, str);
+                        } else {
+                            return h("code", {style: styles.error_code}, str.op);
+                        }
+                    }));
+                },
+
+            });
+            return;
+        }
+
     },
 
     [input_type.json]: async (data) => {
