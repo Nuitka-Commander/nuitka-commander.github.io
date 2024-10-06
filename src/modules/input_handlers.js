@@ -39,11 +39,11 @@ export const input_handlers = {
             });
             return;
         }
-        const parsed_data = (await bash_parser).parse(data);
-        console.log(`parsed_data: ${JSON.stringify(parsed_data, null, 4)}`);
+        const original_parsed_data = (await bash_parser).parse(data);
+        console.log(`parsed_data: ${JSON.stringify(original_parsed_data, null, 4)}`);
 
         let flag_error = false;
-        parsed_data.forEach((item) => {
+        original_parsed_data.forEach((item) => {
             //如果不是字符串
             if (typeof item !== "string") {
                 flag_error = true;
@@ -56,7 +56,7 @@ export const input_handlers = {
                 title: "to i18n 输入错误——不支持操作符",
                 // 设置弹窗的消息内容
                 message: () => {
-                    return h("div", {style: styles.area}, parsed_data.map(str => {
+                    return h("div", {style: styles.area}, original_parsed_data.map(str => {
                         if (typeof str === "string") {
                             return h("code", {}, str);
                         } else {
@@ -68,6 +68,33 @@ export const input_handlers = {
             });
             return;
         }
+        const unexcepted_command = [ // 不用解析的命令的规则集，使用函数，返回true表示不用解析
+            (str) => { // python
+                return str.startsWith("python") || str === "-m";
+            },
+            (str) => { // nuitka过滤
+                return str === "nuitka";
+            },
+
+
+        ];
+        const parsed_data = []; // 用于存储过滤后的数据
+        original_parsed_data.forEach((item) => {
+            if (item.trim() === "") {
+                return;
+            }
+            let flag = false;
+            for (const rule of unexcepted_command) {
+                if (rule(item)) {
+                    flag = true;
+                    console.log("已过滤命令:" + item);
+                    break;
+                }
+            }
+            if (!flag) {
+                parsed_data.push(item);
+            }
+        });
 
     },
 
