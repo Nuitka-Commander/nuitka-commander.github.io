@@ -8,6 +8,7 @@ import * as constants from "@/values/constants.json";
 import {h} from "vue";
 import {i18n} from "@/assets/languages/i18n.js";
 
+const bash_parser = import("shell-quote");
 
 const t = i18n.global.t;
 const throw_error = (message) => {
@@ -18,6 +19,7 @@ const throw_error = (message) => {
         duration: constants.message_duration,
     });
 };
+
 /**
  * 将输入的数据解析为json格式
  * @type {{[p: string]: (function(*): Promise<*>)|(function(*): Promise<null|*>)}}
