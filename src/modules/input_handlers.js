@@ -75,6 +75,9 @@ export const input_handlers = {
             (str) => { // nuitka过滤
                 return str === "nuitka";
             },
+            (str) => { //conda
+                return str === "conda";
+            },
 
 
         ];
