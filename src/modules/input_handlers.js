@@ -98,7 +98,109 @@ export const input_handlers = {
                 parsed_data.push(item);
             }
         });
+        console.log(`parsed_data: ${parsed_data}`);
+        const error_list = []; //一个错误列表，存储所有命令，但是内部根据标识来表明是否是报错的
+        await use_command.reset_status(); // 重置一手
+        parsed_data.forEach((item) => {
+            // 分割命令和参数
+            const {
+                key,
+                value,
+            } = (() => {
+                const [key, ...value] = item.split("=");
+                return {
+                    key: key,
+                    value: value.join("="),
+                };
+            })();
+            console.log(`key: ${key}, value: ${value}`);
+            if (key === undefined || !key.startsWith("--")) {
+                error_list.push({
+                    item: item,
+                    error: true,
+                });
+                console.log(`错误的命令: ${item}，不以--开头`);
+                return;
+            }
+            const command = key;
+            const target_val = (() => { //分割一下
+                const regex = /,(?=(?:(?:[^"]*"){2})*[^"]*$)/;
+                const result = value.split(regex);
+                return result.map((val) => {
+                    return val.replace(/^['"]|['"]$/g, ""); // Remove leading and trailing quotes
+                });
+            })();
+            // 巨大遍历
+            let flag = false;
+            for (const topKey of Object.keys(use_command.status.value)) {
+                const topValue = use_command.status.value[topKey];
+                for (const subKey of Object.keys(topValue)) {
+                    const subValue = topValue[subKey];
+                    for (const final_key of Object.keys(subValue)) {
+                        const final_value = subValue[final_key];
 
+                        if (final_value.command.original !== command) {
+                            continue;
+                        }
+                        // todo 这边的赋值逻辑有问题，应该是根据原始命令反推出value的值
+                        flag = true; //wow,匹配成功了
+                        switch (final_value.type) { //根据类型进行处理
+                            case nuitka_element_type.Bool:
+                                // final_value.val = true;
+                                console.log("bool");
+                                break;
+                            case nuitka_element_type.Definable_single:
+                                // final_value.val = target_val[0];
+                                console.log("definable_single");
+                                break;
+                            case nuitka_element_type.Definable_multiple_option:
+                                // final_value.val = target_val;
+                                console.log("definable_multiple_option");
+                                break;
+                            case nuitka_element_type.Single_option:
+                                // 判断值是否存在于选项中？
+                                console.log(`target_val: ${target_val}, elements: ${final_value.elements},single_option`);
+                                let allMatch = target_val.every(val =>
+                                    Object.values(final_value.elements).some(element => element.command.original === val),
+                                );
+                                if (allMatch) {
+                                    // final_value.val = target_val;
+                                } else {
+                                    flag = false;
+                                    console.log("有未定义的值");
+                                }
+                                break;
+                            case nuitka_element_type.Defined_multiple:
+                                // 判断值是否存在于选项中？
+                                console.log(`target_val: ${target_val},defined_multiple`);
+                                console.log(final_value.elements);
+                                let allMatch_defined_multiple = target_val.every(val =>
+                                    Object.values(final_value.elements).some(element => element.command.original === val),
+                                );
+                                if (allMatch_defined_multiple) {
+                                    // final_value.val = target_val;
+                                } else {
+                                    flag = false;
+                                    console.log("有未定义的值");
+                                }
+                                break;
+                        }
+                    }
+                    if (flag) {
+                        break;
+                    }
+                }
+                if (flag) {
+                    break;
+                }
+            }
+            console.log(`flag: ${flag}, item: ${item}, command: ${command}, target_val: ${target_val}`);
+            error_list.push({
+                item: item,
+                error: flag,
+            });
+
+        });
     },
 
     [input_type.json]: async (data) => {
