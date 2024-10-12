@@ -62,13 +62,13 @@ const add_new_element = (elements, command) => {
 export const input_handlers = {
     [input_type.cli]: async (data) => {
         const styles = {
-            error_code: "color: red;font-weight: fold;",
+            error_code: "color: #FF3636;font-weight: fold;",
             area: "display: flex;flex-wrap: wrap;justify-content: flex-start;align-items: center;gap:10px;",
         };
         if (bash_parser === undefined) {
             await ElMessage({
                 type: "warning",
-                message: "(to i18n)请等待bash_parser加载完毕",
+                message: t("input_page.cli.wait_bash_parser"),
                 showClose: true,
                 duration: constants.message_duration,
             });
@@ -89,7 +89,7 @@ export const input_handlers = {
             try {
                 await ElMessageBox({
                     // 设置弹窗的标题
-                    title: "to i18n 输入错误——不支持操作符",
+                    title: t(`input_page.cli.unsupported_operate`),
                     // 设置弹窗的消息内容
                     message: () => {
                         return h("div", {style: styles.area}, original_parsed_data.map(str => {
@@ -281,7 +281,7 @@ export const input_handlers = {
         try {
             await ElMessageBox({
                 // Set the title of the message box
-                title: "to i18n 输入错误——错误的命令",
+                title: t(`input_page.cli.error_command`),
                 // Set the message content of the message box
                 message: () => {
                     return h("div", {style: styles.area}, error_list.map(error => {
@@ -304,7 +304,7 @@ export const input_handlers = {
         try {
             original_data = JSON.parse(data);
         } catch (e) {
-            throw_error(t("output_page.json.json_parse_error"));
+            throw_error(t("input_page.json.json_parse_error"));
             return null;
         }
         await use_command.reset_status();
@@ -356,12 +356,12 @@ export const input_handlers = {
         });
         //检查是否有无法处理的属性，如果有就提示用户
         if (Object.keys(original_data).length > 0) {
-            throw_error(t("output_page.general.unable_parse_check"));
+            throw_error(t("input_page.general.unable_parse_check"));
             // 一个简单的弹窗，提示用户有哪些属性无法识别
             try {
                 await ElMessageBox({
                     // 设置弹窗的标题
-                    title: t(`output_page.general.please_check_down`),
+                    title: t(`input_page.general.please_check_down`),
                     // 设置弹窗的消息内容
                     message: () => {
                         // 获取original_data对象中所有剩余的键
