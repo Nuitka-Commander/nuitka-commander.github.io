@@ -132,6 +132,7 @@ export const input_handlers = {
             })();
             // 巨大遍历
             let flag = false;
+
             for (const topKey of Object.keys(use_command.status.value)) {
                 const topValue = use_command.status.value[topKey];
                 for (const subKey of Object.keys(topValue)) {
@@ -142,48 +143,59 @@ export const input_handlers = {
                         if (final_value.command.original !== command) {
                             continue;
                         }
-                        // todo 这边的赋值逻辑有问题，应该是根据原始命令反推出value的值
+
                         flag = true; //wow,匹配成功了
-                        switch (final_value.type) { //根据类型进行处理
-                            case nuitka_element_type.Bool:
-                                // final_value.val = true;
+                        // 找一下元素的key
+                        const find_elements_key_by_command = (command, elements) => {
+                            for (const key of Object.keys(elements)) {
+                                if (elements[key].command.original === command) {
+                                    return key;
+                                }
+                            }
+                        };
+                        const handlers = {
+                            [nuitka_element_type.Bool]: (final_value, target_val) => {
+                                final_value.val = true;
                                 console.log("bool");
-                                break;
-                            case nuitka_element_type.Definable_single:
+                            },
+                            [nuitka_element_type.Definable_single]: (final_value, target_val) => {
                                 // final_value.val = target_val[0];
                                 console.log("definable_single");
-                                break;
-                            case nuitka_element_type.Definable_multiple_option:
+                            },
+                            [nuitka_element_type.Definable_multiple_option]: (final_value, target_val) => {
                                 // final_value.val = target_val;
                                 console.log("definable_multiple_option");
-                                break;
-                            case nuitka_element_type.Single_option:
-                                // 判断值是否存在于选项中？
+                            },
+                            [nuitka_element_type.Single_option]: (final_value, target_val) => {
                                 console.log(`target_val: ${target_val}, elements: ${final_value.elements},single_option`);
                                 let allMatch = target_val.every(val =>
                                     Object.values(final_value.elements).some(element => element.command.original === val),
                                 );
                                 if (allMatch) {
-                                    // final_value.val = target_val;
+                                    final_value.val = target_val.map(val => find_elements_key_by_command(val, final_value.elements));
                                 } else {
                                     flag = false;
                                     console.log("有未定义的值");
                                 }
-                                break;
-                            case nuitka_element_type.Defined_multiple:
-                                // 判断值是否存在于选项中？
+                            },
+                            [nuitka_element_type.Defined_multiple]: (final_value, target_val) => {
                                 console.log(`target_val: ${target_val},defined_multiple`);
                                 console.log(final_value.elements);
                                 let allMatch_defined_multiple = target_val.every(val =>
                                     Object.values(final_value.elements).some(element => element.command.original === val),
                                 );
                                 if (allMatch_defined_multiple) {
-                                    // final_value.val = target_val;
+                                    final_value.val = target_val.map(val => find_elements_key_by_command(val, final_value.elements));
                                 } else {
                                     flag = false;
                                     console.log("有未定义的值");
                                 }
-                                break;
+                            },
+                        };
+
+                        const handler = handlers[final_value.type];
+                        if (handler) {
+                            handler(final_value, target_val);
                         }
                     }
                     if (flag) {
@@ -194,6 +206,7 @@ export const input_handlers = {
                     break;
                 }
             }
+
             console.log(`flag: ${flag}, item: ${item}, command: ${command}, target_val: ${target_val}`);
             error_list.push({
                 item: item,
