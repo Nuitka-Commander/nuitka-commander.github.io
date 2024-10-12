@@ -63,7 +63,7 @@ export const input_handlers = {
     [input_type.cli]: async (data) => {
         const styles = {
             error_code: "color: red;font-weight: fold;",
-            area: "display: flex;flex-wrap: wrap;justify-content: center;align-items: center;gap:10px;",
+            area: "display: flex;flex-wrap: wrap;justify-content: flex-start;align-items: center;gap:10px;",
         };
         if (bash_parser === undefined) {
             await ElMessage({
@@ -86,21 +86,25 @@ export const input_handlers = {
         });
         // 错误处理1 —— 不支持操作符
         if (flag_error) {
-            await ElMessageBox({
-                // 设置弹窗的标题
-                title: "to i18n 输入错误——不支持操作符",
-                // 设置弹窗的消息内容
-                message: () => {
-                    return h("div", {style: styles.area}, original_parsed_data.map(str => {
-                        if (typeof str === "string") {
-                            return h("code", {}, str);
-                        } else {
-                            return h("code", {style: styles.error_code}, str.op);
-                        }
-                    }));
-                },
+            try {
+                await ElMessageBox({
+                    // 设置弹窗的标题
+                    title: "to i18n 输入错误——不支持操作符",
+                    // 设置弹窗的消息内容
+                    message: () => {
+                        return h("div", {style: styles.area}, original_parsed_data.map(str => {
+                            if (typeof str === "string") {
+                                return h("code", {}, str);
+                            } else {
+                                return h("code", {style: styles.error_code}, str.op);
+                            }
+                        }));
+                    },
 
-            });
+                });
+            } catch (e) {
+                console.log(e);
+            }
             return;
         }
         const unexcepted_command = [ // 不用解析的命令的规则集，使用函数，返回true表示不用解析
@@ -252,13 +256,13 @@ export const input_handlers = {
             console.log(`flag: ${flag}, item: ${item}, command: ${command}, target_val: ${target_val}`);
             error_list.push({
                 item: item,
-                error: flag,
+                error: !flag,
             });
 
         });
         let error_flag = false;
         for (const error of error_list) {
-            if (!error.error) {
+            if (error.error) {
                 error_flag = true;
                 break;
             }
@@ -272,22 +276,26 @@ export const input_handlers = {
             });
             return;
         }
+        console.log(error_list);
         // 错误处理2 —— 命令错误
-        await ElMessageBox({
-            // 设置弹窗的标题
-            title: "to i18n 输入错误——错误的命令",
-            // 设置弹窗的消息内容
-            message: () => {
-                return h("div", {style: styles.area}, error_list.map(str => {
-                    if (!str.error) {
-                        return h("code", {}, str);
-                    } else {
-                        return h("code", {style: styles.error_code}, str.op);
-                    }
-                }));
-            },
-
-        });
+        try {
+            await ElMessageBox({
+                // Set the title of the message box
+                title: "to i18n 输入错误——错误的命令",
+                // Set the message content of the message box
+                message: () => {
+                    return h("div", {style: styles.area}, error_list.map(error => {
+                        if (!error.error) {
+                            return h("code", {}, error.item);
+                        } else {
+                            return h("code", {style: styles.error_code}, error.item);
+                        }
+                    }));
+                },
+            });
+        } catch (e) {
+            console.log(e);
+        }
     },
 
     [input_type.json]: async (data) => {
