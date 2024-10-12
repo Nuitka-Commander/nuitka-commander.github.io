@@ -256,6 +256,38 @@ export const input_handlers = {
             });
 
         });
+        let error_flag = false;
+        for (const error of error_list) {
+            if (!error.error) {
+                error_flag = true;
+                break;
+            }
+        }
+        if (!error_flag) {
+            ElMessage({
+                type: "success",
+                message: t(`message.data_input_success`),
+                showClose: true,
+                duration: constants.message_duration,
+            });
+            return;
+        }
+        // 错误处理2 —— 命令错误
+        await ElMessageBox({
+            // 设置弹窗的标题
+            title: "to i18n 输入错误——错误的命令",
+            // 设置弹窗的消息内容
+            message: () => {
+                return h("div", {style: styles.area}, error_list.map(str => {
+                    if (!str.error) {
+                        return h("code", {}, str);
+                    } else {
+                        return h("code", {style: styles.error_code}, str.op);
+                    }
+                }));
+            },
+
+        });
     },
 
     [input_type.json]: async (data) => {
