@@ -20,8 +20,43 @@ const throw_error = (message) => {
     });
 };
 
+// CLI处理函数
+
 /**
- * 将输入的数据解析为json格式
+ * 根据原始命令寻找元素的key
+ * @param command {string}
+ * @param elements {object}
+ * @return {string}
+ */
+const find_elements_key_by_command = (command, elements) => {
+    for (const key of Object.keys(elements)) {
+        if (elements[key].command.original === command) {
+            return key;
+        }
+    }
+    return undefined;
+};
+/**
+ * 给目标对象添加新的元素 并且不添加已有元素
+ * @param elements {object}
+ * @param command {string}
+ */
+const add_new_element = (elements, command) => {
+    if (elements[command]) {
+        return;
+    }
+    elements[command] = {
+        command: {
+            original: command,
+        },
+        i18n: "",
+        enabled: true,
+        user_provide: true,
+
+    };
+};
+/**
+ * 将输入的数据解析为nuitka commander特有的对象
  * @type {{[p: string]: (function(*): Promise<*>)|(function(*): Promise<null|*>)}}
  */
 export const input_handlers = {
@@ -145,25 +180,32 @@ export const input_handlers = {
                         }
 
                         flag = true; //wow,匹配成功了
-                        // 找一下元素的key
-                        const find_elements_key_by_command = (command, elements) => {
-                            for (const key of Object.keys(elements)) {
-                                if (elements[key].command.original === command) {
-                                    return key;
-                                }
-                            }
-                        };
+
                         const handlers = {
-                            [nuitka_element_type.Bool]: (final_value, target_val) => {
+                            [nuitka_element_type.Bool]: (final_value, _) => {
                                 final_value.val = true;
                                 console.log("bool");
                             },
                             [nuitka_element_type.Definable_single]: (final_value, target_val) => {
-                                // final_value.val = target_val[0];
+                                let temp_val = find_elements_key_by_command(target_val[0], final_value.elements);
+                                if (!temp_val) {
+                                    add_new_element(final_value.elements, target_val[0]);
+                                    temp_val = target_val[0];
+                                }
+                                final_value.val = temp_val;
                                 console.log("definable_single");
                             },
                             [nuitka_element_type.Definable_multiple_option]: (final_value, target_val) => {
-                                // final_value.val = target_val;
+                                const pushed = [];
+                                target_val.forEach(val => {
+                                    let temp_val = find_elements_key_by_command(val, final_value.elements);
+                                    if (!temp_val) {
+                                        add_new_element(final_value.elements, val);
+                                        temp_val = val;
+                                    }
+                                    pushed.push(temp_val);
+                                });
+                                final_value.val = pushed;
                                 console.log("definable_multiple_option");
                             },
                             [nuitka_element_type.Single_option]: (final_value, target_val) => {
