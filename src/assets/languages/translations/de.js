@@ -81,6 +81,11 @@ export default {
             please_input_json: "Bitte geben Sie die von dieser Website exportierten JSON-Daten ein",
             json_parse_error: "JSON-Parsing fehlgeschlagen. Bitte überprüfen Sie, ob die eingegebenen Daten dem JSON-Format entsprechen",
         },
+        cli: {
+            wait_bash_parser: "Bitte warten Sie, bis der Bash-Parser geladen ist",
+            unsupported_operate: "Eingabefehler - nicht unterstützter Operator, bitte überprüfen Sie Ihre Eingabe",
+            error_command: "Eingabefehler - Befehlsfehler, bitte stellen Sie sicher, dass Ihr Befehl korrekt ist und Sie die richtige Nuitka-Version ausgewählt haben",
+        },
     },
     nuitka_elements: {
         select_placeholder: "Auswählen",

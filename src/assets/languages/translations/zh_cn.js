@@ -84,6 +84,11 @@ export default {
             please_input_json: "请输入从本网站导出的JSON数据",
             json_parse_error: "JSON解析失败，请检查输入的数据是否符合JSON格式",
         },
+        cli: {
+            wait_bash_parser: "请等待Bash Parser加载完毕",
+            unsupported_operate: "输入错误——不支持操作符，请检查您的输入",
+            error_command: "输入错误——命令错误，请确保你的命令正确，并选择了正确的Nuitka版本",
+        },
     },
     nuitka_elements: {
         select_placeholder: "选择",
