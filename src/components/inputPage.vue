@@ -41,32 +41,32 @@ const start_input = async (type) => {
   <!--记得写input_type-->
   <!--command line-->
   <el-tabs stretch tab-position="left" type="card">
-    <!--<el-tab-pane>-->
-    <!--  <template #label>{{ $t("input_page.input_from_cli") }}</template>-->
-    <!--  <div class="input_page_content_area">-->
-    <!--    <div class="start_input_button">-->
-    <!--      <el-button :disabled="is_importing"-->
-    <!--                 @click="start_input(input_type.cli)"-->
-    <!--      >-->
-    <!--        <el-icon>-->
-    <!--          <promotion></promotion>-->
-    <!--        </el-icon>-->
-    <!--        {{ $t("input_page.start_input") }}-->
-    <!--      </el-button>-->
-    <!--    </div>-->
-    <!--    &lt;!&ndash;&ndash;&gt;-->
-    <!--    <div class="input-area">-->
-    <!--      <el-input-->
-    <!--          v-model="input_data[input_type.cli]"-->
-    <!--          :autosize="{minRows:10,maxRows:20}"-->
-    <!--          :placeholder="$t('input_page.please_input_cli_command')"-->
-    <!--          type="textarea"-->
-    <!--      >-->
-    <!--      </el-input>-->
-    <!--    </div>-->
+    <el-tab-pane>
+      <template #label>{{ $t("input_page.input_from_cli") }}</template>
+      <div class="input_page_content_area">
+        <div class="start_input_button">
+          <el-button :disabled="is_importing"
+                     @click="start_input(input_type.cli)"
+          >
+            <el-icon>
+              <promotion></promotion>
+            </el-icon>
+            {{ $t("input_page.start_input") }}
+          </el-button>
+        </div>
+        <!---->
+        <div class="input-area">
+          <el-input
+              v-model="input_data[input_type.cli]"
+              :autosize="{minRows:10,maxRows:20}"
+              :placeholder="$t('input_page.please_input_cli_command')"
 
-    <!--  </div>-->
-    <!--</el-tab-pane>-->
+          >
+          </el-input>
+        </div>
+
+      </div>
+    </el-tab-pane>
     <!--json-->
     <el-tab-pane>
       <template #label>{{ $t("input_page.json.input_from_json") }}</template>
@@ -90,7 +90,8 @@ const start_input = async (type) => {
               v-model="input_data[input_type.json]"
               :autosize="{minRows:10,maxRows:20}"
               :placeholder="$t(`input_page.json.please_input_json`)"
-              type="textarea"
+
+
           >
 
           </el-input>
@@ -115,6 +116,7 @@ const start_input = async (type) => {
 
 .input-area {
   display: flex;
+  height: 80%;
   margin: 15px 60px;
 }
 
@@ -124,4 +126,5 @@ const start_input = async (type) => {
   padding-top: 10px; //这里因为div是在button外面所以用padding
   padding-right: 10px;
 }
+
 </style>
