@@ -1,6 +1,6 @@
 {
   "version": "1.0.0.0",
-  "support_nuitka_version": "2.4.*",
+  "support_nuitka_version": "2.5.*",
   "authors": [
     {
       "name": "erduotong 这只是用于测试 请不要直接修改 Github Action会自动修改的喵~",
