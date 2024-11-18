@@ -140,6 +140,7 @@ export const input_handlers = {
         console.log(`parsed_data: ${parsed_data}`);
         const error_list = []; //一个错误列表，存储所有命令，但是内部根据标识来表明是否是报错的
         await use_command.reset_status(); // 重置一手
+        const met_list = {}; // 一个标识列表，用于标识是否已经处理过某个元素
         parsed_data.forEach((item) => {
             // 分割命令和参数
             const {
@@ -209,7 +210,18 @@ export const input_handlers = {
                                     }
                                     pushed.push(temp_val);
                                 });
-                                final_value.val = pushed;
+                                console.log(met_list[final_key]);
+                                if (met_list[final_key]) {
+
+                                    final_value.val = [...pushed, ...final_value.val];
+
+                                } else {
+                                    final_value.val = pushed;
+                                }
+
+
+                                met_list[final_key] = true;
+
                                 console.log("definable_multiple_option");
                             },
                             [nuitka_element_type.Single_option]: (final_value, target_val) => {
@@ -231,7 +243,14 @@ export const input_handlers = {
                                     Object.values(final_value.elements).some(element => element.command.original === val),
                                 );
                                 if (allMatch_defined_multiple) {
-                                    final_value.val = target_val.map(val => find_elements_key_by_command(val, final_value.elements));
+                                    if (met_list[final_key]) {
+                                        final_value.val = [...target_val.map(val => find_elements_key_by_command(val, final_value.elements)),
+                                                           ...final_value.val];
+                                    } else {
+                                        final_value.val = target_val.map(val => find_elements_key_by_command(val, final_value.elements));
+                                    }
+                                    met_list[final_key] = true;
+
                                 } else {
                                     flag = false;
                                     console.log("有未定义的值");

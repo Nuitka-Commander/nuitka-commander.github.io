@@ -310,6 +310,10 @@ export default {
                 name: "附加到现有",
                 desc: "使用现有的控制台进行输出",
             },
+            hide: {
+                name: "隐藏模式",
+                desc: "新生成的控制台将被隐藏，而已经存在的控制台将像 '强制模式' 一样行为",
+            },
         },
     },
     windows_icon_from_ico: {

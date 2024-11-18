@@ -184,11 +184,11 @@ const need_json = computed(() => Object.keys(user_provides_options.value).length
 const is_equal = computed(() => is_array_equivalent(model.value.val, model.value.default));
 const result = computed(() => {
   //cli输出
-  let cli = `${model.value.command.original}=`;
+  let cli = ``;
   model.value.val.forEach((item, index) => {
-    cli += `"${model.value.elements[item].command.original}"`;
+    cli += `${model.value.command.original}="${model.value.elements[item].command.original}"`;
     if (index !== model.value.val.length - 1) {
-      cli += ",";
+      cli += " ";
     }
   });
   //
