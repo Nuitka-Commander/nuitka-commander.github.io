@@ -310,6 +310,10 @@ export default {
                 name: "Attach to Existing",
                 desc: "Use the existing console for output.",
             },
+            hide: {
+                name: "Hide Mode",
+                desc: "The newly created console will be hidden, and the existing console will behave like 'force mode'.",
+            },
         },
     },
     windows_icon_from_ico: {

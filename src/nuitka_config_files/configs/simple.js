@@ -552,6 +552,13 @@ const config = {
                     },
                     true,
                 ),
+                hide: add_option.multi_elements(
+                    "hide",
+                    {
+                        original: "hide",
+                    },
+                    true,
+                ),
             },
             "force",
         ),
