@@ -16,7 +16,7 @@
 
 ## 🐛 修复 Fixed
 
--
+- 2.5忘记加入了supported list
 
 ## 🔒 安全 Security
 
