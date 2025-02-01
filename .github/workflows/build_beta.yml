@@ -32,7 +32,7 @@ jobs:
         run: |
           pnpm run build:local_use
       - name: 上传 index.html
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: local_use index.html
           path: ${{ github.workspace }}/dist/index.html
