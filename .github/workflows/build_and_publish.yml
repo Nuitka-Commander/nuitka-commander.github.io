@@ -51,26 +51,6 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: 推送到Gitee
-        run: |
-          git config --global user.name "github action"
-          git config --global user.email "action_bot@github.com."
-          git clone https://gitee.com/nuitka-commander/nuitka-commander.git
-          rm ./nuitka-commander/index.html
-          rm -r ./nuitka-commander/assets/*
-          cp -r ./dist/* ./nuitka-commander/
-          cd ./nuitka-commander
-          git add .
-          git commit -m "Update from GitHub Actions"
-          git push https://oauth2:${{ secrets.GITEE_TOKEN }}@gitee.com/nuitka-commander/nuitka-commander.git
-
-      - name: 部署Gitee Page
-        uses: yanglbme/gitee-pages-action@main
-        with:
-          gitee-username: ${{secrets.GITEE_USERNAME}}
-          gitee-password: ${{secrets.GITEE_PASSWORD}}
-          gitee-repo: nuitka-commander/nuitka-commander
-          branch: master
       - name: 删除无用文件夹
         run: |
           cd ${{ github.workspace }}
