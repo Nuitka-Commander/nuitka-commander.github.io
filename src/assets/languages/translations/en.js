@@ -13,7 +13,7 @@ export default {
         get_involved: "Get involved",
         changelog: "Changelog",
         project_homepage: "Project homepage",
-        github_website: "Use on GitHub",
+        github_website: "Use on website",
         local_use: "Local use",
         current_version_author: "Current version contributors",
         open_source_license: "Open source license",
