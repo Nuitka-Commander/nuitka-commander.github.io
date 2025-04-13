@@ -55,7 +55,7 @@ const license_info_visible = ref(false);
             </el-link>
           </li>
           <li>
-            <el-link href="https://nuitka-commander.github.io/">{{ $t("website_info.github_website") }}</el-link>
+            <el-link href="https://nuitka-commander.erduotong.com">{{ $t("website_info.github_website") }}</el-link>
           </li>
         </ul>
       </div>
