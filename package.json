@@ -1,7 +1,7 @@
 {
   "name": "nuitka-commander",
   "private": true,
-  "version": "1.4.2.0",
+  "version": "1.4.2.1",
   "type": "module",
   "scripts": {
     "dev": "vite --port 3002",
@@ -14,7 +14,7 @@
     "@vitejs/plugin-vue": "^5.0.4",
     "@voerkai18n/runtime": "^2.1.9",
     "@vueuse/core": "^10.9.0",
-    "axios": "^1.7.9",
+    "axios": "^1.8.2",
     "element-plus": "^2.7.3",
     "fuse.js": "^7.0.0",
     "html-minifier-terser": "^7.2.0",
