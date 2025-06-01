@@ -1,7 +1,12 @@
 /**
- * @Description 客户端爬虫检测脚本 - 用于静态部署环境
+ * @Description 客户端爬虫检测脚本 - 仅基于 User-Agent 检测
  * @Author: GitHub Copilot
  * @Date: 2024-12-19
+ * @Updated: 2025-06-02
+ * 
+ * 逻辑：
+ * - 检测 User-Agent 中的爬虫标识，如果是爬虫则显示静态页面
+ * - 其他所有情况（包括普通用户、无头浏览器等）都重定向到 SPA 应用
  */
 
 (function() {
@@ -59,37 +64,9 @@
         const userAgent = navigator.userAgent.toLowerCase();
         return crawlerUserAgents.some(bot => userAgent.includes(bot));
     }
-    
-    /**
-     * 检测是否为无头浏览器（通常是爬虫）
-     */
-    function isHeadlessBrowser() {
-        // 检测常见的无头浏览器特征
-        return (
-            navigator.webdriver === true ||
-            window.navigator.webdriver === true ||
-            window.chrome && window.chrome.runtime && window.chrome.runtime.onConnect === undefined ||
-            window.phantom !== undefined ||
-            window.callPhantom !== undefined
-        );
-    }
-    
-    /**
-     * 检测是否支持JavaScript（爬虫通常不会执行JS）
-     */
-    function supportsModernJS() {
-        try {
-            // 检测ES6+特性支持
-            return typeof Promise !== 'undefined' && 
-                   typeof Set !== 'undefined' && 
-                   typeof Map !== 'undefined';
-        } catch (e) {
-            return false;
-        }
-    }
-    
-    /**
-     * 综合判断是否为爬虫
+      /**
+     * 判断是否应该重定向到SPA
+     * 只基于 user-agent 检测爬虫，其他情况都重定向
      */
     function shouldRedirectToSPA() {
         // 如果是明确的爬虫，不重定向
@@ -98,18 +75,7 @@
             return false;
         }
         
-        // 如果是无头浏览器，可能是爬虫
-        if (isHeadlessBrowser()) {
-            console.log('🤖 检测到无头浏览器，可能是爬虫，显示静态页面');
-            return false;
-        }
-        
-        // 如果不支持现代JS，可能是爬虫
-        if (!supportsModernJS()) {
-            console.log('🤖 检测到不支持现代JS的环境，可能是爬虫，显示静态页面');
-            return false;
-        }
-        
+        // 所有非爬虫的访问都重定向到SPA应用
         console.log('👤 检测到普通用户，重定向到SPA应用');
         return true;
     }
@@ -149,8 +115,7 @@
             }
         }
     }
-    
-    /**
+      /**
      * 添加调试信息（仅在开发环境）
      */
     function addDebugInfo() {
@@ -158,8 +123,6 @@
             console.group('🔍 SEO重定向调试信息');
             console.log('User-Agent:', navigator.userAgent);
             console.log('是否为爬虫:', isCrawler());
-            console.log('是否为无头浏览器:', isHeadlessBrowser());
-            console.log('支持现代JS:', supportsModernJS());
             console.log('当前路径:', window.location.pathname);
             console.groupEnd();
         }

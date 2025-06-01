@@ -174,35 +174,83 @@ export default function vitePrerender(options = {}) {
                 console.warn('⚠️  注入客户端检测脚本失败:', error.message)
                 return html
             }
-        },
-        async generateSitemap(pages, outputDir, baseUrl = "https://your-domain.com") {
+        },        async generateSitemap(pages, outputDir, baseUrl) {
             console.log('📋 生成sitemap.xml...')
 
-            // 添加根目录作为主页，具有最高优先级
-            const rootEntry = `    <url>
-        <loc>${baseUrl}/</loc>
-        <lastmod>${new Date().toISOString().split("T")[0]}</lastmod>
-        <changefreq>daily</changefreq>
-        <priority>1.0</priority>
-    </url>`;
+            // 如果没有提供baseUrl，尝试从package.json或其他配置中获取
+            if (!baseUrl || baseUrl === 'https://your-domain.com') {
+                console.warn('⚠️  未提供有效的baseUrl，使用默认值。请在配置中设置正确的域名。')
+                baseUrl = 'https://example.com'
+            }
+
+            // 标准化baseUrl，确保没有尾随斜杠
+            const normalizedBaseUrl = baseUrl.replace(/\/+$/, '')
+              // 标准化页面路径函数
+            const normalizeUrl = (basePath, pagePath) => {
+                // 确保页面路径以斜杠开头
+                const cleanPath = pagePath.startsWith('/') ? pagePath : `/${pagePath}`
+                // 避免重复的根路径
+                if (cleanPath === '/' || cleanPath === '/index') {
+                    return `${basePath}/`
+                }
+                // 其他页面都在 /static/ 路径下
+                return `${basePath}/static${cleanPath}`
+            }
+
+            // 获取当前日期
+            const currentDate = new Date().toISOString().split('T')[0]
             
+            // 创建URL集合，避免重复
+            const urlSet = new Set()
+            const entries = []
+
+            // 添加根页面
+            const rootUrl = `${normalizedBaseUrl}/`
+            if (!urlSet.has(rootUrl)) {
+                urlSet.add(rootUrl)
+                entries.push({
+                    url: rootUrl,
+                    lastmod: currentDate,
+                    changefreq: 'daily',
+                    priority: '1.0'
+                })
+            }
+
+            // 处理所有页面
+            pages.forEach(page => {
+                const fullUrl = normalizeUrl(normalizedBaseUrl, page.path)
+                
+                // 跳过重复URL和根路径（已添加）
+                if (!urlSet.has(fullUrl) && fullUrl !== rootUrl) {
+                    urlSet.add(fullUrl)
+                    entries.push({
+                        url: fullUrl,
+                        lastmod: currentDate,
+                        changefreq: 'weekly',
+                        priority: '0.8'
+                    })
+                }
+            })
+
+            // 生成XML内容
+            const xmlEntries = entries.map(entry => 
+                `  <url>
+    <loc>${entry.url}</loc>
+    <lastmod>${entry.lastmod}</lastmod>
+    <changefreq>${entry.changefreq}</changefreq>
+    <priority>${entry.priority}</priority>
+  </url>`
+            ).join('\n')
+
             const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-${rootEntry}
-${pages.map(page => {
-    const url = baseUrl + page.path
-    return `    <url>
-        <loc>${url}</loc>
-        <lastmod>${new Date().toISOString().split('T')[0]}</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.8</priority>
-    </url>`
-}).join('\n')}
+${xmlEntries}
 </urlset>`
             
             const sitemapPath = path.join(outputDir, 'sitemap.xml')
             await fs.writeFile(sitemapPath, sitemap, 'utf-8')
             console.log(`✅ Sitemap 已生成: ${sitemapPath}`)
+            console.log(`📊 共包含 ${entries.length} 个页面`)
         },
         
         async generateRobotsTxt(outputDir, baseUrl = 'https://your-domain.com') {
