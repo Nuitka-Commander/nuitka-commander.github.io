@@ -12,7 +12,8 @@
     "preview:temp": "vite preview --port 4173 --host",
     "serve": "node server/crawler-detection.js",
     "serve:dev": "cross-env NODE_ENV=development node server/crawler-detection.js",
-    "prerender": "cross-env ENABLE_PRERENDER=true vite build --mode website"
+    "prerender": "cross-env ENABLE_PRERENDER=true vite build --mode website",
+    "test:seo": "pwsh scripts/test-seo.ps1"
   },
   "dependencies": {
     "@element-plus/icons-vue": "^2.3.1",

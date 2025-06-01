@@ -155,6 +155,27 @@ export default function vitePrerender(options = {}) {
                     await previewServer.close()
                     console.log('🛑 预览服务器已关闭')
                 }
+            }        },
+        
+        async injectCrawlerDetectionScript(html) {
+            try {
+                // 读取客户端检测脚本
+                const scriptPath = path.join(process.cwd(), 'scripts', 'client-crawler-detection.js')
+                const scriptContent = await fs.readFile(scriptPath, 'utf-8')
+                
+                // 将脚本包装为内联脚本标签
+                const scriptTag = `<script data-seo-redirect>\n${scriptContent}\n</script>`
+                
+                // 在 </head> 标签前插入脚本
+                if (html.includes('</head>')) {
+                    return html.replace('</head>', `${scriptTag}\n</head>`)
+                } else {
+                    // 如果没有 </head> 标签，在 <body> 后插入
+                    return html.replace('<body>', `<body>\n${scriptTag}`)
+                }
+            } catch (error) {
+                console.warn('⚠️  注入客户端检测脚本失败:', error.message)
+                return html
             }
         },
         
@@ -285,16 +306,19 @@ export default function vitePrerender(options = {}) {
                         
                     }, pageConfig.meta)
                 }
-                
-                // 获取渲染后的HTML
+                  // 获取渲染后的HTML
                 const html = await page.content()
+                
+                // 注入客户端爬虫检测脚本
+                const injectedHtml = await this.injectCrawlerDetectionScript(html)
+                
                 // 保存到文件
                 const outputDir = renderOptions.outputDir || 'dist/static'
                 // 扁平化结构：直接使用页面路径作为文件名
                 const fileName = pageConfig.path.replace(/\//g, '_').replace(/^_+|_+$/g, '') || 'index'
                 const filePath = path.join(outputDir, `${fileName}.html`)
                 await fs.ensureDir(path.dirname(filePath))
-                await fs.writeFile(filePath, html, 'utf-8')
+                await fs.writeFile(filePath, injectedHtml, 'utf-8')
                 
             } finally {
                 await page.close()

@@ -1,13 +1,30 @@
 # SEO 构建指南
 
-本项目现已支持 SEO 优化构建，能够预渲染静态页面以提高搜索引擎可见性。
+本项目现已支持 SEO 优化构建，专为**静态部署环境**（如 Cloudflare Pages）设计，能够预渲染静态页面以提高搜索引擎可见性。
 
 ## 功能特性
 
 -   **预渲染静态页面**: 使用 Playwright 预渲染所有语言和版本组合的页面（约 96 个页面）
--   **爬虫检测**: 自动检测搜索引擎爬虫并提供静态页面
+-   **客户端爬虫检测**: 在每个静态页面中注入 JavaScript 代码，智能检测访问者类型
 -   **扁平化结构**: 静态页面使用扁平化文件名格式（如 `en_2_1___en.html`）
 -   **并发渲染**: 基于系统资源动态调整并发数，提高构建效率
+-   **静态部署友好**: 无需服务器环境，完全适用于 Cloudflare Pages 等静态部署
+
+## 工作原理
+
+### 客户端智能检测
+
+每个预渲染的静态页面都包含智能检测脚本：
+
+-   **爬虫访问** → 继续显示静态页面内容（SEO 友好）
+-   **用户访问** → 自动重定向到 SPA 应用（用户体验友好）
+
+### 检测机制
+
+1. **User-Agent 检测**: 识别 Google、Bing、百度等搜索引擎爬虫
+2. **无头浏览器检测**: 识别 Puppeteer、Playwright 等自动化工具
+3. **JavaScript 能力检测**: 检测现代 JavaScript 特性支持情况
+4. **综合判断**: 多重检测确保准确识别访问者类型
 
 ## 本地使用
 
@@ -31,12 +48,26 @@ pnpm run prerender
 ### 3. 本地测试
 
 ```bash
-# 启动爬虫检测服务器
+# 完整SEO功能测试
+pnpm run test:seo
+
+# 或者分步测试
+# 1. SEO构建
+pnpm run build:website:seo
+
+# 2. 启动测试服务器
 pnpm run serve
 
-# 开发环境测试
-pnpm run serve:dev
+# 3. 手动测试
+# 浏览器访问: http://localhost:3000
+# curl模拟爬虫: curl -H "User-Agent: Googlebot" http://localhost:3000/en/simple/en
 ```
+
+### 4. 部署到 Cloudflare Pages
+
+1. 将 `dist` 目录的所有文件上传到 Cloudflare Pages
+2. 静态页面会自动处理爬虫和用户访问
+3. 无需额外配置
 
 ## GitHub Actions 使用
 
@@ -65,9 +96,10 @@ pnpm run serve:dev
 
 ### 爬虫检测
 
--   服务器文件: `server/crawler-detection.js`
+-   检测方式: **客户端 JavaScript 检测**（适用于静态部署）
 -   支持的爬虫: Google、Bing、百度、搜狗等主流搜索引擎
--   静态页面路径: `/dist/static/`
+-   静态页面路径: `/static/` 目录下的扁平化 HTML 文件
+-   重定向逻辑: 普通用户自动重定向到根路径 SPA 应用
 
 ### 并发控制
 
