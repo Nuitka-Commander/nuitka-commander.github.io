@@ -1,84 +1,87 @@
 name: 发布新版本
 on:
-  workflow_dispatch:
+    workflow_dispatch:
+        inputs:
+            enable_seo:
+                description: "启用SEO优化构建"
+                required: false
+                default: false
+                type: boolean
 permissions: write-all
 jobs:
-  publish:
-    name: 发布新版本
-    runs-on: ubuntu-latest
+    publish:
+        name: 发布新版本
+        runs-on: ubuntu-latest
 
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v4
+            - uses: pnpm/action-setup@v4
+              name: Install pnpm
+              with:
+                  version: 10
+                  run_install: false
+            - name: Install Node.js
+              uses: actions/setup-node@v4
+              with:
+                  node-version: 20
+                  cache: "pnpm"           
+           - name: Install dependencies
+              run: pnpm install
 
-      - uses: pnpm/action-setup@v4
-        name: Install pnpm
-        with:
-          version: 10
-          run_install: false
+            - name: 安装 Playwright 浏览器 (仅 SEO 构建需要)
+              if: github.event.inputs.enable_seo == 'true'
+              run: npx playwright install chromium
 
-      - name: Install Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
-          cache: 'pnpm'
+            - name: 更新制作人员列表
+              run: node ${{ github.workspace }}/.github/workflows/scripts/update_authors.js
 
-      - name: Install dependencies
-        run: pnpm install
+            - name: 检查版本并同步版本号
+              run: node ${{ github.workspace }}/.github/workflows/scripts/sync_version.js
+            - name: 检查更新日志并转markdown
+              run: |
+                  node ${{ github.workspace }}/.github/workflows/scripts/update_changelog.js            # 其他预处理以后要用的时候在上方添加
 
-      - name: 安装依赖
-        if: steps.pnpm-cache.outputs.cache-hit != 'true'
-        run: pnpm install
+            - name: 为网站SEO构建
+              if: github.event.inputs.enable_seo == 'true'
+              run: pnpm run build:website:seo
 
-      - name: 更新制作人员列表
-        run: node ${{ github.workspace }}/.github/workflows/scripts/update_authors.js
+            - name: 发布到 GitHub Pages
+              uses: crazy-max/ghaction-github-pages@v2.1.3
+              with:
+                  target_branch: gh-pages
+                  build_dir: ./dist
+              env:
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: 检查版本并同步版本号
-        run: node ${{ github.workspace }}/.github/workflows/scripts/sync_version.js
-      - name: 检查更新日志并转markdown
-        run: |
-          node ${{ github.workspace }}/.github/workflows/scripts/update_changelog.js
-      # 其他预处理以后要用的时候在上方添加
-
-      - name: 为网站构建
-        run: pnpm run build:website
-
-      - name: 发布到 GitHub Pages
-        uses: crazy-max/ghaction-github-pages@v2.1.3
-        with:
-          target_branch: gh-pages
-          build_dir: ./dist
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: 删除无用文件夹
-        run: |
-          cd ${{ github.workspace }}
-          rm -rf ./dist
-          rm -rf ./nuitka-commander
-          ls
-      # 这可以做一些其他特殊的所需处理
-      - name: 为本地运行构建
-        run: |
-          pnpm run build:local_use
-          mv ${{ github.workspace }}/dist/index.html ${{ github.workspace }}/dist/Nuitka-Commander.html
-      - name: 读取版本号
-        id: read_version #此处刚需存储在scripts中的version文件
-        run: |
-          echo "VERSION=$(cat ${{ github.workspace }}/.github/workflows/scripts/version)" >> $GITHUB_ENV
-      - name: 为Github发布release
-        run: | # 此处刚需存储在scripts中的CHANGELOG.md文件
-          gh release create $VERSION ${{ github.workspace }}/dist/Nuitka-Commander.html -F ${{ github.workspace }}/.github/workflows/scripts/CHANGELOG.md --latest -t $VERSION
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - name: 重置更新日志并更新语言支持列表
-        run: |
-          cd ${{ github.workspace }}/.github/workflows/scripts
-          node ${{ github.workspace }}/.github/workflows/scripts/update_language_supports_list.js
-          node ${{ github.workspace }}/.github/workflows/scripts/reset_changelog.js
-          cd ${{ github.workspace }}
-          git config --global user.name "github action"
-          git config --global user.email "action_bot@github.com"
-          git add ./docs/CHANGELOG.md
-          git commit -m "Reset changelog & update language support list"
-          git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/Nuitka-Commander/nuitka-commander.github.io.git
+            - name: 删除无用文件夹
+              run: |
+                  cd ${{ github.workspace }}
+                  rm -rf ./dist
+                  rm -rf ./nuitka-commander
+                  ls
+            # 这可以做一些其他特殊的所需处理
+            - name: 为本地运行构建
+              run: |
+                  pnpm run build:local_use
+                  mv ${{ github.workspace }}/dist/index.html ${{ github.workspace }}/dist/Nuitka-Commander.html
+            - name: 读取版本号
+              id: read_version #此处刚需存储在scripts中的version文件
+              run: |
+                  echo "VERSION=$(cat ${{ github.workspace }}/.github/workflows/scripts/version)" >> $GITHUB_ENV
+            - name: 为Github发布release
+              run: | # 此处刚需存储在scripts中的CHANGELOG.md文件
+                  gh release create $VERSION ${{ github.workspace }}/dist/Nuitka-Commander.html -F ${{ github.workspace }}/.github/workflows/scripts/CHANGELOG.md --latest -t $VERSION
+              env:
+                  GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+            - name: 重置更新日志并更新语言支持列表
+              run: |
+                  cd ${{ github.workspace }}/.github/workflows/scripts
+                  node ${{ github.workspace }}/.github/workflows/scripts/update_language_supports_list.js
+                  node ${{ github.workspace }}/.github/workflows/scripts/reset_changelog.js
+                  cd ${{ github.workspace }}
+                  git config --global user.name "github action"
+                  git config --global user.email "action_bot@github.com"
+                  git add ./docs/CHANGELOG.md
+                  git commit -m "Reset changelog & update language support list"
+                  git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/Nuitka-Commander/nuitka-commander.github.io.git

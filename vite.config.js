@@ -10,6 +10,8 @@ import {viteSingleFile} from "vite-plugin-singlefile";
 import {createHtmlPlugin} from "vite-plugin-html";
 import fs, {readFileSync, writeFileSync} from "fs";
 import {JSDOM} from "jsdom";
+import vitePrerender from "./plugins/vite-prerender.js";
+import prerenderConfig from "./prerender.config.js";
 
 
 const timestamp = new Date().getTime();
@@ -125,14 +127,20 @@ export default ({mode}) => {
                 ,
                 drop: ["debugger"],
             },
-        };
-
-    } else { //正常为网站构建
+        };    } else { //正常为网站构建
         return {
             server: {
                 port: 3001,
             },
-            plugins: [...plugin_array],
+            plugins: [
+                ...plugin_array,                // 添加预渲染插件（仅在生产构建时启用）
+                process.env.ENABLE_PRERENDER === 'true' && vitePrerender({
+                    pages: prerenderConfig.pages,
+                    playwrightOptions: prerenderConfig.playwrightOptions,
+                    renderOptions: prerenderConfig.renderOptions,
+                    injectScript: prerenderConfig.injectScript
+                })
+            ].filter(Boolean),
             resolve: {
                 alias: {
                     "@": resolve(__dirname, "src"),

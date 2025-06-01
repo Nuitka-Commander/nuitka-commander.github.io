@@ -16,7 +16,7 @@
 ### 通过网页使用
 
 最方便的方式是直接使用在线的网页，这样您同时可以获得最新的版本支持和语言支持。您可以从以下网址访问:  
-[在Github上使用Nuitka Commander](https://nuitka-commander.github.io)
+[在网页上使用Nuitka Commander](https://nuitka-commander.erduotong.com)
 
 ### 下载到本地使用
 

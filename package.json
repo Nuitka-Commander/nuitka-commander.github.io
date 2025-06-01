@@ -6,8 +6,9 @@
   "scripts": {
     "dev": "vite --port 3002",
     "build:website": "vite build --mode website",
+    "build:website:seo": "cross-env ENABLE_PRERENDER=true vite build --mode website",
     "build:local_use": "vite build --mode local_use",
-    "preview": "vite preview"
+    "test:seo": "pwsh scripts/test-seo.ps1"
   },
   "dependencies": {
     "@element-plus/icons-vue": "^2.3.1",
@@ -15,7 +16,10 @@
     "@voerkai18n/runtime": "^2.1.9",
     "@vueuse/core": "^10.9.0",
     "axios": "^1.8.2",
+    "cross-env": "^7.0.3",
     "element-plus": "^2.7.3",
+    "express": "^4.21.2",
+    "fs-extra": "^11.3.0",
     "fuse.js": "^7.0.0",
     "html-minifier-terser": "^7.2.0",
     "js-yaml": "^4.1.0",
@@ -23,6 +27,7 @@
     "localforage": "^1.10.0",
     "mousetrap": "^1.6.5",
     "node-fetch": "^3.3.2",
+    "playwright": "^1.52.0",
     "punycode": "^2.3.1",
     "sass": "^1.77.2",
     "scss-loader": "^0.0.1",

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="refresh" content="0; url=/">
+    <title>Page Not Found - Nuitka Commander</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-align: center;
+            padding: 50px 20px;
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            opacity: 0.9;
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+            opacity: 0.8;
+        }
+
+        p {
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+            opacity: 0.7;
+        }
+
+        .redirect-info {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            backdrop-filter: blur(10px);
+        }
+
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 1s ease-in-out infinite;
+            margin-left: 10px;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .manual-link {
+            display: inline-block;
+            color: white;
+            text-decoration: none;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 12px 24px;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+        }
+
+        .manual-link:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>404</h1>
+        <h2>页面未找到</h2>
+        <p>抱歉，您访问的页面不存在或已被移动。</p>
+
+        <div class="redirect-info">
+            <p>正在自动重定向到首页<span class="loading"></span></p>
+            <p>如果没有自动跳转，请点击下方链接：</p>
+            <a href="/" class="manual-link">返回主站</a>
+        </div>
+    </div>
+
+    <script>
+        // 立即重定向到根目录
+        (function () {
+            'use strict';
+
+            // 尝试保留原始路径到 sessionStorage，供 SPA 应用使用
+            try {
+                const originalPath = window.location.pathname + window.location.search + window.location.hash;
+                if (originalPath !== '/404.html') {
+                    sessionStorage.setItem('404_redirect_path', originalPath);
+                }
+            } catch (e) {
+                console.warn('无法保存重定向路径:', e);
+            }
+
+            // 延迟一秒后重定向，让用户看到404页面
+            setTimeout(function () {
+                window.location.replace('/');
+            }, 1000);
+
+            // 如果是直接访问404页面，立即重定向
+            if (window.location.pathname === '/404.html') {
+                window.location.replace('/');
+            }
+        })();
+    </script>
+</body>
+
+</html>
