@@ -30,7 +30,8 @@ jobs:
               uses: actions/setup-node@v4
               with:
                   node-version: 20
-                  cache: "pnpm"            - name: Install dependencies
+                  cache: "pnpm"
+            - name: Install dependencies
               run: pnpm install
 
             - name: 安装 Playwright 浏览器 (仅 SEO 构建需要)

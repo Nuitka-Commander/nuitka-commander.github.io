@@ -42,9 +42,6 @@ jobs:
             - name: 检查更新日志并转markdown
               run: |
                   node ${{ github.workspace }}/.github/workflows/scripts/update_changelog.js            # 其他预处理以后要用的时候在上方添加
-            - name: 为网站构建
-              if: github.event.inputs.enable_seo != 'true'
-              run: pnpm run build:website
 
             - name: 为网站SEO构建
               if: github.event.inputs.enable_seo == 'true'
