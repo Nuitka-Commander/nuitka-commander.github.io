@@ -136,11 +136,11 @@ export default function vitePrerender(options = {}) {
                     }
                       const totalTime = ((Date.now() - startTime) / 1000).toFixed(1)
                     console.log(`🎉 渲染完成! 总耗时: ${totalTime}s, 平均: ${(totalTime / pages.length).toFixed(1)}s/页`)
-                    
-                    // 生成 sitemap 和 robots.txt
+                    // 生成 sitemap 和 robots.txt - 生成在根目录而不是静态文件目录
                     const outputDir = renderOptions.outputDir || 'dist/static'
-                    await pluginInstance.generateSitemap(pages, outputDir, renderOptions.baseUrl)
-                    await pluginInstance.generateRobotsTxt(outputDir, renderOptions.baseUrl)
+                    const rootDir = path.dirname(outputDir); // 获取根目录 (dist/)
+                    await pluginInstance.generateSitemap(pages, rootDir, renderOptions.baseUrl);
+                    await pluginInstance.generateRobotsTxt(rootDir, renderOptions.baseUrl);
                     
                 } finally {
                     // 关闭所有浏览器实例
@@ -175,12 +175,20 @@ export default function vitePrerender(options = {}) {
                 return html
             }
         },
-        
-        async generateSitemap(pages, outputDir, baseUrl = 'https://your-domain.com') {
+        async generateSitemap(pages, outputDir, baseUrl = "https://your-domain.com") {
             console.log('📋 生成sitemap.xml...')
+
+            // 添加根目录作为主页，具有最高优先级
+            const rootEntry = `    <url>
+        <loc>${baseUrl}/</loc>
+        <lastmod>${new Date().toISOString().split("T")[0]}</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>1.0</priority>
+    </url>`;
             
             const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+${rootEntry}
 ${pages.map(page => {
     const url = baseUrl + page.path
     return `    <url>

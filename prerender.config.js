@@ -4,7 +4,7 @@
  * @Date: 2024-12-19
  */
 
-import { supported_i18n } from './src/assets/languages/supported_i18n.js'
+import {supported_i18n} from "./src/assets/languages/supported_i18n.js";
 import supported_nuitka_version from './src/nuitka_config_files/supported_nuitka_version.js'
 
 /**
@@ -13,12 +13,26 @@ import supported_nuitka_version from './src/nuitka_config_files/supported_nuitka
  */
 function generatePageConfigurations() {
     const configurations = []
-    
-    // 获取支持的UI语言
-    const uiLanguages = Object.keys(supported_i18n)
-    
-    // 获取支持的Nuitka版本
-    const nuitkaVersions = Object.keys(supported_nuitka_version.versions)
+    // 获取支持的UI语言 - 只保留中文和英文
+    const allUiLanguages = Object.keys(supported_i18n);
+    const uiLanguages = allUiLanguages.filter(lang => lang === "zh-CN" || lang === "en");
+
+    // 获取支持的Nuitka版本 - 只保留最新的3个版本加上"simple"版本
+    const allVersions = Object.keys(supported_nuitka_version.versions);
+    const numericVersions = allVersions.filter(v => v !== "simple").sort((a, b) => {
+        // 提取版本号进行比较 (例如: "2.7.*" -> 2.7)
+        const versionA = parseFloat(a.replace(/[.*]/g, ""));
+        const versionB = parseFloat(b.replace(/[.*]/g, ""));
+        return versionB - versionA; // 降序排列，最新版本在前
+    });
+    // 取最新的3个版本，加上"simple"版本
+    const nuitkaVersions = [
+        ...numericVersions.slice(0, 3), // 最新的3个版本
+        "simple", // 始终包含simple版本
+    ];
+
+    console.log("选择的UI语言:", uiLanguages);
+    console.log("选择的Nuitka版本:", nuitkaVersions);
     
     // 为每种组合生成配置
     uiLanguages.forEach(uiLang => {
