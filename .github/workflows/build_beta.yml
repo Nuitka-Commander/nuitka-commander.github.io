@@ -1,38 +1,59 @@
 name: 构建测试版本
 on:
-  workflow_dispatch:
+    workflow_dispatch:
+        inputs:
+            build_type:
+                description: "构建类型"
+                required: true
+                default: "local_use"
+                type: choice
+                options:
+                    - local_use
+                    - website
+                    - website_seo
 permissions: write-all
 jobs:
-  publish:
-    name: 构建测试版本
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+    publish:
+        name: 构建测试版本
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v4
 
-      - uses: pnpm/action-setup@v4
-        name: Install pnpm
-        with:
-          version: 8
-          run_install: false
+            - uses: pnpm/action-setup@v4
+              name: Install pnpm
+              with:
+                  version: 8
+                  run_install: false
 
-      - name: Install Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
-          cache: 'pnpm'
+            - name: Install Node.js
+              uses: actions/setup-node@v4
+              with:
+                  node-version: 20
+                  cache: "pnpm"            - name: Install dependencies
+              run: pnpm install
 
-      - name: Install dependencies
-        run: pnpm install
+            - name: 安装 Playwright 浏览器 (仅 SEO 构建需要)
+              if: github.event.inputs.build_type == 'website_seo'
+              run: npx playwright install chromium
 
-      - name: 安装依赖
-        if: steps.pnpm-cache.outputs.cache-hit != 'true'
-        run: pnpm install
-      - name: 为本地运行构建
-        run: |
-          pnpm run build:local_use
-      - name: 上传 index.html
-        uses: actions/upload-artifact@v4
-        with:
-          name: local_use index.html
-          path: ${{ github.workspace }}/dist/index.html
+            - name: 为本地运行构建
+              if: github.event.inputs.build_type == 'local_use'
+              run: |
+                  pnpm run build:local_use
+
+            - name: 为网站构建
+              if: github.event.inputs.build_type == 'website'
+              run: |
+                  pnpm run build:website
+
+            - name: 为网站SEO构建
+              if: github.event.inputs.build_type == 'website_seo'
+              run: |
+                  pnpm run build:website:seo
+
+            - name: 上传构建文件
+              uses: actions/upload-artifact@v4
+              with:
+                  name: ${{ github.event.inputs.build_type }}-build
+                  path: ${{ github.workspace }}/dist/

@@ -8,6 +8,19 @@ import CommandEdit from "@/components/commandEdit.vue";
 import {user_options} from "@/values/stores/user_options.js";
 import OutputPage from "@/components/outputPage.vue";
 import InputPage from "@/components/inputPage.vue";
+import { onMounted } from 'vue';
+
+// 预渲染准备标记
+onMounted(() => {
+  // 等待一段时间确保所有组件都已加载
+  setTimeout(() => {
+    // 直接在body上添加预渲染准备标记
+    document.body.setAttribute('data-prerender-ready', 'true');
+    
+    // 在控制台输出调试信息
+    console.log('🎭 Page ready for prerendering');
+  }, 2000); // 2秒延迟确保所有内容加载完成
+});
 </script>
 
 <template>
