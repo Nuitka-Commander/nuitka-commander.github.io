@@ -6,13 +6,8 @@
   "scripts": {
     "dev": "vite --port 3002",
     "build:website": "vite build --mode website",
-    "build:website:seo": "cross-env ENABLE_PRERENDER=true vite build --mode website && pnpm run preview:temp",
+    "build:website:seo": "cross-env ENABLE_PRERENDER=true vite build --mode website",
     "build:local_use": "vite build --mode local_use",
-    "preview": "vite preview",
-    "preview:temp": "vite preview --port 4173 --host",
-    "serve": "node server/crawler-detection.js",
-    "serve:dev": "cross-env NODE_ENV=development node server/crawler-detection.js",
-    "prerender": "cross-env ENABLE_PRERENDER=true vite build --mode website",
     "test:seo": "pwsh scripts/test-seo.ps1"
   },
   "dependencies": {

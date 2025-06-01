@@ -134,15 +134,13 @@ export default function vitePrerender(options = {}) {
                             })
                         )
                     }
-                    
-                    const totalTime = ((Date.now() - startTime) / 1000).toFixed(1)
+                      const totalTime = ((Date.now() - startTime) / 1000).toFixed(1)
                     console.log(`🎉 渲染完成! 总耗时: ${totalTime}s, 平均: ${(totalTime / pages.length).toFixed(1)}s/页`)
                     
-                    // 生成 sitemap
-                    if (renderOptions.generateSitemap) {
-                        await pluginInstance.generateSitemap(pages, renderOptions)
-                        console.log('🗺️  Sitemap 已生成')
-                    }
+                    // 生成 sitemap 和 robots.txt
+                    const outputDir = renderOptions.outputDir || 'dist/static'
+                    await pluginInstance.generateSitemap(pages, outputDir, renderOptions.baseUrl)
+                    await pluginInstance.generateRobotsTxt(outputDir, renderOptions.baseUrl)
                     
                 } finally {
                     // 关闭所有浏览器实例
@@ -156,8 +154,7 @@ export default function vitePrerender(options = {}) {
                     console.log('🛑 预览服务器已关闭')
                 }
             }        },
-        
-        async injectCrawlerDetectionScript(html) {
+          async injectCrawlerDetectionScript(html) {
             try {
                 // 读取客户端检测脚本
                 const scriptPath = path.join(process.cwd(), 'scripts', 'client-crawler-detection.js')
@@ -177,6 +174,40 @@ export default function vitePrerender(options = {}) {
                 console.warn('⚠️  注入客户端检测脚本失败:', error.message)
                 return html
             }
+        },
+        
+        async generateSitemap(pages, outputDir, baseUrl = 'https://your-domain.com') {
+            console.log('📋 生成sitemap.xml...')
+            
+            const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+${pages.map(page => {
+    const url = baseUrl + page.path
+    return `    <url>
+        <loc>${url}</loc>
+        <lastmod>${new Date().toISOString().split('T')[0]}</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>`
+}).join('\n')}
+</urlset>`
+            
+            const sitemapPath = path.join(outputDir, 'sitemap.xml')
+            await fs.writeFile(sitemapPath, sitemap, 'utf-8')
+            console.log(`✅ Sitemap 已生成: ${sitemapPath}`)
+        },
+        
+        async generateRobotsTxt(outputDir, baseUrl = 'https://your-domain.com') {
+            console.log('🤖 生成robots.txt...')
+            
+            const robots = `User-agent: *
+Allow: /
+
+Sitemap: ${baseUrl}/sitemap.xml`
+            
+            const robotsPath = path.join(outputDir, 'robots.txt')
+            await fs.writeFile(robotsPath, robots, 'utf-8')
+            console.log(`✅ Robots.txt 已生成: ${robotsPath}`)
         },
         
         async renderPage(browser, pageConfig, renderOptions, injectScript) {
@@ -305,8 +336,7 @@ export default function vitePrerender(options = {}) {
                         canonical.setAttribute('href', window.location.href)
                         
                     }, pageConfig.meta)
-                }
-                  // 获取渲染后的HTML
+                }                // 获取渲染后的HTML
                 const html = await page.content()
                 
                 // 注入客户端爬虫检测脚本
@@ -322,22 +352,7 @@ export default function vitePrerender(options = {}) {
                 
             } finally {
                 await page.close()
-            }        },
-        
-        async generateSitemap(pages, renderOptions) {
-            const baseUrl = renderOptions.baseUrl || 'https://your-domain.com'
-            
-            const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-${pages.map(page => `    <url>
-        <loc>${baseUrl}${page.path}</loc>
-        <lastmod>${new Date().toISOString().split('T')[0]}</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.8</priority>
-    </url>`).join('\n')}
-</urlset>`
-              const sitemapPath = path.join(renderOptions.outputDir || 'dist/static', 'sitemap.xml')
-            await fs.writeFile(sitemapPath, sitemap, 'utf-8')
+            }
         }
     }
     

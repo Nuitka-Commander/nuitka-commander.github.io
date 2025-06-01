@@ -149,15 +149,11 @@ export const prerenderConfig = {
         
         // 需要等待的选择器（表示页面加载完成）
         waitForSelector: '[data-prerender-ready]',
-        
-        // 输出目录
+          // 输出目录
         outputDir: 'dist/static',
         
-        // 是否生成sitemap
-        generateSitemap: true,
-        
         // 网站基础URL（用于sitemap）
-        baseUrl: 'https://your-domain.com'
+        baseUrl: 'https://nuitka-commander.erduotong.com'
     },
     
     // 需要注入的脚本（在页面加载前执行）
