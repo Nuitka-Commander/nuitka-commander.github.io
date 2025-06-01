@@ -26,7 +26,7 @@ function calculateOptimalConcurrency() {
     const cpuBasedConcurrency = Math.max(2, Math.floor(cpuCores / 2))
     
     // 取较小值，但至少为2，最多为8
-    const concurrency = Math.min(Math.max(2, Math.min(memoryBasedConcurrency, cpuBasedConcurrency)), 8)
+    const concurrency = Math.min(Math.max(2, Math.min(memoryBasedConcurrency, cpuBasedConcurrency)), 64)
     
     console.log(`💻 系统信息: ${totalMemoryGB.toFixed(1)}GB 内存, ${cpuCores} CPU核心`)
     console.log(`🚀 计算出的最佳并发数: ${concurrency}`)
@@ -372,8 +372,7 @@ Sitemap: ${baseUrl}/sitemap.xml`
                             
                             element.setAttribute('content', content)
                         }
-                        
-                        updateMeta('description', meta.description)
+                          updateMeta('description', meta.description)
                         updateMeta('keywords', meta.keywords)
                         updateMeta('language', meta.language)
                         
@@ -381,15 +380,6 @@ Sitemap: ${baseUrl}/sitemap.xml`
                         updateMeta('og:title', meta.title, true)
                         updateMeta('og:description', meta.description, true)
                         updateMeta('og:type', 'website', true)
-                        
-                        // 添加 canonical URL
-                        let canonical = document.querySelector('link[rel="canonical"]')
-                        if (!canonical) {
-                            canonical = document.createElement('link')
-                            canonical.setAttribute('rel', 'canonical')
-                            document.head.appendChild(canonical)
-                        }
-                        canonical.setAttribute('href', window.location.href)
                         
                     }, pageConfig.meta)
                 }                // 获取渲染后的HTML

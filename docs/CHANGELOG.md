@@ -16,7 +16,7 @@
 
 ## 🐛 修复 Fixed
 
--
+- 搜索引擎canonical的问题
 
 ## 🔒 安全 Security
 
