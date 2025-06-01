@@ -17,4 +17,32 @@ export const supported_i18n = {
         name: "Deutsch",
         path_name: "de",
     },
+    "fr": {
+        name: "Français",
+        path_name: "fr",
+    },
+    "es": {
+        name: "Español",
+        path_name: "es",
+    },
+    "ar": {
+        name: "العربية",
+        path_name: "ar",
+    },
+    "ru": {
+        name: "Русский",
+        path_name: "ru",
+    },
+    "ja": {
+        name: "日本語",
+        path_name: "ja",
+    },
+    "it": {
+        name: "Italiano",
+        path_name: "it",
+    },
+    "pt": {
+        name: "Português",
+        path_name: "pt",
+    },
 };
