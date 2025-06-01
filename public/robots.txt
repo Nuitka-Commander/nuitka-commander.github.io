@@ -1,0 +1,11 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://nuitka-commander.erduotong.com/sitemap.xml
+
+# Disallow unnecessary files
+Disallow: /src/
+Disallow: /*.js$
+Disallow: /*.css$
+Disallow: /*.json$
