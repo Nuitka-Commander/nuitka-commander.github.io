@@ -46,15 +46,12 @@ function generatePageConfigurations() {
                       // URL路径（扁平化结构）- 使用简化的文件名
                     path: `/${uiLang}-${nuitkaVersion.replace(/[.*]/g, '_')}-${cmdLang}`,                    // localStorage设置
                     localStorage: {
-                        'vueuse-locale': uiLang,
-                        'selected_nuitka_version': nuitkaVersion,
-                        'command_language': cmdLang,
                         '_Nuitka_Commander_user_options': JSON.stringify({
                             theme: "auto",
-                            language: "undefined",
-                            nuitka_language: "undefined", 
+                            language: uiLang,
+                            nuitka_language: cmdLang, 
                             nuitka_version: nuitkaVersion,
-                            show_original_command: true, // 预渲染时默认开启显示源命令
+                            show_original_command: true, 
                             settings_page_show: false,
                             action_tab: "edit",
                             action_command_tab: ""
