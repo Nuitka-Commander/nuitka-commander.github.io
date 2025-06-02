@@ -1,6 +1,6 @@
 ## ✨ 新增 Added
 
--
+- SEO Tooltip渲染
 
 ## 🔧 更改 Changed
 
