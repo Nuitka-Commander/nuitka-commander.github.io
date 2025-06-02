@@ -1,7 +1,7 @@
 {
   "name": "nuitka-commander",
   "private": true,
-  "version": "1.4.4.3",
+  "version": "1.4.4.4",
   "type": "module",
   "scripts": {
     "dev": "vite --port 3002",
