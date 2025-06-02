@@ -182,11 +182,10 @@ export const prerenderConfig = {
             height: 1080
         }
     },
-    
-    // 渲染选项
+      // 渲染选项
     renderOptions: {
         // 等待时间（毫秒）
-        waitTime: 10000,
+        waitTime: 15000, // 增加等待时间以确保 tooltip 完全加载
         
         // 等待条件（可选）
         waitUntil: 'networkidle2',
@@ -198,17 +197,93 @@ export const prerenderConfig = {
         
         // 网站基础URL（用于sitemap）
         baseUrl: 'https://nuitka-commander.erduotong.com'
-    },
-    
-    // 需要注入的脚本（在页面加载前执行）
+    },    // 需要注入的脚本（在页面加载前执行）
     injectScript: `
-        // 标记页面准备好进行预渲染
+        // 强制显示所有 el-tooltip 用于 SEO
         window.addEventListener('load', () => {
             setTimeout(() => {
-                const readyElement = document.createElement('div');
-                readyElement.setAttribute('data-prerender-ready', 'true');
-                readyElement.style.display = 'none';
-                document.body.appendChild(readyElement);
+                console.log('🎯 开始触发所有 tooltip 显示...');
+                
+                let triggeredCount = 0;
+                
+                // 分批次触发 tooltip，避免性能问题
+                const triggerTooltips = () => {
+                    try {
+                        // 查找所有 el-tooltip__trigger 元素（这是 Element Plus 的标准类）
+                        const tooltipTriggers = document.querySelectorAll('.el-tooltip__trigger');
+                        console.log(\`找到 \${tooltipTriggers.length} 个 tooltip 触发器\`);
+                        
+                        tooltipTriggers.forEach((trigger, index) => {
+                            setTimeout(() => {
+                                // 创建鼠标进入事件
+                                const mouseenterEvent = new MouseEvent('mouseenter', {
+                                    view: window,
+                                    bubbles: true,
+                                    cancelable: true,
+                                    clientX: 0,
+                                    clientY: 0
+                                });
+                                
+                                // 创建鼠标悬停事件
+                                const mouseoverEvent = new MouseEvent('mouseover', {
+                                    view: window,
+                                    bubbles: true,
+                                    cancelable: true,
+                                    clientX: 0,
+                                    clientY: 0
+                                });
+                                
+                                // 触发事件
+                                trigger.dispatchEvent(mouseenterEvent);
+                                trigger.dispatchEvent(mouseoverEvent);
+                                
+                                triggeredCount++;
+                                console.log(\`触发第 \${triggeredCount} 个 tooltip\`);
+                            }, index * 10); // 每个 tooltip 间隔 10ms 触发
+                        });
+                        
+                        // 额外查找其他可能的 tooltip 元素
+                        const additionalSelectors = [
+                            '.el-tooltip',
+                            '[data-tooltip]', 
+                            '.edit_content_card',
+                            '.cli_command'
+                        ];
+                        
+                        additionalSelectors.forEach(selector => {
+                            const elements = document.querySelectorAll(selector);
+                            elements.forEach((element, index) => {
+                                if (!element.classList.contains('el-tooltip__trigger')) {
+                                    setTimeout(() => {
+                                        element.dispatchEvent(new MouseEvent('mouseenter', { bubbles: true }));
+                                        element.dispatchEvent(new MouseEvent('mouseover', { bubbles: true }));
+                                    }, (tooltipTriggers.length + index) * 10);
+                                }
+                            });
+                        });
+                        
+                    } catch (error) {
+                        console.error('触发 tooltip 时出错:', error);
+                    }
+                };
+                
+                // 立即触发一次
+                triggerTooltips();
+                
+                // 延迟再触发一次，确保所有 Vue 组件都已加载
+                setTimeout(() => {
+                    console.log('🔄 重新触发 tooltip...');
+                    triggerTooltips();
+                }, 1000);
+                
+                // 标记页面准备好进行预渲染
+                setTimeout(() => {
+                    const readyElement = document.createElement('div');
+                    readyElement.setAttribute('data-prerender-ready', 'true');
+                    readyElement.style.display = 'none';
+                    document.body.appendChild(readyElement);
+                    console.log(\`✅ 页面准备完成，共触发了 \${triggeredCount} 个 tooltip\`);
+                }, 2500); // 给足够时间让所有 tooltip 都显示
             }, 1000);
         });
     `
