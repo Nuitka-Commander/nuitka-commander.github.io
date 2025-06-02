@@ -6,6 +6,8 @@
 
 import {supported_i18n} from "./src/assets/languages/supported_i18n.js";
 import supported_nuitka_version from './src/nuitka_config_files/supported_nuitka_version.js'
+import { readdirSync } from 'fs';
+import { join } from 'path';
 
 /**
  * 生成预渲染页面配置
@@ -84,19 +86,42 @@ function generatePageConfigurations() {
  * 获取指定Nuitka版本支持的命令语言
  */
 function getCommandLanguagesForVersion(nuitkaVersion) {
-    // 根据实际翻译文件结构确定支持的命令语言
-    // 从搜索结果可以看出，支持的命令语言包括：
-    const supportedLanguages = ['en', 'zh_cn', 'de'] // 基于实际翻译文件
-    
-    // 根据版本目录结构映射语言代码
-    const languageMapping = {
-        'zh_cn': 'zh-CN',
-        'en': 'en', 
-        'de': 'de'
+    try {
+        // 获取版本对应的路径
+        const versionPath = supported_nuitka_version.versions[nuitkaVersion];
+        if (!versionPath) {
+            console.warn(`版本 ${nuitkaVersion} 未在支持列表中找到，使用默认语言`);
+            return ['en']; // 默认返回英文
+        }
+        
+        // 构建翻译文件夹的完整路径
+        const translationsDir = join(process.cwd(), 'src', 'nuitka_config_files', 'translations', versionPath);
+        
+        // 读取文件夹中的所有文件
+        const files = readdirSync(translationsDir);
+        
+        // 筛选出 .js 文件并提取语言代码
+        const supportedLanguages = files
+            .filter(file => file.endsWith('.js'))
+            .map(file => file.replace('.js', ''));
+        
+        console.log(`版本 ${nuitkaVersion} 支持的命令语言:`, supportedLanguages);
+        
+        // 语言代码映射（从文件名到标准语言代码）
+        const languageMapping = {
+            'zh_cn': 'zh-CN',
+            'en': 'en', 
+            'de': 'de'
+        };
+        
+        // 返回映射后的语言代码
+        return supportedLanguages.map(lang => languageMapping[lang] || lang);
+        
+    } catch (error) {
+        console.error(`读取版本 ${nuitkaVersion} 的语言配置时出错:`, error);
+        // 出错时返回默认语言
+        return ['en'];
     }
-    
-    // 返回映射后的语言代码
-    return supportedLanguages.map(lang => languageMapping[lang] || lang)
 }
 
 /**
