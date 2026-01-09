@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="canonical" href="/">
+    <title>Redirecting...</title>
+    <script>
+        // 立即执行 JavaScript 重定向
+        (function () {
+            'use strict';
+
+            // 保存原始路径到 sessionStorage，供 SPA 应用使用
+            try {
+                const originalPath = window.location.pathname + window.location.search + window.location.hash;
+                if (originalPath !== '/404.html' && originalPath !== '/') {
+                    sessionStorage.setItem('404_redirect_path', originalPath);
+                }
+            } catch (e) {
+                // 忽略存储错误
+            }
+
+            // 立即重定向到根目录
+            try {
+                window.location.replace('/');
+            } catch (e) {
+                // 如果 replace 失败，使用 href 作为备选
+                window.location.href = '/';
+            }
+        })();
+    </script>
+</head>
+
+<body> <!-- 备用链接，以防重定向失败 -->
+    <noscript>
+        <p style="text-align: center; font-family: sans-serif; margin-top: 50px;">
+            <a href="/" style="color: #0066cc; text-decoration: none; font-size: 18px;">
+                Please click here to continue to the main site
+            </a>
+        </p>
+    </noscript>
+</body>
+
+</html>
